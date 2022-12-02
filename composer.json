@@ -1,0 +1,20 @@
+{
+  "name": "newfold-labs/wp-module-installer",
+  "description": "An installer for WordPress plugins and themes.",
+  "type": "library",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Micah Wood",
+      "email": "micah.wood@newfold.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "NewfoldLabs\\WP\\Module\\Installer\\": "includes"
+    },
+    "files": [
+      "bootstrap.php"
+    ]
+  }
+}
