@@ -51,7 +51,7 @@ class PluginsController {
 					'methods'  => \WP_REST_Server::CREATABLE,
 					'callback' => array( $this, 'install' ),
 					'args'     => $this->get_install_plugin_args(),
-					// 'permission_callback' => array( $this, 'check_install_permissions' ),
+					'permission_callback' => array( $this, 'check_install_permissions' ),
 				),
 			)
 		);
@@ -64,7 +64,7 @@ class PluginsController {
 					'methods'  => \WP_REST_Server::CREATABLE,
 					'callback' => array( $this, 'uninstall' ),
 					'args'     => $this->get_install_plugin_args(),
-					// 'permission_callback' => array( $this, 'check_install_permissions' ),
+					'permission_callback' => array( $this, 'check_install_permissions' ),
 				),
 			)
 		);
