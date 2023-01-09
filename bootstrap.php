@@ -11,15 +11,20 @@ if ( function_exists( 'add_action' ) ) {
 		function () {
 
 			register(
-				[
+				array(
 					'name'     => 'installer',
 					'label'    => __( 'Installer', 'newfold-installer-module' ),
 					'callback' => function ( Container $container ) {
+
+						if ( ! defined( 'NFD_INSTALLER_VERSION' ) ) {
+							define( 'NFD_INSTALLER_VERSION', '1.0.0' );
+						}
+
 						new Installer( $container );
 					},
 					'isActive' => true,
 					'isHidden' => true,
-				]
+				)
 			);
 
 		}
