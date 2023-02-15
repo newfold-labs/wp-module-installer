@@ -1,5 +1,5 @@
 <?php
-namespace NewfoldLabs\WP\Module\Onboarding\Data;
+namespace NewfoldLabs\WP\Module\Installer\Data;
 
 /**
  * List of Plugin Slugs/URLs/Domains
