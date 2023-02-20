@@ -5,13 +5,13 @@ namespace NewfoldLabs\WP\Module\Installer\Data;
  * List of Plugin Slugs/URLs/Domains
  */
 final class Plugins {
-
-	/*
-	 A value of true indicates that the slug/url/domain has been approved.
-	   A value of null indicates that the slug/url/domain has not been approved
-	   (or) has been temporarily deactivated.
-	*/
-
+	/**
+	 * A value of true indicates that the slug/url/domain has been approved.
+	 * A value of null indicates that the slug/url/domain has not been approved
+	 * (or) has been temporarily deactivated.
+	 *
+	 * @var array
+	 */
 	protected static $wp_slugs = array(
 		'jetpack'                           => array(
 			'approved' => true,
@@ -44,6 +44,10 @@ final class Plugins {
 		'creative-mail-by-constant-contact' => array(
 			'approved' => true,
 			'path'     => 'creative-mail-by-constant-contact/creative-mail-plugin.php',
+		),
+		'woo-razorpay'                      => array(
+			'approved' => true,
+			'path'     => 'woo-razorpay/woo-razorpay.php',
 		),
 	);
 
@@ -100,17 +104,28 @@ final class Plugins {
 		),
 	);
 
-	 // [TODO] Think about deprecating this approach and move to nfd_slugs for url based installs.
+	// [TODO] Think about deprecating this approach and move to nfd_slugs for url based installs.
+	/**
+	 * Contains a whitelist of zip url's.
+	 *
+	 * @var array
+	 */
 	protected static $urls = array(
 		'https://downloads.wordpress.org/plugin/google-analytics-for-wordpress.8.5.3.zip' => true,
 	);
-
+	/**
+	 * Contains a list of approved domains for zip based installs.
+	 *
+	 * @var array
+	 */
 	protected static $domains = array(
 		'downloads.wordpress.org' => true,
 		'nonapproveddomain.com'   => null,
 	);
 
 	/**
+	 * Returns a list of whitelisted WordPress Plugin slugs.
+	 *
 	 * @return array
 	 */
 	public static function get_wp_slugs() {
@@ -118,6 +133,8 @@ final class Plugins {
 	}
 
 	/**
+	 * Returns a list of whitelisted Plugin URL's.
+	 *
 	 * @return array
 	 */
 	public static function get_urls() {
@@ -125,6 +142,8 @@ final class Plugins {
 	}
 
 	/**
+	 * Returns a list of whitelisted Plugin URL domains.
+	 *
 	 * @return array
 	 */
 	public static function get_domains() {
@@ -153,7 +172,7 @@ final class Plugins {
 	public static function get_squashed() {
 		return array_merge(
 			array_filter( self::$wp_slugs, array( __CLASS__, 'check_approved' ) ),
-			array_filter( self::$nfd_slugs, array( __CLASS__, 'check_approved' ) ),
+			array_filter( self::$nfd_slugs, array( __CLASS__, 'check_approved' ) )
 		);
 	}
 
@@ -172,14 +191,13 @@ final class Plugins {
 	}
 
 	/**
-	 * @param array $value
+	 * Checks if a Plugin slug has been approved.
 	 *
-	 * Checks if $value has been approved.
-	 *
+	 * @param array $value The Plugin slug that will be checked.
 	 * @return boolean
 	 */
 	private static function check_approved( $value ) {
-		 return $value['approved'] === true;
+		 return true === $value['approved'];
 	}
 
 }
