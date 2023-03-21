@@ -45,10 +45,6 @@ final class Plugins {
 			'approved' => true,
 			'path'     => 'creative-mail-by-constant-contact/creative-mail-plugin.php',
 		),
-		'woo-razorpay'                      => array(
-			'approved' => true,
-			'path'     => 'woo-razorpay/woo-razorpay.php',
-		),
 	);
 
 	 /**
@@ -101,6 +97,11 @@ final class Plugins {
 			'approved' => true,
 			'url'      => 'https://hiive.cloud/workers/plugin-downloads/yith-woocommerce-wishlist',
 			'path'     => 'yith-woocommerce-wishlist-extended/init.php',
+		),
+		'nfd_slug_woo_razorpay'             => array(
+			'approved' => true,
+			'url'      => 'https://hiive.cloud/workers/plugin-downloads/razorpay',
+			'path'     => 'woo-razorpay/woo-razorpay.php',
 		),
 	);
 
