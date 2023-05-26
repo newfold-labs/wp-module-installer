@@ -47,11 +47,11 @@ final class Plugins {
 		),
 	);
 
-	 /**
-	  * Contains a list of zip url's with a unique "nfd_slug" for each.
-	  *
-	  * @var array
-	  */
+	/**
+	 * Contains a list of zip url's with a unique "nfd_slug" for each.
+	 *
+	 * @var array
+	 */
 	protected static $nfd_slugs = array(
 		'nfd_slug_endurance_page_cache'                  => array(
 			'approved' => true,
@@ -98,7 +98,7 @@ final class Plugins {
 			'url'      => 'https://hiive.cloud/workers/plugin-downloads/yith-woocommerce-wishlist',
 			'path'     => 'yith-woocommerce-wishlist-extended/init.php',
 		),
-		'nfd_slug_woo_razorpay'             => array(
+		'nfd_slug_woo_razorpay'                          => array(
 			'approved' => true,
 			'url'      => 'https://hiive.cloud/workers/plugin-downloads/razorpay',
 			'path'     => 'woo-razorpay/woo-razorpay.php',
@@ -186,8 +186,8 @@ final class Plugins {
 		return array(
 			'wp_slugs'  => array_keys( array_filter( self::$wp_slugs, array( __CLASS__, 'check_approved' ) ) ),
 			'nfd_slugs' => array_keys( array_filter( self::$nfd_slugs, array( __CLASS__, 'check_approved' ) ) ),
-			'urls'      => array_keys( self::$urls, true ),
-			'domains'   => array_keys( self::$domains, true ),
+			'urls'      => array_keys( self::$urls, true, true ),
+			'domains'   => array_keys( self::$domains, true, true ),
 		);
 	}
 
@@ -198,7 +198,7 @@ final class Plugins {
 	 * @return boolean
 	 */
 	private static function check_approved( $value ) {
-		 return true === $value['approved'];
+		return true === $value['approved'];
 	}
 
 }
