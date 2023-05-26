@@ -8,8 +8,7 @@ namespace NewfoldLabs\WP\Module\Installer\RestApi;
 final class RestApi {
 
 	protected $controllers = array(
-		'NewfoldLabs\\WP\\Module\\Installer\\RestApi\\PluginsController',
-		'NewfoldLabs\WP\\Module\\Installer\\RestApi\\ThemeInstallerController',
+		'NewfoldLabs\\WP\\Module\\Installer\\RestApi\\PluginsController'
 	);
 
 	public function __construct() {
