@@ -12,11 +12,11 @@ use NewfoldLabs\WP\Module\Installer\Services\PluginUninstaller;
  */
 class PluginUninstallTaskManager {
 
-	 /**
-	  * The number of times a PluginUninstallTask can be retried.
-	  *
-	  * @var int
-	  */
+	/**
+	 * The number of times a PluginUninstallTask can be retried.
+	 *
+	 * @var int
+	 */
 	private static $retry_limit = 2;
 
 	/**
@@ -48,7 +48,7 @@ class PluginUninstallTaskManager {
 	 * @return string
 	 */
 	public static function get_queue_name() {
-		 return self::$queue_name;
+		return self::$queue_name;
 	}
 
 	/**
@@ -65,30 +65,29 @@ class PluginUninstallTaskManager {
 			);
 		}
 
-		 return $schedules;
+		return $schedules;
 	}
 
 	/**
-
 	 * Queue out a PluginUninstallTask with the highest priority in the plugin uninstall queue and execute it.
 	 *
 	 * @return array|false
 	 */
 	public function uninstall() {
 		/*
-		   Get the plugins queued up to be uninstalled, the PluginUninstall task gets
-		  converted to an associative array before storing it in the option.
+		Get the plugins queued up to be uninstalled, the PluginUninstall task gets
+		converted to an associative array before storing it in the option.
 		*/
 		$plugins = \get_option( Options::get_option_name( self::$queue_name ), array() );
 
 		/*
-		   Conversion of the max heap to an array will always place the PluginUninstallTask with the highest
-		  priority at the beginning of the array
+		Conversion of the max heap to an array will always place the PluginUninstallTask with the highest
+		priority at the beginning of the array
 		*/
 		$plugin_to_uninstall = array_shift( $plugins );
 
 		// Update the plugin uninstall queue.
-		 \update_option( Options::get_option_name( self::$queue_name ), $plugins );
+		\update_option( Options::get_option_name( self::$queue_name ), $plugins );
 
 		// Recreate the PluginInstall task from the associative array.
 		$plugin_uninstall_task = new PluginUninstallTask(
@@ -101,8 +100,8 @@ class PluginUninstallTaskManager {
 		$status = $plugin_uninstall_task->execute();
 		if ( \is_wp_error( $status ) ) {
 
-			   // If there is an error, then increase the retry count for the task.
-			   $plugin_uninstall_task->increment_retries();
+			// If there is an error, then increase the retry count for the task.
+			$plugin_uninstall_task->increment_retries();
 
 			/*
 				If the number of retries have not exceeded the limit
@@ -128,8 +127,8 @@ class PluginUninstallTaskManager {
 	 */
 	public static function add_to_queue( PluginUninstallTask $plugin_uninstall_task ) {
 		/*
-		   Get the plugins queued up to be uninstalled, the PluginUninstall task gets
-		   converted to an associative array before storing it in the option.
+		Get the plugins queued up to be uninstalled, the PluginUninstall task gets
+		converted to an associative array before storing it in the option.
 		*/
 		$plugins = \get_option( Options::get_option_name( self::$queue_name ), array() );
 
@@ -153,13 +152,13 @@ class PluginUninstallTaskManager {
 		$queue = new PriorityQueue();
 		foreach ( $plugins as $queued_plugin ) {
 			/*
-			   Check if there is an already existing PluginUninstallTask in the queue
-			   for a given slug.
+			Check if there is an already existing PluginUninstallTask in the queue
+			for a given slug.
 			*/
 			if ( $queued_plugin['slug'] === $plugin_uninstall_task->get_slug() ) {
-				 return false;
+				return false;
 			}
-			 $queue->insert( $queued_plugin, $queued_plugin['priority'] );
+			$queue->insert( $queued_plugin, $queued_plugin['priority'] );
 		}
 
 		// Insert a new PluginUninstallTask at the appropriate position in the queue.
@@ -168,7 +167,7 @@ class PluginUninstallTaskManager {
 			$plugin_uninstall_task->get_priority()
 		);
 
-		 return \update_option( Options::get_option_name( self::$queue_name ), $queue->to_array() );
+		return \update_option( Options::get_option_name( self::$queue_name ), $queue->to_array() );
 	}
 
 	/**
@@ -179,6 +178,6 @@ class PluginUninstallTaskManager {
 	 */
 	public static function status( $plugin ) {
 		$plugins = \get_option( Options::get_option_name( self::$queue_name ), array() );
-		return array_search( $plugin, array_column( $plugins, 'slug' ) );
+		return array_search( $plugin, array_column( $plugins, 'slug' ), true );
 	}
 }

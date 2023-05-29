@@ -13,19 +13,20 @@ final class TaskManager {
 	 *
 	 * @var array
 	 */
-	 protected $task_managers = array(
-		 'NewfoldLabs\\WP\Module\\Installer\\TaskManagers\\PluginInstallTaskManager',
-		 'NewfoldLabs\\WP\Module\\Installer\\TaskManagers\\PluginUninstallTaskManager'
-	 );
+	protected $task_managers = array(
+		'NewfoldLabs\\WP\Module\\Installer\\TaskManagers\\PluginInstallTaskManager',
+		'NewfoldLabs\\WP\Module\\Installer\\TaskManagers\\PluginUninstallTaskManager',
+		'NewfoldLabs\\WP\Module\\Installer\\TaskManagers\\ThemeInstallTaskManager',
+	);
 
-	 /**
-	  * TaskManager constructor.
-	  */
-	 public function __construct() {
-		 foreach ( $this->task_managers as $task_manager ) {
-			 if ( ! empty( get_option( Options::get_option_name( $task_manager::get_queue_name() ), array() ) ) ) {
-				  new $task_manager();
-			 }
-		 }
-	 }
+	/**
+	 * Constructor that registers all the TaskManagers.
+	 */
+	public function __construct() {
+		foreach ( $this->task_managers as $task_manager ) {
+			if ( ! empty( get_option( Options::get_option_name( $task_manager::get_queue_name() ), array() ) ) ) {
+				new $task_manager();
+			}
+		}
+	}
 }

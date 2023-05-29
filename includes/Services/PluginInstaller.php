@@ -2,6 +2,7 @@
 namespace NewfoldLabs\WP\Module\Installer\Services;
 
 use NewfoldLabs\WP\Module\Installer\Data\Plugins;
+use NewfoldLabs\WP\Module\Installer\Permissions;
 
 /**
  * Class PluginInstaller
@@ -373,6 +374,38 @@ class PluginInstaller {
 		}
 
 		return true;
+	}
+
+		/**
+		 * Verify caller has permissions to install plugins.
+		 *
+		 * @param \WP_REST_Request $request the incoming request object.
+		 *
+		 * @return boolean
+		 */
+	public static function check_install_permissions( \WP_REST_Request $request ) {
+		$install_hash = $request->get_header( 'X-NFD-INSTALLER' );
+		return self::rest_verify_plugin_install_hash( $install_hash )
+			&& Permissions::rest_is_authorized_admin();
+	}
+
+		/**
+		 * Retrieve Plugin Install Hash Value.
+		 *
+		 * @return string
+		 */
+	public static function rest_get_plugin_install_hash() {
+		return 'NFD_INSTALLER_' . hash( 'sha256', NFD_INSTALLER_VERSION . wp_salt( 'nonce' ) . site_url() );
+	}
+
+	/**
+	 * Verify Plugin Install Hash Value.
+	 *
+	 * @param string $hash Hash Value.
+	 * @return boolean
+	 */
+	public static function rest_verify_plugin_install_hash( $hash ) {
+		return self::rest_get_plugin_install_hash() === $hash;
 	}
 
 }

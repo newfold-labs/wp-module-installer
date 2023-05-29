@@ -18,8 +18,9 @@ final class Plugins {
 			'path'     => 'jetpack/jetpack.php',
 		),
 		'woocommerce'                       => array(
-			'approved' => true,
-			'path'     => 'woocommerce/woocommerce.php',
+			'approved'              => true,
+			'path'                  => 'woocommerce/woocommerce.php',
+			'post_install_callback' => array( __CLASS__, 'wc_prevent_redirect_on_activation' ),
 		),
 		'wordpress-seo'                     => array(
 			'approved' => true,
@@ -199,6 +200,15 @@ final class Plugins {
 	 */
 	private static function check_approved( $value ) {
 		return true === $value['approved'];
+	}
+
+	/**
+	 * Prevent redirect to woo wizard after activation of woocommerce.
+	 *
+	 * @return void
+	 */
+	public static function wc_prevent_redirect_on_activation() {
+		\delete_transient( '_wc_activation_redirect' );
 	}
 
 }

@@ -6,6 +6,9 @@ use NewfoldLabs\WP\Module\Installer\RestApi\RestApi;
 use NewfoldLabs\WP\Module\Installer\TaskManagers\TaskManager;
 use NewfoldLabs\WP\ModuleLoader\Container;
 
+/**
+ * The Module's main class.
+ */
 class Installer {
 
 	/**
@@ -18,7 +21,7 @@ class Installer {
 	/**
 	 * Constructor.
 	 *
-	 * @param Container $container
+	 * @param Container $container The module container.
 	 */
 	public function __construct( Container $container ) {
 
