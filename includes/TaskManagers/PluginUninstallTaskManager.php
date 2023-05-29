@@ -85,6 +85,9 @@ class PluginUninstallTaskManager {
 		priority at the beginning of the array
 		*/
 		$plugin_to_uninstall = array_shift( $plugins );
+		if ( ! $plugin_to_uninstall ) {
+			return true;
+		}
 
 		// Update the plugin uninstall queue.
 		\update_option( Options::get_option_name( self::$queue_name ), $plugins );

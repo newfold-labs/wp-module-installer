@@ -85,6 +85,9 @@ class ThemeInstallTaskManager {
 		priority at the beginning of the array
 		*/
 		$theme_to_install = array_shift( $themes );
+		if ( ! $theme_to_install ) {
+			return true;
+		}
 
 		// Recreate the ThemeInstallTask from the associative array.
 		$theme_install_task = new ThemeInstallTask(
