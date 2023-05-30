@@ -17,6 +17,10 @@ final class Plugins {
 			'approved' => true,
 			'path'     => 'jetpack/jetpack.php',
 		),
+		'jetpack-boost'                     => array(
+			'approved' => true,
+			'path'     => 'jetpack-boost/jetpack-boost.php',
+		),
 		'woocommerce'                       => array(
 			'approved' => true,
 			'path'     => 'woocommerce/woocommerce.php',
