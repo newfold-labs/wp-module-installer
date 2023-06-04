@@ -5,8 +5,11 @@ use NewfoldLabs\WP\Module\Installer\Data\Options;
 use NewfoldLabs\WP\Module\Installer\Permissions;
 use NewfoldLabs\WP\Module\Installer\Data\Plugins;
 use NewfoldLabs\WP\Module\Installer\Services\PluginInstaller;
+use NewfoldLabs\WP\Module\Installer\Services\PluginUninstaller;
 use NewfoldLabs\WP\Module\Installer\Tasks\PluginInstallTask;
 use NewfoldLabs\WP\Module\Installer\TaskManagers\PluginInstallTaskManager;
+use NewfoldLabs\WP\Module\Installer\Tasks\PluginUninstallTask;
+use NewfoldLabs\WP\Module\Installer\TaskManagers\PluginUninstallTaskManager;
 
 /**
  * Class PluginsController
@@ -17,7 +20,7 @@ class PluginsController {
 	 *
 	 * @var string
 	 */
-	 protected $namespace = 'newfold-installer/v1';
+	protected $namespace = 'newfold-installer/v1';
 
 	/**
 	 * The base of this controller's route.
@@ -52,7 +55,20 @@ class PluginsController {
 					'methods'             => \WP_REST_Server::CREATABLE,
 					'callback'            => array( $this, 'install' ),
 					'args'                => $this->get_install_plugin_args(),
-					'permission_callback' => array( $this, 'check_install_permissions' ),
+					'permission_callback' => array( PluginInstaller::class, 'check_install_permissions' ),
+				),
+			)
+		);
+
+		\register_rest_route(
+			$this->namespace,
+			$this->rest_base . '/uninstall',
+			array(
+				array(
+					'methods'             => \WP_REST_Server::CREATABLE,
+					'callback'            => array( $this, 'uninstall' ),
+					'args'                => $this->get_install_plugin_args(),
+					'permission_callback' => array( PluginInstaller::class, 'check_install_permissions' ),
 				),
 			)
 		);
@@ -110,6 +126,28 @@ class PluginsController {
 		);
 	}
 
+			/**
+			 * Get args for the uninstall route.
+			 *
+			 * @return array
+			 */
+	public function get_uninstall_plugin_args() {
+		return array(
+			'plugin'   => array(
+				'type'     => 'string',
+				'required' => true,
+			),
+			'queue'    => array(
+				'type'    => 'boolean',
+				'default' => true,
+			),
+			'priority' => array(
+				'type'    => 'integer',
+				'default' => 0,
+			),
+		);
+	}
+
 	/**
 	 * Get the plugin status check arguments.
 	 *
@@ -126,19 +164,6 @@ class PluginsController {
 				'default' => true,
 			),
 		);
-	}
-
-	/**
-	 * Verify caller has permissions to install plugins.
-	 *
-	 * @param \WP_REST_Request $request the incoming request object.
-	 *
-	 * @return boolean
-	 */
-	public function check_install_permissions( \WP_REST_Request $request ) {
-		$install_hash = $request->get_header( 'X-NFD-INSTALLER' );
-		return Permissions::rest_verify_plugin_install_hash( $install_hash )
-			&& Permissions::rest_is_authorized_admin();
 	}
 
 	/**
@@ -183,6 +208,58 @@ class PluginsController {
 		$plugin_install_task = new PluginInstallTask( $plugin, $activate );
 
 		return $plugin_install_task->execute();
+	}
+
+	/**
+	 * Handle an uninstall requuest.
+	 *
+	 * @param \WP_REST_Request $request The incoming request object.
+	 * @return \WP_REST_Response
+	 */
+	public function uninstall( \WP_REST_Request $request ) {
+		$plugin   = $request->get_param( 'plugin' );
+		$queue    = $request->get_param( 'queue' );
+		$priority = $request->get_param( 'priority' );
+
+		$position_in_queue = PluginInstallTaskManager::status( $plugin );
+		if ( false !== $position_in_queue && 0 !== $position_in_queue ) {
+			PluginInstallTaskManager::remove_from_queue(
+				$plugin
+			);
+
+			return new \WP_REST_Response(
+				array(),
+				200
+			);
+		}
+
+		if ( ! PluginUninstaller::exists( $plugin ) ) {
+			return new \WP_REST_Response(
+				array(),
+				200
+			);
+		}
+
+		// Queue the plugin uninstall if specified in the request.
+		if ( $queue ) {
+			// Add a new PluginUninstallTask to the Plugin install queue.
+			PluginUninstallTaskManager::add_to_queue(
+				new PluginUninstallTask(
+					$plugin,
+					$priority
+				)
+			);
+
+			return new \WP_REST_Response(
+				array(),
+				202
+			);
+		}
+
+		// Execute the task if it need not be queued.
+		$plugin_uninstall_task = new PluginUninstallTask( $plugin );
+
+		return $plugin_uninstall_task->execute();
 	}
 
 	/**

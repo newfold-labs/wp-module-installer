@@ -84,7 +84,7 @@ class PluginInstallTask extends Task {
 	 * @return string
 	 */
 	public function get_retries() {
-		 return $this->retries;
+		return $this->retries;
 	}
 
 	/**
@@ -118,5 +118,4 @@ class PluginInstallTask extends Task {
 			'retries'  => $this->retries,
 		);
 	}
-
 }

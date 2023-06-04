@@ -66,7 +66,7 @@ class PluginUninstallTask extends Task {
 	 * @return string
 	 */
 	public function get_retries() {
-		 return $this->retries;
+		return $this->retries;
 	}
 
 	/**

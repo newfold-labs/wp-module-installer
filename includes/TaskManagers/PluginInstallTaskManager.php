@@ -83,6 +83,9 @@ class PluginInstallTaskManager {
 		priority at the beginning of the array
 		*/
 		$plugin_to_install = array_shift( $plugins );
+		if ( ! $plugin_to_install ) {
+			return true;
+		}
 
 		// Update the plugin install queue.
 		\update_option( Options::get_option_name( self::$queue_name ), $plugins );

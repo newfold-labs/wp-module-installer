@@ -50,9 +50,9 @@ class PluginUninstaller {
 		$plugin_path = $plugin_list[ $plugin ]['path'];
 
 		if ( ! self::is_plugin_installed( $plugin_path ) ) {
-			 return false;
+			return false;
 		}
-		 return true;
+		return true;
 	}
 
 	/**
