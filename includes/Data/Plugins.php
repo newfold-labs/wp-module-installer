@@ -108,6 +108,11 @@ final class Plugins {
 			'url'      => 'https://hiive.cloud/workers/plugin-downloads/razorpay',
 			'path'     => 'woo-razorpay/woo-razorpay.php',
 		),
+		'nfd_slug_wonder_cart'                           => array(
+			'approved' => true,
+			'url'      => 'https://hiive.cloud/workers/plugin-downloads/wonder-cart',
+			'path'     => 'wonder-cart/init.php',
+		),
 	);
 
 	// [TODO] Think about deprecating this approach and move to nfd_slugs for url based installs.
