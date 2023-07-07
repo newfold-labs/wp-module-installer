@@ -16,7 +16,8 @@ final class SiteFeatures {
 	/**
 	 * Gets the list of plugins selected in the site features step
 	 */
-	public static function site_features_plugins( $onboarding_flow_data ) {
+	public static function site_features_plugins() {
+		$onboarding_flow_data = \get_option( 'nfd_module_onboarding_flow', false );
 
 		if ( ! empty( $onboarding_flow_data ) && isset( $onboarding_flow_data['data'] ) ) {
 			if ( isset( $onboarding_flow_data['data']['siteFeatures'] ) && count( $onboarding_flow_data['data']['siteFeatures'] ) > 0 ) {
@@ -64,9 +65,7 @@ final class SiteFeatures {
 	 */
 	public static function set_site_features() {
 
-		$onboarding_flow_data = \get_option( 'nfd_module_onboarding_flow', false );
-
-		$site_features_plugins = self::site_features_plugins( $onboarding_flow_data );
+		$site_features_plugins = self::site_features_plugins();
 		$plugins               = array_merge( self::get_plugins_to_be_activated(), $site_features_plugins );
 
 		foreach ( $plugins as $plugin => $decision ) {
