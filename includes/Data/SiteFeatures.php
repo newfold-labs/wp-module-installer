@@ -13,7 +13,9 @@ use NewfoldLabs\WP\Module\Installer\TaskManagers\PluginUninstallTaskManager;
  */
 final class SiteFeatures {
 
-
+	/**
+	 * Gets the list of plugins selected in the site features step
+	 */
 	public static function site_features_plugins( $onboarding_flow_data ) {
 
 		if ( ! empty( $onboarding_flow_data ) && isset( $onboarding_flow_data['data'] ) ) {
@@ -25,6 +27,10 @@ final class SiteFeatures {
 		return array();
 	}
 
+	/**
+	 * Converts the allowed plugins to a path => slug map
+	 * for faster queries
+	 */
 	public static function get_allowed_plugins() {
 		$allowed_plugins   = array();
 		$installed_plugins = Plugins::get_squashed();

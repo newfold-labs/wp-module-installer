@@ -35,7 +35,7 @@ class Installer {
 		new TaskManager();
 
 		// Check if the current URL contains enable_site_features flag
-		if ( isset( $_GET['enable_site_features'] ) && $_GET['enable_site_features'] === 'true' ) {
+		if ( isset( $_GET['enable_site_features'] ) && 'true' === $_GET['enable_site_features'] ) {
 			SiteFeatures::set_site_features();
 		}
 	}
