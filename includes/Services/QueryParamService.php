@@ -57,8 +57,8 @@ class QueryParamService {
 	public static function setup_onboarding_plugin_install_cron() {
 
 		// Register the one time cron task if not already scheduled
-		if ( ! wp_next_scheduled( 'nfd_module_installer_onboarding_cleanup_cron' ) ) {
-			wp_schedule_single_event( time() + MINUTE_IN_SECONDS, 'nfd_module_installer_onboarding_cleanup_cron' );
+		if ( ! wp_next_scheduled( 'nfd_module_installer_plugin_cleanup_cron' ) ) {
+			wp_schedule_single_event( time() + MINUTE_IN_SECONDS, 'nfd_module_installer_plugin_cleanup_cron' );
 
 		}
 	}
