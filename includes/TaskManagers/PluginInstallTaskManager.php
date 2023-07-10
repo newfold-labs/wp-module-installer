@@ -215,20 +215,21 @@ class PluginInstallTaskManager {
 	}
 
 	/**
-	 * Gets the list of Plugins in the activation queue and requeues them with activation true
+	 * Gets the list of Plugins in the activation queue and requeues them with new activation criteria
 	 *
 	 * @return bool
 	 */
 	public static function requeue_with_changed_activation() {
 		/*
-		Get the plugins queued up to be installed.
+		* Get the plugins queued up to be installed.
 		*/
 		$plugins = \get_option( Options::get_option_name( self::$queue_name ), array() );
 
 		$queue = new PriorityQueue();
 		foreach ( $plugins as $queued_plugin ) {
 			/*
-			Get a plugin task that is in the queue and insert it at the end with changed activation criteria
+			* Get a plugin task that is in the queue
+			* and insert it at the end with new activation criteria
 			*/
 			if ( false === $queued_plugin['activate'] ) {
 				$queued_plugin['activate'] = true;
@@ -236,6 +237,9 @@ class PluginInstallTaskManager {
 			$queue->insert( $queued_plugin, $queued_plugin['priority'] );
 		}
 
+		/*
+		* Update the plugins list with the new activation criteria
+		*/
 		return \update_option( Options::get_option_name( self::$queue_name ), $queue->to_array() );
 	}
 }
