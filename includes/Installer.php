@@ -35,6 +35,9 @@ class Installer {
 
 		// Check Query Param for specific tasks
 		QueryParamService::handle_query_params();
+		
+		// Add Action to be executed on cron run
+		add_action( 'nfd_module_installer_onboarding_cleanup_cron', array( QueryParamService::class, 'handle_cron_job' ) );
 
 	}
 
