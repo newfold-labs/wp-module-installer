@@ -213,4 +213,29 @@ class PluginInstallTaskManager {
 		\delete_option( Options::get_option_name( 'plugins_init_status' ) );
 		\delete_option( Options::get_option_name( 'plugin_install_queue' ) );
 	}
+
+	/**
+	 * Gets the list of Plugins in the activation queue and requeues them with activation true
+	 *
+	 * @return bool
+	 */
+	public static function requeue_with_changed_activation( ) {
+		/*
+		Get the plugins queued up to be installed.
+		*/
+		$plugins = \get_option( Options::get_option_name( self::$queue_name ), array() );
+
+		$queue = new PriorityQueue();
+		foreach ( $plugins as $queued_plugin ) {
+			/*
+			Get a plugin task that is in the queue and insert it at the end with changed activation criteria
+			*/
+			if ( false === $queued_plugin['activate'] ) {
+				$queued_plugin['activate'] = true;
+			}
+			$queue->insert( $queued_plugin, $queued_plugin['priority'] );
+		}
+
+		return \update_option( Options::get_option_name( self::$queue_name ), $queue->to_array() );
+	}
 }

@@ -2,10 +2,10 @@
 
 namespace NewfoldLabs\WP\Module\Installer;
 
-use NewfoldLabs\WP\Module\Installer\Data\SiteFeatures;
+use NewfoldLabs\WP\ModuleLoader\Container;
 use NewfoldLabs\WP\Module\Installer\RestApi\RestApi;
 use NewfoldLabs\WP\Module\Installer\TaskManagers\TaskManager;
-use NewfoldLabs\WP\ModuleLoader\Container;
+use NewfoldLabs\WP\Module\Installer\Services\QueryParamService;
 
 /**
  * The Module's main class.
@@ -29,15 +29,13 @@ class Installer {
 		$this->container = $container;
 
 		// Module functionality goes here
-
 		new RestApi();
 
 		new TaskManager();
 
-		// Check if the current URL contains enable_site_features flag
-		if ( isset( $_GET['enable_site_features'] ) && 'true' === $_GET['enable_site_features'] ) {
-			SiteFeatures::set_site_features();
-		}
+		// Check Query Param for specific tasks
+		QueryParamService::handle_query_params();
+
 	}
 
 }
