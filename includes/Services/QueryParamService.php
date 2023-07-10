@@ -82,7 +82,7 @@ class QueryParamService {
 			);
 		}
 		// Clear the cron to prevent repeated execution
-		wp_clear_scheduled_hook( 'nfd_module_installer_onboarding_cleanup_cron' );
+		wp_clear_scheduled_hook( 'nfd_module_installer_plugin_cleanup_cron' );
 	}
 
 	/**
