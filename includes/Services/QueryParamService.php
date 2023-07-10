@@ -35,7 +35,7 @@ class QueryParamService {
 			$allowed_plugins = self::get_allowed_plugins();
 
 			foreach ( array_keys( $installed_plugins ) as $plugin_path ) {
-				if ( !is_plugin_active($plugin_path) && isset( $allowed_plugins[ $plugin_path ] ) ) {
+				if ( ! is_plugin_active( $plugin_path ) && isset( $allowed_plugins[ $plugin_path ] ) ) {
 					$plugins[ $allowed_plugins[ $plugin_path ] ] = true;
 				}
 			}
@@ -61,7 +61,7 @@ class QueryParamService {
 	 */
 	public static function handle_cron_job() {
 
-		//Fetch all the plugins and add the ones that are not active
+		// Fetch all the plugins and add the ones that are not active
 		$plugins = self::get_plugins_to_be_activated();
 		foreach ( $plugins as $plugin => $decision ) {
 			PluginInstallTaskManager::add_to_queue(
@@ -77,7 +77,7 @@ class QueryParamService {
 
 	public static function handle_query_params() {
 		if ( isset( $_GET['enable_site_features'] ) && 'true' === $_GET['enable_site_features'] ) {
-			// Change the activation criteria for the plugins in the queue. 
+			// Change the activation criteria for the plugins in the queue.
 			PluginInstallTaskManager::requeue_with_changed_activation();
 			self::setup_onboarding_plugin_install_cron();
 		}

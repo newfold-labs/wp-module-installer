@@ -219,7 +219,7 @@ class PluginInstallTaskManager {
 	 *
 	 * @return bool
 	 */
-	public static function requeue_with_changed_activation( ) {
+	public static function requeue_with_changed_activation() {
 		/*
 		Get the plugins queued up to be installed.
 		*/
