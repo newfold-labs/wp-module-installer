@@ -58,7 +58,7 @@ class QueryParamService {
 
 		// Register the one time cron task if not already scheduled
 		if ( ! wp_next_scheduled( 'nfd_module_installer_plugin_cleanup_cron' ) ) {
-			wp_schedule_single_event( time() + MINUTE_IN_SECONDS, 'nfd_module_installer_plugin_cleanup_cron' );
+			wp_schedule_single_event( time() + 30 * MINUTE_IN_SECONDS, 'nfd_module_installer_plugin_cleanup_cron' );
 
 		}
 	}
