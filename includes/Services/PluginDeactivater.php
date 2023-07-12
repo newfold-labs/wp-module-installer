@@ -4,18 +4,18 @@ namespace NewfoldLabs\WP\Module\Installer\Services;
 use NewfoldLabs\WP\Module\Installer\Data\Plugins;
 
 /**
- * Class PluginUninstaller
- * This class is responsible to Uninstall a specified plugin
+ * Class PluginDeactivater
+ * This class is responsible to deactivate a specified plugin
  */
-class PluginUninstaller {
+class PluginDeactivater {
 
 	/**
-	 * Deactivate a plugin if active and then Uninstall the specific plugin.
+	 * Deactivate a specific plugin if active.
 	 *
 	 * @param string $plugin Plugin URL.
 	 * @return \WP_REST_Response|\WP_Error
 	 */
-	public static function uninstall( $plugin ) {
+	public static function deactivate( $plugin ) {
 
 		$plugin_list = Plugins::get_squashed();
 		// Gets the specified path for the Plugin from the predefined list
@@ -24,12 +24,12 @@ class PluginUninstaller {
 		if ( isset( $plugin_path ) && self::is_plugin_installed( $plugin_path ) ) {
 
 			self::deactivate_plugin_if_active( $plugin_path );
-			$deleted = self::delete_plugin( $plugin_path );
+			// $deleted = self::delete_plugin( $plugin_path );
 
-			// If Deletion is not successful throw an error for a retry.
-			if ( is_wp_error( $deleted ) ) {
-				return $deleted;
-			}
+			// // If Deletion is not successful throw an error for a retry.
+			// if ( is_wp_error( $deleted ) ) {
+			// return $deleted;
+			// }
 		}
 
 		return new \WP_REST_Response(

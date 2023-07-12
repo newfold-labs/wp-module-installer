@@ -1,12 +1,12 @@
 <?php
 namespace NewfoldLabs\WP\Module\Installer\Tasks;
 
-use NewfoldLabs\WP\Module\Installer\Services\PluginUninstaller;
+use NewfoldLabs\WP\Module\Installer\Services\PluginDeactivater;
 
 /**
- * Task for Uninstalling a Plugin.
+ * Task for Deactivating a Plugin.
  */
-class PluginUninstallTask extends Task {
+class PluginDeactivateTask extends Task {
 
 	/**
 	 * Plugin Slug.
@@ -30,7 +30,7 @@ class PluginUninstallTask extends Task {
 	private $retries;
 
 	/**
-	 * PluginUninstallTask constructor
+	 * PluginDeactivateTask constructor
 	 *
 	 * @param string $slug The slug for the Plugin. Ref: includes/Data/Plugins.php for the slugs.
 	 * @param int    $priority Priority of the task, higher the number higher the priority.
@@ -61,7 +61,7 @@ class PluginUninstallTask extends Task {
 	}
 
 	/**
-	 * Retrieves Task Installation retry count.
+	 * Retrieves Task Deactivation retry count.
 	 *
 	 * @return string
 	 */
@@ -79,16 +79,16 @@ class PluginUninstallTask extends Task {
 	}
 
 	/**
-	 * Uninstalls the Plugin using the PluginUninstaller Service.
+	 * Deactivates the Plugin using the PluginDeactivate Service.
 	 *
 	 * @return \WP_REST_Response|\WP_Error
 	 */
 	public function execute() {
-		return PluginUninstaller::uninstall( $this->get_slug() );
+		return PluginDeactivater::deactivate( $this->get_slug() );
 	}
 
 	/**
-	 * Convert the PluginUninstallTask into an associative array.
+	 * Convert the PluginDeactivateTask into an associative array.
 	 *
 	 * @return array
 	 */

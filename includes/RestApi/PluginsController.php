@@ -5,11 +5,11 @@ use NewfoldLabs\WP\Module\Installer\Data\Options;
 use NewfoldLabs\WP\Module\Installer\Permissions;
 use NewfoldLabs\WP\Module\Installer\Data\Plugins;
 use NewfoldLabs\WP\Module\Installer\Services\PluginInstaller;
-use NewfoldLabs\WP\Module\Installer\Services\PluginUninstaller;
+use NewfoldLabs\WP\Module\Installer\Services\PluginDeactivater;
 use NewfoldLabs\WP\Module\Installer\Tasks\PluginInstallTask;
 use NewfoldLabs\WP\Module\Installer\TaskManagers\PluginInstallTaskManager;
-use NewfoldLabs\WP\Module\Installer\Tasks\PluginUninstallTask;
-use NewfoldLabs\WP\Module\Installer\TaskManagers\PluginUninstallTaskManager;
+use NewfoldLabs\WP\Module\Installer\Tasks\PluginDeactivateTask;
+use NewfoldLabs\WP\Module\Installer\TaskManagers\PluginDeactivateTaskManager;
 
 /**
  * Class PluginsController
@@ -62,11 +62,11 @@ class PluginsController {
 
 		\register_rest_route(
 			$this->namespace,
-			$this->rest_base . '/uninstall',
+			$this->rest_base . '/deactivate',
 			array(
 				array(
 					'methods'             => \WP_REST_Server::CREATABLE,
-					'callback'            => array( $this, 'uninstall' ),
+					'callback'            => array( $this, 'deactivate' ),
 					'args'                => $this->get_install_plugin_args(),
 					'permission_callback' => array( PluginInstaller::class, 'check_install_permissions' ),
 				),
@@ -127,11 +127,11 @@ class PluginsController {
 	}
 
 			/**
-			 * Get args for the uninstall route.
+			 * Get args for the deactivate route.
 			 *
 			 * @return array
 			 */
-	public function get_uninstall_plugin_args() {
+	public function get_deactivate_plugin_args() {
 		return array(
 			'plugin'   => array(
 				'type'     => 'string',
@@ -211,12 +211,12 @@ class PluginsController {
 	}
 
 	/**
-	 * Handle an uninstall requuest.
+	 * Handle an deactivate requuest.
 	 *
 	 * @param \WP_REST_Request $request The incoming request object.
 	 * @return \WP_REST_Response
 	 */
-	public function uninstall( \WP_REST_Request $request ) {
+	public function deactivate( \WP_REST_Request $request ) {
 		$plugin   = $request->get_param( 'plugin' );
 		$queue    = $request->get_param( 'queue' );
 		$priority = $request->get_param( 'priority' );
@@ -233,18 +233,18 @@ class PluginsController {
 			);
 		}
 
-		if ( ! PluginUninstaller::exists( $plugin ) ) {
+		if ( ! PluginDeactivater::exists( $plugin ) ) {
 			return new \WP_REST_Response(
 				array(),
 				200
 			);
 		}
 
-		// Queue the plugin uninstall if specified in the request.
+		// Queue the plugin deactivate if specified in the request.
 		if ( $queue ) {
-			// Add a new PluginUninstallTask to the Plugin install queue.
-			PluginUninstallTaskManager::add_to_queue(
-				new PluginUninstallTask(
+			// Add a new PluginDeactivateTask to the Plugin install queue.
+			PluginDeactivateTaskManager::add_to_queue(
+				new PluginDeactivateTask(
 					$plugin,
 					$priority
 				)
@@ -257,9 +257,9 @@ class PluginsController {
 		}
 
 		// Execute the task if it need not be queued.
-		$plugin_uninstall_task = new PluginUninstallTask( $plugin );
+		$plugin_deactivate_task = new PluginDeactivateTask( $plugin );
 
-		return $plugin_uninstall_task->execute();
+		return $plugin_deactivate_task->execute();
 	}
 
 	/**
