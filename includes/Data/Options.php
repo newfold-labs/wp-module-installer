@@ -18,11 +18,11 @@ final class Options {
 	 * @var array
 	 */
 	protected static $options = array(
-		'plugins_init_status'     => 'plugins_init_status',
-		'plugin_install_queue'    => 'plugin_install_queue',
-		'plugin_deactivate_queue' => 'plugin_deactivate_queue',
-		'theme_init_status'       => 'theme_init_status',
-		'theme_install_queue'     => 'theme_install_queue',
+		'plugins_init_status'  => 'plugins_init_status',
+		'plugin_install_queue' => 'plugin_install_queue',
+		'plugin_control_queue' => 'plugin_control_queue',
+		'theme_init_status'    => 'theme_init_status',
+		'theme_install_queue'  => 'theme_install_queue',
 	);
 
 	/**

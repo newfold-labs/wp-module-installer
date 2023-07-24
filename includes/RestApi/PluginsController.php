@@ -5,11 +5,11 @@ use NewfoldLabs\WP\Module\Installer\Data\Options;
 use NewfoldLabs\WP\Module\Installer\Permissions;
 use NewfoldLabs\WP\Module\Installer\Data\Plugins;
 use NewfoldLabs\WP\Module\Installer\Services\PluginInstaller;
-use NewfoldLabs\WP\Module\Installer\Services\PluginDeactivater;
+use NewfoldLabs\WP\Module\Installer\Services\PluginController;
 use NewfoldLabs\WP\Module\Installer\Tasks\PluginInstallTask;
 use NewfoldLabs\WP\Module\Installer\TaskManagers\PluginInstallTaskManager;
-use NewfoldLabs\WP\Module\Installer\Tasks\PluginDeactivateTask;
-use NewfoldLabs\WP\Module\Installer\TaskManagers\PluginDeactivateTaskManager;
+use NewfoldLabs\WP\Module\Installer\Tasks\PluginControlTask;
+use NewfoldLabs\WP\Module\Installer\TaskManagers\PluginControlTaskManager;
 
 /**
  * Class PluginsController
@@ -62,12 +62,12 @@ class PluginsController {
 
 		\register_rest_route(
 			$this->namespace,
-			$this->rest_base . '/deactivate',
+			$this->rest_base . '/control',
 			array(
 				array(
 					'methods'             => \WP_REST_Server::CREATABLE,
-					'callback'            => array( $this, 'deactivate' ),
-					'args'                => $this->get_install_plugin_args(),
+					'callback'            => array( $this, 'control' ),
+					'args'                => $this->get_control_plugin_args(),
 					'permission_callback' => array( PluginInstaller::class, 'check_install_permissions' ),
 				),
 			)
@@ -126,22 +126,26 @@ class PluginsController {
 		);
 	}
 
-			/**
-			 * Get args for the deactivate route.
-			 *
-			 * @return array
-			 */
-	public function get_deactivate_plugin_args() {
+	/**
+	 * Get args for the controller route.
+	 *
+	 * @return array
+	 */
+	public function get_control_plugin_args() {
 		return array(
-			'plugin'   => array(
+			'plugin'     => array(
 				'type'     => 'string',
 				'required' => true,
 			),
-			'queue'    => array(
+			'activation' => array(
+				'type'     => 'boolean',
+				'required' => true,
+			),
+			'queue'      => array(
 				'type'    => 'boolean',
 				'default' => true,
 			),
-			'priority' => array(
+			'priority'   => array(
 				'type'    => 'integer',
 				'default' => 0,
 			),
@@ -211,16 +215,18 @@ class PluginsController {
 	}
 
 	/**
-	 * Handle an deactivate requuest.
+	 * Handle an activation/deactivation requuest.
 	 *
 	 * @param \WP_REST_Request $request The incoming request object.
 	 * @return \WP_REST_Response
 	 */
-	public function deactivate( \WP_REST_Request $request ) {
-		$plugin   = $request->get_param( 'plugin' );
-		$queue    = $request->get_param( 'queue' );
-		$priority = $request->get_param( 'priority' );
+	public function control( \WP_REST_Request $request ) {
+		$plugin     = $request->get_param( 'plugin' );
+		$activation = $request->get_param( 'activation' );
+		$queue      = $request->get_param( 'queue' );
+		$priority   = $request->get_param( 'priority' );
 
+		// TO-DO make sure to add it with changed priority
 		$position_in_queue = PluginInstallTaskManager::status( $plugin );
 		if ( false !== $position_in_queue && 0 !== $position_in_queue ) {
 			PluginInstallTaskManager::remove_from_queue(
@@ -233,19 +239,20 @@ class PluginsController {
 			);
 		}
 
-		if ( ! PluginDeactivater::exists( $plugin ) ) {
+		if ( ! PluginController::exists( $plugin ) ) {
 			return new \WP_REST_Response(
 				array(),
 				200
 			);
 		}
 
-		// Queue the plugin deactivate if specified in the request.
+		// Queue the plugin contoller if specified in the request.
 		if ( $queue ) {
-			// Add a new PluginDeactivateTask to the Plugin install queue.
-			PluginDeactivateTaskManager::add_to_queue(
-				new PluginDeactivateTask(
+			// Add a new PluginControlTask to the Plugin control queue.
+			PluginControlTaskManager::add_to_queue(
+				new PluginControlTask(
 					$plugin,
+					$activation,
 					$priority
 				)
 			);
@@ -257,9 +264,9 @@ class PluginsController {
 		}
 
 		// Execute the task if it need not be queued.
-		$plugin_deactivate_task = new PluginDeactivateTask( $plugin );
+		$plugin_control_task = new PluginControlTask( $plugin, $activation );
 
-		return $plugin_deactivate_task->execute();
+		return $plugin_control_task->execute();
 	}
 
 	/**

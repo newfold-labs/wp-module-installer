@@ -33,12 +33,6 @@ class Installer {
 
 		new TaskManager();
 
-		// Handle Query Param tasks
-		QueryParamService::handle_query_params();
-
-		// Action to to activate all deactivated whitelisted existing plugins
-		add_action( 'nfd_module_installer_plugin_cleanup_cron', array( QueryParamService::class, 'handle_plugin_cron_job' ) );
-
 	}
 
 }
