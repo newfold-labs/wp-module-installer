@@ -4,18 +4,19 @@ namespace NewfoldLabs\WP\Module\Installer\Services;
 use NewfoldLabs\WP\Module\Installer\Data\Plugins;
 
 /**
- * Class PluginDeactivater
- * This class is responsible to deactivate a specified plugin
+ * Class PluginController
+ * This class is responsible to activate/deactivate a specified plugin
  */
-class PluginDeactivater {
+class PluginController {
 
 	/**
-	 * Deactivate a specific plugin if active.
+	 * Activate/Deactivate a specific plugin if active.
 	 *
-	 * @param string $plugin Plugin URL.
+	 * @param string  $plugin Plugin URL.
+	 * @param boolean $activate Activate or deactivate the plugin.
 	 * @return \WP_REST_Response|\WP_Error
 	 */
-	public static function deactivate( $plugin ) {
+	public static function control( $plugin, $activate ) {
 
 		$plugin_list = Plugins::get_squashed();
 		// Gets the specified path for the Plugin from the predefined list

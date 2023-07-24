@@ -15,7 +15,7 @@ final class TaskManager {
 	 */
 	protected $task_managers = array(
 		'NewfoldLabs\\WP\Module\\Installer\\TaskManagers\\PluginInstallTaskManager',
-		'NewfoldLabs\\WP\Module\\Installer\\TaskManagers\\PluginDeactivateTaskManager',
+		'NewfoldLabs\\WP\Module\\Installer\\TaskManagers\\PluginControlTaskManager',
 		'NewfoldLabs\\WP\Module\\Installer\\TaskManagers\\ThemeInstallTaskManager',
 	);
 
