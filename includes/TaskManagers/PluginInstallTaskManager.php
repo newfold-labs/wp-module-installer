@@ -217,9 +217,10 @@ class PluginInstallTaskManager {
 	/**
 	 * Gets the list of Plugins in the activation queue and requeues them with new activation criteria
 	 *
-	 * @return bool
+	 * @param array $plugin_slugs The slugs of the plugins to be activated.
+	 * @return array
 	 */
-	public static function requeue_with_changed_activation() {
+	public static function requeue_with_changed_activation( $plugin_slugs ) {
 		/*
 		* Get the plugins queued up to be installed.
 		*/
@@ -229,10 +230,12 @@ class PluginInstallTaskManager {
 		foreach ( $plugins as $queued_plugin ) {
 			/*
 			* Get a plugin task that is in the queue
-			* and insert it at the end with new activation criteria
+			* and insert it with new activation criteria if it needs to be activated.
 			*/
-			if ( false === $queued_plugin['activate'] ) {
+			if ( in_array( $queued_plugin['slug'], $plugin_slugs ) ) {
 				$queued_plugin['activate'] = true;
+				// Gets the index of the plugin and unset it
+				unset( $plugin_slugs[ array_search( $queued_plugin['slug'], $plugin_slugs ) ] );
 			}
 			$queue->insert( $queued_plugin, $queued_plugin['priority'] );
 		}
@@ -240,6 +243,8 @@ class PluginInstallTaskManager {
 		/*
 		* Update the plugins list with the new activation criteria
 		*/
-		return \update_option( Options::get_option_name( self::$queue_name ), $queue->to_array() );
+		\update_option( Options::get_option_name( self::$queue_name ), $queue->to_array() );
+		\do_action( 'qm/debug', $plugin_slugs );
+		return $plugin_slugs;
 	}
 }
