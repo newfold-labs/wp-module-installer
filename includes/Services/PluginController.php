@@ -24,13 +24,11 @@ class PluginController {
 
 		if ( isset( $plugin_path ) && self::is_plugin_installed( $plugin_path ) ) {
 
-			self::deactivate_plugin_if_active( $plugin_path );
-			// $deleted = self::delete_plugin( $plugin_path );
-
-			// // If Deletion is not successful throw an error for a retry.
-			// if ( is_wp_error( $deleted ) ) {
-			// return $deleted;
-			// }
+			if ( true === $activate ) {
+				activate_plugin( $plugin_path );
+			} else {
+				self::deactivate_plugin_if_active( $plugin_path );
+			}
 		}
 
 		return new \WP_REST_Response(
@@ -93,62 +91,4 @@ class PluginController {
 			\deactivate_plugins( $plugin_path );
 		}
 	}
-
-	/**
-	 * Establishes a connection to the wp_filesystem.
-	 *
-	 * @return boolean
-	 */
-	protected static function connect_to_filesystem() {
-		require_once ABSPATH . 'wp-admin/includes/file.php';
-
-		// We want to ensure that the user has direct access to the filesystem.
-		$access_type = \get_filesystem_method();
-		if ( 'direct' !== $access_type ) {
-			return false;
-		}
-
-		$creds = \request_filesystem_credentials( site_url() . '/wp-admin', '', false, false, array() );
-
-		if ( ! \WP_Filesystem( $creds ) ) {
-			return false;
-		}
-
-		return true;
-	}
-
-	/**
-	 * Deletes a Plugin if it exists.
-	 *
-	 * @param string $plugin_path Path to the plugin's header file.
-	 * @return boolean|\WP_Error
-	 */
-	public static function delete_plugin( $plugin_path ) {
-
-		// Checks if the necessary functions exist
-		if ( ! function_exists( 'delete_plugins' ) ) {
-			require_once ABSPATH . 'wp-admin/includes/plugin.php';
-		}
-
-		if ( ! self::connect_to_filesystem() ) {
-			return new \WP_Error(
-				'nfd_installer_error',
-				'Could not connect to the filesystem.',
-				array( 'status' => 500 )
-			);
-		}
-
-		// Removes directory and files of a plugin
-		$deleted = \delete_plugins( array( $plugin_path ) );
-		if ( ! $deleted || is_wp_error( $deleted ) ) {
-			return new \WP_Error(
-				'nfd_installer_error',
-				'Unable to Delete the Plugin',
-				array( 'status' => 500 )
-			);
-		}
-
-		return true;
-	}
-
 }
