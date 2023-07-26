@@ -226,19 +226,7 @@ class PluginsController {
 		$queue      = $request->get_param( 'queue' );
 		$priority   = $request->get_param( 'priority' );
 
-		// TO-DO make sure to add it with changed priority
-		$position_in_queue = PluginInstallTaskManager::status( $plugin );
-		if ( false !== $position_in_queue && 0 !== $position_in_queue ) {
-			PluginInstallTaskManager::remove_from_queue(
-				$plugin
-			);
-
-			return new \WP_REST_Response(
-				array(),
-				200
-			);
-		}
-
+		// If plugin is not installed stop execution
 		if ( ! PluginController::exists( $plugin ) ) {
 			return new \WP_REST_Response(
 				array(),
