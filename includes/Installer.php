@@ -2,10 +2,9 @@
 
 namespace NewfoldLabs\WP\Module\Installer;
 
-use NewfoldLabs\WP\ModuleLoader\Container;
 use NewfoldLabs\WP\Module\Installer\RestApi\RestApi;
 use NewfoldLabs\WP\Module\Installer\TaskManagers\TaskManager;
-use NewfoldLabs\WP\Module\Installer\Services\QueryParamService;
+use NewfoldLabs\WP\ModuleLoader\Container;
 
 /**
  * The Module's main class.
@@ -29,6 +28,7 @@ class Installer {
 		$this->container = $container;
 
 		// Module functionality goes here
+
 		new RestApi();
 
 		new TaskManager();
