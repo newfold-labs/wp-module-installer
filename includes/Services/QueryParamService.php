@@ -95,8 +95,8 @@ class QueryParamService {
 		 * with activation true for whitelisted plugins
 		 */
 		if ( isset( $_GET['enable_site_features'] ) && 'true' === $_GET['enable_site_features'] ) {
-			// Change the activation criteria to true for the plugins in the queue.
-			PluginInstallTaskManager::requeue_with_changed_activation();
+			// // Change the activation criteria to true for the plugins in the queue.
+			// PluginInstallTaskManager::requeue_with_changed_activation();
 
 			// Start a one time Cron Job to activate all deactivated plugins
 			self::setup_onboarding_plugin_install_cron();

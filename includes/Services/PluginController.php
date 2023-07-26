@@ -24,9 +24,14 @@ class PluginController {
 
 		if ( isset( $plugin_path ) && self::is_plugin_installed( $plugin_path ) ) {
 
-			if ( true === $activate ) {
-				activate_plugin( $plugin_path );
-			} else {
+			if ( true === $activate && ! is_plugin_active( $plugin_path ) ) {
+				// Checks if the necessary functions exist
+				if ( ! function_exists( 'activate_plugin' ) ) {
+					require_once ABSPATH . 'wp-admin/includes/plugin.php';
+				}
+				\activate_plugin( $plugin_path );
+
+			} elseif ( false === $activate && is_plugin_active( $plugin_path ) ) {
 				self::deactivate_plugin_if_active( $plugin_path );
 			}
 		}

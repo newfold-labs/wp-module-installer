@@ -95,6 +95,7 @@ class PluginControlTaskManager {
 		// Recreate the Plugincontrol task from the associative array.
 		$plugin_control_task = new PluginControlTask(
 			$plugin_to_control['slug'],
+			$plugin_to_control['activation'],
 			$plugin_to_control['priority'],
 			$plugin_to_control['retries']
 		);
@@ -135,13 +136,12 @@ class PluginControlTaskManager {
 		*/
 		$plugins = \get_option( Options::get_option_name( self::$queue_name ), array() );
 
-		// TO-DO Come and fix this to change criteria while installing
 		$position_in_queue = PluginInstallTaskManager::status( $plugin_control_task->get_slug() );
 		if ( false !== $position_in_queue && 0 !== $position_in_queue ) {
-			PluginInstallTaskManager::remove_from_queue(
-				$plugin_control_task->get_slug()
+			PluginInstallTaskManager::change_activation(
+				$plugin_control_task->get_slug(),
+				$plugin_control_task->get_activation()
 			);
-
 			return true;
 		}
 
