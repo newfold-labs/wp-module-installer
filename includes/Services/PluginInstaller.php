@@ -308,6 +308,59 @@ class PluginInstaller {
 	}
 
 	/**
+	 * Checks if a give plugin is active, given the plugin path.
+	 *
+	 * @param string $plugin_path The plugin path.
+	 * @return boolean
+	 */
+	public static function is_active( $plugin_path ) {
+		return \is_plugin_active( $plugin_path );
+	}
+
+	/**
+	 * Activates a plugin slug after performing the necessary checks.
+	 *
+	 * @param string $plugin The plugin slug. Ref: includes/Data/Plugins.php for the slugs.
+	 * @return boolean
+	 */
+	public static function activate( $plugin ) {
+		$plugin_type = self::get_plugin_type( $plugin );
+		$plugin_path = self::get_plugin_path( $plugin, $plugin_type );
+		if ( ! self::is_plugin_installed( $plugin_path ) ) {
+			return false;
+		}
+
+		if ( \is_plugin_active( $plugin_path ) ) {
+			return true;
+		}
+
+		return \activate_plugin( $plugin_path );
+		// handle post install callback here.
+	}
+
+	/**
+	 * Deactivates a given plugin slug after performing the necessary checks.
+	 *
+	 * @param string $plugin The plugin slug. Ref: includes/Data/Plugins.php for the slugs.
+	 * @return boolean
+	 */
+	public static function deactivate( $plugin ) {
+		$plugin_type = self::get_plugin_type( $plugin );
+		$plugin_path = self::get_plugin_path( $plugin, $plugin_type );
+		if ( ! self::is_plugin_installed( $plugin_path ) ) {
+			return false;
+		}
+
+		if ( ! \is_plugin_active( $plugin_path ) ) {
+			return true;
+		}
+
+		\deactivate_plugins( $plugin_path );
+		return true;
+		// handle post install callback here.
+	}
+
+	/**
 	 * Install the Endurance Page Cache Plugin
 	 *
 	 * [TODO] Make this generic for mu-plugins and direct file downloads.

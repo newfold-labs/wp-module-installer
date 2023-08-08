@@ -17,6 +17,8 @@ final class TaskManager {
 		'NewfoldLabs\\WP\Module\\Installer\\TaskManagers\\PluginInstallTaskManager',
 		'NewfoldLabs\\WP\Module\\Installer\\TaskManagers\\PluginUninstallTaskManager',
 		'NewfoldLabs\\WP\Module\\Installer\\TaskManagers\\ThemeInstallTaskManager',
+		'NewfoldLabs\\WP\Module\\Installer\\TaskManagers\\PluginActivationTaskManager',
+		'NewfoldLabs\\WP\Module\\Installer\\TaskManagers\\PluginDeactivationTaskManager',
 	);
 
 	/**
