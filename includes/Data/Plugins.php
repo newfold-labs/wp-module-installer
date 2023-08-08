@@ -115,7 +115,7 @@ final class Plugins {
 		),
 		'nfd_slug_yith_stripe_payments_for_woocommerce' => array(
 			'approved' => true,
-			'url' => 'https://downloads.yithemes.com/?apiRequest=download_extended&package=yith-stripe-payments-for-woocommerce',
+			'url' => 'https://hiive.cloud/workers/plugin-downloads/yith-stripe-payments-for-woocommerce',
 			'path' => 'yith-stripe-payments-for-woocommerce-extended/init.php',
 		)
 	);
