@@ -149,13 +149,11 @@ class PluginInstallTaskManager {
 		foreach ( $plugins as $queued_plugin ) {
 			/*
 			Check if there is an already existing PluginInstallTask in the queue
-			for a given slug and activation criteria.
+			for a given slug.
 			*/
-			if ( $queued_plugin['slug'] === $plugin_install_task->get_slug()
-				&& $queued_plugin['activate'] === $plugin_install_task->get_activate() ) {
-				return false;
+			if ( $queued_plugin['slug'] !== $plugin_install_task->get_slug() ) {
+				$queue->insert( $queued_plugin, $queued_plugin['priority'] );
 			}
-			$queue->insert( $queued_plugin, $queued_plugin['priority'] );
 		}
 
 		// Insert a new PluginInstallTask at the appropriate position in the queue.

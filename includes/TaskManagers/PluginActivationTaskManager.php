@@ -77,7 +77,7 @@ class PluginActivationTaskManager {
 		}
 		// Get latest instance of the plugin activation queue and update it.
 		$plugins = \get_option( Options::get_option_name( self::$queue_name ), array() );
-		array_push( $plugins, $retries );
+		array_merge( $plugins, $retries );
 		\update_option( Options::get_option_name( self::$queue_name ), $plugins );
 
 		return true;

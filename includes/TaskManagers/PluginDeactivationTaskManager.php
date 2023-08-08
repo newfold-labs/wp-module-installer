@@ -75,7 +75,7 @@ class PluginDeactivationTaskManager {
 		}
 		// Update the plugin deactivation queue.
 		$plugins = \get_option( Options::get_option_name( self::$queue_name ), array() );
-		array_push( $plugins, $retries );
+		array_merge( $plugins, $retries );
 		\update_option( Options::get_option_name( self::$queue_name ), $plugins );
 
 		return true;
