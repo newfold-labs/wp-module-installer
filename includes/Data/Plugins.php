@@ -113,10 +113,10 @@ final class Plugins {
 			'url'      => 'https://hiive.cloud/workers/plugin-downloads/wonder-cart',
 			'path'     => 'wonder-cart/init.php',
 		),
-		'nfd_slug_yith_stripe_payments_for_woocommerce' => array(
+		'nfd_slug_yith_stripe_payments_for_woocommerce'  => array(
 			'approved' => true,
-			'url' => 'https://hiive.cloud/workers/plugin-downloads/yith-stripe-payments-for-woocommerce',
-			'path' => 'yith-stripe-payments-for-woocommerce-extended/init.php',
+			'url'      => 'https://hiive.cloud/workers/plugin-downloads/yith-stripe-payments-for-woocommerce',
+			'path'     => 'yith-stripe-payments-for-woocommerce-extended/init.php',
 		)
 	);
 
