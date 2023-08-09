@@ -117,7 +117,7 @@ final class Plugins {
 			'approved' => true,
 			'url'      => 'https://hiive.cloud/workers/plugin-downloads/yith-stripe-payments-for-woocommerce',
 			'path'     => 'yith-stripe-payments-for-woocommerce-extended/init.php',
-		)
+		),
 	);
 
 	// [TODO] Think about deprecating this approach and move to nfd_slugs for url based installs.
