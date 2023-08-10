@@ -4,8 +4,6 @@ namespace NewfoldLabs\WP\Module\Installer\TaskManagers;
 use NewfoldLabs\WP\Module\Installer\Data\Options;
 use NewfoldLabs\WP\Module\Installer\Tasks\ThemeInstallTask;
 use NewfoldLabs\WP\Module\Installer\Models\PriorityQueue;
-use NewfoldLabs\WP\Module\Installer\Services\ThemeInstaller;
-use NewfoldLabs\WP\Module\Installer\Data\Themes;
 
 /**
  * Manages the execution of ThemeInstallTasks.
@@ -66,6 +64,61 @@ class ThemeInstallTaskManager {
 		}
 
 		return $schedules;
+	}
+
+	/**
+	 * Expedites an existing ThemeInstallTask with a given slug.
+	 *
+	 * @param string $theme_slug The theme slug to expedite.
+	 * @return boolean
+	 */
+	public static function expedite( $theme_slug ) {
+		$themes            = \get_option( Options::get_option_name( self::$queue_name ), array() );
+		$position_in_queue = array_search( $theme_slug, array_column( $themes, 'slug' ), true );
+		if ( false === $position_in_queue ) {
+			return false;
+		}
+
+		$theme_to_install = $themes[ $position_in_queue ];
+		unset( $themes[ $position_in_queue ] );
+		$themes = array_values( $themes );
+		\update_option( Options::get_option_name( self::$queue_name ), $themes );
+
+		$theme_install_task = new ThemeInstallTask(
+			$theme_to_install['slug'],
+			$theme_to_install['activate'],
+			$theme_to_install['priority'],
+			$theme_to_install['retries']
+		);
+
+		// Update status to the current slug being installed.
+		\update_option( Options::get_option_name( 'theme_init_status' ), $theme_install_task->get_slug() );
+
+		// Execute the ThemeInstallTask.
+		$status = $theme_install_task->execute();
+		if ( \is_wp_error( $status ) ) {
+
+			// If there is an error, then increase the retry count for the task.
+			$theme_install_task->increment_retries();
+
+			/*
+				If the number of retries have not exceeded the limit
+				then re-queue the task at the end of the queue to be retried.
+			*/
+			if ( $theme_install_task->get_retries() <= self::$retry_limit ) {
+					array_push( $themes, $theme_install_task->to_array() );
+			}
+		}
+
+		// If there are no more themes to be installed then change the status to completed.
+		if ( empty( $themes ) ) {
+			\update_option( Options::get_option_name( 'theme_init_status' ), 'completed' );
+		}
+		// Update the theme install queue.
+		\update_option( Options::get_option_name( self::$queue_name ), $themes );
+
+		return true;
+
 	}
 
 	/**
