@@ -140,7 +140,7 @@ class PluginInstaller {
 			return $api;
 		}
 
-		$status = self::install_from_zip( $api->download_link, $activate );
+		$status = self::install_from_zip( $api->download_link, $activate, $api->language_packs );
 		if ( \is_wp_error( $status ) ) {
 			return $status;
 		}
@@ -156,9 +156,10 @@ class PluginInstaller {
 	 *
 	 * @param string  $url The ZIP URL to install from.
 	 * @param boolean $activate Whether to activate the plugin after install.
+	 * @param array   $language_packs The set of language packs to install for the plugin.
 	 * @return \WP_REST_Response|\WP_Error
 	 */
-	public static function install_from_zip( $url, $activate ) {
+	public static function install_from_zip( $url, $activate, $language_packs = array() ) {
 		require_once ABSPATH . 'wp-admin/includes/file.php';
 		require_once ABSPATH . 'wp-admin/includes/misc.php';
 		require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
@@ -218,6 +219,34 @@ class PluginInstaller {
 				$status->add_data( array( 'status' => 500 ) );
 
 				return $status;
+			}
+		}
+
+		// Install translations.
+		$installed_locales = array_values( get_available_languages() );
+		/** This filter is documented in wp-includes/update.php */
+		$installed_locales = apply_filters( 'plugins_update_check_locales', $installed_locales );
+
+		if ( ! empty( $language_packs ) ) {
+			$language_packs = array_map(
+				static function( $item ) {
+					return (object) $item;
+				},
+				$language_packs
+			);
+
+			$language_packs = array_filter(
+				$language_packs,
+				static function( $pack ) use ( $installed_locales ) {
+					return in_array( $pack->language, $installed_locales, true );
+				}
+			);
+
+			if ( $language_packs ) {
+				$lp_upgrader = new \Language_Pack_Upgrader( $skin );
+
+				// Install all applicable language packs for the plugin.
+				$lp_upgrader->bulk_upgrade( $language_packs );
 			}
 		}
 
