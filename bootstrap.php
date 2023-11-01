@@ -17,7 +17,7 @@ if ( function_exists( 'add_action' ) ) {
 					'callback' => function ( Container $container ) {
 
 						if ( ! defined( 'NFD_INSTALLER_VERSION' ) ) {
-							define( 'NFD_INSTALLER_VERSION', '1.1.2' );
+							define( 'NFD_INSTALLER_VERSION', '1.1.3' );
 						}
 
 						new Installer( $container );
