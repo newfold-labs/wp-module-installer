@@ -309,11 +309,11 @@ class PluginInstaller {
 	 *
 	 * @param string $plugin The slug of the plugin.
 	 * @param string $plugin_type The type of plugin.
-	 * @return string
+	 * @return string|false
 	 */
 	public static function get_plugin_path( $plugin, $plugin_type ) {
 		$plugin_list = Plugins::get();
-		return $plugin_list[ $plugin_type ][ $plugin ]['path'];
+		return isset( $plugin_list[ $plugin_type ][ $plugin ] ) ? $plugin_list[ $plugin_type ][ $plugin ]['path'] : false;
 	}
 
 	/**
@@ -326,7 +326,7 @@ class PluginInstaller {
 	public static function exists( $plugin, $activate ) {
 		$plugin_type = self::get_plugin_type( $plugin );
 		$plugin_path = self::get_plugin_path( $plugin, $plugin_type );
-		if ( ! self::is_plugin_installed( $plugin_path ) ) {
+		if ( ! ( $plugin_path && self::is_plugin_installed( $plugin_path ) ) ) {
 			return false;
 		}
 
@@ -355,7 +355,7 @@ class PluginInstaller {
 	public static function activate( $plugin ) {
 		$plugin_type = self::get_plugin_type( $plugin );
 		$plugin_path = self::get_plugin_path( $plugin, $plugin_type );
-		if ( ! self::is_plugin_installed( $plugin_path ) ) {
+		if ( ! ( $plugin_path && self::is_plugin_installed( $plugin_path ) ) ) {
 			return false;
 		}
 
@@ -376,7 +376,7 @@ class PluginInstaller {
 	public static function deactivate( $plugin ) {
 		$plugin_type = self::get_plugin_type( $plugin );
 		$plugin_path = self::get_plugin_path( $plugin, $plugin_type );
-		if ( ! self::is_plugin_installed( $plugin_path ) ) {
+		if ( ! ( $plugin_path && self::is_plugin_installed( $plugin_path ) ) ) {
 			return false;
 		}
 
