@@ -7,20 +7,6 @@ namespace NewfoldLabs\WP\Module\Installer\Models;
 class PriorityQueue extends \SplPriorityQueue {
 
 	/**
-	 * Defines the logic to use when comparing two priorities.
-	 *
-	 * @param mixed $priority1 First Priority Queue
-	 * @param mixed $priority2 Second Priority Queue
-	 * @return int
-	 */
-	public function compare( $priority1, $priority2 ) : int {
-		if ( $priority1 === $priority2 ) {
-			return 0;
-		}
-		return $priority1 < $priority2 ? -1 : 1;
-	}
-
-	/**
 	 * Converts the max heap to an array.
 	 *
 	 * @return array
