@@ -45,4 +45,4 @@ Update the module version in the `bootstrap.php` file (the NFD_INSTALLER_VERSION
  composer require newfold-labs/wp-module-installer
  ```
 
-[More on NewFold WordPress Modules](https://github.com/newfold-labs/wp-module-loader)
+[More on Newfold WordPress Modules](https://github.com/newfold-labs/wp-module-loader)
