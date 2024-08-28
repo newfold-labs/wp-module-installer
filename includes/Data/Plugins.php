@@ -225,4 +225,26 @@ final class Plugins {
 		\delete_transient( '_wc_activation_redirect' );
 	}
 
+	/**
+	 * Activate or Deactivate Jetpack modules.
+	 *
+	 * @param string $module the name of the module to activate
+	 * @param string $active the status of the module, pass true to activate and false to deactivate
+	 *
+	 * @return boolean
+	 */
+	public static function toggle_jetpack_module( $module, $active = true ) {
+		$request = new \WP_REST_Request(
+			'POST',
+			'/jetpack/v4/settings'
+		);
+		$request->set_header( 'Content-Type', 'application/json' );
+		$request->set_body( wp_json_encode( array( $module => $active ) ) );
+		$response = \rest_do_request( $request );
+
+		if ( 200 !== $response->status ) {
+			return false;
+		}
+		return true;
+	}
 }
