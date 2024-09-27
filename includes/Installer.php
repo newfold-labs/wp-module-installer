@@ -4,6 +4,7 @@ namespace NewfoldLabs\WP\Module\Installer;
 
 use NewfoldLabs\WP\Module\Installer\RestApi\RestApi;
 use NewfoldLabs\WP\Module\Installer\TaskManagers\TaskManager;
+use NewfoldLabs\WP\Module\Installer\WPCLI\WPCLI;
 use NewfoldLabs\WP\ModuleLoader\Container;
 
 /**
@@ -33,6 +34,6 @@ class Installer {
 
 		new TaskManager();
 
+		new WPCLI();
 	}
-
 }

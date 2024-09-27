@@ -3,6 +3,7 @@ namespace NewfoldLabs\WP\Module\Installer\Services;
 
 use NewfoldLabs\WP\Module\Installer\Data\Plugins;
 use NewfoldLabs\WP\Module\Installer\Permissions;
+use NewfoldLabs\WP\Module\PLS\Utilities\PLSUtility;
 
 /**
  * Class PluginInstaller
@@ -152,6 +153,54 @@ class PluginInstaller {
 	}
 
 	/**
+	 * Provisions a license and installs or activates a premium plugin.
+	 *
+	 * @param string  $plugin The slug of the premium plugin.
+	 * @param boolean $activate Whether to activate the plugin after installation.
+	 *
+	 * @return \WP_Error|\WP_REST_Response
+	 */
+	public static function install_premium_plugin( $plugin, $activate ) {
+		$status_codes = Plugins::get_status_codes();
+
+		$premium_status = self::get_plugin_status( $plugin );
+
+		// Check if the premium plugin is already installed or active
+		if ( $status_codes['active'] === $premium_status || $status_codes['installed'] === $premium_status ) {
+			return new \WP_REST_Response(
+				array(
+					'message' => __( 'Premium plugin already installed or active: ', 'wp-module-installer' ) . $plugin,
+				),
+				200
+			);
+		}
+
+		// Provision a license for the premium plugin
+		$license_response = PLSUtility::provision_license( $plugin );
+		if ( is_wp_error( $license_response ) ) {
+			return $license_response;
+		}
+
+		// Check if the download URL is present in the license response
+		if ( empty( $license_response['downloadUrl'] ) ) {
+			return new \WP_Error( 'nfd_installer_error', __( 'Download URL is missing for premium plugin: ', 'wp-module-installer' ) . $plugin );
+		}
+
+		// Attempt to install and/or activate the premium plugin using the provided download URL
+		$install_status = self::install_from_zip( $license_response['downloadUrl'], $activate );
+		if ( is_wp_error( $install_status ) ) {
+			return new \WP_Error( 'nfd_installer_error', __( 'Failed to install or activate the premium plugin: ', 'wp-module-installer' ) . $plugin );
+		}
+
+		return new \WP_REST_Response(
+			array(
+				'message' => __( 'Successfully provisioned and installed: ', 'wp-module-installer' ) . $plugin,
+			),
+			200
+		);
+	}
+
+	/**
 	 * Install the plugin from a custom ZIP.
 	 *
 	 * @param string  $url The ZIP URL to install from.
@@ -229,7 +278,7 @@ class PluginInstaller {
 
 		if ( ! empty( $language_packs ) ) {
 			$language_packs = array_map(
-				static function( $item ) {
+				static function ( $item ) {
 					return (object) $item;
 				},
 				$language_packs
@@ -237,7 +286,7 @@ class PluginInstaller {
 
 			$language_packs = array_filter(
 				$language_packs,
-				static function( $pack ) use ( $installed_locales ) {
+				static function ( $pack ) use ( $installed_locales ) {
 					return in_array( $pack->language, $installed_locales, true );
 				}
 			);
@@ -490,4 +539,30 @@ class PluginInstaller {
 		return self::rest_get_plugin_install_hash() === $hash;
 	}
 
+	/**
+	 * Retrieves the current status of a plugin.
+	 *
+	 * @param string $plugin The slug or identifier of the plugin.
+	 *
+	 * @return string
+	 */
+	public static function get_plugin_status( $plugin ) {
+		$plugin_type         = self::get_plugin_type( $plugin );
+		$plugin_path         = self::get_plugin_path( $plugin, $plugin_type );
+		$plugin_status_codes = Plugins::get_status_codes();
+
+		if ( ! $plugin_path ) {
+			return $plugin_status_codes['unknown'];
+		}
+
+		if ( is_plugin_active( $plugin_path ) ) {
+			return $plugin_status_codes['active'];
+		}
+
+		if ( self::is_plugin_installed( $plugin_path ) ) {
+			return $plugin_status_codes['installed'];
+		}
+
+		return $plugin_status_codes['not_installed'];
+	}
 }

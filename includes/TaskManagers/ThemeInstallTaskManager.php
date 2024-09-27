@@ -118,7 +118,6 @@ class ThemeInstallTaskManager {
 		\update_option( Options::get_option_name( self::$queue_name ), $themes );
 
 		return true;
-
 	}
 
 	/**
