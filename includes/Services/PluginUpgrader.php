@@ -30,16 +30,11 @@ class PluginUpgrader {
 		// Array to store the status of each plugin's upgrade process
 		$yith_plugins_upgrade_status = array();
 
-		// Loop through each YITH plugin and use the upgrade_single_extended_plugin function for the upgrade
 		foreach ( $yith_plugins_to_upgrade as $index => $extended_slug ) {
-			// Call the single plugin upgrade function and get the status
-			$upgrade_status = self::upgrade_single_extended_plugin( $extended_slug );
-
-			// Store the result of the upgrade in the array
+			$upgrade_status                                = self::upgrade_extended_yith_plugin( $extended_slug );
 			$yith_plugins_upgrade_status[ $extended_slug ] = $upgrade_status;
 		}
 
-		// Return the array containing the upgrade status for each plugin
 		return $yith_plugins_upgrade_status;
 	}
 
@@ -50,7 +45,7 @@ class PluginUpgrader {
 	 *
 	 * @return array Contains the status of the upgrade process with 'upgraded' and 'message' keys.
 	 */
-	public static function upgrade_single_extended_plugin( $extended_slug ) {
+	public static function upgrade_extended_yith_plugin( $extended_slug ) {
 		// Define the list of extended YITH plugins and their corresponding premium versions.
 		// TODO: Replace the dummy entitlement slug 'nfd_slug_yith_paypal_payments_for_woocommerce' with actual entitlement slugs.
 		$yith_plugins_to_upgrade = array(

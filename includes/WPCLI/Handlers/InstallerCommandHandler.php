@@ -57,16 +57,16 @@ class InstallerCommandHandler {
 	 *
 	 * ## EXAMPLES
 	 *
-	 *     wp installer upgrade_single_extended_yith_plugin <extended_yith_plugin_slug>
+	 *     wp installer upgrade_extended_yith_plugin <extended_yith_plugin_slug>
 	 *
 	 * @param array $args Arguments passed from the command line. First argument is the plugin slug.
 	 *
 	 * @return void
 	 */
-	public function upgrade_single_yith_plugin( $args ) {
+	public function upgrade_extended_yith_plugin( $args ) {
 		$plugin_slug = $args[0];
 
-		$status_info = PluginUpgrader::upgrade_single_extended_plugin( $plugin_slug );
+		$status_info = PluginUpgrader::upgrade_extended_yith_plugin( $plugin_slug );
 		$status_json = wp_json_encode(
 			array(
 				'slug'    => $plugin_slug,
