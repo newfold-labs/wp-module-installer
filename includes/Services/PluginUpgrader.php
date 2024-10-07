@@ -68,7 +68,7 @@ class PluginUpgrader {
 
 		// Check if the extended plugin exists in the list
 		if ( ! isset( $yith_plugins_to_upgrade[ $extended_slug ] ) ) {
-			$upgrade_status['message'] = 'Invalid extended plugin slug provided.';
+			$upgrade_status['message'] = __( 'Invalid extended plugin slug provided.', 'wp-module-installer' );
 			return $upgrade_status;
 		}
 
@@ -80,12 +80,12 @@ class PluginUpgrader {
 
 		// Check if the extended plugin's status is unknown or not installed
 		if ( $status_codes['unknown'] === $extended_status ) {
-			$upgrade_status['message'] = 'Could not determine the status of the extended plugin.';
+			$upgrade_status['message'] = __( 'Could not determine the status of the extended plugin.', 'wp-module-installer' );
 			return $upgrade_status;
 		}
 
 		if ( $status_codes['not_installed'] === $extended_status ) {
-			$upgrade_status['message'] = 'Extended plugin is not installed.';
+			$upgrade_status['message'] = __( 'Extended plugin is not installed.', 'wp-module-installer' );
 			return $upgrade_status;
 		}
 
@@ -94,20 +94,20 @@ class PluginUpgrader {
 
 		// Skip if the premium plugin is already active or installed
 		if ( $status_codes['active'] === $premium_status || $status_codes['installed'] === $premium_status ) {
-			$upgrade_status['message'] = 'Premium plugin already installed or active: ' . $premium_slug;
+			$upgrade_status['message'] = __( 'Premium plugin already installed or active: ', 'wp-module-installer' ) . $premium_slug;
 			return $upgrade_status;
 		}
 
 		// Provision a license for the premium version of the plugin
 		$license_response = PLSUtility::provision_license( $premium_slug );
 		if ( is_wp_error( $license_response ) ) {
-			$upgrade_status['message'] = 'Failed to provision license for: ' . $premium_slug;
+			$upgrade_status['message'] = __( 'Failed to provision license for: ', 'wp-module-installer' ) . $premium_slug;
 			return $upgrade_status;
 		}
 
 		// Check if the download URL is present in the license response
 		if ( empty( $license_response['downloadUrl'] ) ) {
-			$upgrade_status['message'] = 'Download URL is missing for premium plugin: ' . $premium_slug;
+			$upgrade_status['message'] = __( 'Download URL is missing for premium plugin: ', 'wp-module-installer' ) . $premium_slug;
 			return $upgrade_status;
 		}
 
@@ -122,7 +122,7 @@ class PluginUpgrader {
 		// Attempt to install the premium plugin using the provided download URL, and activate it if needed
 		$premium_install_status = PluginInstaller::install_from_zip( $license_response['downloadUrl'], $should_activate );
 		if ( is_wp_error( $premium_install_status ) ) {
-			$upgrade_status['message'] = 'Failed to install the premium plugin: ' . $premium_slug;
+			$upgrade_status['message'] = __( 'Failed to install the premium plugin: ', 'wp-module-installer' ) . $premium_slug;
 			if ( $should_activate ) {
 				PluginInstaller::activate( $extended_slug );
 			}
@@ -131,12 +131,12 @@ class PluginUpgrader {
 
 		// Mark as successfully upgraded
 		$upgrade_status['upgraded'] = true;
-		$upgrade_status['message']  = 'Successfully provisioned and installed: ' . $premium_slug;
+		$upgrade_status['message']  = __( 'Successfully provisioned and installed: ', 'wp-module-installer' ) . $premium_slug;
 
 		// Attempt to uninstall the extended version of the plugin
 		$uninstall_status = PluginUninstaller::uninstall( $extended_slug );
 		if ( is_wp_error( $uninstall_status ) ) {
-			$upgrade_status['message'] = 'Successfully installed the premium plugin, but there was an error uninstalling the extended plugin. Manual cleanup may be required.';
+			$upgrade_status['message'] = __( 'Successfully installed the premium plugin, but there was an error uninstalling the extended plugin. Manual cleanup may be required.', 'wp-module-installer' );
 			return $upgrade_status;
 		}
 

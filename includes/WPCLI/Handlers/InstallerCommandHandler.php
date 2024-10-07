@@ -43,9 +43,9 @@ class InstallerCommandHandler {
 		}
 
 		if ( $all_upgrades_successful ) {
-			WP_CLI::success( 'YITH plugin upgrade process completed successfully.' );
+			WP_CLI::success( __( 'YITH plugin upgrade process completed successfully.', 'wp-module-installer' ) );
 		} else {
-			WP_CLI::error( 'YITH plugin upgrade process completed, but some upgrades failed. Please check the logs.' );
+			WP_CLI::error( __( 'YITH plugin upgrade process completed, but some upgrades failed. Please check the logs.', 'wp-module-installer' ) );
 		}
 	}
 
