@@ -13,12 +13,12 @@ domReady( () => {
 						typeof addedNode.querySelectorAll === 'function'
 					) {
 						addedNode
-							.querySelectorAll( '[data-nfd-plugin-provider]' )
+							.querySelectorAll( '[data-nfd-installer-plugin-provider]' )
 							.forEach( ( ele ) => {
 								ele.addEventListener( 'click', function ( e ) {
 									if (
 										e.target.getAttribute(
-											'data-nfd-plugin-slug'
+											'data-nfd-installer-plugin-slug'
 										) !== null
 									) {
 										apiFetch( {
@@ -26,11 +26,11 @@ domReady( () => {
 											method: 'POST',
 											data: {
 												plugin: this.getAttribute(
-													'data-nfd-plugin-slug'
+													'data-nfd-installer-plugin-slug'
 												),
 												activate:
 													this.getAttribute(
-														'data-nfd-plugin-activate'
+														'data-nfd-installer-plugin-activate'
 													) === 'true'
 														? true
 														: false,
