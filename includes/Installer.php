@@ -33,6 +33,10 @@ class Installer {
 
 		new TaskManager();
 
+		if ( Permissions::rest_is_authorized_admin() ) {
+			new WPAdmin();
+		}
+
 	}
 
 }
