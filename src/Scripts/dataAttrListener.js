@@ -13,7 +13,9 @@ domReady( () => {
 						typeof addedNode.querySelectorAll === 'function'
 					) {
 						addedNode
-							.querySelectorAll( '[data-nfd-installer-plugin-provider]' )
+							.querySelectorAll(
+								'[data-nfd-installer-plugin-provider]'
+							)
 							.forEach( ( ele ) => {
 								ele.addEventListener( 'click', function ( e ) {
 									if (
