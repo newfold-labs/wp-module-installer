@@ -2,7 +2,7 @@
 
 namespace NewfoldLabs\WP\Module\Installer\WPAdmin;
 
-use NewfoldLabs\WP\Module\PLS\WPAdmin\Listeners\DataAttrListener;
+use NewfoldLabs\WP\Module\Installer\WPAdmin\Listeners\DataAttrListener;
 
 /**
  * Manages all the wp-admin related functionalities for the module.

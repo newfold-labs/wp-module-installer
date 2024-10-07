@@ -22,7 +22,6 @@ class DataAttrListener {
 		$asset_file = NFD_INSTALLER_BUILD_DIR . '/dataAttrListener.asset.php';
 
 		if ( is_readable( $asset_file ) ) {
-
 			$asset = include $asset_file;
 
 			wp_register_script(
@@ -43,7 +42,7 @@ class DataAttrListener {
 				'before'
 			);
 
-			wp_enqueue_script( 'nfd-pls-data-attr-installer' );
+			wp_enqueue_script( 'nfd-installer-data-attr-listener' );
 		}
 	}
 }

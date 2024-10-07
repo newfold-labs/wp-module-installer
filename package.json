@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.5",
   "name": "@newfold-labs/wp-module-installer",
   "description": "An installer for WordPress plugins and themes.",
   "license": "GPL-2.0-or-later",
@@ -12,7 +12,7 @@
     "@wordpress/scripts": "^26.10.0"
   },
   "scripts": {
-    "build": "wp-scripts build ./src/ ./src/Scripts/dataAttrListener.js",
-    "start": "wp-scripts start ./src/ ./src/Scripts/dataAttrListener.js"
+    "build": "wp-scripts build ./src/Scripts/dataAttrListener.js",
+    "start": "wp-scripts start ./src/Scripts/dataAttrListener.js"
   }
 }

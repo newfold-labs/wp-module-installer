@@ -3,6 +3,7 @@
 namespace NewfoldLabs\WP\Module\Installer;
 
 use NewfoldLabs\WP\Module\Installer\RestApi\RestApi;
+use NewfoldLabs\WP\Module\Installer\WPAdmin\WPAdmin;
 use NewfoldLabs\WP\Module\Installer\TaskManagers\TaskManager;
 use NewfoldLabs\WP\ModuleLoader\Container;
 
