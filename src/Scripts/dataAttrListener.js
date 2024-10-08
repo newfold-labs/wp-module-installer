@@ -36,7 +36,7 @@ domReady( () => {
 													) === 'true'
 														? true
 														: false,
-												queue: true,
+												queue: false,
 												priority: 0,
 												premium: true,
 											},
