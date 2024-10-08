@@ -62,19 +62,6 @@ class PluginsController {
 
 		\register_rest_route(
 			$this->namespace,
-			$this->rest_base . '/install-premium',
-			array(
-				array(
-					'methods'             => \WP_REST_Server::READABLE,
-					'callback'            => array( $this, 'install_premium' ),
-					'args'                => $this->get_install_premium_plugin_args(),
-					'permission_callback' => array( Permissions::class, 'rest_is_authorized_admin' ),
-				),
-			)
-		);
-
-		\register_rest_route(
-			$this->namespace,
 			$this->rest_base . '/uninstall',
 			array(
 				array(
@@ -136,21 +123,7 @@ class PluginsController {
 				'type'    => 'integer',
 				'default' => 0,
 			),
-		);
-	}
-
-	/**
-	 * Get args for the premium install route.
-	 *
-	 * @return array
-	 */
-	public function get_install_premium_plugin_args() {
-		return array(
-			'plugin'   => array(
-				'type'     => 'string',
-				'required' => true,
-			),
-			'activate' => array(
+			'premium'  => array(
 				'type'    => 'boolean',
 				'default' => false,
 			),
@@ -209,6 +182,12 @@ class PluginsController {
 		$activate = $request->get_param( 'activate' );
 		$queue    = $request->get_param( 'queue' );
 		$priority = $request->get_param( 'priority' );
+		$premium  = $request->get_param( 'premium' );
+
+		// Checks if the plugin is premium and uses the corresponding function for it.
+		if ( true === $premium ) {
+			return PluginInstaller::install_premium_plugin( $plugin, $activate );
+		}
 
 		// Checks if a plugin with the given slug and activation criteria already exists.
 		if ( PluginInstaller::exists( $plugin, $activate ) ) {
@@ -239,20 +218,6 @@ class PluginsController {
 		$plugin_install_task = new PluginInstallTask( $plugin, $activate );
 
 		return $plugin_install_task->execute();
-	}
-
-	/**
-	 * Install the requested premium plugin.
-	 *
-	 * @param \WP_REST_Request $request the incoming request object.
-	 *
-	 * @return \WP_REST_Response|\WP_Error
-	 */
-	public function install_premium( \WP_REST_Request $request ) {
-		$plugin   = $request->get_param( 'plugin' );
-		$activate = $request->get_param( 'activate' );
-
-		return PluginInstaller::install_premium_plugin( $plugin, $activate );
 	}
 
 	/**

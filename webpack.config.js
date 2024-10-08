@@ -6,7 +6,7 @@ const version = require( './package.json' ).version; // never require full confi
 const nfdSurveyWebpackConfig = {
 	output: {
 		path: path.resolve( process.cwd(), `build/${ version }` ),
-		library: [ 'newfold', 'Survey', '[name]' ],
+		library: [ 'newfold', 'Installer', '[name]' ],
 		libraryTarget: 'window',
 	},
 };

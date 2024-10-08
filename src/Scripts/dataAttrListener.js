@@ -36,6 +36,9 @@ domReady( () => {
 													) === 'true'
 														? true
 														: false,
+												queue: true,
+												priority: 0,
+												premium: true,
 											},
 										} );
 									}
