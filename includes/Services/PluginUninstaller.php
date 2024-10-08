@@ -149,5 +149,4 @@ class PluginUninstaller {
 
 		return true;
 	}
-
 }

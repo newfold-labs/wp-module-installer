@@ -93,7 +93,7 @@ class PluginInstallTask extends Task {
 	 * @return void
 	 */
 	public function increment_retries() {
-		$this->retries++;
+		++$this->retries;
 	}
 
 	/**

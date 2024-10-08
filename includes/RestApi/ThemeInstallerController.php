@@ -67,7 +67,6 @@ class ThemeInstallerController extends \WP_REST_Controller {
 				),
 			)
 		);
-
 	}
 
 	/**
@@ -230,7 +229,6 @@ class ThemeInstallerController extends \WP_REST_Controller {
 			),
 			200
 		);
-
 	}
 
 	/**
@@ -261,6 +259,5 @@ class ThemeInstallerController extends \WP_REST_Controller {
 			array(),
 			400
 		);
-
 	}
 }

@@ -75,7 +75,7 @@ class PluginUninstallTask extends Task {
 	 * @return void
 	 */
 	public function increment_retries() {
-		$this->retries++;
+		++$this->retries;
 	}
 
 	/**
@@ -99,5 +99,4 @@ class PluginUninstallTask extends Task {
 			'retries'  => $this->retries,
 		);
 	}
-
 }
