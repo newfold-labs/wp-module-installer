@@ -50,11 +50,11 @@ class PluginUpgrader {
 		// TODO: Replace the dummy entitlement slug 'nfd_slug_yith_paypal_payments_for_woocommerce' with actual entitlement slugs.
 		$yith_plugins_to_upgrade = array(
 			'yith-woocommerce-ajax-search'         => 'nfd_slug_yith_paypal_payments_for_woocommerce',
-			'nfd_slug_yith_woocommerce_ajax_product_filter' => 'nfd_slug_yith_paypal_payments_for_woocommerce',
-			'nfd_slug_yith_woocommerce_wishlist'   => 'nfd_slug_yith_paypal_payments_for_woocommerce',
-			'nfd_slug_yith_woocommerce_booking'    => 'nfd_slug_yith_paypal_payments_for_woocommerce',
+			'nfd_slug_yith_woocommerce_ajax_product_filter' => 'yith-woocommerce-ajax-product-filter-premium',
+			'nfd_slug_yith_woocommerce_wishlist'   => 'yith-woocommerce-wishlist-premium',
+			'nfd_slug_yith_woocommerce_booking'    => 'yith-woocommerce-booking-premium',
 			'nfd_slug_yith_woocommerce_gift_cards' => 'nfd_slug_yith_paypal_payments_for_woocommerce',
-			'nfd_slug_yith_woocommerce_customize_myaccount_page' => 'nfd_slug_yith_paypal_payments_for_woocommerce',
+			'nfd_slug_yith_woocommerce_customize_myaccount_page' => 'yith-woocommerce-customize-myaccount-page',
 		);
 
 		// Initialize status array for the plugin upgrade process
