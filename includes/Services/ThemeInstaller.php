@@ -112,7 +112,6 @@ class ThemeInstaller {
 			array(),
 			201
 		);
-
 	}
 
 	/**

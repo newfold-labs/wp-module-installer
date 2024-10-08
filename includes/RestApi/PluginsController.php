@@ -310,7 +310,5 @@ class PluginsController {
 			),
 			200
 		);
-
 	}
 }
-

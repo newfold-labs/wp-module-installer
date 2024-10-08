@@ -18,6 +18,4 @@ final class Permissions {
 	public static function rest_is_authorized_admin() {
 		return \is_user_logged_in() && \current_user_can( self::ADMIN );
 	}
-
 }
-

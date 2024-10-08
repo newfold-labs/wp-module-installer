@@ -13,7 +13,7 @@ if ( function_exists( 'add_action' ) ) {
 			register(
 				array(
 					'name'     => 'installer',
-					'label'    => __( 'Installer', 'newfold-installer-module' ),
+					'label'    => __( 'Installer', 'wp-module-installer' ),
 					'callback' => function ( Container $container ) {
 
 						if ( ! defined( 'NFD_INSTALLER_VERSION' ) ) {
@@ -26,7 +26,6 @@ if ( function_exists( 'add_action' ) ) {
 					'isHidden' => true,
 				)
 			);
-
 		}
 	);
 
