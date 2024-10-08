@@ -1,3 +1,3 @@
 export const wpRestURL = window.nfdInstallerDataAttrListener?.restUrl;
-export const dataRestRoute = 'newfold-installer/v1';
-export const installerAPI = `${ wpRestURL }/${ dataRestRoute }/install`;
+export const installerRestRoute = 'newfold-installer/v1';
+export const installerAPI = `${ wpRestURL }/${ dataRestRoute }/plugins/install`;
