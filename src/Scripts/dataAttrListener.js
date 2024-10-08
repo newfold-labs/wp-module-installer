@@ -1,7 +1,7 @@
 import domReady from '@wordpress/dom-ready';
 import apiFetch from '@wordpress/api-fetch';
 
-import { installerAPI } from '../constants';
+import { pluginInstallHash, installerAPI } from '../constants';
 
 domReady( () => {
 	const domObserver = new window.MutationObserver( ( mutationList ) => {
@@ -26,6 +26,10 @@ domReady( () => {
 										apiFetch( {
 											url: installerAPI,
 											method: 'POST',
+											headers: {
+												'X-NFD-INSTALLER':
+													pluginInstallHash,
+											},
 											data: {
 												plugin: this.getAttribute(
 													'data-nfd-installer-plugin-slug'

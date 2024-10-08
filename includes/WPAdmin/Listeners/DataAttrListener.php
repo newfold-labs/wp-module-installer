@@ -2,6 +2,8 @@
 
 namespace NewfoldLabs\WP\Module\Installer\WPAdmin\Listeners;
 
+use NewfoldLabs\WP\Module\Installer\Services\PluginInstaller;
+
 /**
  * Manages all the data-* listening related functionalities for the module.
  */
@@ -34,9 +36,10 @@ class DataAttrListener {
 
 			wp_add_inline_script(
 				'nfd-installer-data-attr-listener',
-				'var nfdInstallerDataAttrListener =' . wp_json_encode(
-					array(
-						'restUrl' => \get_home_url() . '/index.php?rest_route=',
+				'var nfdInstaller =' . wp_json_encode(
+					value: array(
+						'restUrl'           => \get_home_url() . '/index.php?rest_route=',
+						'pluginInstallHash' => PluginInstaller::rest_get_plugin_install_hash(),
 					)
 				) . ';',
 				'before'
