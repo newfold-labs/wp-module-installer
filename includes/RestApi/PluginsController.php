@@ -123,6 +123,10 @@ class PluginsController {
 				'type'    => 'integer',
 				'default' => 0,
 			),
+			'premium'  => array(
+				'type'    => 'boolean',
+				'default' => false,
+			),
 		);
 	}
 
@@ -178,6 +182,12 @@ class PluginsController {
 		$activate = $request->get_param( 'activate' );
 		$queue    = $request->get_param( 'queue' );
 		$priority = $request->get_param( 'priority' );
+		$premium  = $request->get_param( 'premium' );
+
+		// Checks if the plugin is premium and uses the corresponding function for it.
+		if ( true === $premium ) {
+			return PluginInstaller::install_premium_plugin( $plugin, $activate );
+		}
 
 		// Checks if a plugin with the given slug and activation criteria already exists.
 		if ( PluginInstaller::exists( $plugin, $activate ) ) {
