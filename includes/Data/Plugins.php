@@ -138,6 +138,21 @@ final class Plugins {
 		'downloads.wordpress.org' => true,
 		'nonapproveddomain.com'   => null,
 	);
+	/**
+	 * Holds the possible status codes for a plugin.
+	 *
+	 * @var array $status_codes Possible plugin status codes including:
+	 *     'unknown'       - The plugin's status cannot be determined.
+	 *     'installed'     - The plugin is installed but not activated.
+	 *     'active'        - The plugin is installed and active.
+	 *     'not_installed' - The plugin is not installed on the system.
+	 */
+	protected static $status_codes = array(
+		'unknown'       => 'unknown',
+		'installed'     => 'installed',
+		'active'        => 'active',
+		'not_installed' => 'not_installed',
+	);
 
 	/**
 	 * Returns a list of whitelisted WordPress Plugin slugs.
@@ -167,16 +182,26 @@ final class Plugins {
 	}
 
 	/**
+	 * Retrieves the array of plugin status codes.
+	 *
+	 * @return array
+	 */
+	public static function get_status_codes() {
+		return self::$status_codes;
+	}
+
+	/**
 	 * Use this return value for a faster search of slug/url/domain.
 	 *
 	 * @return array
 	 */
 	public static function get() {
 		return array(
-			'wp_slugs'  => self::$wp_slugs,
-			'nfd_slugs' => self::$nfd_slugs,
-			'urls'      => self::$urls,
-			'domains'   => self::$domains,
+			'wp_slugs'     => self::$wp_slugs,
+			'nfd_slugs'    => self::$nfd_slugs,
+			'urls'         => self::$urls,
+			'domains'      => self::$domains,
+			'status_codes' => self::$status_codes,
 		);
 	}
 
@@ -222,7 +247,7 @@ final class Plugins {
 	 * @return void
 	 */
 	public static function wc_prevent_redirect_on_activation() {
-		\delete_transient( '_wc_activation_redirect' );
+		delete_transient( '_wc_activation_redirect' );
 	}
 
 	/**
@@ -240,7 +265,7 @@ final class Plugins {
 		);
 		$request->set_header( 'Content-Type', 'application/json' );
 		$request->set_body( wp_json_encode( array( $module => $active ) ) );
-		$response = \rest_do_request( $request );
+		$response = rest_do_request( $request );
 
 		if ( 200 !== $response->status ) {
 			return false;

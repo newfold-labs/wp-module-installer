@@ -93,7 +93,7 @@ class ThemeInstallTask extends Task {
 	 * @return void
 	 */
 	public function increment_retries() {
-		$this->retries++;
+		++$this->retries;
 	}
 
 	/**
@@ -121,5 +121,4 @@ class ThemeInstallTask extends Task {
 			'retries'  => $this->retries,
 		);
 	}
-
 }
