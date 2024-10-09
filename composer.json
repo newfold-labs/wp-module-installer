@@ -27,10 +27,10 @@
     }
   },
   "require": {
-    "wp-cli/wp-cli": "^2.11",
-    "@newfold-labs/wp-module-pls": "^1.0"
+    "newfold-labs/wp-module-pls": "^0.1.0"
   },
   "require-dev": {
+    "wp-cli/wp-cli": "^2.11",
     "newfold-labs/wp-php-standards": "^1.2"
   },
   "config": {
