@@ -27,12 +27,21 @@ const Modal = ( { pluginName, pluginSlug, pluginURL, pluginActivate } ) => {
 
 	useEffect( () => {
 		installPremiumPlugin();
-		const handleKeyDown = ( event ) => {
-			if ( event.key === 'Escape' ) {
-				closeModal();
-			}
-		};
+	}, [] );
 
+	const handleKeyDown = ( event ) => {
+		if ( event.key === 'Escape' ) {
+			closeModal();
+		}
+	};
+
+	const handleClickOutside = ( event ) => {
+		if ( modalRef.current && ! modalRef.current.contains( event.target ) ) {
+			closeModal();
+		}
+	};
+
+	useEffect( () => {
 		document.addEventListener( 'keydown', handleKeyDown );
 		document.addEventListener( 'mousedown', handleClickOutside );
 
@@ -40,13 +49,7 @@ const Modal = ( { pluginName, pluginSlug, pluginURL, pluginActivate } ) => {
 			document.removeEventListener( 'keydown', handleKeyDown );
 			document.removeEventListener( 'mousedown', handleClickOutside );
 		};
-	}, [] );
-
-	const handleClickOutside = ( event ) => {
-		if ( modalRef.current && ! modalRef.current.contains( event.target ) ) {
-			closeModal();
-		}
-	};
+	}, [ pluginStatus ] );
 
 	const closeModal = () => {
 		if ( 'failed' === pluginStatus || 'completed' === pluginStatus ) {
@@ -55,8 +58,8 @@ const Modal = ( { pluginName, pluginSlug, pluginURL, pluginActivate } ) => {
 	};
 
 	const installPremiumPlugin = async () => {
-		setPluginStatus( 'installing' );
 		try {
+			setPluginStatus( 'installing' );
 			await apiFetch( {
 				url: installerAPI,
 				method: 'POST',
