@@ -69,10 +69,18 @@
 
 		&-error {
 			color: red;
+			display: flex;
 			font-size: 16px;
+			flex-direction: row;
+			align-items: center;
 
 			@media (max-width: #{ ($break-small) }) {
 				font-size: 14px;
+			}
+
+			&--icon {
+				margin-right: 5px;
+				filter: invert(20%) sepia(79%) saturate(5488%) hue-rotate(2deg) brightness(99%) contrast(109%);
 			}
 		}
 	}

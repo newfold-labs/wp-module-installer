@@ -1,6 +1,7 @@
 // External Imports
 import apiFetch from '@wordpress/api-fetch';
 import { __, sprintf } from '@wordpress/i18n';
+import { Icon, info } from '@wordpress/icons';
 import { useRef, useState, useEffect } from '@wordpress/element';
 
 // Internal Imports
@@ -23,6 +24,7 @@ const Modal = ( { pluginName, pluginSlug, pluginURL, pluginActivate } ) => {
 	 * @property {'completed'}  completed  - The plugin installation process is complete.
 	 */
 	const [ pluginStatus, setPluginStatus ] = useState( 'unknown' );
+	// const [ isRequestCompleted, setIsRequestCompleted ] = useState( false );
 	const modalRef = useRef( null );
 
 	useEffect( () => {
@@ -113,6 +115,10 @@ const Modal = ( { pluginName, pluginSlug, pluginURL, pluginActivate } ) => {
 					) }
 					{ pluginStatus === 'failed' && (
 						<div className="nfd-installer-modal__content-error">
+							<Icon
+								className="nfd-installer-modal__content-error--icon"
+								icon={ info }
+							/>
 							{ __(
 								'Sorry, there was an error installing and activating the plugin.',
 								'wp-module-onboarding'
