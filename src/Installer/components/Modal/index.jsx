@@ -29,7 +29,7 @@ const Modal = ( { pluginName, pluginSlug, pluginURL, pluginActivate } ) => {
 
 	useEffect( () => {
 		installPremiumPlugin();
-	}, [] );
+	}, [ pluginSlug ] );
 
 	const handleKeyDown = ( event ) => {
 		if ( event.key === 'Escape' ) {
