@@ -1,3 +1,7 @@
+//Imports
+@import "wordpress";
+@import "../components/Modal/stylesheet";
+
 * {
 	margin: 0;
 	padding: 0;
@@ -5,9 +9,10 @@
 }
 
 body {
-	font-family: Arial, sans-serif;
-	background-color: #f4f4f4;
+	font-family: "Open Sans", sans-serif;
 }
 
-//Imports
-@import "../components/Modal/stylesheet";
+#nfd-installer {
+	display: none;
+	transition: all 3s ease-in-out;
+}

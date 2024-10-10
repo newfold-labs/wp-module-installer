@@ -1,27 +1,10 @@
+// External Imports
 import domReady from '@wordpress/dom-ready';
-import apiFetch from '@wordpress/api-fetch';
 
-import { pluginInstallHash, installerAPI } from '../Installer/constants';
+// Internal Imports
+import { INSTALLER_DIV } from '../Installer/constants';
 
 domReady( () => {
-	const installPremiumPlugin = async ( pluginSlug, activate ) => {
-		const data = await apiFetch( {
-			url: installerAPI,
-			method: 'POST',
-			headers: {
-				'X-NFD-INSTALLER': pluginInstallHash,
-			},
-			data: {
-				plugin: pluginSlug,
-				activate: activate === 'true' ? true : false,
-				queue: false,
-				priority: 0,
-				premium: true,
-			},
-		} );
-		return data;
-	};
-
 	// function removeModal() {
 	// 	// find the modal and remove if it exists
 	// 	const modal = document.querySelector( '.nfd-installer' );
@@ -30,12 +13,26 @@ domReady( () => {
 	// 	}
 	// }
 
-	// function renderModal() {
-	// 	// create the installer div
-	// 	const modal = document.createElement( 'div' );
-	// 	modal.classList.add( 'nfd-installer' );
-	// 	document.body.appendChild( modal );
-	// }
+	function renderModal( pluginName, pluginSlug, pluginURL, activate ) {
+		// create the installer div
+		document.getElementById( INSTALLER_DIV ).style.display = 'block';
+		document
+			.getElementById( INSTALLER_DIV )
+			.setAttribute( 'nfd-installer-app__plugin--name', pluginName );
+		document
+			.getElementById( INSTALLER_DIV )
+			.setAttribute( 'nfd-installer-app__plugin--slug', pluginSlug );
+		document
+			.getElementById( INSTALLER_DIV )
+			.setAttribute( 'nfd-installer-app__plugin--url', pluginURL );
+		document
+			.getElementById( INSTALLER_DIV )
+			.setAttribute(
+				'nfd-installer-ap__plugin--activate',
+				activate === 'true' ? true : false
+			);
+		window.dispatchEvent( new Event( 'installerParamsSet' ) );
+	}
 
 	const domObserver = new window.MutationObserver( ( mutationList ) => {
 		for ( const mutation of mutationList ) {
@@ -56,10 +53,15 @@ domReady( () => {
 											'data-nfd-installer-plugin-slug'
 										) !== null
 									) {
-										// renderModal();
-										installPremiumPlugin(
+										renderModal(
+											this.getAttribute(
+												'data-nfd-installer-plugin-name'
+											),
 											this.getAttribute(
 												'data-nfd-installer-plugin-slug'
+											),
+											this.getAttribute(
+												'data-nfd-installer-plugin-url'
 											),
 											this.getAttribute(
 												'data-nfd-installer-plugin-activate'
