@@ -1,9 +1,39 @@
+// External Imports
 import domReady from '@wordpress/dom-ready';
-import apiFetch from '@wordpress/api-fetch';
 
-import { pluginInstallHash, installerAPI } from '../constants';
+// Internal Imports
+import { INSTALLER_DIV } from '../Installer/constants';
 
 domReady( () => {
+	// function removeModal() {
+	// 	// find the modal and remove if it exists
+	// 	const modal = document.querySelector( '.nfd-installer' );
+	// 	if ( modal ) {
+	// 		modal.remove();
+	// 	}
+	// }
+
+	function renderModal( pluginName, pluginSlug, pluginURL, activate ) {
+		// create the installer div
+		document.getElementById( INSTALLER_DIV ).style.display = 'block';
+		document
+			.getElementById( INSTALLER_DIV )
+			.setAttribute( 'nfd-installer-app__plugin--name', pluginName );
+		document
+			.getElementById( INSTALLER_DIV )
+			.setAttribute( 'nfd-installer-app__plugin--slug', pluginSlug );
+		document
+			.getElementById( INSTALLER_DIV )
+			.setAttribute( 'nfd-installer-app__plugin--url', pluginURL );
+		document
+			.getElementById( INSTALLER_DIV )
+			.setAttribute(
+				'nfd-installer-ap__plugin--activate',
+				activate === 'true' ? true : false
+			);
+		window.dispatchEvent( new Event( 'installerParamsSet' ) );
+	}
+
 	const domObserver = new window.MutationObserver( ( mutationList ) => {
 		for ( const mutation of mutationList ) {
 			if ( mutation.type === 'childList' ) {
@@ -23,28 +53,20 @@ domReady( () => {
 											'data-nfd-installer-plugin-slug'
 										) !== null
 									) {
-										apiFetch( {
-											url: installerAPI,
-											method: 'POST',
-											headers: {
-												'X-NFD-INSTALLER':
-													pluginInstallHash,
-											},
-											data: {
-												plugin: this.getAttribute(
-													'data-nfd-installer-plugin-slug'
-												),
-												activate:
-													this.getAttribute(
-														'data-nfd-installer-plugin-activate'
-													) === 'true'
-														? true
-														: false,
-												queue: false,
-												priority: 0,
-												premium: true,
-											},
-										} );
+										renderModal(
+											this.getAttribute(
+												'data-nfd-installer-plugin-name'
+											),
+											this.getAttribute(
+												'data-nfd-installer-plugin-slug'
+											),
+											this.getAttribute(
+												'data-nfd-installer-plugin-url'
+											),
+											this.getAttribute(
+												'data-nfd-installer-plugin-activate'
+											)
+										);
 									}
 								} );
 							} );
