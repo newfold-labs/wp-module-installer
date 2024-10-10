@@ -119,9 +119,13 @@ const Modal = ( { pluginName, pluginSlug, pluginURL, pluginActivate } ) => {
 								className="nfd-installer-modal__content-error--icon"
 								icon={ info }
 							/>
-							{ __(
-								'Sorry, there was an error installing and activating the plugin.',
-								'wp-module-onboarding'
+							{ sprintf(
+								__(
+									'Sorry, there was an error installing and activating the plugin. Please try again. If the problem persists, %1$scontact support%2$s.',
+									'wp-module-onboarding'
+								),
+								'<a href="' + window.NewfoldRuntime.adminUrl + 'admin.php?page=' + window.NewfoldRuntime.plugin.brand + '#/help">',
+								'</a>'
 							) }
 						</div>
 					) }
