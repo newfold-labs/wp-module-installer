@@ -13,7 +13,9 @@ import { render } from '@wordpress/element';
  * Internal dependencies
  */
 import { INSTALLER_DIV } from './constants';
-import App from './components/App/index';
+
+// eslint-disable-next-line import/no-unresolved
+import App from './components/App';
 
 domReady( () => {
 	renderModal( INSTALLER_DIV );
