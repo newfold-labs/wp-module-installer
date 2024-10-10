@@ -8,11 +8,15 @@
     "name": "Micah Wood",
     "email": "micah.wood@newfold.com"
   },
+  "dependencies": {
+    "@wordpress/element": "^6.1.0"
+  },
   "devDependencies": {
-    "@wordpress/scripts": "^26.10.0"
+    "@wordpress/scripts": "^26.10.0",
+    "webpack-merge": "^5.8.0"
   },
   "scripts": {
-    "build": "wp-scripts build ./src/Scripts/dataAttrListener.js",
-    "start": "wp-scripts start ./src/Scripts/dataAttrListener.js"
+    "build": "wp-scripts build ./src/Installer/installer.js ./src/Scripts/dataAttrListener.js",
+    "start": "wp-scripts start ./src/Installer/installer.js ./src/Scripts/dataAttrListener.js"
   }
 }
