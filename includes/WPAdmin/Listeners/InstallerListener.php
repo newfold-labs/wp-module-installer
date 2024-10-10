@@ -54,7 +54,6 @@ class InstallerListener {
 				'before'
 			);
 
-
 			wp_enqueue_script( 'nfd-installer-enqueue' );
 			wp_enqueue_style( 'nfd-installer-enqueue' );
 		}

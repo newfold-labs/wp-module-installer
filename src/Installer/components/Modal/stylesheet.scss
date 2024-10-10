@@ -1,16 +1,16 @@
 .nfd-installer-modal {
 	top: 0;
-    left: 0;
+	left: 0;
 	z-index: 99;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    position: fixed;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0.5);
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	position: fixed;
+	align-items: center;
+	justify-content: center;
+	background: rgba(0, 0, 0, 0.5);
 
-	&__content{
+	&__content {
 		width: 400px;
 		padding: 20px;
 		position: relative;
@@ -54,10 +54,12 @@
 }
 
 @keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
 }
