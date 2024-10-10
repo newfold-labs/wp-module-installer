@@ -13,7 +13,7 @@ import { render } from '@wordpress/element';
  * Internal dependencies
  */
 import { INSTALLER_DIV } from './constants';
-import App from './components/App';
+import App from './components/App/index';
 
 domReady( () => {
 	renderModal( INSTALLER_DIV );
