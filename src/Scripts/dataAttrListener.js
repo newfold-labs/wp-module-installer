@@ -14,6 +14,16 @@ domReady( () => {
 	// }
 
 	function renderModal( pluginName, pluginSlug, pluginURL, activate ) {
+		// Don't make requests if values not provided.
+		if (
+			'' === pluginName ||
+			'' === pluginSlug ||
+			'' === pluginURL ||
+			'' === activate
+		) {
+			return;
+		}
+
 		// create the installer div
 		document.getElementById( INSTALLER_DIV ).style.display = 'block';
 		document
