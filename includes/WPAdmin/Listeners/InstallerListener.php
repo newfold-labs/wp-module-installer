@@ -13,15 +13,48 @@ class InstallerListener {
 	 * Constructor for the Installer class.
 	 */
 	public function __construct() {
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_installer_script' ) );
+		add_action( 'newfold_installer_enqueue_scripts', array( $this, 'enqueue_installer_scripts' ) );
 	}
 
 	/**
-	 * Enqueues the installer script.
+	 * Enqueues all the installer scripts that are required.
 	 *
 	 * @return void
 	 */
-	public function enqueue_installer_script() {
+	public function enqueue_installer_scripts() {
+		$this->enqueue_data_attr_listener();
+		$this->enqueue_installer_react_script();
+	}
+
+	/**
+	 * Enqueues the data-* attribute listener script.
+	 *
+	 * @return void
+	 */
+	public function enqueue_data_attr_listener() {
+		$asset_file = NFD_INSTALLER_BUILD_DIR . '/dataAttrListener.asset.php';
+
+		if ( is_readable( $asset_file ) ) {
+			$asset = include $asset_file;
+
+			wp_register_script(
+				'nfd-installer-data-attr-listener',
+				NFD_INSTALLER_BUILD_URL . '/dataAttrListener.js',
+				array_merge( $asset['dependencies'], array() ),
+				$asset['version'],
+				true
+			);
+
+			wp_enqueue_script( 'nfd-installer-data-attr-listener' );
+		}
+	}
+
+	/**
+	 * Enqueues the installer react scripts.
+	 *
+	 * @return void
+	 */
+	public function enqueue_installer_react_script() {
 		$asset_file = NFD_INSTALLER_BUILD_DIR . '/installer.asset.php';
 
 		if ( is_readable( $asset_file ) ) {
