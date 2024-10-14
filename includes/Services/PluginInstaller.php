@@ -175,9 +175,7 @@ class PluginInstaller {
 			);
 		}
 
-		// Create an instance of PLSUtility for handling license operations
 		$pls_utility = new PLSUtility();
-
 		// Provision a license for the premium plugin
 		$license_response = $pls_utility->provision_license( $plugin );
 		if ( is_wp_error( $license_response ) ) {
@@ -205,7 +203,7 @@ class PluginInstaller {
 
 		return new \WP_REST_Response(
 			array(
-				'message' => __( 'Successfully provisioned, installed, and activated: ', 'wp-module-installer' ) . $plugin,
+				'message' => __( 'Successfully provisioned: ', 'wp-module-installer' ) . $plugin,
 			),
 			200
 		);

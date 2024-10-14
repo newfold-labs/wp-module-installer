@@ -80,15 +80,11 @@ class InstallerListener {
 
 		// Loop through each plugin in the license data and hook to its activation using basename
 		foreach ( $license_data_store as $plugin_slug => $license_data ) {
-			// Ensure that the basename is present in the license data
 			if ( isset( $license_data['basename'] ) ) {
 				$basename = $license_data['basename'];
-
-				// Hook into plugin activation using the basename
 				add_action(
 					'activate_' . $basename,
 					function () use ( $plugin_slug, $pls_utility ) {
-						// Call the activate_license function when this plugin is activated
 						$pls_utility->activate_license( $plugin_slug );
 					}
 				);
