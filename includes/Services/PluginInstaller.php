@@ -161,21 +161,8 @@ class PluginInstaller {
 	 * @return \WP_Error|\WP_REST_Response
 	 */
 	public static function install_premium_plugin( $plugin, $activate ) {
-		$status_codes = Plugins::get_status_codes();
-
-		$premium_status = self::get_plugin_status( $plugin );
-
-		// Check if the premium plugin is already installed or active
-		if ( $status_codes['active'] === $premium_status || $status_codes['installed'] === $premium_status ) {
-			return new \WP_REST_Response(
-				array(
-					'message' => __( 'Premium plugin already installed or active: ', 'wp-module-installer' ) . $plugin,
-				),
-				200
-			);
-		}
-
 		$pls_utility = new PLSUtility();
+
 		// Provision a license for the premium plugin
 		$license_response = $pls_utility->provision_license( $plugin );
 		if ( is_wp_error( $license_response ) ) {
