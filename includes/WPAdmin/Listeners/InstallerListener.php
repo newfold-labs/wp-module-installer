@@ -64,7 +64,7 @@ class InstallerListener {
 	}
 
 	/**
-	 * Listens for premium plugin activation.
+	 * Listens for premium plugin activation using activated_plugin hook.
 	 *
 	 * @return void
 	 */
@@ -78,17 +78,19 @@ class InstallerListener {
 			return;
 		}
 
-		// Loop through each plugin in the license data and hook to its activation using basename
-		foreach ( $license_data_store as $plugin_slug => $license_data ) {
-			if ( isset( $license_data['basename'] ) ) {
-				$basename = $license_data['basename'];
-				add_action(
-					'activate_' . $basename,
-					function () use ( $plugin_slug, $pls_utility ) {
+		// Hook into activated_plugin action to trigger license activation after plugin activation
+		add_action(
+			'activated_plugin',
+			function ( $plugin, $network_wide ) use ( $pls_utility, $license_data_store ) {
+				foreach ( $license_data_store as $plugin_slug => $license_data ) {
+					if ( isset( $license_data['basename'] ) && $license_data['basename'] === $plugin ) {
 						$pls_utility->activate_license( $plugin_slug );
+						break;
 					}
-				);
-			}
-		}
+				}
+			},
+			10,
+			2
+		);
 	}
 }
