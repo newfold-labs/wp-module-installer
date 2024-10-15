@@ -205,8 +205,6 @@ class PluginInstaller {
 		);
 	}
 
-
-
 	/**
 	 * Install the plugin from a custom ZIP.
 	 *
