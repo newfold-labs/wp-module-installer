@@ -79,14 +79,12 @@
 			}
 
 			&--icon {
-				width: 40px;
-				height: 40px;
 				margin-right: 5px;
-				filter: invert(20%) sepia(79%) saturate(5488%) hue-rotate(2deg) brightness(99%) contrast(109%);
 			}
 
 			&--text {
 				font-weight: 300;
+				line-height: 20px;
 
 				&-link {
 					all: unset;
