@@ -58,6 +58,13 @@ const Modal = ( { pluginName, pluginSlug, pluginURL, pluginActivate } ) => {
 			document.getElementById( INSTALLER_DIV ).style.display = 'none';
 		}
 	};
+	const navigateToHelp = () => {
+		closeModal();
+		window.open(
+			`${ window.NewfoldRuntime.adminUrl }admin.php?page=${ window.NewfoldRuntime.plugin.brand }#/help`,
+			'_self'
+		);
+	};
 
 	const installPremiumPlugin = async () => {
 		try {
@@ -95,7 +102,7 @@ const Modal = ( { pluginName, pluginSlug, pluginURL, pluginActivate } ) => {
 				<div className="nfd-installer-modal__content-section">
 					<img
 						src={ loadingInstaller }
-						alt={ __( 'Loading Vector.', 'wp-module-onboarding' ) }
+						alt={ __( 'Loading Vector.', 'wp-module-installer' ) }
 						className="nfd-installer-modal__content-image"
 					/>
 					{ pluginStatus === 'installing' && (
@@ -104,8 +111,8 @@ const Modal = ( { pluginName, pluginSlug, pluginURL, pluginActivate } ) => {
 								{ sprintf(
 									/* translators: %s: Plugin Name */
 									__(
-										'Activating… %s',
-										'wp-module-onboarding'
+										'Activating the %s',
+										'wp-module-installer'
 									),
 									pluginName
 								) }
@@ -119,10 +126,21 @@ const Modal = ( { pluginName, pluginSlug, pluginURL, pluginActivate } ) => {
 								className="nfd-installer-modal__content-error--icon"
 								icon={ info }
 							/>
-							{ __(
-								'Sorry, there was an error installing and activating the plugin. Please try again. If the problem persists, contact support.',
-								'wp-module-onboarding'
-							) }
+							<div className="nfd-installer-modal__content-error--text">
+								{ __(
+									'Sorry, there was an error installing and activating the plugin. Please try again. If the problem persists,',
+									'wp-module-installer'
+								) }
+								<button
+									className="nfd-installer-modal__content-error--text-link"
+									onClick={ () => navigateToHelp() }
+								>
+									{ __(
+										'contact support.',
+										'wp-module-installer'
+									) }
+								</button>
+							</div>
 						</div>
 					) }
 				</div>
