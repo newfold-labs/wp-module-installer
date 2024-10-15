@@ -8,6 +8,7 @@ import { INSTALLER_DIV } from '../../constants';
 const App = () => {
 	const [ pluginName, setPluginName ] = useState();
 	const [ pluginSlug, setPluginSlug ] = useState();
+	const [ pluginProvider, setPluginProvider ] = useState();
 	const [ pluginURL, setPluginURL ] = useState();
 	const [ pluginActivate, setPluginActivate ] = useState();
 
@@ -29,6 +30,9 @@ const App = () => {
 		setPluginSlug(
 			element.getAttribute( 'nfd-installer-app__plugin--slug' )
 		);
+		setPluginProvider(
+			element.getAttribute( 'nfd-installer-app__plugin--provider' )
+		);
 		setPluginURL(
 			element.getAttribute( 'nfd-installer-app__plugin--url' )
 		);
@@ -45,6 +49,7 @@ const App = () => {
 					pluginSlug={ pluginSlug }
 					pluginURL={ pluginURL }
 					pluginActivate={ pluginActivate }
+					pluginProvider={ pluginProvider }
 				/>
 			) }
 		</div>

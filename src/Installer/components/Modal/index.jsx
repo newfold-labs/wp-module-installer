@@ -1,17 +1,24 @@
 // External Imports
 import apiFetch from '@wordpress/api-fetch';
 import { __, sprintf } from '@wordpress/i18n';
+import { Icon, info } from '@wordpress/icons';
 import { useRef, useState, useEffect } from '@wordpress/element';
 
 // Internal Imports
-import { errorIcon, loadingInstaller } from '../../static/icons/index';
+import { loadingInstaller } from '../../static/icons/index';
 import {
 	INSTALLER_DIV,
 	installerAPI,
 	pluginInstallHash,
 } from '../../constants';
 
-const Modal = ( { pluginName, pluginSlug, pluginURL, pluginActivate } ) => {
+const Modal = ( {
+	pluginName,
+	pluginSlug,
+	pluginURL,
+	pluginActivate,
+	pluginProvider,
+} ) => {
 	/**
 	 * Represents the status of the plugin installation process.
 	 *
@@ -57,13 +64,6 @@ const Modal = ( { pluginName, pluginSlug, pluginURL, pluginActivate } ) => {
 			document.getElementById( INSTALLER_DIV ).style.display = 'none';
 		}
 	};
-	const navigateToHelp = () => {
-		closeModal();
-		window.open(
-			`${ window.NewfoldRuntime.adminUrl }admin.php?page=${ window.NewfoldRuntime.plugin.brand }#/help`,
-			'_self'
-		);
-	};
 
 	const installPremiumPlugin = async () => {
 		try {
@@ -80,6 +80,7 @@ const Modal = ( { pluginName, pluginSlug, pluginURL, pluginActivate } ) => {
 					priority: 0,
 					premium: true,
 					plugin: pluginSlug,
+					provider: pluginProvider,
 				},
 			} );
 			setPluginStatus( 'completed' );
@@ -101,7 +102,7 @@ const Modal = ( { pluginName, pluginSlug, pluginURL, pluginActivate } ) => {
 				<div className="nfd-installer-modal__content-section">
 					<img
 						src={ loadingInstaller }
-						alt={ __( 'Loading Vector.', 'wp-module-installer' ) }
+						alt={ __( 'Loading Vector.', 'wp-module-onboarding' ) }
 						className="nfd-installer-modal__content-image"
 					/>
 					{ pluginStatus === 'installing' && (
@@ -110,8 +111,8 @@ const Modal = ( { pluginName, pluginSlug, pluginURL, pluginActivate } ) => {
 								{ sprintf(
 									/* translators: %s: Plugin Name */
 									__(
-										'Activating the %s',
-										'wp-module-installer'
+										'Activating… %s',
+										'wp-module-onboarding'
 									),
 									pluginName
 								) }
@@ -121,29 +122,23 @@ const Modal = ( { pluginName, pluginSlug, pluginURL, pluginActivate } ) => {
 					) }
 					{ pluginStatus === 'failed' && (
 						<div className="nfd-installer-modal__content-error">
-							<img
-								src={ errorIcon }
-								alt={ __(
-									'Error Icon.',
-									'wp-module-installer'
-								) }
+							<Icon
 								className="nfd-installer-modal__content-error--icon"
+								icon={ info }
 							/>
-							<div className="nfd-installer-modal__content-error--text">
-								{ __(
-									'Sorry, there was an error installing and activating the plugin. Please try again. If the problem persists,',
-									'wp-module-installer'
-								) }
-								<button
-									className="nfd-installer-modal__content-error--text-link"
-									onClick={ () => navigateToHelp() }
-								>
-									{ __(
-										'contact support.',
-										'wp-module-installer'
-									) }
-								</button>
-							</div>
+							{ sprintf(
+								// translators: %1$s and %2$s are HTML tags used to format the contact support link
+								__(
+									'Sorry, there was an error installing and activating the plugin. Please try again. If the problem persists, %1$scontact support%2$s.',
+									'wp-module-onboarding'
+								),
+								'<a href="' +
+									window.NewfoldRuntime.adminUrl +
+									'admin.php?page=' +
+									window.NewfoldRuntime.plugin.brand +
+									'#/help">',
+								'</a>'
+							) }
 						</div>
 					) }
 				</div>
