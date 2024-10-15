@@ -72,7 +72,7 @@ class InstallerListener {
 		$pls_utility = new PLSUtility();
 
 		// Retrieve the license data (decrypted) from the option
-		$license_data_store = $pls_utility->retrieve_license_data();
+		$license_data_store = $pls_utility->retrieve_license_storage_map();
 
 		if ( ! $license_data_store || empty( $license_data_store ) ) {
 			return;

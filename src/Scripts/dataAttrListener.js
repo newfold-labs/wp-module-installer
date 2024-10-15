@@ -5,15 +5,14 @@ import domReady from '@wordpress/dom-ready';
 import { INSTALLER_DIV } from '../Installer/constants';
 
 domReady( () => {
-	// function removeModal() {
-	// 	// find the modal and remove if it exists
-	// 	const modal = document.querySelector( '.nfd-installer' );
-	// 	if ( modal ) {
-	// 		modal.remove();
-	// 	}
-	// }
 
-	function renderModal( pluginName, pluginSlug, pluginURL, activate ) {
+	function renderModal(
+		pluginName,
+		pluginSlug,
+		pluginProvider,
+		pluginURL,
+		activate
+	) {
 		// create the installer div
 		document.getElementById( INSTALLER_DIV ).style.display = 'block';
 		document
@@ -22,6 +21,12 @@ domReady( () => {
 		document
 			.getElementById( INSTALLER_DIV )
 			.setAttribute( 'nfd-installer-app__plugin--slug', pluginSlug );
+		document
+			.getElementById( INSTALLER_DIV )
+			.setAttribute(
+				'nfd-installer-app__plugin--provider',
+				pluginProvider
+			);
 		document
 			.getElementById( INSTALLER_DIV )
 			.setAttribute( 'nfd-installer-app__plugin--url', pluginURL );
@@ -59,6 +64,9 @@ domReady( () => {
 											),
 											this.getAttribute(
 												'data-nfd-installer-plugin-slug'
+											),
+											this.getAttribute(
+												'data-nfd-installer-plugin-provider'
 											),
 											this.getAttribute(
 												'data-nfd-installer-plugin-url'

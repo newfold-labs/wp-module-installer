@@ -12,7 +12,13 @@ import {
 	pluginInstallHash,
 } from '../../constants';
 
-const Modal = ( { pluginName, pluginSlug, pluginURL, pluginActivate } ) => {
+const Modal = ( {
+	pluginName,
+	pluginSlug,
+	pluginURL,
+	pluginActivate,
+	pluginProvider,
+} ) => {
 	/**
 	 * Represents the status of the plugin installation process.
 	 *
@@ -74,6 +80,7 @@ const Modal = ( { pluginName, pluginSlug, pluginURL, pluginActivate } ) => {
 					priority: 0,
 					premium: true,
 					plugin: pluginSlug,
+					provider: pluginProvider,
 				},
 			} );
 			setPluginStatus( 'completed' );
@@ -120,11 +127,16 @@ const Modal = ( { pluginName, pluginSlug, pluginURL, pluginActivate } ) => {
 								icon={ info }
 							/>
 							{ sprintf(
+								// translators: %1$s and %2$s are HTML tags used to format the contact support link
 								__(
 									'Sorry, there was an error installing and activating the plugin. Please try again. If the problem persists, %1$scontact support%2$s.',
 									'wp-module-onboarding'
 								),
-								'<a href="' + window.NewfoldRuntime.adminUrl + 'admin.php?page=' + window.NewfoldRuntime.plugin.brand + '#/help">',
+								'<a href="' +
+									window.NewfoldRuntime.adminUrl +
+									'admin.php?page=' +
+									window.NewfoldRuntime.plugin.brand +
+									'#/help">',
 								'</a>'
 							) }
 						</div>

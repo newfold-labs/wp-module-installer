@@ -156,15 +156,24 @@ class PluginInstaller {
 	 * Provisions a license and installs or activates a premium plugin.
 	 *
 	 * @param string  $plugin The slug of the premium plugin.
+	 * @param string  $provider The provider name for the premium plugin.
 	 * @param boolean $activate Whether to activate the plugin after installation.
 	 *
 	 * @return \WP_Error|\WP_REST_Response
 	 */
-	public static function install_premium_plugin( $plugin, $activate ) {
+	public static function install_premium_plugin( $plugin, $provider, $activate ) {
+		// Ensure plugin and provider are not empty
+		if ( empty( $plugin ) || empty( $provider ) ) {
+			return new \WP_Error(
+				'nfd_installer_error',
+				__( 'Plugin slug and provider name cannot be empty.', 'wp-module-installer' )
+			);
+		}
+
 		$pls_utility = new PLSUtility();
 
 		// Provision a license for the premium plugin
-		$license_response = $pls_utility->provision_license( $plugin );
+		$license_response = $pls_utility->provision_license( $plugin, $provider );
 		if ( is_wp_error( $license_response ) ) {
 			return $license_response;
 		}
@@ -195,6 +204,7 @@ class PluginInstaller {
 			200
 		);
 	}
+
 
 
 	/**
