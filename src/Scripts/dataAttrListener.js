@@ -5,7 +5,6 @@ import domReady from '@wordpress/dom-ready';
 import { INSTALLER_DIV } from '../Installer/constants';
 
 domReady( () => {
-
 	function renderModal(
 		pluginName,
 		pluginSlug,
