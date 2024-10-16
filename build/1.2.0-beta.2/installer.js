@@ -485,6 +485,12 @@ const Modal = ({
       setPluginStatus('failed');
     }
   };
+  const helpLink = `${window.NewfoldRuntime.adminUrl}admin.php?page=${window.NewfoldRuntime.plugin.brand}#/help`;
+  const errorMessage = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createInterpolateElement)((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Sorry, there was an error installing and activating the plugin. Please try again. If the problem persists, <a>contact support</a>.', 'wp-module-onboarding'), {
+    a: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+      href: helpLink
+    })
+  });
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "nfd-installer-modal"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -508,9 +514,7 @@ const Modal = ({
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_6__["default"], {
     className: "nfd-installer-modal__content-error--icon",
     icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_7__["default"]
-  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.sprintf)(
-  // translators: %1$s and %2$s are HTML tags used to format the contact support link
-  (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Sorry, there was an error installing and activating the plugin. Please try again. If the problem persists, %1$scontact support%2$s.', 'wp-module-onboarding'), '<a href="' + window.NewfoldRuntime.adminUrl + 'admin.php?page=' + window.NewfoldRuntime.plugin.brand + '#/help">', '</a>')))));
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, errorMessage)))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Modal);
 

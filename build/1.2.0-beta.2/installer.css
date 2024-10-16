@@ -93,6 +93,7 @@
 }
 .nfd-installer-modal__content-error--icon {
   margin-right: 5px;
+  flex-shrink: 0;
 }
 .nfd-installer-modal__content-error--text {
   font-weight: 300;
