@@ -471,7 +471,7 @@ const Modal = ({
           'X-NFD-INSTALLER': _constants__WEBPACK_IMPORTED_MODULE_5__.pluginInstallHash
         },
         data: {
-          activate: pluginActivate === 'true' ? true : false,
+          activate: pluginActivate === 'true',
           queue: false,
           priority: 0,
           premium: true,

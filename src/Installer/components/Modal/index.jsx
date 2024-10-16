@@ -80,7 +80,7 @@ const Modal = ( {
 					'X-NFD-INSTALLER': pluginInstallHash,
 				},
 				data: {
-					activate: pluginActivate === 'true' ? true : false,
+					activate: pluginActivate === 'true',
 					queue: false,
 					priority: 0,
 					premium: true,
