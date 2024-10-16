@@ -38,8 +38,8 @@ domReady( () => {
 
 			// Is premium plugin
 			if (
-				el.hasAttribute( 'data-nfd-installer-plugin-slug' ) &&
-				el.hasAttribute( 'data-nfd-installer-plugin-provider' )
+				el.hasAttribute( 'data-nfd-installer-pls-slug' ) &&
+				el.hasAttribute( 'data-nfd-installer-pls-provider' )
 			) {
 				dispatchEvent( {
 					action: 'installPremiumPlugin',
@@ -47,10 +47,10 @@ domReady( () => {
 						'data-nfd-installer-plugin-name'
 					),
 					pluginSlug: el.getAttribute(
-						'data-nfd-installer-plugin-slug'
+						'data-nfd-installer-pls-slug'
 					),
 					pluginProvider: el.getAttribute(
-						'data-nfd-installer-plugin-provider'
+						'data-nfd-installer-pls-provider'
 					),
 					redirectUrl,
 				} );
