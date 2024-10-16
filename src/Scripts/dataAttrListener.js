@@ -12,7 +12,6 @@ domReady( () => {
 		const el = e.target;
 
 		if ( el.hasAttribute( 'data-nfd-installer-plugin-name' ) ) {
-
 			// Don't follow the existing link
 			e.preventDefault();
 
