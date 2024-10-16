@@ -3,53 +3,44 @@ import { useState, useEffect } from '@wordpress/element';
 
 // Internal Imports
 import Modal from '../Modal';
-import { INSTALLER_DIV } from '../../constants';
 
 const App = () => {
+	const [ action, setAction ] = useState();
 	const [ pluginName, setPluginName ] = useState();
-	const [ pluginSlug, setPluginSlug ] = useState();
+	const [ pluginDownloadUrl, setPluginDownloadUrl ] = useState();
 	const [ pluginProvider, setPluginProvider ] = useState();
-	const [ pluginURL, setPluginURL ] = useState();
-	const [ pluginActivate, setPluginActivate ] = useState();
+	const [ pluginSlug, setPluginSlug ] = useState();
+	const [ redirectUrl, setRedirectUrl ] = useState();
+
+	const setData = ( e ) => {
+		setAction( e.detail.action );
+		setPluginName( e.detail.pluginName );
+		setPluginDownloadUrl( e.detail.pluginDownloadUrl );
+		setPluginProvider( e.detail.pluginProvider );
+		setPluginSlug( e.detail.pluginSlug );
+		setRedirectUrl( e.detail.redirectUrl );
+	};
 
 	useEffect( () => {
 		// Add an event listener to get the changes
-		window.addEventListener( 'installerParamsSet', getData );
+		window.addEventListener( 'installerParamsSet', setData );
 
 		// Cleanup the event listener
 		return () => {
-			window.removeEventListener( 'installerParamsSet', getData );
+			window.removeEventListener( 'installerParamsSet', setData );
 		};
 	}, [] );
-
-	const getData = () => {
-		const element = document.getElementById( INSTALLER_DIV );
-		setPluginName(
-			element.getAttribute( 'nfd-installer-app__plugin--name' )
-		);
-		setPluginSlug(
-			element.getAttribute( 'nfd-installer-app__plugin--slug' )
-		);
-		setPluginProvider(
-			element.getAttribute( 'nfd-installer-app__plugin--provider' )
-		);
-		setPluginURL(
-			element.getAttribute( 'nfd-installer-app__plugin--url' )
-		);
-		setPluginActivate(
-			element.getAttribute( 'nfd-installer-app__plugin--activate' )
-		);
-	};
 
 	return (
 		<div className="nfd-installer-app">
 			{ pluginSlug && (
 				<Modal
+					action={ action }
 					pluginName={ pluginName }
-					pluginSlug={ pluginSlug }
-					pluginURL={ pluginURL }
-					pluginActivate={ pluginActivate }
+					pluginDownloadUrl={ pluginDownloadUrl }
 					pluginProvider={ pluginProvider }
+					pluginSlug={ pluginSlug }
+					redirectUrl={ redirectUrl }
 				/>
 			) }
 		</div>

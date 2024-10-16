@@ -2,28 +2,6 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/Installer/constants.js":
-/*!************************************!*\
-  !*** ./src/Installer/constants.js ***!
-  \************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   INSTALLER_DIV: () => (/* binding */ INSTALLER_DIV),
-/* harmony export */   installerAPI: () => (/* binding */ installerAPI),
-/* harmony export */   installerRestRoute: () => (/* binding */ installerRestRoute),
-/* harmony export */   pluginInstallHash: () => (/* binding */ pluginInstallHash),
-/* harmony export */   wpRestURL: () => (/* binding */ wpRestURL)
-/* harmony export */ });
-const INSTALLER_DIV = 'nfd-installer';
-const wpRestURL = window.nfdInstaller?.restUrl;
-const installerRestRoute = 'newfold-installer/v1';
-const pluginInstallHash = window.nfdInstaller?.pluginInstallHash;
-const installerAPI = `${wpRestURL}/${installerRestRoute}/plugins/install`;
-
-/***/ }),
-
 /***/ "@wordpress/dom-ready":
 /*!**********************************!*\
   !*** external ["wp","domReady"] ***!
@@ -111,43 +89,53 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/dom-ready */ "@wordpress/dom-ready");
 /* harmony import */ var _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Installer_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Installer/constants */ "./src/Installer/constants.js");
 // External Imports
 
-
-// Internal Imports
-
 _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_0___default()(() => {
-  function renderModal(pluginName, pluginSlug, pluginProvider, pluginURL, activate) {
-    // create the installer div
-    document.getElementById(_Installer_constants__WEBPACK_IMPORTED_MODULE_1__.INSTALLER_DIV).style.display = 'block';
-    document.getElementById(_Installer_constants__WEBPACK_IMPORTED_MODULE_1__.INSTALLER_DIV).setAttribute('nfd-installer-app__plugin--name', pluginName);
-    document.getElementById(_Installer_constants__WEBPACK_IMPORTED_MODULE_1__.INSTALLER_DIV).setAttribute('nfd-installer-app__plugin--slug', pluginSlug);
-    document.getElementById(_Installer_constants__WEBPACK_IMPORTED_MODULE_1__.INSTALLER_DIV).setAttribute('nfd-installer-app__plugin--provider', pluginProvider);
-    document.getElementById(_Installer_constants__WEBPACK_IMPORTED_MODULE_1__.INSTALLER_DIV).setAttribute('nfd-installer-app__plugin--url', pluginURL);
-    document.getElementById(_Installer_constants__WEBPACK_IMPORTED_MODULE_1__.INSTALLER_DIV).setAttribute('nfd-installer-ap__plugin--activate', activate === 'true' ? true : false);
-    window.dispatchEvent(new Event('installerParamsSet'));
+  function dispatchEvent(detail) {
+    window.dispatchEvent(new CustomEvent('installerParamsSet', {
+      detail
+    }));
   }
-  const domObserver = new window.MutationObserver(mutationList => {
-    for (const mutation of mutationList) {
-      if (mutation.type === 'childList') {
-        for (const addedNode of mutation.addedNodes) {
-          if (typeof addedNode === 'object' && typeof addedNode.querySelectorAll === 'function') {
-            addedNode.querySelectorAll('[data-nfd-installer-plugin-provider]').forEach(ele => {
-              ele.addEventListener('click', function (e) {
-                if (e.target.getAttribute('data-nfd-installer-plugin-slug') !== null) {
-                  renderModal(this.getAttribute('data-nfd-installer-plugin-name'), this.getAttribute('data-nfd-installer-plugin-slug'), this.getAttribute('data-nfd-installer-plugin-provider'), this.getAttribute('data-nfd-installer-plugin-url'), this.getAttribute('data-nfd-installer-plugin-activate'));
-                }
-              });
-            });
-          }
-        }
+  document.body.addEventListener('click', e => {
+    const el = e.target;
+    if (el.hasAttribute('data-nfd-installer-plugin-name')) {
+      // Don't follow the existing link
+      e.preventDefault();
+
+      // URL to redirect to after install
+      const redirectUrl = el.getAttribute('href') || el.getAttribute('data-nfd-installer-plugin-url');
+
+      // Is free plugin
+      if (el.hasAttribute('data-nfd-installer-download-url').length) {
+        dispatchEvent({
+          action: 'installFreePlugin',
+          pluginName: el.getAttribute('data-nfd-installer-plugin-name'),
+          pluginDownloadUrl: el.getAttribute('data-nfd-installer-download-url'),
+          redirectUrl
+        });
+        return false;
+      }
+
+      // Is premium plugin
+      if (el.hasAttribute('data-nfd-installer-plugin-slug') && el.hasAttribute('data-nfd-installer-plugin-provider')) {
+        dispatchEvent({
+          action: 'installPremiumPlugin',
+          pluginName: el.getAttribute('data-nfd-installer-plugin-name'),
+          pluginSlug: el.getAttribute('data-nfd-installer-plugin-slug'),
+          pluginProvider: el.getAttribute('data-nfd-installer-plugin-provider'),
+          redirectUrl
+        });
+        return false;
+      }
+
+      // TODO: Handle use cases for theme installs
+
+      // Redirect to the URL provided by the data attribute
+      if (redirectUrl) {
+        window.location.href = redirectUrl;
       }
     }
-  });
-  domObserver.observe(document.body, {
-    childList: true,
-    subtree: true
   });
 });
 })();

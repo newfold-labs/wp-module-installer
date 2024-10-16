@@ -18,11 +18,12 @@ import {
 } from '../../constants';
 
 const Modal = ( {
-	pluginName,
-	pluginSlug,
-	pluginURL,
-	pluginActivate,
+	action,
+    pluginDownloadUrl,
+    pluginName,
 	pluginProvider,
+	pluginSlug,
+	redirectUrl,
 } ) => {
 	/**
 	 * Represents the status of the plugin installation process.
@@ -35,22 +36,36 @@ const Modal = ( {
 	 * @property {'completed'}  completed  - The plugin installation process is complete.
 	 */
 	const [ pluginStatus, setPluginStatus ] = useState( 'unknown' );
-	// const [ isRequestCompleted, setIsRequestCompleted ] = useState( false );
+	const [ show, showModal ] = useState( true );
 	const modalRef = useRef( null );
 
 	useEffect( () => {
-		installPremiumPlugin();
-	}, [ pluginSlug ] );
+		document.getElementById( INSTALLER_DIV ).style.display = show
+			? 'block'
+			: 'none';
+	}, [ show ] );
+
+	useEffect( () => {
+		switch ( action ) {
+			case 'installFreePlugin':
+				// TODO: Install free plugin from pluginDownloadUrl
+				break;
+
+			case 'installPremiumPlugin':
+				installPremiumPlugin();
+				break;
+		}
+	}, [ action ] );
 
 	const handleKeyDown = ( event ) => {
 		if ( event.key === 'Escape' ) {
-			closeModal();
+			showModal( false );
 		}
 	};
 
 	const handleClickOutside = ( event ) => {
 		if ( modalRef.current && ! modalRef.current.contains( event.target ) ) {
-			closeModal();
+			showModal( false );
 		}
 	};
 
@@ -64,12 +79,6 @@ const Modal = ( {
 		};
 	}, [ pluginStatus ] );
 
-	const closeModal = () => {
-		if ( 'failed' === pluginStatus || 'completed' === pluginStatus ) {
-			document.getElementById( INSTALLER_DIV ).style.display = 'none';
-		}
-	};
-
 	const installPremiumPlugin = async () => {
 		try {
 			setPluginStatus( 'installing' );
@@ -80,7 +89,7 @@ const Modal = ( {
 					'X-NFD-INSTALLER': pluginInstallHash,
 				},
 				data: {
-					activate: pluginActivate === 'true',
+					activate: true,
 					queue: false,
 					priority: 0,
 					premium: true,
@@ -89,7 +98,7 @@ const Modal = ( {
 				},
 			} );
 			setPluginStatus( 'completed' );
-			window.open( pluginURL, '_self' );
+			window.location.href = redirectUrl;
 		} catch ( e ) {
 			setPluginStatus( 'failed' );
 		}

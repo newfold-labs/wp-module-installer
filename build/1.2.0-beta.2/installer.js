@@ -338,45 +338,45 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _Modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Modal */ "./src/Installer/components/Modal/index.jsx");
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../constants */ "./src/Installer/constants.js");
 
 // External Imports
 
 
 // Internal Imports
 
-
 const App = () => {
+  const [action, setAction] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)();
   const [pluginName, setPluginName] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)();
-  const [pluginSlug, setPluginSlug] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)();
+  const [pluginDownloadUrl, setPluginDownloadUrl] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)();
   const [pluginProvider, setPluginProvider] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)();
-  const [pluginURL, setPluginURL] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)();
-  const [pluginActivate, setPluginActivate] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)();
+  const [pluginSlug, setPluginSlug] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)();
+  const [redirectUrl, setRedirectUrl] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)();
+  const setData = e => {
+    setAction(e.detail.action);
+    setPluginName(e.detail.pluginName);
+    setPluginDownloadUrl(e.detail.pluginDownloadUrl);
+    setPluginProvider(e.detail.pluginProvider);
+    setPluginSlug(e.detail.pluginSlug);
+    setRedirectUrl(e.detail.redirectUrl);
+  };
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     // Add an event listener to get the changes
-    window.addEventListener('installerParamsSet', getData);
+    window.addEventListener('installerParamsSet', setData);
 
     // Cleanup the event listener
     return () => {
-      window.removeEventListener('installerParamsSet', getData);
+      window.removeEventListener('installerParamsSet', setData);
     };
   }, []);
-  const getData = () => {
-    const element = document.getElementById(_constants__WEBPACK_IMPORTED_MODULE_3__.INSTALLER_DIV);
-    setPluginName(element.getAttribute('nfd-installer-app__plugin--name'));
-    setPluginSlug(element.getAttribute('nfd-installer-app__plugin--slug'));
-    setPluginProvider(element.getAttribute('nfd-installer-app__plugin--provider'));
-    setPluginURL(element.getAttribute('nfd-installer-app__plugin--url'));
-    setPluginActivate(element.getAttribute('nfd-installer-app__plugin--activate'));
-  };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "nfd-installer-app"
   }, pluginSlug && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Modal__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    action: action,
     pluginName: pluginName,
+    pluginDownloadUrl: pluginDownloadUrl,
+    pluginProvider: pluginProvider,
     pluginSlug: pluginSlug,
-    pluginURL: pluginURL,
-    pluginActivate: pluginActivate,
-    pluginProvider: pluginProvider
+    redirectUrl: redirectUrl
   }));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
@@ -416,11 +416,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const Modal = ({
+  action,
+  pluginDownloadUrl,
   pluginName,
+  pluginProvider,
   pluginSlug,
-  pluginURL,
-  pluginActivate,
-  pluginProvider
+  redirectUrl
 }) => {
   /**
    * Represents the status of the plugin installation process.
@@ -433,19 +434,29 @@ const Modal = ({
    * @property {'completed'}  completed  - The plugin installation process is complete.
    */
   const [pluginStatus, setPluginStatus] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)('unknown');
-  // const [ isRequestCompleted, setIsRequestCompleted ] = useState( false );
+  const [show, showModal] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(true);
   const modalRef = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useRef)(null);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(() => {
-    installPremiumPlugin();
-  }, [pluginSlug]);
+    document.getElementById(_constants__WEBPACK_IMPORTED_MODULE_5__.INSTALLER_DIV).style.display = show ? 'block' : 'none';
+  }, [show]);
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(() => {
+    switch (action) {
+      case 'installFreePlugin':
+        // TODO: Install free plugin from pluginDownloadUrl
+        break;
+      case 'installPremiumPlugin':
+        installPremiumPlugin();
+        break;
+    }
+  }, [action]);
   const handleKeyDown = event => {
     if (event.key === 'Escape') {
-      closeModal();
+      showModal(false);
     }
   };
   const handleClickOutside = event => {
     if (modalRef.current && !modalRef.current.contains(event.target)) {
-      closeModal();
+      showModal(false);
     }
   };
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(() => {
@@ -456,11 +467,6 @@ const Modal = ({
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [pluginStatus]);
-  const closeModal = () => {
-    if ('failed' === pluginStatus || 'completed' === pluginStatus) {
-      document.getElementById(_constants__WEBPACK_IMPORTED_MODULE_5__.INSTALLER_DIV).style.display = 'none';
-    }
-  };
   const installPremiumPlugin = async () => {
     try {
       setPluginStatus('installing');
@@ -471,7 +477,7 @@ const Modal = ({
           'X-NFD-INSTALLER': _constants__WEBPACK_IMPORTED_MODULE_5__.pluginInstallHash
         },
         data: {
-          activate: pluginActivate === 'true',
+          activate: true,
           queue: false,
           priority: 0,
           premium: true,
@@ -480,7 +486,7 @@ const Modal = ({
         }
       });
       setPluginStatus('completed');
-      window.open(pluginURL, '_self');
+      window.location.href = redirectUrl;
     } catch (e) {
       setPluginStatus('failed');
     }
