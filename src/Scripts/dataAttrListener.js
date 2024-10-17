@@ -21,7 +21,7 @@ domReady( () => {
 				el.getAttribute( 'data-nfd-installer-plugin-url' );
 
 			// Is free plugin
-			if ( el.hasAttribute( 'data-nfd-installer-download-url' ).length ) {
+			if ( el.hasAttribute( 'data-nfd-installer-download-url' ) ) {
 				dispatchEvent( {
 					action: 'installFreePlugin',
 					pluginName: el.getAttribute(
