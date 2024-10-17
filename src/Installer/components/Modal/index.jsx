@@ -75,11 +75,11 @@ const Modal = ( { pluginName, pluginSlug, pluginURL, pluginActivate } ) => {
 					'X-NFD-INSTALLER': pluginInstallHash,
 				},
 				data: {
-					activate: pluginActivate === 'true' ? true : false,
 					queue: false,
 					priority: 0,
 					premium: true,
 					plugin: pluginSlug,
+					activate: pluginActivate,
 				},
 			} );
 			setPluginStatus( 'completed' );

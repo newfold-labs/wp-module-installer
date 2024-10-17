@@ -38,7 +38,7 @@ domReady( () => {
 		document
 			.getElementById( INSTALLER_DIV )
 			.setAttribute(
-				'nfd-installer-ap__plugin--activate',
+				'nfd-installer-app__plugin--activate',
 				activate === 'true' ? true : false
 			);
 		window.dispatchEvent( new Event( 'installerParamsSet' ) );
@@ -54,13 +54,15 @@ domReady( () => {
 					) {
 						addedNode
 							.querySelectorAll(
-								'[data-nfd-installer-plugin-provider]'
+								'[data-nfd-installer-pls-provider]'
 							)
 							.forEach( ( ele ) => {
+								console.log("hereee");
+								
 								ele.addEventListener( 'click', function ( e ) {
 									if (
 										e.target.getAttribute(
-											'data-nfd-installer-plugin-slug'
+											'data-nfd-installer-pls-slug'
 										) !== null
 									) {
 										renderModal(
@@ -68,7 +70,7 @@ domReady( () => {
 												'data-nfd-installer-plugin-name'
 											),
 											this.getAttribute(
-												'data-nfd-installer-plugin-slug'
+												'data-nfd-installer-pls-slug'
 											),
 											this.getAttribute(
 												'data-nfd-installer-plugin-url'
