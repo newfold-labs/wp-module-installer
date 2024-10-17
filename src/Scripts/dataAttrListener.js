@@ -57,8 +57,6 @@ domReady( () => {
 								'[data-nfd-installer-pls-provider]'
 							)
 							.forEach( ( ele ) => {
-								console.log("hereee");
-								
 								ele.addEventListener( 'click', function ( e ) {
 									if (
 										e.target.getAttribute(
