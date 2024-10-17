@@ -13,7 +13,7 @@ class InstallerListener {
 	 * Constructor for the Installer class.
 	 */
 	public function __construct() {
-		add_action( 'newfold/installer/enqueue_scripts', array( $this, 'enqueue_installer_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_installer_scripts' ) );
 	}
 
 	/**
