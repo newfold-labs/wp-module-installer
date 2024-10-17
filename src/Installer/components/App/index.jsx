@@ -33,7 +33,7 @@ const App = () => {
 
 	return (
 		<div className="nfd-installer-app">
-			{ pluginSlug && (
+			{ ( pluginSlug || pluginDownloadUrl ) && (
 				<Modal
 					action={ action }
 					pluginName={ pluginName }
