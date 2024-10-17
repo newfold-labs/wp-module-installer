@@ -1,7 +1,6 @@
 // External Imports
 import apiFetch from '@wordpress/api-fetch';
 import { __, sprintf } from '@wordpress/i18n';
-import { Icon, info } from '@wordpress/icons';
 import {
 	createInterpolateElement,
 	useRef,
@@ -10,7 +9,7 @@ import {
 } from '@wordpress/element';
 
 // Internal Imports
-import { loadingInstaller } from '../../static/icons/index';
+import { errorIcon, loadingInstaller } from '../../static/icons/index';
 import {
 	INSTALLER_DIV,
 	installerAPI,
@@ -160,7 +159,7 @@ const Modal = ( {
 								{ sprintf(
 									/* translators: %s: Plugin Name */
 									__(
-										'Activating… %s',
+										'Activating the %s',
 										'wp-module-onboarding'
 									),
 									pluginName
@@ -171,9 +170,13 @@ const Modal = ( {
 					) }
 					{ pluginStatus === 'failed' && (
 						<div className="nfd-installer-modal__content-error">
-							<Icon
+							<img
+								src={ errorIcon }
+								alt={ __(
+									'Error Icon.',
+									'wp-module-installer'
+								) }
 								className="nfd-installer-modal__content-error--icon"
-								icon={ info }
 							/>
 							<div>{ errorMessage }</div>
 						</div>
