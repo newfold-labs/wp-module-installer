@@ -19,8 +19,8 @@ import {
 
 const Modal = ( {
 	action,
-    pluginDownloadUrl,
-    pluginName,
+	pluginDownloadUrl,
+	pluginName,
 	pluginProvider,
 	pluginSlug,
 	redirectUrl,
@@ -48,7 +48,7 @@ const Modal = ( {
 	useEffect( () => {
 		switch ( action ) {
 			case 'installFreePlugin':
-				// TODO: Install free plugin from pluginDownloadUrl
+				installFreePlugin();
 				break;
 
 			case 'installPremiumPlugin':
@@ -95,6 +95,29 @@ const Modal = ( {
 					premium: true,
 					plugin: pluginSlug,
 					provider: pluginProvider,
+				},
+			} );
+			setPluginStatus( 'completed' );
+			window.location.href = redirectUrl;
+		} catch ( e ) {
+			setPluginStatus( 'failed' );
+		}
+	};
+
+	const installFreePlugin = async () => {
+		try {
+			setPluginStatus( 'installing' );
+			await apiFetch( {
+				url: installerAPI,
+				method: 'POST',
+				headers: {
+					'X-NFD-INSTALLER': pluginInstallHash,
+				},
+				data: {
+					activate: true,
+					queue: false,
+					priority: 0,
+					plugin: pluginDownloadUrl,
 				},
 			} );
 			setPluginStatus( 'completed' );
