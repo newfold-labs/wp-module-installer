@@ -99,7 +99,8 @@ class PluginUpgrader {
 		}
 
 		// Provision a license for the premium version of the plugin
-		$license_response = PLSUtility::provision_license( $premium_slug );
+		$pls_utility      = new PLSUtility();
+		$license_response = $pls_utility->provision_license( $premium_slug, 'yith' );
 		if ( is_wp_error( $license_response ) ) {
 			$upgrade_status['message'] = __( 'Failed to provision license for: ', 'wp-module-installer' ) . $premium_slug;
 			return $upgrade_status;
