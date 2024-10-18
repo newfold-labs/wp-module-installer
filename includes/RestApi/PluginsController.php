@@ -127,14 +127,18 @@ class PluginsController {
 				'type'    => 'boolean',
 				'default' => false,
 			),
+			'provider' => array(
+				'type'    => 'string',
+				'default' => '',
+			),
 		);
 	}
 
-			/**
-			 * Get args for the uninstall route.
-			 *
-			 * @return array
-			 */
+	/**
+	 * Get args for the uninstall route.
+	 *
+	 * @return array
+	 */
 	public function get_uninstall_plugin_args() {
 		return array(
 			'plugin'   => array(
@@ -183,10 +187,11 @@ class PluginsController {
 		$queue    = $request->get_param( 'queue' );
 		$priority = $request->get_param( 'priority' );
 		$premium  = $request->get_param( 'premium' );
+		$provider = $request->get_param( 'provider' );
 
 		// Checks if the plugin is premium and uses the corresponding function for it.
 		if ( true === $premium ) {
-			return PluginInstaller::install_premium_plugin( $plugin, $activate );
+			return PluginInstaller::install_premium_plugin( $plugin, $provider, $activate );
 		}
 
 		// Checks if a plugin with the given slug and activation criteria already exists.

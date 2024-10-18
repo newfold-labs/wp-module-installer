@@ -156,27 +156,24 @@ class PluginInstaller {
 	 * Provisions a license and installs or activates a premium plugin.
 	 *
 	 * @param string  $plugin The slug of the premium plugin.
+	 * @param string  $provider The provider name for the premium plugin.
 	 * @param boolean $activate Whether to activate the plugin after installation.
 	 *
 	 * @return \WP_Error|\WP_REST_Response
 	 */
-	public static function install_premium_plugin( $plugin, $activate ) {
-		$status_codes = Plugins::get_status_codes();
-
-		$premium_status = self::get_plugin_status( $plugin );
-
-		// Check if the premium plugin is already installed or active
-		if ( $status_codes['active'] === $premium_status || $status_codes['installed'] === $premium_status ) {
-			return new \WP_REST_Response(
-				array(
-					'message' => __( 'Premium plugin already installed or active: ', 'wp-module-installer' ) . $plugin,
-				),
-				200
+	public static function install_premium_plugin( $plugin, $provider, $activate ) {
+		// Ensure plugin and provider are not empty
+		if ( empty( $plugin ) || empty( $provider ) ) {
+			return new \WP_Error(
+				'nfd_installer_error',
+				__( 'Plugin slug and provider name cannot be empty.', 'wp-module-installer' )
 			);
 		}
 
+		$pls_utility = new PLSUtility();
+
 		// Provision a license for the premium plugin
-		$license_response = PLSUtility::provision_license( $plugin );
+		$license_response = $pls_utility->provision_license( $plugin, $provider );
 		if ( is_wp_error( $license_response ) ) {
 			return $license_response;
 		}
@@ -186,15 +183,23 @@ class PluginInstaller {
 			return new \WP_Error( 'nfd_installer_error', __( 'Download URL is missing for premium plugin: ', 'wp-module-installer' ) . $plugin );
 		}
 
-		// Attempt to install and/or activate the premium plugin using the provided download URL
+		// Attempt to install the premium plugin using the provided download URL
 		$install_status = self::install_from_zip( $license_response['downloadUrl'], $activate );
 		if ( is_wp_error( $install_status ) ) {
 			return new \WP_Error( 'nfd_installer_error', __( 'Failed to install or activate the premium plugin: ', 'wp-module-installer' ) . $plugin );
 		}
 
+		// If activation is requested, activate the license
+		if ( $activate ) {
+			$activation_response = $pls_utility->activate_license( $plugin );
+			if ( is_wp_error( $activation_response ) ) {
+				return new \WP_Error( 'nfd_installer_error', __( 'Failed to activate the license for the premium plugin: ', 'wp-module-installer' ) . $plugin );
+			}
+		}
+
 		return new \WP_REST_Response(
 			array(
-				'message' => __( 'Successfully provisioned and installed: ', 'wp-module-installer' ) . $plugin,
+				'message' => __( 'Successfully provisioned: ', 'wp-module-installer' ) . $plugin,
 			),
 			200
 		);
