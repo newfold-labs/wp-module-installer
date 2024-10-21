@@ -7,7 +7,7 @@ import './styles/app.scss';
  * WordPress dependencies
  */
 import domReady from '@wordpress/dom-ready';
-import { render } from '@wordpress/element';
+import { createRoot, render } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -29,11 +29,14 @@ domReady( () => {
 const renderModal = ( elementId ) => {
 	const modalRoot = document.createElement( 'div' );
 	modalRoot.id = elementId;
-
-	// Append the modal container to the body if it hasn't been added already.
 	if ( ! document.getElementById( elementId ) ) {
+		// Append the modal container to the body if it hasn't been added already.
 		document.body.append( modalRoot );
+		if ( 'undefined' !== typeof createRoot ) {
+			// WP 6.2+ only
+			createRoot(modalRoot ).render( <App />);
+		} else if ( 'undefined' !== typeof render ) {
+			render( <App />, modalRoot );
+		}
 	}
-
-	render( <App />, modalRoot );
 };
