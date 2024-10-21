@@ -134,7 +134,8 @@ const Modal = ( {
 			'wp-module-onboarding'
 		),
 		{
-			a: <a href={ helpLink } />,
+			// eslint-disable-next-line jsx-a11y/anchor-has-content
+			a: <a href={ helpLink } onClick={ () => showModal( false ) } />,
 		}
 	);
 
