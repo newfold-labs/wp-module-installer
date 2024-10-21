@@ -6,6 +6,7 @@ import Modal from '../Modal';
 
 const App = () => {
 	const [ action, setAction ] = useState();
+	const [ statesReady, setStatesReady ] = useState( false );
 	const [ pluginName, setPluginName ] = useState();
 	const [ pluginDownloadUrl, setPluginDownloadUrl ] = useState();
 	const [ pluginProvider, setPluginProvider ] = useState();
@@ -13,12 +14,14 @@ const App = () => {
 	const [ redirectUrl, setRedirectUrl ] = useState();
 
 	const setData = ( e ) => {
+		setStatesReady( false );
 		setAction( e.detail.action );
 		setPluginName( e.detail.pluginName );
 		setPluginDownloadUrl( e.detail.pluginDownloadUrl );
 		setPluginProvider( e.detail.pluginProvider );
 		setPluginSlug( e.detail.pluginSlug );
 		setRedirectUrl( e.detail.redirectUrl );
+		setStatesReady( true );
 	};
 
 	useEffect( () => {
@@ -33,7 +36,7 @@ const App = () => {
 
 	return (
 		<div className="nfd-installer-app">
-			{ ( pluginSlug || pluginDownloadUrl ) && (
+			{ statesReady && (
 				<Modal
 					action={ action }
 					pluginName={ pluginName }

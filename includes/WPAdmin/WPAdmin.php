@@ -2,7 +2,6 @@
 
 namespace NewfoldLabs\WP\Module\Installer\WPAdmin;
 
-use NewfoldLabs\WP\Module\Installer\WPAdmin\Listeners\DataAttrListener;
 use NewfoldLabs\WP\Module\Installer\WPAdmin\Listeners\InstallerListener;
 
 /**
@@ -13,7 +12,6 @@ class WPAdmin {
 	 * Constructor for the WPAdmin class.
 	 */
 	public function __construct() {
-		new DataAttrListener();
 		new InstallerListener();
 	}
 }
