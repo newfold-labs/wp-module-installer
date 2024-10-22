@@ -34,7 +34,7 @@ const renderModal = ( elementId ) => {
 		document.body.append( modalRoot );
 		if ( 'undefined' !== typeof createRoot ) {
 			// WP 6.2+ only
-			createRoot(modalRoot ).render( <App />);
+			createRoot( modalRoot ).render( <App /> );
 		} else if ( 'undefined' !== typeof render ) {
 			render( <App />, modalRoot );
 		}
@@ -60,20 +60,24 @@ const renderModal = ( elementId ) => {
 	 *
 	 * @param {Object} entitlement the entitlement or product
 	 * @param {string} classes     to be added to the button
+	 * @param {string} children    any children to follow the cta.text
+	 * @return {string} button html
 	 */
-	const renderInstallerButton = ( entitlement, classes = '' ) => {
+	const renderInstallerButton = (
+		entitlement,
+		classes = '',
+		children = ''
+	) => {
 		/*
 		entitlementShape = {
 			"name": "Advanced Reviews",
-			"url": "https://example.com", // redirect on completion
 			"cta": {
-			"text": "Manage",
-			"url": "{siteUrl}/wp-admin/admin.php?page=bluehost#/example"
+				"text": "Manage",
+				"url": "{siteUrl}/wp-admin/admin.php?page=bluehost#/example" // redirect on completion
 			},
 			"plsProviderName": "yith", // premium provider
 			"plsSlug": "yith-woocommerce-advanced-reviews", // premium id
 			"download": null, // free download url
-			"slug": "example",
 			"basename": "example.com/example.php",
 		};
 		*/
@@ -84,7 +88,7 @@ const renderModal = ( elementId ) => {
 			! entitlement.basename ||
 			! entitlement.name
 		) {
-			return;
+			return '';
 		}
 
 		let buttonHTML = `<button
@@ -101,18 +105,20 @@ const renderModal = ( elementId ) => {
 			`;
 		}
 		// free attributes
-		if ( entitlement.download ) {
+		else if ( entitlement.download ) {
 			buttonHTML += `
 			data-nfd-installer-download-url="${ entitlement.download }"
 			`;
 		}
-		buttonHTML += `>${ entitlement.cta.text }</button>`; // close button element
+		buttonHTML += `>${ entitlement.cta.text }${ children }</button>`; // close button element
 		return buttonHTML;
 	};
 
 	/**
 	 * Helper method to clean cta urls for use - replacing {siteUrl} with actual
+	 *
 	 * @param {string} url the url to transform
+	 * @return {string} updated url
 	 */
 	const renderCTAUrl = ( url ) => {
 		if ( ! window.NewfoldRuntime || ! window.NewfoldRuntime.siteUrl ) {
@@ -125,5 +131,4 @@ const renderModal = ( elementId ) => {
 	window.addEventListener( 'DOMContentLoaded', () => {
 		attachToRuntime();
 	} );
-
 }

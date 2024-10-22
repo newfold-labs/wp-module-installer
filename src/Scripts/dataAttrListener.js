@@ -16,9 +16,7 @@ domReady( () => {
 			e.preventDefault();
 
 			// URL to redirect to after install
-			const redirectUrl =
-				el.getAttribute( 'href' ) ||
-				el.getAttribute( 'data-nfd-installer-plugin-url' );
+			const redirectUrl = el.getAttribute( 'href' );
 
 			// Is free plugin
 			if ( el.hasAttribute( 'data-nfd-installer-download-url' ) ) {
