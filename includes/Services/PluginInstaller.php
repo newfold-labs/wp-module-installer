@@ -243,15 +243,6 @@ class PluginInstaller {
 		);
 	}
 
-	public static function is_plugin_installed( $plugin_path ) {
-		if ( ! function_exists( 'get_plugins' ) ) {
-			require_once ABSPATH . 'wp-admin/includes/plugin.php';
-		}
-		$all_plugins = \get_plugins();
-		return ! empty( $all_plugins[ $plugin_path ] );
-	}
-
-
 	/**
 	 * Install the plugin from a custom ZIP.
 	 *
@@ -369,6 +360,24 @@ class PluginInstaller {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * Determines if a plugin has already been installed.
+	 *
+	 * @param string $plugin_path Path to the plugin's header file.
+	 * @return boolean
+	 */
+	public static function is_plugin_installed( $plugin_path ) {
+		if ( ! function_exists( 'get_plugins' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+		$all_plugins = \get_plugins();
+		if ( ! empty( $all_plugins[ $plugin_path ] ) ) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
