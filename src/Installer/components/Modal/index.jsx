@@ -78,9 +78,49 @@ const Modal = ( {
 		};
 	}, [ pluginStatus ] );
 
+	// Function to handle premium plugin installation
+	const installDependantPlugins = async () => {
+		try {
+			// TODO: Change this logic to ensure we get dependent plugins as a prop
+			if ( pluginProvider === 'yith' ) {
+				await apiFetch( {
+					url: installerAPI,
+					method: 'POST',
+					headers: {
+						'X-NFD-INSTALLER': pluginInstallHash,
+					},
+					data: {
+						activate: true,
+						queue: false,
+						priority: 0,
+						plugin: 'woocommerce',
+					},
+				} );
+			} else if ( pluginProvider === 'yoast' ) {
+				// TODO: This will cause 2 calls to install the Yoast SEO Plugin. Remove this once we have dependent plugins as a prop.
+				await apiFetch( {
+					url: installerAPI,
+					method: 'POST',
+					headers: {
+						'X-NFD-INSTALLER': pluginInstallHash,
+					},
+					data: {
+						activate: true,
+						queue: false,
+						priority: 0,
+						plugin: 'wordpress-seo',
+					},
+				} );
+			}
+		} catch ( error ) {
+			throw error;
+		}
+	};
+
 	const installPremiumPlugin = async () => {
 		try {
 			setPluginStatus( 'installing' );
+			await installDependantPlugins();
 			await apiFetch( {
 				url: installerAPI,
 				method: 'POST',
@@ -107,6 +147,7 @@ const Modal = ( {
 	const installFreePlugin = async () => {
 		try {
 			setPluginStatus( 'installing' );
+			await installDependantPlugins();
 			await apiFetch( {
 				url: installerAPI,
 				method: 'POST',
