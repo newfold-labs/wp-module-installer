@@ -44,7 +44,6 @@ const renderModal = ( elementId ) => {
 // Installer API/helpers
 {
 	const attachToRuntime = () => {
-		// window.NewfoldRuntime.comingSoon = buildObject();
 		window.NewfoldRuntime.installer = buildObject();
 	};
 
@@ -128,7 +127,5 @@ const renderModal = ( elementId ) => {
 		return url.replace( '{siteUrl}', window.NewfoldRuntime.siteUrl );
 	};
 
-	window.addEventListener( 'DOMContentLoaded', () => {
-		attachToRuntime();
-	} );
+	attachToRuntime();
 }
