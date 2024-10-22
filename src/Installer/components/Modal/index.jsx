@@ -97,6 +97,7 @@ const Modal = ( {
 				},
 			} );
 			setPluginStatus( 'completed' );
+			showModal( false );
 			window.location.href = redirectUrl;
 		} catch ( e ) {
 			setPluginStatus( 'failed' );
@@ -120,6 +121,7 @@ const Modal = ( {
 				},
 			} );
 			setPluginStatus( 'completed' );
+			showModal( false );
 			window.location.href = redirectUrl;
 		} catch ( e ) {
 			setPluginStatus( 'failed' );
