@@ -178,11 +178,6 @@ class PluginInstaller {
 			return $license_response;
 		}
 
-		// Check if the download URL is present in the license response
-		if ( empty( $license_response['downloadUrl'] ) ) {
-			return new \WP_Error( 'nfd_installer_error', __( 'Download URL is missing for premium plugin: ', 'wp-module-installer' ) . $plugin );
-		}
-
 		// Get the plugin basename from the license response
 		$plugin_basename = ! empty( $license_response['basename'] ) ? $license_response['basename'] : false;
 
@@ -218,6 +213,11 @@ class PluginInstaller {
 				),
 				200
 			);
+		}
+
+		// Check if the download URL is present in the license response
+		if ( empty( $license_response['downloadUrl'] ) ) {
+			return new \WP_Error( 'nfd_installer_error', __( 'Download URL is missing for premium plugin: ', 'wp-module-installer' ) . $plugin );
 		}
 
 		// Plugin is not installed, proceed with installation
