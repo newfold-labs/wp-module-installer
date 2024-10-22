@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "293e91d4313e33412aef95a2da475739",
+    "content-hash": "97cd5ef22f58fdc34c9af9fd0f16e6f9",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -286,16 +286,16 @@
         },
         {
             "name": "newfold-labs/wp-module-pls",
-            "version": "0.1.0",
+            "version": "0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/newfold-labs/wp-module-pls.git",
-                "reference": "ffa1517c18da067dd830c809f74aee597f05dc17"
+                "reference": "5572585b9b84d6bddde8404e0065057979db7b6f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/newfold-labs/wp-module-pls/zipball/ffa1517c18da067dd830c809f74aee597f05dc17",
-                "reference": "ffa1517c18da067dd830c809f74aee597f05dc17",
+                "url": "https://api.github.com/repos/newfold-labs/wp-module-pls/zipball/5572585b9b84d6bddde8404e0065057979db7b6f",
+                "reference": "5572585b9b84d6bddde8404e0065057979db7b6f",
                 "shasum": ""
             },
             "require": {
@@ -326,10 +326,10 @@
             ],
             "description": "A Newfold module that handles license key provisioning, validation, and other lifecycle events for registered plugins using the PLS API via Hiive.",
             "support": {
-                "source": "https://github.com/newfold-labs/wp-module-pls/tree/0.1.0",
+                "source": "https://github.com/newfold-labs/wp-module-pls/tree/0.2.0",
                 "issues": "https://github.com/newfold-labs/wp-module-pls/issues"
             },
-            "time": "2024-10-09T08:23:27+00:00"
+            "time": "2024-10-22T16:27:09+00:00"
         },
         {
             "name": "wp-forge/collection",
