@@ -30,6 +30,9 @@ domReady( () => {
 					pluginDownloadUrl: el.getAttribute(
 						'data-nfd-installer-download-url'
 					),
+					pluginProvider: el.getAttribute(
+						'data-nfd-installer-pls-provider'
+					),
 					redirectUrl,
 				} );
 				return false;
