@@ -19,12 +19,12 @@ class PluginUpgrader {
 	public static function upgrade_extended_yith_plugins() {
 		// Define the list of extended YITH plugins to upgrade.
 		$yith_plugins_to_upgrade = array(
-			'yith-woocommerce-ajax-search',
 			'nfd_slug_yith_woocommerce_ajax_product_filter',
 			'nfd_slug_yith_woocommerce_wishlist',
 			'nfd_slug_yith_woocommerce_booking',
 			'nfd_slug_yith_woocommerce_gift_cards',
 			'nfd_slug_yith_woocommerce_customize_myaccount_page',
+			'yith-woocommerce-ajax-search',
 		);
 
 		// Array to store the status of each plugin's upgrade process
@@ -48,12 +48,12 @@ class PluginUpgrader {
 	public static function upgrade_extended_yith_plugin( $extended_slug ) {
 		// Define the list of extended YITH plugins and their corresponding premium versions.
 		$yith_plugins_to_upgrade = array(
-			'yith-woocommerce-ajax-search'         => 'yith-woocommerce-ajax-search',
 			'nfd_slug_yith_woocommerce_ajax_product_filter' => 'yith-woocommerce-ajax-navigation',
 			'nfd_slug_yith_woocommerce_wishlist'   => 'yith-woocommerce-wishlist',
 			'nfd_slug_yith_woocommerce_booking'    => 'yith-woocommerce-booking',
 			'nfd_slug_yith_woocommerce_gift_cards' => 'yith-woocommerce-gift-cards',
 			'nfd_slug_yith_woocommerce_customize_myaccount_page' => 'yith-woocommerce-customize-myaccount-page',
+			'yith-woocommerce-ajax-search'         => 'yith-woocommerce-ajax-search',
 		);
 
 		// Initialize status array for the plugin upgrade process
