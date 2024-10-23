@@ -1,58 +1,70 @@
+// External Imports
 import domReady from '@wordpress/dom-ready';
-import apiFetch from '@wordpress/api-fetch';
-
-import { pluginInstallHash, installerAPI } from '../constants';
 
 domReady( () => {
-	const domObserver = new window.MutationObserver( ( mutationList ) => {
-		for ( const mutation of mutationList ) {
-			if ( mutation.type === 'childList' ) {
-				for ( const addedNode of mutation.addedNodes ) {
-					if (
-						typeof addedNode === 'object' &&
-						typeof addedNode.querySelectorAll === 'function'
-					) {
-						addedNode
-							.querySelectorAll(
-								'[data-nfd-installer-plugin-provider]'
-							)
-							.forEach( ( ele ) => {
-								ele.addEventListener( 'click', function ( e ) {
-									if (
-										e.target.getAttribute(
-											'data-nfd-installer-plugin-slug'
-										) !== null
-									) {
-										apiFetch( {
-											url: installerAPI,
-											method: 'POST',
-											headers: {
-												'X-NFD-INSTALLER':
-													pluginInstallHash,
-											},
-											data: {
-												plugin: this.getAttribute(
-													'data-nfd-installer-plugin-slug'
-												),
-												activate:
-													this.getAttribute(
-														'data-nfd-installer-plugin-activate'
-													) === 'true'
-														? true
-														: false,
-												queue: false,
-												priority: 0,
-												premium: true,
-											},
-										} );
-									}
-								} );
-							} );
-					}
-				}
+	function dispatchEvent( detail ) {
+		window.dispatchEvent(
+			new CustomEvent( 'installerParamsSet', { detail } )
+		);
+	}
+
+	document.body.addEventListener( 'click', ( e ) => {
+		const el = e.target;
+
+		if ( el.hasAttribute( 'data-nfd-installer-plugin-name' ) ) {
+			// Don't follow the existing link
+			e.preventDefault();
+
+			// URL to redirect to after install
+			const redirectUrl =
+				el.getAttribute( 'href' ) ||
+				el.getAttribute( 'data-nfd-installer-plugin-url' );
+
+			// Is free plugin
+			if ( el.hasAttribute( 'data-nfd-installer-download-url' ) ) {
+				dispatchEvent( {
+					action: 'installFreePlugin',
+					pluginName: el.getAttribute(
+						'data-nfd-installer-plugin-name'
+					),
+					pluginDownloadUrl: el.getAttribute(
+						'data-nfd-installer-download-url'
+					),
+					pluginProvider: el.getAttribute(
+						'data-nfd-installer-pls-provider'
+					),
+					redirectUrl,
+				} );
+				return false;
+			}
+
+			// Is premium plugin
+			if (
+				el.hasAttribute( 'data-nfd-installer-pls-slug' ) &&
+				el.hasAttribute( 'data-nfd-installer-pls-provider' )
+			) {
+				dispatchEvent( {
+					action: 'installPremiumPlugin',
+					pluginName: el.getAttribute(
+						'data-nfd-installer-plugin-name'
+					),
+					pluginSlug: el.getAttribute(
+						'data-nfd-installer-pls-slug'
+					),
+					pluginProvider: el.getAttribute(
+						'data-nfd-installer-pls-provider'
+					),
+					redirectUrl,
+				} );
+				return false;
+			}
+
+			// TODO: Handle use cases for theme installs
+
+			// Redirect to the URL provided by the data attribute
+			if ( redirectUrl ) {
+				window.location.href = redirectUrl;
 			}
 		}
 	} );
-
-	domObserver.observe( document.body, { childList: true, subtree: true } );
 } );

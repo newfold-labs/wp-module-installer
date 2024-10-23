@@ -86,21 +86,24 @@ class InstallerCommandHandler {
 	/**
 	 * Triggers the installation and activation of a premium plugin.
 	 *
-	 * This command provisions a license, installs the premium plugin, and optionally activates it based on the
-	 * activation parameter passed. It outputs the status of the process.
+	 * This command provisions a license, installs the premium plugin, and optionally activates it
+	 * based on the activation parameter passed. It outputs the status of the process.
 	 *
 	 * ## OPTIONS
 	 *
 	 * <premium_slug>
 	 * : The slug of the premium plugin to be installed.
 	 *
+	 * <provider>
+	 * : The name of the provider for the premium plugin.
+	 *
 	 * [--activate]
 	 * : Optional flag to activate the plugin after installation.
 	 *
 	 * ## EXAMPLES
 	 *
-	 *     wp installer install_premium_plugin <premium_slug> --activate
-	 *     wp installer install_premium_plugin <premium_slug>
+	 *     wp installer install_premium_plugin <premium_slug> <provider> --activate
+	 *     wp installer install_premium_plugin <premium_slug> <provider>
 	 *
 	 * @param array $args Arguments passed from the command line. First argument is the plugin slug.
 	 * @param array $assoc_args Associative arguments (like --activate).
@@ -109,10 +112,17 @@ class InstallerCommandHandler {
 	 */
 	public function install_premium_plugin( $args, $assoc_args ) {
 		$premium_slug = $args[0];
+		$provider     = $args[1];
 		$activate     = isset( $assoc_args['activate'] );
 
+		// Ensure both the plugin slug and provider are not empty
+		if ( empty( $premium_slug ) || empty( $provider ) ) {
+			WP_CLI::error( __( 'Both plugin slug and provider name are required.', 'wp-module-installer' ) );
+			return;
+		}
+
 		// Call the function to provision, install, and (optionally) activate the premium plugin
-		$status = PluginInstaller::install_premium_plugin( $premium_slug, $activate );
+		$status = PluginInstaller::install_premium_plugin( $premium_slug, $provider, $activate );
 
 		// Handle error or success response
 		if ( is_wp_error( $status ) ) {

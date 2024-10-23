@@ -137,6 +137,7 @@ final class Plugins {
 	protected static $domains = array(
 		'downloads.wordpress.org' => true,
 		'nonapproveddomain.com'   => null,
+		'hiive.cloud'             => true,
 	);
 	/**
 	 * Holds the possible status codes for a plugin.

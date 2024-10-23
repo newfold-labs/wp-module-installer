@@ -156,29 +156,63 @@ class PluginInstaller {
 	 * Provisions a license and installs or activates a premium plugin.
 	 *
 	 * @param string  $plugin The slug of the premium plugin.
+	 * @param string  $provider The provider name for the premium plugin.
 	 * @param boolean $activate Whether to activate the plugin after installation.
 	 *
 	 * @return \WP_Error|\WP_REST_Response
 	 */
-	public static function install_premium_plugin( $plugin, $activate ) {
-		$status_codes = Plugins::get_status_codes();
-
-		$premium_status = self::get_plugin_status( $plugin );
-
-		// Check if the premium plugin is already installed or active
-		if ( $status_codes['active'] === $premium_status || $status_codes['installed'] === $premium_status ) {
-			return new \WP_REST_Response(
-				array(
-					'message' => __( 'Premium plugin already installed or active: ', 'wp-module-installer' ) . $plugin,
-				),
-				200
+	public static function install_premium_plugin( $plugin, $provider, $activate ) {
+		// Ensure plugin and provider are not empty
+		if ( empty( $plugin ) || empty( $provider ) ) {
+			return new \WP_Error(
+				'nfd_installer_error',
+				__( 'Plugin slug and provider name cannot be empty.', 'wp-module-installer' )
 			);
 		}
 
-		// Provision a license for the premium plugin
-		$license_response = PLSUtility::provision_license( $plugin );
+		$pls_utility = new PLSUtility();
+
+		// Provision a license for the premium plugin, this returns basename and download URL
+		$license_response = $pls_utility->provision_license( $plugin, $provider );
 		if ( is_wp_error( $license_response ) ) {
 			return $license_response;
+		}
+
+		// Get the plugin basename from the license response
+		$plugin_basename = ! empty( $license_response['basename'] ) ? $license_response['basename'] : false;
+
+		// Check if the plugin is already installed
+		if ( $plugin_basename && self::is_plugin_installed( $plugin_basename ) ) {
+			// Check if the plugin is active
+			if ( is_plugin_active( $plugin_basename ) ) {
+				// If plugin is already installed and active, return success
+				return new \WP_REST_Response(
+					array(
+						'message' => __( 'Plugin is already installed and active: ', 'wp-module-installer' ) . $plugin,
+					),
+					200
+				);
+			}
+
+			// Activate the plugin if it's installed but not active
+			$activate_plugin_response = activate_plugin( $plugin_basename );
+			if ( is_wp_error( $activate_plugin_response ) ) {
+				return new \WP_Error( 'nfd_installer_error', __( 'Failed to activate the plugin: ', 'wp-module-installer' ) . $plugin );
+			}
+
+			// Activate the license
+			$activation_response = $pls_utility->activate_license( $plugin );
+			if ( is_wp_error( $activation_response ) ) {
+				return new \WP_Error( 'nfd_installer_error', __( 'Failed to activate the license for the premium plugin: ', 'wp-module-installer' ) . $plugin );
+			}
+
+			// Return success response
+			return new \WP_REST_Response(
+				array(
+					'message' => __( 'Successfully provisioned and installed: ', 'wp-module-installer' ) . $plugin,
+				),
+				200
+			);
 		}
 
 		// Check if the download URL is present in the license response
@@ -186,12 +220,21 @@ class PluginInstaller {
 			return new \WP_Error( 'nfd_installer_error', __( 'Download URL is missing for premium plugin: ', 'wp-module-installer' ) . $plugin );
 		}
 
-		// Attempt to install and/or activate the premium plugin using the provided download URL
+		// Plugin is not installed, proceed with installation
 		$install_status = self::install_from_zip( $license_response['downloadUrl'], $activate );
 		if ( is_wp_error( $install_status ) ) {
 			return new \WP_Error( 'nfd_installer_error', __( 'Failed to install or activate the premium plugin: ', 'wp-module-installer' ) . $plugin );
 		}
 
+		// If activation is requested, activate the license
+		if ( $activate ) {
+			$activation_response = $pls_utility->activate_license( $plugin );
+			if ( is_wp_error( $activation_response ) ) {
+				return new \WP_Error( 'nfd_installer_error', __( 'Failed to activate the license for the premium plugin: ', 'wp-module-installer' ) . $plugin );
+			}
+		}
+
+		// Return success response
 		return new \WP_REST_Response(
 			array(
 				'message' => __( 'Successfully provisioned and installed: ', 'wp-module-installer' ) . $plugin,
