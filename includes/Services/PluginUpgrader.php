@@ -47,10 +47,9 @@ class PluginUpgrader {
 	 */
 	public static function upgrade_extended_yith_plugin( $extended_slug ) {
 		// Define the list of extended YITH plugins and their corresponding premium versions.
-		// TODO: Replace the dummy entitlement slug 'nfd_slug_yith_paypal_payments_for_woocommerce' with actual entitlement slugs.
 		$yith_plugins_to_upgrade = array(
 			'yith-woocommerce-ajax-search'         => 'yith-woocommerce-ajax-search',
-			'nfd_slug_yith_woocommerce_ajax_product_filter' => 'yith-woocommerce-ajax-product-filter',
+			'nfd_slug_yith_woocommerce_ajax_product_filter' => 'yith-woocommerce-ajax-navigation',
 			'nfd_slug_yith_woocommerce_wishlist'   => 'yith-woocommerce-wishlist',
 			'nfd_slug_yith_woocommerce_booking'    => 'yith-woocommerce-booking',
 			'nfd_slug_yith_woocommerce_gift_cards' => 'yith-woocommerce-gift-cards',
@@ -89,44 +88,31 @@ class PluginUpgrader {
 			return $upgrade_status;
 		}
 
-		// Get the status of the premium version of the plugin
-		$premium_status = PluginInstaller::get_plugin_status( $premium_slug );
-
-		// Skip if the premium plugin is already active or installed
-		if ( $status_codes['active'] === $premium_status || $status_codes['installed'] === $premium_status ) {
-			$upgrade_status['message'] = __( 'Premium plugin already installed or active: ', 'wp-module-installer' ) . $premium_slug;
-			return $upgrade_status;
-		}
-
-		// Provision a license for the premium version of the plugin
-		$pls_utility      = new PLSUtility();
-		$license_response = $pls_utility->provision_license( $premium_slug, 'yith' );
-		if ( is_wp_error( $license_response ) ) {
-			$upgrade_status['message'] = __( 'Failed to provision license for: ', 'wp-module-installer' ) . $premium_slug;
-			return $upgrade_status;
-		}
-
-		// Check if the download URL is present in the license response
-		if ( empty( $license_response['downloadUrl'] ) ) {
-			$upgrade_status['message'] = __( 'Download URL is missing for premium plugin: ', 'wp-module-installer' ) . $premium_slug;
-			return $upgrade_status;
-		}
-
 		// Check if the premium plugin should be activated after installation
 		$should_activate = ( $status_codes['active'] === $extended_status );
 
 		// Deactivate the extended version of the plugin if the premium plugin needs to be activated
 		if ( $should_activate ) {
-			PluginInstaller::deactivate( $extended_slug );
+			$deactivation_response = PluginInstaller::deactivate( $extended_slug );
+			if ( is_wp_error( $deactivation_response ) ) {
+				$upgrade_status['message'] = __( 'Failed to deactivate the extended plugin: ', 'wp-module-installer' ) . $extended_slug;
+				return $upgrade_status;
+			}
 		}
 
-		// Attempt to install the premium plugin using the provided download URL, and activate it if needed
-		$premium_install_status = PluginInstaller::install_from_zip( $license_response['downloadUrl'], $should_activate );
-		if ( is_wp_error( $premium_install_status ) ) {
-			$upgrade_status['message'] = __( 'Failed to install the premium plugin: ', 'wp-module-installer' ) . $premium_slug;
+		// Use the install_premium_plugin function to install and activate the premium plugin
+		$install_status = PluginInstaller::install_premium_plugin( $premium_slug, 'yith', $should_activate );
+		if ( is_wp_error( $install_status ) ) {
+			$upgrade_status['message'] = $install_status->get_error_message();
+
+			// Reactivate the extended plugin if premium installation failed and it was deactivated
 			if ( $should_activate ) {
-				PluginInstaller::activate( $extended_slug );
+				$reactivation_response = PluginInstaller::activate( $extended_slug );
+				if ( is_wp_error( $reactivation_response ) ) {
+					$upgrade_status['message'] .= __( ' Also Failed to reactivate the extended plugin: ', 'wp-module-installer' ) . $extended_slug;
+				}
 			}
+
 			return $upgrade_status;
 		}
 
