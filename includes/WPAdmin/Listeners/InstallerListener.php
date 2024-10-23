@@ -84,8 +84,8 @@ class InstallerListener {
 
 			wp_add_inline_script(
 				'nfd-installer-enqueue',
-				'var nfdInstaller =' . wp_json_encode(
-					value: array(
+				'var nfdInstaller = ' . wp_json_encode(
+					array(
 						'restUrl'           => \get_home_url() . '/index.php?rest_route=',
 						'pluginInstallHash' => PluginInstaller::rest_get_plugin_install_hash(),
 					)
