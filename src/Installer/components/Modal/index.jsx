@@ -63,7 +63,11 @@ const Modal = ( {
 	};
 
 	const handleClickOutside = ( event ) => {
-		if ( modalRef.current && ! modalRef.current.contains( event.target ) ) {
+		if (
+			pluginStatus === 'failed' && // only close on outside click when in failed state
+			modalRef.current &&
+			! modalRef.current.contains( event.target )
+		) {
 			showModal( false );
 		}
 	};
