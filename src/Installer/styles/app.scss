@@ -15,4 +15,6 @@ body {
 #nfd-installer {
 	display: none;
 	transition: all 3s ease-in-out;
+	position: relative;
+	z-index: 1000000;
 }
