@@ -142,6 +142,7 @@ const Modal = ( {
 			} );
 			setPluginStatus( 'completed' );
 			window.location.href = redirectUrl;
+			showModal(false);
 		} catch ( e ) {
 			setPluginStatus( 'failed' );
 		}
