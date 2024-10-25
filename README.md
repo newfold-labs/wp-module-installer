@@ -27,9 +27,10 @@ An installer for WordPress plugins and themes.
 
 ## Releases
 
-### 1. Bump Version
+### 1. Bump Version [IMPORTANT]
 
-Update the module version in the `bootstrap.php` file (the NFD_INSTALLER_VERSION const).
+- Update the module version in the `includes/Data/Constants.php` file (the NFD_INSTALLER_VERSION const).
+- Update the module version in the `package.json and package-lock.json` file as well.
 
 ## Installation
 
