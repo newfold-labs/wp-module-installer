@@ -63,7 +63,11 @@ const Modal = ( {
 	};
 
 	const handleClickOutside = ( event ) => {
-		if ( modalRef.current && ! modalRef.current.contains( event.target ) ) {
+		if (
+			pluginStatus === 'failed' && // only close on outside click when in failed state
+			modalRef.current &&
+			! modalRef.current.contains( event.target )
+		) {
 			showModal( false );
 		}
 	};
@@ -137,8 +141,8 @@ const Modal = ( {
 				},
 			} );
 			setPluginStatus( 'completed' );
-			showModal( false );
 			window.location.href = redirectUrl;
+			showModal(false);
 		} catch ( e ) {
 			setPluginStatus( 'failed' );
 		}
@@ -174,7 +178,7 @@ const Modal = ( {
 	const errorMessage = createInterpolateElement(
 		__(
 			'Sorry, there was an error installing and activating the plugin. Please try again. If the problem persists, <a>contact support</a>.',
-			'wp-module-onboarding'
+			'wp-module-installer'
 		),
 		{
 			// eslint-disable-next-line jsx-a11y/anchor-has-content
@@ -194,7 +198,7 @@ const Modal = ( {
 				<div className="nfd-installer-modal__content-section">
 					<img
 						src={ loadingInstaller }
-						alt={ __( 'Loading Vector.', 'wp-module-onboarding' ) }
+						alt={ __( 'Loading Vector.', 'wp-module-installer' ) }
 						className="nfd-installer-modal__content-image"
 					/>
 					{ pluginStatus === 'installing' && (
@@ -203,10 +207,21 @@ const Modal = ( {
 								{ sprintf(
 									/* translators: %s: Plugin Name */
 									__(
-										'Activating the %s',
-										'wp-module-onboarding'
+										'Activating %s',
+										'wp-module-installer'
 									),
 									pluginName
+								) }
+							</div>
+							<div className="nfd-installer-modal__loader"></div>
+						</>
+					) }
+					{ pluginStatus === 'completed' && (
+						<>
+							<div className="nfd-installer-modal__content-subheading">
+								{ __(
+									'Activation Complete! Redirecting…',
+									'wp-module-installer'
 								) }
 							</div>
 							<div className="nfd-installer-modal__loader"></div>
