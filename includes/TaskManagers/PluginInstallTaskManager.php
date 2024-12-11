@@ -28,13 +28,12 @@ class PluginInstallTaskManager {
 	 * Schedules the crons.
 	 */
 	public function __construct() {
-		// Ensure there is a thirty second option in the cron schedules
+		// Ensure there is a thirty seconds option in the cron schedules
 		add_filter( 'cron_schedules', array( $this, 'add_thirty_seconds_schedule' ) );
 
-		// Thirty second cron hook
+		// Thirty seconds cron hook
 		add_action( 'nfd_module_installer_plugin_install_cron', array( $this, 'install' ) );
 
-		// Register the cron task
 		if ( ! wp_next_scheduled( 'nfd_module_installer_plugin_install_cron' ) ) {
 			wp_schedule_event( time(), 'thirty_seconds', 'nfd_module_installer_plugin_install_cron' );
 		}
@@ -69,7 +68,7 @@ class PluginInstallTaskManager {
 	/**
 	 * Queue out a PluginInstallTask with the highest priority in the plugin install queue and execute it.
 	 *
-	 * @return array|false
+	 * @void
 	 */
 	public function install() {
 		/*
@@ -83,8 +82,11 @@ class PluginInstallTaskManager {
 		priority at the beginning of the array
 		*/
 		$plugin_to_install = array_shift( $plugins );
+
 		if ( ! $plugin_to_install ) {
-			return true;
+			self::complete();
+
+			return;
 		}
 
 		// Update the plugin install queue.
@@ -123,12 +125,10 @@ class PluginInstallTaskManager {
 			}
 		}
 
-		// If there are no more plugins to be installed then change the status to completed.
+		// If there are no more plugins to be installed then change the status to complete.
 		if ( empty( $plugins ) ) {
-			return \update_option( Options::get_option_name( 'plugins_init_status' ), 'completed' );
+			self::complete();
 		}
-
-		return true;
 	}
 
 	/**
@@ -200,6 +200,16 @@ class PluginInstallTaskManager {
 	public static function status( $plugin ) {
 		$plugins = \get_option( Options::get_option_name( self::$queue_name ), array() );
 		return array_search( $plugin, array_column( $plugins, 'slug' ), true );
+	}
+
+	/**
+	 * Clear all the hook scheduling and update the status option
+	 *
+	 * @return bool
+	 */
+	private static function complete() {
+		wp_clear_scheduled_hook( 'nfd_module_installer_plugin_install_cron' );
+		return \update_option( Options::get_option_name( 'plugins_init_status' ), 'completed' );
 	}
 
 	/**
