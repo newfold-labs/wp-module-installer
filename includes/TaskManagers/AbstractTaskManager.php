@@ -1,4 +1,5 @@
 <?php
+
 namespace NewfoldLabs\WP\Module\Installer\TaskManagers;
 
 use NewfoldLabs\WP\Module\Installer\Data\Options;
@@ -13,7 +14,7 @@ abstract class AbstractTaskManager {
 	 *
 	 * @var int
 	 */
-	protected  static $retry_limit = 1;
+	protected static $retry_limit = 1;
 
 	/**
 	 * Name of the Queue.

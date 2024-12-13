@@ -23,7 +23,7 @@ class ThemeInstallTaskManager extends AbstractTaskManager {
 	 *
 	 * @var string
 	 */
-	protected  static $hook_name = 'nfd_module_installer_theme_install_cron';
+	protected static $hook_name = 'nfd_module_installer_theme_install_cron';
 
 	/**
 	 * ThemeInstallTaskManager constructor.
@@ -59,10 +59,10 @@ class ThemeInstallTaskManager extends AbstractTaskManager {
 		\update_option( Options::get_option_name( self::$queue_name ), $themes );
 
 		$theme_install_task = new ThemeInstallTask(
-			$theme_to_install[ 'slug' ],
-			$theme_to_install[ 'activate' ],
-			$theme_to_install[ 'priority' ],
-			$theme_to_install[ 'retries' ]
+			$theme_to_install['slug'],
+			$theme_to_install['activate'],
+			$theme_to_install['priority'],
+			$theme_to_install['retries']
 		);
 
 		// Update status to the current slug being installed.
@@ -118,10 +118,10 @@ class ThemeInstallTaskManager extends AbstractTaskManager {
 
 		// Recreate the ThemeInstallTask from the associative array.
 		$theme_install_task = new ThemeInstallTask(
-			$theme_to_install[ 'slug' ],
-			$theme_to_install[ 'activate' ],
-			$theme_to_install[ 'priority' ],
-			$theme_to_install[ 'retries' ]
+			$theme_to_install['slug'],
+			$theme_to_install['activate'],
+			$theme_to_install['priority'],
+			$theme_to_install['retries']
 		);
 
 		// Update status to the current slug being installed.
@@ -172,11 +172,11 @@ class ThemeInstallTaskManager extends AbstractTaskManager {
 			Check if there is an already existing ThemeInstallTask in the queue
 			for a given slug and activation criteria.
 			*/
-			if ( $queued_theme[ 'slug' ] === $theme_install_task->get_slug()
-				&& $queued_theme[ 'activate' ] === $theme_install_task->get_activate() ) {
+			if ( $queued_theme['slug'] === $theme_install_task->get_slug()
+				&& $queued_theme['activate'] === $theme_install_task->get_activate() ) {
 				return false;
 			}
-			$queue->insert( $queued_theme, $queued_theme[ 'priority' ] );
+			$queue->insert( $queued_theme, $queued_theme['priority'] );
 		}
 
 		// Insert a new ThemeInstallTask at the appropriate position in the queue.

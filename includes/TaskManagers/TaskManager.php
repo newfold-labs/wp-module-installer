@@ -29,6 +29,8 @@ final class TaskManager {
 		TaskManagerSchedules::init();
 
 		/**
+		 * Task Manager Class
+		 *
 		 * @var $task_manager PluginUninstallTaskManager|PluginDeactivationTaskManager|ThemeInstallTaskManager|PluginInstallTaskManager|PluginActivationTaskManager
 		 */
 		foreach ( $this->task_managers as $task_manager ) {

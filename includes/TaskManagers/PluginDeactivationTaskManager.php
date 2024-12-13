@@ -56,9 +56,9 @@ class PluginDeactivationTaskManager extends AbstractTaskManager {
 		$retries = array();
 		foreach ( $plugins as $plugin ) {
 			$plugin_deactivation_task = new PluginDeactivationTask(
-				$plugin[ 'slug' ],
-				$plugin[ 'priority' ],
-				$plugin[ 'retries' ]
+				$plugin['slug'],
+				$plugin['priority'],
+				$plugin['retries']
 			);
 			$status                   = $plugin_deactivation_task->execute();
 			if ( ! $status ) {
@@ -95,10 +95,10 @@ class PluginDeactivationTaskManager extends AbstractTaskManager {
 			Check if there is an already existing PluginDeactivationTask in the queue
 			for a given slug.
 			*/
-			if ( $queued_plugin[ 'slug' ] === $plugin_deactivation_task->get_slug() ) {
+			if ( $queued_plugin['slug'] === $plugin_deactivation_task->get_slug() ) {
 				return false;
 			}
-			$queue->insert( $queued_plugin, $queued_plugin[ 'priority' ] );
+			$queue->insert( $queued_plugin, $queued_plugin['priority'] );
 		}
 
 		// Insert a new PluginDeactivationTask at the appropriate position in the queue.
@@ -128,8 +128,8 @@ class PluginDeactivationTaskManager extends AbstractTaskManager {
 			/*
 			If the Plugin slug does not match add it back to the queue.
 			*/
-			if ( $queued_plugin[ 'slug' ] !== $plugin ) {
-				$queue->insert( $queued_plugin, $queued_plugin[ 'priority' ] );
+			if ( $queued_plugin['slug'] !== $plugin ) {
+				$queue->insert( $queued_plugin, $queued_plugin['priority'] );
 			}
 		}
 

@@ -62,9 +62,9 @@ class PluginActivationTaskManager extends AbstractTaskManager {
 		$retries = array();
 		foreach ( $plugins as $plugin ) {
 			$plugin_activation_task = new PluginActivationTask(
-				$plugin[ 'slug' ],
-				$plugin[ 'priority' ],
-				$plugin[ 'retries' ]
+				$plugin['slug'],
+				$plugin['priority'],
+				$plugin['retries']
 			);
 			$status                 = $plugin_activation_task->execute();
 			if ( is_wp_error( $status ) ) {
@@ -101,10 +101,10 @@ class PluginActivationTaskManager extends AbstractTaskManager {
 			Check if there is an already existing PluginActivationTask in the queue
 			for a given slug.
 			*/
-			if ( $queued_plugin[ 'slug' ] === $plugin_activation_task->get_slug() ) {
+			if ( $queued_plugin['slug'] === $plugin_activation_task->get_slug() ) {
 				return false;
 			}
-			$queue->insert( $queued_plugin, $queued_plugin[ 'priority' ] );
+			$queue->insert( $queued_plugin, $queued_plugin['priority'] );
 		}
 
 		// Insert a new PluginActivationTask at the appropriate position in the queue.
@@ -134,8 +134,8 @@ class PluginActivationTaskManager extends AbstractTaskManager {
 			/*
 			If the Plugin slug does not match add it back to the queue.
 			*/
-			if ( $queued_plugin[ 'slug' ] !== $plugin ) {
-				$queue->insert( $queued_plugin, $queued_plugin[ 'priority' ] );
+			if ( $queued_plugin['slug'] !== $plugin ) {
+				$queue->insert( $queued_plugin, $queued_plugin['priority'] );
 			}
 		}
 

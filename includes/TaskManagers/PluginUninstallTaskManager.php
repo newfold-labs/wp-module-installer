@@ -57,8 +57,8 @@ class PluginUninstallTaskManager extends AbstractTaskManager {
 	 * @return array
 	 */
 	public function add_ten_seconds_schedule( $schedules ) {
-		if ( ! array_key_exists( 'ten_seconds', $schedules ) || 10 !== $schedules[ 'ten_seconds' ][ 'interval' ] ) {
-			$schedules[ 'ten_seconds' ] = array(
+		if ( ! array_key_exists( 'ten_seconds', $schedules ) || 10 !== $schedules['ten_seconds']['interval'] ) {
+			$schedules['ten_seconds'] = array(
 				'interval' => 10,
 				'display'  => __( 'Once Every Ten Seconds' ),
 			);
@@ -94,9 +94,9 @@ class PluginUninstallTaskManager extends AbstractTaskManager {
 
 		// Recreate the PluginInstall task from the associative array.
 		$plugin_uninstall_task = new PluginUninstallTask(
-			$plugin_to_uninstall[ 'slug' ],
-			$plugin_to_uninstall[ 'priority' ],
-			$plugin_to_uninstall[ 'retries' ]
+			$plugin_to_uninstall['slug'],
+			$plugin_to_uninstall['priority'],
+			$plugin_to_uninstall['retries']
 		);
 
 		// Execute the PluginUninstall Task.
@@ -146,7 +146,7 @@ class PluginUninstallTaskManager extends AbstractTaskManager {
 
 		$plugin_list = Plugins::get_squashed();
 		// Gets the specified path for the Plugin from the predefined list
-		$plugin_path = $plugin_list[ $plugin_uninstall_task->get_slug() ][ 'path' ];
+		$plugin_path = $plugin_list[ $plugin_uninstall_task->get_slug() ]['path'];
 
 		if ( ! PluginUninstaller::is_plugin_installed( $plugin_path ) ) {
 			return true;
@@ -158,10 +158,10 @@ class PluginUninstallTaskManager extends AbstractTaskManager {
 			Check if there is an already existing PluginUninstallTask in the queue
 			for a given slug.
 			*/
-			if ( $queued_plugin[ 'slug' ] === $plugin_uninstall_task->get_slug() ) {
+			if ( $queued_plugin['slug'] === $plugin_uninstall_task->get_slug() ) {
 				return false;
 			}
-			$queue->insert( $queued_plugin, $queued_plugin[ 'priority' ] );
+			$queue->insert( $queued_plugin, $queued_plugin['priority'] );
 		}
 
 		// Insert a new PluginUninstallTask at the appropriate position in the queue.

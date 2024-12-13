@@ -47,8 +47,8 @@ class PluginInstallTaskManager extends AbstractTaskManager {
 	 * @return array
 	 */
 	public function add_thirty_seconds_schedule( $schedules ) {
-		if ( ! array_key_exists( 'thirty_seconds', $schedules ) || 30 !== $schedules[ 'thirty_seconds' ][ 'interval' ] ) {
-			$schedules[ 'thirty_seconds' ] = array(
+		if ( ! array_key_exists( 'thirty_seconds', $schedules ) || 30 !== $schedules['thirty_seconds']['interval'] ) {
+			$schedules['thirty_seconds'] = array(
 				'interval' => 30,
 				'display'  => __( 'Once Every Thirty Seconds' ),
 			);
@@ -86,10 +86,10 @@ class PluginInstallTaskManager extends AbstractTaskManager {
 
 		// Recreate the PluginInstall task from the associative array.
 		$plugin_install_task = new PluginInstallTask(
-			$plugin_to_install[ 'slug' ],
-			$plugin_to_install[ 'activate' ],
-			$plugin_to_install[ 'priority' ],
-			$plugin_to_install[ 'retries' ]
+			$plugin_to_install['slug'],
+			$plugin_to_install['activate'],
+			$plugin_to_install['priority'],
+			$plugin_to_install['retries']
 		);
 
 		// Update status to the current slug being installed.
@@ -143,8 +143,8 @@ class PluginInstallTaskManager extends AbstractTaskManager {
 			Check if there is an already existing PluginInstallTask in the queue
 			for a given slug.
 			*/
-			if ( $queued_plugin[ 'slug' ] !== $plugin_install_task->get_slug() ) {
-				$queue->insert( $queued_plugin, $queued_plugin[ 'priority' ] );
+			if ( $queued_plugin['slug'] !== $plugin_install_task->get_slug() ) {
+				$queue->insert( $queued_plugin, $queued_plugin['priority'] );
 			}
 		}
 
@@ -175,8 +175,8 @@ class PluginInstallTaskManager extends AbstractTaskManager {
 			/*
 			If the Plugin slug does not match add it back to the queue.
 			*/
-			if ( $queued_plugin[ 'slug' ] !== $plugin ) {
-				$queue->insert( $queued_plugin, $queued_plugin[ 'priority' ] );
+			if ( $queued_plugin['slug'] !== $plugin ) {
+				$queue->insert( $queued_plugin, $queued_plugin['priority'] );
 			}
 		}
 
