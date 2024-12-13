@@ -1,4 +1,5 @@
 <?php
+
 namespace NewfoldLabs\WP\Module\Installer\TaskManagers;
 
 use NewfoldLabs\WP\Module\Installer\Data\Options;
@@ -8,45 +9,36 @@ use NewfoldLabs\WP\Module\Installer\Models\PriorityQueue;
 /**
  * Manages the execution of PluginInstallTasks.
  */
-class PluginInstallTaskManager {
-
-	/**
-	 * The number of times a PluginInstallTask can be retried.
-	 *
-	 * @var int
-	 */
-	private static $retry_limit = 1;
+class PluginInstallTaskManager extends AbstractTaskManager {
 
 	/**
 	 * The name of the queue, might be prefixed.
 	 *
 	 * @var string
 	 */
-	private static $queue_name = 'plugin_install_queue';
+	protected static $queue_name = 'plugin_install_queue';
+
+	/**
+	 * The name of the Hook.
+	 *
+	 * @var string
+	 */
+	protected static $hook_name = 'nfd_module_installer_plugin_install_cron';
 
 	/**
 	 * Schedules the crons.
 	 */
 	public function __construct() {
-		// Ensure there is a thirty seconds option in the cron schedules
-		add_filter( 'cron_schedules', array( $this, 'add_thirty_seconds_schedule' ) );
+		parent::__construct();
 
 		// Thirty seconds cron hook
-		add_action( 'nfd_module_installer_plugin_install_cron', array( $this, 'install' ) );
+		add_action( self::$hook_name, array( $this, 'install' ) );
 
-		if ( ! wp_next_scheduled( 'nfd_module_installer_plugin_install_cron' ) ) {
-			wp_schedule_event( time(), 'thirty_seconds', 'nfd_module_installer_plugin_install_cron' );
+		if ( ! wp_next_scheduled( self::$hook_name ) ) {
+			wp_schedule_event( time(), 'thirty_seconds', self::$hook_name );
 		}
 	}
 
-	/**
-	 * Returns the queue name, might be prefixed.
-	 *
-	 * @return string
-	 */
-	public static function get_queue_name() {
-		return self::$queue_name;
-	}
 
 	/**
 	 * Adds a 30 second cron schedule.
@@ -55,8 +47,8 @@ class PluginInstallTaskManager {
 	 * @return array
 	 */
 	public function add_thirty_seconds_schedule( $schedules ) {
-		if ( ! array_key_exists( 'thirty_seconds', $schedules ) || 30 !== $schedules['thirty_seconds']['interval'] ) {
-			$schedules['thirty_seconds'] = array(
+		if ( ! array_key_exists( 'thirty_seconds', $schedules ) || 30 !== $schedules[ 'thirty_seconds' ][ 'interval' ] ) {
+			$schedules[ 'thirty_seconds' ] = array(
 				'interval' => 30,
 				'display'  => __( 'Once Every Thirty Seconds' ),
 			);
@@ -94,10 +86,10 @@ class PluginInstallTaskManager {
 
 		// Recreate the PluginInstall task from the associative array.
 		$plugin_install_task = new PluginInstallTask(
-			$plugin_to_install['slug'],
-			$plugin_to_install['activate'],
-			$plugin_to_install['priority'],
-			$plugin_to_install['retries']
+			$plugin_to_install[ 'slug' ],
+			$plugin_to_install[ 'activate' ],
+			$plugin_to_install[ 'priority' ],
+			$plugin_to_install[ 'retries' ]
 		);
 
 		// Update status to the current slug being installed.
@@ -151,8 +143,8 @@ class PluginInstallTaskManager {
 			Check if there is an already existing PluginInstallTask in the queue
 			for a given slug.
 			*/
-			if ( $queued_plugin['slug'] !== $plugin_install_task->get_slug() ) {
-				$queue->insert( $queued_plugin, $queued_plugin['priority'] );
+			if ( $queued_plugin[ 'slug' ] !== $plugin_install_task->get_slug() ) {
+				$queue->insert( $queued_plugin, $queued_plugin[ 'priority' ] );
 			}
 		}
 
@@ -183,24 +175,14 @@ class PluginInstallTaskManager {
 			/*
 			If the Plugin slug does not match add it back to the queue.
 			*/
-			if ( $queued_plugin['slug'] !== $plugin ) {
-				$queue->insert( $queued_plugin, $queued_plugin['priority'] );
+			if ( $queued_plugin[ 'slug' ] !== $plugin ) {
+				$queue->insert( $queued_plugin, $queued_plugin[ 'priority' ] );
 			}
 		}
 
 		return \update_option( Options::get_option_name( self::$queue_name ), $queue->to_array() );
 	}
 
-	/**
-	 * Get the status of a given plugin slug from the queue.
-	 *
-	 * @param string $plugin The slug of the plugin.
-	 * @return boolean
-	 */
-	public static function status( $plugin ) {
-		$plugins = \get_option( Options::get_option_name( self::$queue_name ), array() );
-		return array_search( $plugin, array_column( $plugins, 'slug' ), true );
-	}
 
 	/**
 	 * Clear all the hook scheduling and update the status option

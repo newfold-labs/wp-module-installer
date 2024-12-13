@@ -1,4 +1,5 @@
 <?php
+
 namespace NewfoldLabs\WP\Module\Installer\TaskManagers;
 
 use NewfoldLabs\WP\Module\Installer\Data\Plugins;
@@ -10,46 +11,44 @@ use NewfoldLabs\WP\Module\Installer\Services\PluginUninstaller;
 /**
  * Manages the execution of PluginUninstallTasks.
  */
-class PluginUninstallTaskManager {
+class PluginUninstallTaskManager extends AbstractTaskManager {
 
 	/**
 	 * The number of times a PluginUninstallTask can be retried.
 	 *
 	 * @var int
 	 */
-	private static $retry_limit = 2;
+	protected static $retry_limit = 2;
 
 	/**
 	 * Name of the PluginUninstallTask Queue.
 	 *
 	 * @var string
 	 */
-	private static $queue_name = 'plugin_uninstall_queue';
+	protected static $queue_name = 'plugin_uninstall_queue';
+
+	/**
+	 * Name of the PluginUninstallTask Hook.
+	 *
+	 * @var string
+	 */
+	protected static $hook_name = 'nfd_module_installer_plugin_uninstall_cron';
 
 	/**
 	 * PluginUninstallTaskManager constructor.
 	 */
 	public function __construct() {
-		// Ensure there is a Ten second option in the cron schedules
-		add_filter( 'cron_schedules', array( $this, 'add_ten_seconds_schedule' ) );
+		parent::__construct();
 
 		// Ten second cron hook
-		add_action( 'nfd_module_installer_plugin_uninstall_cron', array( $this, 'uninstall' ) );
+		add_action( self::$hook_name, array( $this, 'uninstall' ) );
 
 		// Register the cron task
-		if ( ! wp_next_scheduled( 'nfd_module_installer_plugin_uninstall_cron' ) ) {
-			wp_schedule_event( time(), 'ten_seconds', 'nfd_module_installer_plugin_uninstall_cron' );
+		if ( ! wp_next_scheduled( self::$hook_name ) ) {
+			wp_schedule_event( time(), 'ten_seconds', self::$hook_name );
 		}
 	}
 
-	/**
-	 * Retrieve the Queue Name for the TaskManager to perform Plugin Uninstalls.
-	 *
-	 * @return string
-	 */
-	public static function get_queue_name() {
-		return self::$queue_name;
-	}
 
 	/**
 	 * Adds ten seconds option in the cron schedule.
@@ -58,8 +57,8 @@ class PluginUninstallTaskManager {
 	 * @return array
 	 */
 	public function add_ten_seconds_schedule( $schedules ) {
-		if ( ! array_key_exists( 'ten_seconds', $schedules ) || 10 !== $schedules['ten_seconds']['interval'] ) {
-			$schedules['ten_seconds'] = array(
+		if ( ! array_key_exists( 'ten_seconds', $schedules ) || 10 !== $schedules[ 'ten_seconds' ][ 'interval' ] ) {
+			$schedules[ 'ten_seconds' ] = array(
 				'interval' => 10,
 				'display'  => __( 'Once Every Ten Seconds' ),
 			);
@@ -86,6 +85,7 @@ class PluginUninstallTaskManager {
 		*/
 		$plugin_to_uninstall = array_shift( $plugins );
 		if ( ! $plugin_to_uninstall ) {
+			wp_unschedule_event( self::get_hook_name() );
 			return true;
 		}
 
@@ -94,9 +94,9 @@ class PluginUninstallTaskManager {
 
 		// Recreate the PluginInstall task from the associative array.
 		$plugin_uninstall_task = new PluginUninstallTask(
-			$plugin_to_uninstall['slug'],
-			$plugin_to_uninstall['priority'],
-			$plugin_to_uninstall['retries']
+			$plugin_to_uninstall[ 'slug' ],
+			$plugin_to_uninstall[ 'priority' ],
+			$plugin_to_uninstall[ 'retries' ]
 		);
 
 		// Execute the PluginUninstall Task.
@@ -146,7 +146,7 @@ class PluginUninstallTaskManager {
 
 		$plugin_list = Plugins::get_squashed();
 		// Gets the specified path for the Plugin from the predefined list
-		$plugin_path = $plugin_list[ $plugin_uninstall_task->get_slug() ]['path'];
+		$plugin_path = $plugin_list[ $plugin_uninstall_task->get_slug() ][ 'path' ];
 
 		if ( ! PluginUninstaller::is_plugin_installed( $plugin_path ) ) {
 			return true;
@@ -158,10 +158,10 @@ class PluginUninstallTaskManager {
 			Check if there is an already existing PluginUninstallTask in the queue
 			for a given slug.
 			*/
-			if ( $queued_plugin['slug'] === $plugin_uninstall_task->get_slug() ) {
+			if ( $queued_plugin[ 'slug' ] === $plugin_uninstall_task->get_slug() ) {
 				return false;
 			}
-			$queue->insert( $queued_plugin, $queued_plugin['priority'] );
+			$queue->insert( $queued_plugin, $queued_plugin[ 'priority' ] );
 		}
 
 		// Insert a new PluginUninstallTask at the appropriate position in the queue.
@@ -171,16 +171,5 @@ class PluginUninstallTaskManager {
 		);
 
 		return \update_option( Options::get_option_name( self::$queue_name ), $queue->to_array() );
-	}
-
-	/**
-	 * Returns the status of given plugin slug - uninstalling/completed.
-	 *
-	 * @param string $plugin Plugin Slug
-	 * @return string|false
-	 */
-	public static function status( $plugin ) {
-		$plugins = \get_option( Options::get_option_name( self::$queue_name ), array() );
-		return array_search( $plugin, array_column( $plugins, 'slug' ), true );
 	}
 }
