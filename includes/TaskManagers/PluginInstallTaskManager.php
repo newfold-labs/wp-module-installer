@@ -1,4 +1,5 @@
 <?php
+
 namespace NewfoldLabs\WP\Module\Installer\TaskManagers;
 
 use NewfoldLabs\WP\Module\Installer\Data\Options;
@@ -8,46 +9,36 @@ use NewfoldLabs\WP\Module\Installer\Models\PriorityQueue;
 /**
  * Manages the execution of PluginInstallTasks.
  */
-class PluginInstallTaskManager {
-
-	/**
-	 * The number of times a PluginInstallTask can be retried.
-	 *
-	 * @var int
-	 */
-	private static $retry_limit = 1;
+class PluginInstallTaskManager extends AbstractTaskManager {
 
 	/**
 	 * The name of the queue, might be prefixed.
 	 *
 	 * @var string
 	 */
-	private static $queue_name = 'plugin_install_queue';
+	protected static $queue_name = 'plugin_install_queue';
+
+	/**
+	 * The name of the Hook.
+	 *
+	 * @var string
+	 */
+	protected static $hook_name = 'nfd_module_installer_plugin_install_cron';
 
 	/**
 	 * Schedules the crons.
 	 */
 	public function __construct() {
-		// Ensure there is a thirty second option in the cron schedules
-		add_filter( 'cron_schedules', array( $this, 'add_thirty_seconds_schedule' ) );
+		parent::__construct();
 
-		// Thirty second cron hook
-		add_action( 'nfd_module_installer_plugin_install_cron', array( $this, 'install' ) );
+		// Thirty seconds cron hook
+		add_action( self::$hook_name, array( $this, 'install' ) );
 
-		// Register the cron task
-		if ( ! wp_next_scheduled( 'nfd_module_installer_plugin_install_cron' ) ) {
-			wp_schedule_event( time(), 'thirty_seconds', 'nfd_module_installer_plugin_install_cron' );
+		if ( ! wp_next_scheduled( self::$hook_name ) ) {
+			wp_schedule_event( time(), 'thirty_seconds', self::$hook_name );
 		}
 	}
 
-	/**
-	 * Returns the queue name, might be prefixed.
-	 *
-	 * @return string
-	 */
-	public static function get_queue_name() {
-		return self::$queue_name;
-	}
 
 	/**
 	 * Adds a 30 second cron schedule.
@@ -69,7 +60,7 @@ class PluginInstallTaskManager {
 	/**
 	 * Queue out a PluginInstallTask with the highest priority in the plugin install queue and execute it.
 	 *
-	 * @return array|false
+	 * @void
 	 */
 	public function install() {
 		/*
@@ -83,8 +74,11 @@ class PluginInstallTaskManager {
 		priority at the beginning of the array
 		*/
 		$plugin_to_install = array_shift( $plugins );
+
 		if ( ! $plugin_to_install ) {
-			return true;
+			self::complete();
+
+			return;
 		}
 
 		// Update the plugin install queue.
@@ -123,12 +117,10 @@ class PluginInstallTaskManager {
 			}
 		}
 
-		// If there are no more plugins to be installed then change the status to completed.
+		// If there are no more plugins to be installed then change the status to complete.
 		if ( empty( $plugins ) ) {
-			return \update_option( Options::get_option_name( 'plugins_init_status' ), 'completed' );
+			self::complete();
 		}
-
-		return true;
 	}
 
 	/**
@@ -191,15 +183,15 @@ class PluginInstallTaskManager {
 		return \update_option( Options::get_option_name( self::$queue_name ), $queue->to_array() );
 	}
 
+
 	/**
-	 * Get the status of a given plugin slug from the queue.
+	 * Clear all the hook scheduling and update the status option
 	 *
-	 * @param string $plugin The slug of the plugin.
-	 * @return boolean
+	 * @return bool
 	 */
-	public static function status( $plugin ) {
-		$plugins = \get_option( Options::get_option_name( self::$queue_name ), array() );
-		return array_search( $plugin, array_column( $plugins, 'slug' ), true );
+	private static function complete() {
+		wp_clear_scheduled_hook( 'nfd_module_installer_plugin_install_cron' );
+		return \update_option( Options::get_option_name( 'plugins_init_status' ), 'completed' );
 	}
 
 	/**

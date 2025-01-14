@@ -1,4 +1,5 @@
 <?php
+
 namespace NewfoldLabs\WP\Module\Installer\TaskManagers;
 
 use NewfoldLabs\WP\Module\Installer\Data\Options;
@@ -8,62 +9,35 @@ use NewfoldLabs\WP\Module\Installer\Models\PriorityQueue;
 /**
  * Manages the execution of ThemeInstallTasks.
  */
-class ThemeInstallTaskManager {
-
-	/**
-	 * The number of times a ThemeInstallTask can be retried.
-	 *
-	 * @var int
-	 */
-	private static $retry_limit = 1;
+class ThemeInstallTaskManager extends AbstractTaskManager {
 
 	/**
 	 * Name of the ThemeInstallTaskManager Queue.
 	 *
 	 * @var string
 	 */
-	private static $queue_name = 'theme_install_queue';
+	protected static $queue_name = 'theme_install_queue';
+
+	/**
+	 * Name of the ThemeInstallTaskManager Hook.
+	 *
+	 * @var string
+	 */
+	protected static $hook_name = 'nfd_module_installer_theme_install_cron';
 
 	/**
 	 * ThemeInstallTaskManager constructor.
 	 */
 	public function __construct() {
-		// Ensure there is a ten second option in the cron schedules
-		add_filter( 'cron_schedules', array( $this, 'add_ten_seconds_schedule' ) );
+		parent::__construct();
 
 		// Ten second cron hook
-		add_action( 'nfd_module_installer_theme_install_cron', array( $this, 'install' ) );
+		add_action( self::$hook_name, array( $this, 'install' ) );
 
 		// Register the cron task
-		if ( ! wp_next_scheduled( 'nfd_module_installer_theme_install_cron' ) ) {
-			wp_schedule_event( time(), 'ten_seconds', 'nfd_module_installer_theme_install_cron' );
+		if ( ! wp_next_scheduled( self::$hook_name ) ) {
+			wp_schedule_event( time(), 'ten_seconds', self::$hook_name );
 		}
-	}
-
-	/**
-	 * Retrieve the Queue Name for the TaskManager to perform Theme installation.
-	 *
-	 * @return string
-	 */
-	public static function get_queue_name() {
-		return self::$queue_name;
-	}
-
-	/**
-	 * Adds ten seconds option in the cron schedule.
-	 *
-	 * @param array $schedules Cron Schedule duration
-	 * @return array
-	 */
-	public function add_ten_seconds_schedule( $schedules ) {
-		if ( ! array_key_exists( 'ten_seconds', $schedules ) || 10 !== $schedules['ten_seconds']['interval'] ) {
-			$schedules['ten_seconds'] = array(
-				'interval' => 10,
-				'display'  => __( 'Once Every Ten Seconds' ),
-			);
-		}
-
-		return $schedules;
 	}
 
 	/**
@@ -106,7 +80,7 @@ class ThemeInstallTaskManager {
 				then re-queue the task at the end of the queue to be retried.
 			*/
 			if ( $theme_install_task->get_retries() <= self::$retry_limit ) {
-					array_push( $themes, $theme_install_task->to_array() );
+				array_push( $themes, $theme_install_task->to_array() );
 			}
 		}
 
@@ -138,6 +112,7 @@ class ThemeInstallTaskManager {
 		*/
 		$theme_to_install = array_shift( $themes );
 		if ( ! $theme_to_install ) {
+			self::complete();
 			return true;
 		}
 
@@ -164,13 +139,13 @@ class ThemeInstallTaskManager {
 				then re-queue the task at the end of the queue to be retried.
 			*/
 			if ( $theme_install_task->get_retries() <= self::$retry_limit ) {
-					array_push( $themes, $theme_install_task->to_array() );
+				array_push( $themes, $theme_install_task->to_array() );
 			}
 		}
 
 		// If there are no more themes to be installed then change the status to completed.
 		if ( empty( $themes ) ) {
-			\update_option( Options::get_option_name( 'theme_init_status' ), 'completed' );
+			self::complete();
 		}
 
 		// Update the theme install queue.
@@ -213,14 +188,14 @@ class ThemeInstallTaskManager {
 		return \update_option( Options::get_option_name( self::$queue_name ), $queue->to_array() );
 	}
 
+
 	/**
-	 * Returns the status of given plugin slug - installing/completed.
+	 * Clear all the hook scheduling and update the status option
 	 *
-	 * @param string $theme Theme Slug
-	 * @return string|false
+	 * @return bool
 	 */
-	public static function status( $theme ) {
-		$themes = \get_option( Options::get_option_name( self::$queue_name ), array() );
-		return array_search( $theme, array_column( $themes, 'slug' ), true );
+	private static function complete() {
+		wp_clear_scheduled_hook( self::get_hook_name() );
+		return \update_option( Options::get_option_name( 'theme_init_status' ), 'completed' );
 	}
 }

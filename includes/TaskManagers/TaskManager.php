@@ -1,4 +1,5 @@
 <?php
+
 namespace NewfoldLabs\WP\Module\Installer\TaskManagers;
 
 use NewfoldLabs\WP\Module\Installer\Data\Options;
@@ -25,8 +26,15 @@ final class TaskManager {
 	 * Constructor that registers all the TaskManagers.
 	 */
 	public function __construct() {
+		TaskManagerSchedules::init();
+
+		/**
+		 * Task Manager Class
+		 *
+		 * @var $task_manager PluginUninstallTaskManager|PluginDeactivationTaskManager|ThemeInstallTaskManager|PluginInstallTaskManager|PluginActivationTaskManager
+		 */
 		foreach ( $this->task_managers as $task_manager ) {
-			if ( ! empty( get_option( Options::get_option_name( $task_manager::get_queue_name() ), array() ) ) ) {
+			if ( wp_next_scheduled( $task_manager::get_hook_name() ) || ! empty( get_option( Options::get_option_name( $task_manager::get_queue_name() ), array() ) ) ) {
 				new $task_manager();
 			}
 		}

@@ -1,4 +1,5 @@
 <?php
+
 namespace NewfoldLabs\WP\Module\Installer\TaskManagers;
 
 use NewfoldLabs\WP\Module\Installer\Data\Options;
@@ -8,43 +9,40 @@ use NewfoldLabs\WP\Module\Installer\Tasks\PluginActivationTask;
 /**
  * Manages the execution of PluginActivationTasks.
  */
-class PluginActivationTaskManager {
-
+class PluginActivationTaskManager extends AbstractTaskManager {
 	/**
-	 * The number of times a PluginActivationTask can be retried.
+	 * The number of times Hook can be retried.
 	 *
 	 * @var int
 	 */
-	private static $retry_limit = 1;
+	protected static $retry_limit = 1;
 
 	/**
 	 * The name of the queue, might be prefixed.
 	 *
 	 * @var string
 	 */
-	private static $queue_name = 'plugin_activation_queue';
+	protected static $queue_name = 'plugin_activation_queue';
+
+	/**
+	 * The name of the hook, might be prefixed.
+	 *
+	 * @var string
+	 */
+	protected static $hook_name = 'nfd_module_installer_plugin_activation_event';
 
 	/**
 	 * Schedules the crons.
 	 */
 	public function __construct() {
+		parent::__construct();
 
-		// Thirty second cron hook
-		add_action( 'nfd_module_installer_plugin_activation_event', array( $this, 'activate' ) );
+		// Thirty seconds cron hook
+		add_action( self::$hook_name, array( $this, 'activate' ) );
 
-		if ( ! wp_next_scheduled( 'nfd_module_installer_plugin_activation_event' ) ) {
-			wp_schedule_single_event( time() + 5, 'nfd_module_installer_plugin_activation_event' );
+		if ( ! wp_next_scheduled( self::$hook_name ) ) {
+			wp_schedule_single_event( time() + 5, self::$hook_name );
 		}
-	}
-
-
-	/**
-	 * Returns the queue name, might be prefixed.
-	 *
-	 * @return string
-	 */
-	public static function get_queue_name() {
-		return self::$queue_name;
 	}
 
 
@@ -142,16 +140,5 @@ class PluginActivationTaskManager {
 		}
 
 		return \update_option( Options::get_option_name( self::$queue_name ), $queue->to_array() );
-	}
-
-	/**
-	 * Get the status of a given plugin slug from the queue.
-	 *
-	 * @param string $plugin The slug of the plugin.
-	 * @return boolean
-	 */
-	public static function status( $plugin ) {
-		$plugins = \get_option( Options::get_option_name( self::$queue_name ), array() );
-		return array_search( $plugin, array_column( $plugins, 'slug' ), true );
 	}
 }
