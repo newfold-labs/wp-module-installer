@@ -14,7 +14,7 @@
     "@wordpress/icons": "^10.9.0"
   },
   "devDependencies": {
-    "@wordpress/scripts": "^26.19.0",
+    "@wordpress/scripts": "^30.9.0",
     "node-fetch": "^2.7.0",
     "semver": "^7.6.3",
     "webpack-merge": "^5.10.0"
