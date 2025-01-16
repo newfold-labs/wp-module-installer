@@ -15,10 +15,13 @@
   },
   "devDependencies": {
     "@wordpress/scripts": "^26.19.0",
+    "node-fetch": "^2.7.0",
+    "semver": "^7.6.3",
     "webpack-merge": "^5.10.0"
   },
   "scripts": {
     "build": "wp-scripts build ./src/Installer/installer.js ./src/Scripts/dataAttrListener.js",
+    "set-version-bump": "node ./set-version-bump.js && npm i && rm -rf ./build && npm run build",
     "start": "wp-scripts start ./src/Installer/installer.js ./src/Scripts/dataAttrListener.js"
   }
 }
