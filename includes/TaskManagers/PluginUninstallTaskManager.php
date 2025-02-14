@@ -60,7 +60,7 @@ class PluginUninstallTaskManager extends AbstractTaskManager {
 		if ( ! array_key_exists( 'ten_seconds', $schedules ) || 10 !== $schedules['ten_seconds']['interval'] ) {
 			$schedules['ten_seconds'] = array(
 				'interval' => 10,
-				'display'  => __( 'Once Every Ten Seconds' ),
+				'display'  => __( 'Once Every Ten Seconds', 'wp-module-installer' ),
 			);
 		}
 

@@ -50,7 +50,7 @@ class PluginInstallTaskManager extends AbstractTaskManager {
 		if ( ! array_key_exists( 'thirty_seconds', $schedules ) || 30 !== $schedules['thirty_seconds']['interval'] ) {
 			$schedules['thirty_seconds'] = array(
 				'interval' => 30,
-				'display'  => __( 'Once Every Thirty Seconds' ),
+				'display'  => __( 'Once Every Thirty Seconds', 'wp-module-installer' ),
 			);
 		}
 

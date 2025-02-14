@@ -28,11 +28,11 @@ abstract class TaskManagerSchedules {
 		$schedules_to_add = array(
 			'thirty_seconds' => array(
 				'interval' => 30,
-				'display'  => __( 'Once Every Thirty Seconds' ),
+				'display'  => __( 'Once Every Thirty Seconds', 'wp-module-installer' ),
 			),
 			'ten_seconds'    => array(
 				'interval' => 10,
-				'display'  => __( 'Once Every Ten Seconds' ),
+				'display'  => __( 'Once Every Ten Seconds', 'wp-module-installer' ),
 			),
 		);
 

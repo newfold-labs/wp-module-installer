@@ -16,6 +16,7 @@ class InstallerListener {
 	public function __construct() {
 		// Hook to enqueue installer scripts
 		add_action( 'newfold/installer/enqueue_scripts', array( $this, 'enqueue_installer_scripts' ) );
+		\add_action( 'init', array( __CLASS__, 'load_text_domain' ), 100 );
 
 		// Hook to listen to premium plugin activation
 		$this->listen_for_premium_plugin_activation();
@@ -95,6 +96,12 @@ class InstallerListener {
 
 			wp_enqueue_script( 'nfd-installer-enqueue' );
 			wp_enqueue_style( 'nfd-installer-enqueue' );
+
+			\wp_set_script_translations(
+				'nfd-installer-enqueue',
+				'wp-module-installer',
+				NFD_INSTALLER_DIR . '/languages'
+			);
 		}
 	}
 
@@ -126,6 +133,26 @@ class InstallerListener {
 			},
 			10,
 			2
+		);
+	}
+
+	/**
+	 * Load text domain for Module
+	 *
+	 * @return void
+	 */
+	public static function load_text_domain() {
+
+		\load_plugin_textdomain(
+			'wp-module-installer',
+			false,
+			NFD_INSTALLER_DIR . '/languages'
+		);
+
+		\load_script_textdomain(
+			'nfd-installer-enqueue',
+			'wp-module-installer',
+			NFD_INSTALLER_DIR . '/languages'
 		);
 	}
 }

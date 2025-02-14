@@ -30,8 +30,9 @@
     "newfold-labs/wp-module-pls": "^1.0.1"
   },
   "require-dev": {
-    "wp-cli/wp-cli": "^2.11",
-    "newfold-labs/wp-php-standards": "^1.2"
+    "newfold-labs/wp-php-standards": "^1.2",
+    "wp-cli/i18n-command": "^2.6.3",
+    "wp-cli/wp-cli": "^2.11"
   },
   "config": {
     "allow-plugins": {
