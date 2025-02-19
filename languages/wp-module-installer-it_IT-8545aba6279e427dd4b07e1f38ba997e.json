@@ -1,0 +1,33 @@
+{
+    "translation-revision-date": "2025-02-19 15:52",
+    "generator": "WP-CLI\/2.11.0",
+    "source": "build\/1.2.2\/installer.js",
+    "domain": "messages",
+    "locale_data": {
+        "messages": {
+            "": {
+                "domain": "messages",
+                "lang": "it_IT",
+                "plural-forms": "nplurals=2; plural=(n != 1);"
+            },
+            "Sorry, there was an error installing and activating the plugin. Please try again. If the problem persists, <a>contact support<\/a>.": [
+                "Siamo spiacenti, si \u00e8 verificato un errore durante l'installazione e l'attivazione del plugin. Si prega di riprovare. Se il problema persiste, <a>contatta l'assistenza<\/a>."
+            ],
+            "Hold on while we get things setup for you!": [
+                "Tieni premuto mentre riceviamo le cose impostate per te!"
+            ],
+            "Loading Vector.": [
+                "Caricamento Vector."
+            ],
+            "Activating %s": [
+                "Attivazione %s"
+            ],
+            "Activation Complete! Redirecting\u2026": [
+                "Attivazione Completata! Reindirizzamento\u2026"
+            ],
+            "Error Icon.": [
+                "Icona Errore."
+            ]
+        }
+    }
+}
