@@ -43,6 +43,7 @@
     }
   },
   "scripts": {
+    "fix": "vendor/bin/phpcbf --standard=phpcs.xml .",
     "i18n-pot": "vendor/bin/wp i18n make-pot . ./languages/wp-module-installer.pot --headers='{\"Report-Msgid-Bugs-To\":\"https://github.com/newfold-labs/wp-module-installer/issues\",\"POT-Creation-Date\":\"2025-02-13T09:55:55+00:00\"}'",
     "i18n-po": "vendor/bin/wp i18n update-po ./languages/wp-module-installer.pot ./languages",
     "i18n-mo": "vendor/bin/wp i18n make-mo ./languages",
@@ -52,6 +53,7 @@
       "@i18n-po",
       "@i18n-mo",
       "@i18n-json"
-    ]
+    ],
+    "lint": "vendor/bin/phpcs --standard=phpcs.xml -s ."
   }
 }
