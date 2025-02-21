@@ -124,7 +124,7 @@ msgstr "Activeren %s"
 #: build/1.2.2/installer.js:2
 #: src/Installer/components/Modal/index.jsx:222
 msgid "Activation Complete! Redirecting…"
-msgstr ""
+msgstr "Activatie voltooid! Bezig met omleiden…"
 
 #: build/1.2.2/installer.js:2
 #: src/Installer/components/Modal/index.jsx:234
