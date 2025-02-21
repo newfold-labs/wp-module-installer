@@ -31,11 +31,15 @@
   },
   "require-dev": {
     "wp-cli/wp-cli": "^2.11",
-    "newfold-labs/wp-php-standards": "^1.2"
+    "newfold-labs/wp-php-standards": "^1.2.4"
   },
   "config": {
     "allow-plugins": {
-      "dealerdirect/phpcodesniffer-composer-installer": true
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "php-http/discovery": true
+    },
+    "platform": {
+      "php": "7.3"
     }
   }
 }
