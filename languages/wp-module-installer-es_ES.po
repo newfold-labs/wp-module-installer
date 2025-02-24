@@ -9,6 +9,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2025-02-13T10:12:56+00:00\n"
 "PO-Revision-Date: 2025-02-19 15:52\n"
+"Language: es_ES\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: wp-module-installer\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -17,7 +18,6 @@ msgstr ""
 "X-Crowdin-Language: es-ES\n"
 "X-Crowdin-File: wp-module-installer.pot\n"
 "X-Crowdin-File-ID: 40\n"
-"Language: es_ES\n"
 
 #: bootstrap.php:18
 msgid "Installer"
@@ -101,33 +101,26 @@ msgid "Both plugin slug and provider name are required."
 msgstr "Tanto el slug de plugins como el nombre del proveedor son requeridos."
 
 #: build/1.2.2/installer.js:1
-#: src/Installer/components/Modal/index.jsx:179
 msgid "Sorry, there was an error installing and activating the plugin. Please try again. If the problem persists, <a>contact support</a>."
 msgstr "Lo sentimos, hubo un error al instalar y activar el plugin. Por favor, inténtelo de nuevo. Si el problema persiste, <a>póngase en contacto con el soporte</a>."
 
 #: build/1.2.2/installer.js:1
-#: src/Installer/components/Modal/index.jsx:193
 msgid "Hold on while we get things setup for you!"
 msgstr "¡Espera mientras recibimos la configuración para ti!"
 
 #: build/1.2.2/installer.js:1
-#: src/Installer/components/Modal/index.jsx:201
 msgid "Loading Vector."
 msgstr "Cargando vector."
 
 #. translators: %s: Plugin Name
 #: build/1.2.2/installer.js:2
-#: src/Installer/components/Modal/index.jsx:209
 msgid "Activating %s"
 msgstr "Activando %s"
 
 #: build/1.2.2/installer.js:2
-#: src/Installer/components/Modal/index.jsx:222
 msgid "Activation Complete! Redirecting…"
 msgstr "¡Activación completada! Redireccionando…"
 
 #: build/1.2.2/installer.js:2
-#: src/Installer/components/Modal/index.jsx:234
 msgid "Error Icon."
 msgstr "Icono de error."
-

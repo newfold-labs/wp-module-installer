@@ -1,13 +1,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: https://github.com/newfold-labs/wp-module-installer/issues\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-02-13T10:12:56+00:00\n"
+"POT-Creation-Date: 2025-02-13T09:55:55+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: wp-module-installer\n"
@@ -94,32 +94,26 @@ msgid "Both plugin slug and provider name are required."
 msgstr ""
 
 #: build/1.2.2/installer.js:1
-#: src/Installer/components/Modal/index.jsx:179
 msgid "Sorry, there was an error installing and activating the plugin. Please try again. If the problem persists, <a>contact support</a>."
 msgstr ""
 
 #: build/1.2.2/installer.js:1
-#: src/Installer/components/Modal/index.jsx:193
 msgid "Hold on while we get things setup for you!"
 msgstr ""
 
 #: build/1.2.2/installer.js:1
-#: src/Installer/components/Modal/index.jsx:201
 msgid "Loading Vector."
 msgstr ""
 
 #. translators: %s: Plugin Name
 #: build/1.2.2/installer.js:2
-#: src/Installer/components/Modal/index.jsx:209
 msgid "Activating %s"
 msgstr ""
 
 #: build/1.2.2/installer.js:2
-#: src/Installer/components/Modal/index.jsx:222
 msgid "Activation Complete! Redirecting…"
 msgstr ""
 
 #: build/1.2.2/installer.js:2
-#: src/Installer/components/Modal/index.jsx:234
 msgid "Error Icon."
 msgstr ""

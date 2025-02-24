@@ -9,9 +9,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2025-02-13T10:12:56+00:00\n"
 "PO-Revision-Date: 2025-02-13 19:21+0530\n"
+"Language: en_GB\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: wp-module-installer\n"
-"Language: en_GB\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: bootstrap.php:18
@@ -70,12 +70,8 @@ msgid " Also Failed to reactivate the extended plugin: "
 msgstr " Also Failed to reactivate the extended plugin: "
 
 #: includes/Services/PluginUpgrader.php:126
-msgid ""
-"Successfully installed the premium plugin, but there was an error "
-"uninstalling the extended plugin. Manual cleanup may be required."
-msgstr ""
-"Successfully installed the premium plugin, but there was an error "
-"uninstalling the extended plugin. Manual cleanup may be required."
+msgid "Successfully installed the premium plugin, but there was an error uninstalling the extended plugin. Manual cleanup may be required."
+msgstr "Successfully installed the premium plugin, but there was an error uninstalling the extended plugin. Manual cleanup may be required."
 
 #: includes/TaskManagers/PluginInstallTaskManager.php:53
 #: includes/TaskManagers/TaskManagerSchedules.php:31
@@ -92,42 +88,34 @@ msgid "YITH plugin upgrade process completed successfully."
 msgstr "YITH plugin upgrade process completed successfully."
 
 #: includes/WPCLI/Handlers/InstallerCommandHandler.php:48
-msgid ""
-"YITH plugin upgrade process completed, but some upgrades failed. Please "
-"check the logs."
-msgstr ""
-"YITH plugin upgrade process completed, but some upgrades failed. Please "
-"check the logs."
+msgid "YITH plugin upgrade process completed, but some upgrades failed. Please check the logs."
+msgstr "YITH plugin upgrade process completed, but some upgrades failed. Please check the logs."
 
 #: includes/WPCLI/Handlers/InstallerCommandHandler.php:120
 msgid "Both plugin slug and provider name are required."
 msgstr "Both plugin slug and provider name are required."
 
-#: build/1.2.2/installer.js:1 src/Installer/components/Modal/index.jsx:179
-msgid ""
-"Sorry, there was an error installing and activating the plugin. Please try "
-"again. If the problem persists, <a>contact support</a>."
-msgstr ""
-"Sorry, there was an error installing and activating the plugin. Please try "
-"again. If the problem persists, <a>contact support</a>."
+#: build/1.2.2/installer.js:1
+msgid "Sorry, there was an error installing and activating the plugin. Please try again. If the problem persists, <a>contact support</a>."
+msgstr "Sorry, there was an error installing and activating the plugin. Please try again. If the problem persists, <a>contact support</a>."
 
-#: build/1.2.2/installer.js:1 src/Installer/components/Modal/index.jsx:193
+#: build/1.2.2/installer.js:1
 msgid "Hold on while we get things setup for you!"
 msgstr "Hold on while we get things setup for you!"
 
-#: build/1.2.2/installer.js:1 src/Installer/components/Modal/index.jsx:201
+#: build/1.2.2/installer.js:1
 msgid "Loading Vector."
 msgstr "Loading Vector."
 
 #. translators: %s: Plugin Name
-#: build/1.2.2/installer.js:2 src/Installer/components/Modal/index.jsx:209
+#: build/1.2.2/installer.js:2
 msgid "Activating %s"
 msgstr "Activating %s"
 
-#: build/1.2.2/installer.js:2 src/Installer/components/Modal/index.jsx:222
+#: build/1.2.2/installer.js:2
 msgid "Activation Complete! Redirecting…"
 msgstr "Activation Complete! Redirecting…"
 
-#: build/1.2.2/installer.js:2 src/Installer/components/Modal/index.jsx:234
+#: build/1.2.2/installer.js:2
 msgid "Error Icon."
 msgstr "Error Icon."
