@@ -17,6 +17,9 @@ if ( function_exists( 'add_action' ) ) {
 					'name'     => 'installer',
 					'label'    => __( 'Installer', 'wp-module-installer' ),
 					'callback' => function ( Container $container ) {
+						if ( ! defined( 'NFD_INSTALLER_DIR' ) ) {
+							define( 'NFD_INSTALLER_DIR', __DIR__ );
+						}
 						new Constants( $container );
 						new Installer( $container );
 					},

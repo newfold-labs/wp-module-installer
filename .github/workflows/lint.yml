@@ -28,13 +28,16 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: '7.3'
           coverage: none
           tools: composer, cs2pr
 
       - uses: technote-space/get-diff-action@v6
         with:
-          SUFFIX_FILTER: .php
+          PATTERNS: |
+            **/*.php
+            !**/*.asset.php
+            !**/*.l10n.php
 
       - name: Get Composer cache directory
         id: composer-cache

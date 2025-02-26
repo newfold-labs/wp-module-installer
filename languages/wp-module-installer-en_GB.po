@@ -1,0 +1,121 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Vara Prasad Maruboina <varaprasad.maruboina@newfold.com>\n"
+"Language-Team: English (British) <(nothing)>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-02-13T10:12:56+00:00\n"
+"PO-Revision-Date: 2025-02-13 19:21+0530\n"
+"Language: en_GB\n"
+"X-Generator: WP-CLI 2.11.0\n"
+"X-Domain: wp-module-installer\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: bootstrap.php:18
+msgid "Installer"
+msgstr "Installer"
+
+#: includes/Services/PluginInstaller.php:169
+msgid "Plugin slug and provider name cannot be empty."
+msgstr "Plugin slug and provider name cannot be empty."
+
+#: includes/Services/PluginInstaller.php:191
+msgid "Plugin is already installed and active: "
+msgstr "Plugin is already installed and active: "
+
+#: includes/Services/PluginInstaller.php:200
+msgid "Failed to activate the plugin: "
+msgstr "Failed to activate the plugin: "
+
+#: includes/Services/PluginInstaller.php:206
+#: includes/Services/PluginInstaller.php:233
+msgid "Failed to activate the license for the premium plugin: "
+msgstr "Failed to activate the license for the premium plugin: "
+
+#: includes/Services/PluginInstaller.php:212
+#: includes/Services/PluginInstaller.php:240
+#: includes/Services/PluginUpgrader.php:121
+msgid "Successfully provisioned and installed: "
+msgstr "Successfully provisioned and installed: "
+
+#: includes/Services/PluginInstaller.php:220
+msgid "Download URL is missing for premium plugin: "
+msgstr "Download URL is missing for premium plugin: "
+
+#: includes/Services/PluginInstaller.php:226
+msgid "Failed to install or activate the premium plugin: "
+msgstr "Failed to install or activate the premium plugin: "
+
+#: includes/Services/PluginUpgrader.php:70
+msgid "Invalid extended plugin slug provided."
+msgstr "Invalid extended plugin slug provided."
+
+#: includes/Services/PluginUpgrader.php:82
+msgid "Could not determine the status of the extended plugin."
+msgstr "Could not determine the status of the extended plugin."
+
+#: includes/Services/PluginUpgrader.php:87
+msgid "Extended plugin is not installed."
+msgstr "Extended plugin is not installed."
+
+#: includes/Services/PluginUpgrader.php:98
+msgid "Failed to deactivate the extended plugin: "
+msgstr "Failed to deactivate the extended plugin: "
+
+#: includes/Services/PluginUpgrader.php:112
+msgid " Also Failed to reactivate the extended plugin: "
+msgstr " Also Failed to reactivate the extended plugin: "
+
+#: includes/Services/PluginUpgrader.php:126
+msgid "Successfully installed the premium plugin, but there was an error uninstalling the extended plugin. Manual cleanup may be required."
+msgstr "Successfully installed the premium plugin, but there was an error uninstalling the extended plugin. Manual cleanup may be required."
+
+#: includes/TaskManagers/PluginInstallTaskManager.php:53
+#: includes/TaskManagers/TaskManagerSchedules.php:31
+msgid "Once Every Thirty Seconds"
+msgstr "Once Every Thirty Seconds"
+
+#: includes/TaskManagers/PluginUninstallTaskManager.php:63
+#: includes/TaskManagers/TaskManagerSchedules.php:35
+msgid "Once Every Ten Seconds"
+msgstr "Once Every Ten Seconds"
+
+#: includes/WPCLI/Handlers/InstallerCommandHandler.php:46
+msgid "YITH plugin upgrade process completed successfully."
+msgstr "YITH plugin upgrade process completed successfully."
+
+#: includes/WPCLI/Handlers/InstallerCommandHandler.php:48
+msgid "YITH plugin upgrade process completed, but some upgrades failed. Please check the logs."
+msgstr "YITH plugin upgrade process completed, but some upgrades failed. Please check the logs."
+
+#: includes/WPCLI/Handlers/InstallerCommandHandler.php:120
+msgid "Both plugin slug and provider name are required."
+msgstr "Both plugin slug and provider name are required."
+
+#: build/1.2.2/installer.js:1
+msgid "Sorry, there was an error installing and activating the plugin. Please try again. If the problem persists, <a>contact support</a>."
+msgstr "Sorry, there was an error installing and activating the plugin. Please try again. If the problem persists, <a>contact support</a>."
+
+#: build/1.2.2/installer.js:1
+msgid "Hold on while we get things setup for you!"
+msgstr "Hold on while we get things setup for you!"
+
+#: build/1.2.2/installer.js:1
+msgid "Loading Vector."
+msgstr "Loading Vector."
+
+#. translators: %s: Plugin Name
+#: build/1.2.2/installer.js:2
+msgid "Activating %s"
+msgstr "Activating %s"
+
+#: build/1.2.2/installer.js:2
+msgid "Activation Complete! Redirecting…"
+msgstr "Activation Complete! Redirecting…"
+
+#: build/1.2.2/installer.js:2
+msgid "Error Icon."
+msgstr "Error Icon."
