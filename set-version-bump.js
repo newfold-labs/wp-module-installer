@@ -1,7 +1,8 @@
 const fs = require( 'fs' );
+const path = require( 'path' );
 const semver = require( 'semver' );
-const packagefile = './package.json';
-const pluginfile = './includes/Data/Constants.php';
+const packagefile = path.resolve( __dirname, './package.json' );
+const pluginfile = path.resolve( __dirname, './includes/Data/Constants.php' );
 
 if ( fs.existsSync( packagefile ) && fs.existsSync( pluginfile ) ) {
 	const packageData = require( packagefile );

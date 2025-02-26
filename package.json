@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@wordpress/scripts": "^26.19.0",
-    "node-fetch": "^2.7.0",
+    "node-fetch": "^3.3.2",
     "semver": "^7.7.1",
     "webpack-merge": "^6.0.1"
   },
