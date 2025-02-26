@@ -155,7 +155,6 @@ class InstallerListener {
 			false,
 			NFD_INSTALLER_DIR . '/languages'
 		);
-
 	}
 
 	/**
