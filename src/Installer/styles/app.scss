@@ -2,15 +2,6 @@
 @import "wordpress";
 @import "../components/Modal/stylesheet";
 
-#nfd-installer * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
-
 #nfd-installer {
 	display: none;
-	transition: all 3s ease-in-out;
-	position: relative;
-	z-index: 1000000;
 }
