@@ -18,14 +18,14 @@ class InstallerListener {
 
 	/**
 	 * Identifier for the listener script.
-	 * 
+	 *
 	 * @var string
 	 */
-	public static $listener_handle = 'nfd-installer-listener'; 
+	public static $listener_handle = 'nfd-installer-listener';
 
 	/**
-	 * list of pages the installer script should load
-	 * 
+	 * Pages/screen->ids the installer script should load.
+	 *
 	 * @var array
 	 */
 	public static $screens = array(
@@ -113,7 +113,6 @@ class InstallerListener {
 					\wp_enqueue_style( self::$installer_handle );
 				}
 			}
-
 		}
 	}
 
