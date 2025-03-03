@@ -10,18 +10,34 @@ use NewfoldLabs\WP\Module\PLS\Utilities\PLSUtility;
  */
 class InstallerListener {
 	/**
-	 * Identifier for script handle.
+	 * Identifier for main script handle (the Modal).
 	 *
 	 * @var string
 	 */
-	public static $handle = 'nfd-installer-enqueue';
+	public static $installer_handle = 'nfd-installer';
+
+	/**
+	 * Identifier for the listener script.
+	 *
+	 * @var string
+	 */
+	public static $listener_handle = 'nfd-installer-listener';
+
+	/**
+	 * Pages/screen->ids the installer script should load.
+	 *
+	 * @var array
+	 */
+	public static $screens = array(
+		'plugin-install',
+	);
 
 	/**
 	 * Constructor for the Installer class.
 	 */
 	public function __construct() {
 		// Hook to enqueue installer scripts
-		\add_action( 'newfold/installer/enqueue_scripts', array( $this, 'enqueue_installer_scripts' ) );
+		\add_action( 'admin_enqueue_scripts', array( $this, 'assets' ) );
 		\add_action( 'init', array( __CLASS__, 'load_text_domain' ), 100 );
 		\add_filter( 'load_script_translation_file', array( $this, 'load_script_translation_file' ), 10, 3 );
 
@@ -30,68 +46,55 @@ class InstallerListener {
 	}
 
 	/**
-	 * Enqueues all the installer scripts that are required.
-	 * The Data Attribute Listener Script
-	 * The Modal UI with React that installs the plugin
+	 * Register installer assets
 	 *
 	 * @return void
 	 */
-	public function enqueue_installer_scripts() {
-		$this->enqueue_data_attr_listener();
-		$this->enqueue_installer_react_script();
-	}
+	public function assets() {
+		// Installer listener script
+		$listener_asset_file = NFD_INSTALLER_BUILD_DIR . '/dataAttrListener.asset.php';
+		// Installer Modal script
+		$asset_file = NFD_INSTALLER_BUILD_DIR . '/installer.asset.php';
 
-	/**
-	 * Enqueues the data-* attribute listener script.
-	 *
-	 * @return void
-	 */
-	public function enqueue_data_attr_listener() {
-		$asset_file = NFD_INSTALLER_BUILD_DIR . '/dataAttrListener.asset.php';
+		if ( \is_readable( $listener_asset_file ) ) {
+			$listener_asset = include $listener_asset_file;
+
+			// The listener script is passed as a dependency to the installer script
+			\wp_register_script(
+				self::$listener_handle,
+				NFD_INSTALLER_BUILD_URL . '/dataAttrListener.js',
+				array_merge( $listener_asset['dependencies'] ),
+				$listener_asset['version'],
+				true
+			);
+		}
 
 		if ( \is_readable( $asset_file ) ) {
 			$asset = include $asset_file;
 
 			\wp_register_script(
-				'nfd-installer-data-attr-listener',
-				NFD_INSTALLER_BUILD_URL . '/dataAttrListener.js',
-				array_merge( $asset['dependencies'] ),
+				self::$installer_handle,
+				NFD_INSTALLER_BUILD_URL . '/installer.js',
+				array_merge( $asset['dependencies'], array( self::$listener_handle ) ),
 				$asset['version'],
 				true
 			);
 
-			\wp_enqueue_script( 'nfd-installer-data-attr-listener' );
-		}
-	}
-
-	/**
-	 * Enqueues the installer script.
-	 *
-	 * @return void
-	 */
-	public function enqueue_installer_react_script() {
-		$asset_file = NFD_INSTALLER_BUILD_DIR . '/installer.asset.php';
-
-		if ( \is_readable( $asset_file ) ) {
-			$asset = include $asset_file;
-
-			\wp_register_script(
-				self::$handle,
-				NFD_INSTALLER_BUILD_URL . '/installer.js',
-				array_merge( $asset['dependencies'], array() ),
-				$asset['version'],
-				true
+			\wp_set_script_translations(
+				self::$installer_handle,
+				'wp-module-installer',
+				NFD_INSTALLER_DIR . '/languages'
 			);
 
 			\wp_register_style(
-				self::$handle,
+				self::$installer_handle,
 				NFD_INSTALLER_BUILD_URL . '/installer.css',
 				array(),
 				$asset['version']
 			);
 
 			\wp_add_inline_script(
-				self::$handle,
+				self::$installer_handle,
 				'var nfdInstaller = ' . \wp_json_encode(
 					array(
 						'restUrl'           => \get_home_url() . '/index.php?rest_route=',
@@ -101,14 +104,15 @@ class InstallerListener {
 				'before'
 			);
 
-			\wp_enqueue_script( self::$handle );
-			\wp_enqueue_style( self::$handle );
-
-			\wp_set_script_translations(
-				self::$handle,
-				'wp-module-installer',
-				NFD_INSTALLER_DIR . '/languages'
-			);
+			// installer assets may be enqueued as a dependency of any enqueued scripts
+			// they are also enqueued on whitelisted screens
+			$screen = get_current_screen();
+			if ( isset( $screen->id ) ) {
+				if ( in_array( $screen->id, self::$screens, true ) ) {
+					\wp_enqueue_script( self::$installer_handle );
+					\wp_enqueue_style( self::$installer_handle );
+				}
+			}
 		}
 	}
 
@@ -170,7 +174,7 @@ class InstallerListener {
 	 */
 	public function load_script_translation_file( $file, $handle, $domain ) {
 
-		if ( $handle === self::$handle ) {
+		if ( $handle === self::$installer_handle ) {
 			$path   = NFD_INSTALLER_DIR . '/languages/';
 			$locale = \determine_locale();
 
