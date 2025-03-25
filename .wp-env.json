@@ -1,0 +1,8 @@
+{
+  "env": {
+    "tests": {
+      "mysqlPort": 33306
+    }
+  },
+  "core": "https://wordpress.org/wordpress-6.1.7.zip"
+}
