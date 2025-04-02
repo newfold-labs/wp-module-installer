@@ -17,10 +17,15 @@ final class Themes {
 	 * @var array
 	 */
 	protected static $nfd_slugs = array(
-		'nfd_slug_yith_wonder' => array(
+		'nfd_slug_yith_wonder'        => array(
 			'approved'   => true,
 			'url'        => 'https://hiive.cloud/workers/plugin-downloads/yith-wonder-theme',
 			'stylesheet' => 'yith-wonder',
+		),
+		'nfd_slug_bluehost_blueprint' => array(
+			'approved'   => true,
+			'url'        => 'https://patterns.hiive.cloud/cdn/themes/bluehost-blueprint.zip',
+			'stylesheet' => 'bluehost-blueprint',
 		),
 	);
 
