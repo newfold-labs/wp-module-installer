@@ -27,7 +27,7 @@
     }
   },
   "require": {
-    "newfold-labs/wp-module-pls": "^1.0.1"
+    "newfold-labs/wp-module-pls": "^1.1.1"
   },
   "require-dev": {
     "wp-cli/wp-cli": "^2.11",
