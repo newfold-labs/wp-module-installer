@@ -31,11 +31,11 @@
         }
     },
     "require": {
-        "newfold-labs/wp-module-pls": "^1.0.1"
+        "newfold-labs/wp-module-pls": "^1.1.1"
     },
     "require-dev": {
         "wp-cli/wp-cli": "^2.11",
-        "newfold-labs/wp-php-standards": "^1.2.4",
+        "newfold-labs/wp-php-standards": "^1.2.5",
         "johnpbloch/wordpress": "6.1.7",
         "lucatume/wp-browser": "*",
         "phpunit/phpcov": "*"
@@ -56,7 +56,6 @@
         "i18n": [
             "@i18n-pot",
             "@i18n-po",
-            "@i18n-mo",
             "@i18n-php",
             "@i18n-json"
         ],

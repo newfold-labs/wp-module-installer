@@ -29,8 +29,13 @@ An installer for WordPress plugins and themes.
 
 ### 1. Bump Version [IMPORTANT]
 
-- Update the module version in the `includes/Data/Constants.php` file (the NFD_INSTALLER_VERSION const).
-- Update the module version in the `package.json and package-lock.json` file as well.
+Run the command `npm run set-version-bump`. This command will automatically
+- Bump version constants in the proper files:
+  - `includes/Data/Constants.php`: (NFD_INSTALLER_VERSION) 
+  - `package.json`: version
+- Clear old build files
+- Create new build files
+- Update language/i18n files as needed 
 
 ## Installation
 
