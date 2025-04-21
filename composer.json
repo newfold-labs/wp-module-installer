@@ -36,7 +36,7 @@
     "require-dev": {
         "wp-cli/wp-cli": "^2.11",
         "newfold-labs/wp-php-standards": "^1.2.5",
-        "johnpbloch/wordpress": "6.1.7",
+        "johnpbloch/wordpress": "6.8.0",
         "lucatume/wp-browser": "*",
         "phpunit/phpcov": "*"
     },
