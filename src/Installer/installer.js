@@ -7,7 +7,7 @@ import './styles/app.scss';
  * WordPress dependencies
  */
 import domReady from '@wordpress/dom-ready';
-import { createRoot, render } from '@wordpress/element';
+import { createRoot } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -36,10 +36,6 @@ const renderModal = ( elementId ) => {
 	}
 	// react render depending on wp version
 	if ( 'undefined' !== typeof createRoot ) {
-		// wp 6.2 and above
-		createRoot( modalRoot ).render( <App /> );
-	} else if ( 'undefined' !== typeof render ) {
-		// wp 6.1 and below
-		render( <App />, modalRoot );
+		createRoot( modalRoot ).render( <App /> ); // wp 6.2 and above
 	}
 };
