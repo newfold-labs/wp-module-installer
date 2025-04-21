@@ -23,6 +23,7 @@
   "scripts": {
     "build": "wp-scripts build ./src/Installer/installer.js ./src/Scripts/dataAttrListener.js",
     "set-version-bump": "node ./set-version-bump.js && npm i && composer i && rm -rf ./build && npm run build && composer run i18n",
+    "set-version-minor": "node ./set-version-bump.js minor && npm i && composer i && rm -rf ./build && npm run build && composer run i18n",
     "start": "wp-scripts start ./src/Installer/installer.js ./src/Scripts/dataAttrListener.js"
   }
 }
