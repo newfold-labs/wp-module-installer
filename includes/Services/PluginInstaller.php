@@ -175,7 +175,7 @@ class PluginInstaller {
 		// Provision a license for the premium plugin, this returns basename and download URL
 		$license_response = $pls_utility->provision_license( $plugin, $provider );
 		if ( is_wp_error( $license_response ) ) {
-			$license_response->add( 
+			$license_response->add(
 				'nfd_installer_error',
 				__( 'Failed to provision license', 'wp-module-installer' ),
 				array(
@@ -217,13 +217,13 @@ class PluginInstaller {
 			}
 			$install_status = self::install_from_zip( $license_response['downloadUrl'], $activate );
 			if ( is_wp_error( $install_status ) ) {
-				$install_status->add( 
+				$install_status->add(
 					'nfd_installer_error',
 					__( 'Failed to install the plugin', 'wp-module-installer' ),
 					array(
-						'plugin'   => $plugin,
-						'provider' => $provider,
-						'basename' => $plugin_basename,
+						'plugin'       => $plugin,
+						'provider'     => $provider,
+						'basename'     => $plugin_basename,
 						'download_url' => $license_response['downloadUrl'],
 					)
 				);
@@ -241,7 +241,7 @@ class PluginInstaller {
 					array(
 						'plugin'   => $plugin,
 						'provider' => $provider,
-						'basename' => $plugin_basename
+						'basename' => $plugin_basename,
 					)
 				);
 				return $activate_plugin_response;
@@ -252,7 +252,7 @@ class PluginInstaller {
 		// Should we do this here or let the activation hook handle it - see WPAdmin/Listeners/InstallerListener.php
 		$activation_response = $pls_utility->activate_license( $plugin );
 		if ( is_wp_error( $activation_response ) ) {
-			$activation_response->add( 
+			$activation_response->add(
 				'nfd_installer_error',
 				__( 'Failed to activate the license', 'wp-module-installer' ),
 				array(
