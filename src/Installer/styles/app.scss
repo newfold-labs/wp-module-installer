@@ -1,6 +1,5 @@
 //Imports
-@import "wordpress";
-@import "../components/Modal/stylesheet";
+@use "../components/Modal/stylesheet";
 
 #nfd-installer {
 	display: none;
