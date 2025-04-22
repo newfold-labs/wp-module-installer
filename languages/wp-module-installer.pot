@@ -20,31 +20,33 @@ msgstr ""
 msgid "Plugin slug and provider name cannot be empty."
 msgstr ""
 
-#: includes/Services/PluginInstaller.php:191
-msgid "Plugin is already installed and active: "
+#: includes/Services/PluginInstaller.php:180
+msgid "Failed to provision license for premium plugin: "
 msgstr ""
 
-#: includes/Services/PluginInstaller.php:200
-msgid "Failed to activate the plugin: "
+#: includes/Services/PluginInstaller.php:196
+msgid "Plugin basename is missing."
 msgstr ""
 
-#: includes/Services/PluginInstaller.php:206
-#: includes/Services/PluginInstaller.php:233
-msgid "Failed to activate the license for the premium plugin: "
-msgstr ""
-
-#: includes/Services/PluginInstaller.php:212
-#: includes/Services/PluginInstaller.php:240
-#: includes/Services/PluginUpgrader.php:121
-msgid "Successfully provisioned and installed: "
-msgstr ""
-
-#: includes/Services/PluginInstaller.php:220
+#: includes/Services/PluginInstaller.php:210
 msgid "Download URL is missing for premium plugin: "
 msgstr ""
 
-#: includes/Services/PluginInstaller.php:226
+#: includes/Services/PluginInstaller.php:222
 msgid "Failed to install or activate the premium plugin: "
+msgstr ""
+
+#: includes/Services/PluginInstaller.php:240
+msgid "Failed to activate the plugin: "
+msgstr ""
+
+#: includes/Services/PluginInstaller.php:257
+msgid "Failed to activate the license for the premium plugin: "
+msgstr ""
+
+#: includes/Services/PluginInstaller.php:270
+#: includes/Services/PluginUpgrader.php:121
+msgid "Successfully provisioned and installed: "
 msgstr ""
 
 #: includes/Services/PluginUpgrader.php:70
@@ -93,27 +95,32 @@ msgstr ""
 msgid "Both plugin slug and provider name are required."
 msgstr ""
 
-#: build/1.4.3/installer.js:1
+#: build/1.5.1/installer.js:1
 msgid "Sorry, there was an error installing and activating the plugin. Please try again. If the problem persists, <a>contact support</a>."
 msgstr ""
 
-#: build/1.4.3/installer.js:1
+#: build/1.5.1/installer.js:1
 msgid "Hold on while we get things setup for you!"
 msgstr ""
 
-#: build/1.4.3/installer.js:1
+#: build/1.5.1/installer.js:1
 msgid "Loading Vector."
 msgstr ""
 
 #. translators: %s: Plugin Name
-#: build/1.4.3/installer.js:2
+#: build/1.5.1/installer.js:2
 msgid "Activating %s"
 msgstr ""
 
-#: build/1.4.3/installer.js:2
+#: build/1.5.1/installer.js:2
 msgid "Activation Complete! Redirecting…"
 msgstr ""
 
-#: build/1.4.3/installer.js:2
+#: build/1.5.1/installer.js:2
 msgid "Error Icon."
+msgstr ""
+
+#: wordpress/wp-includes/blocks/widget-group/block.json
+msgctxt "block title"
+msgid "Widget Group"
 msgstr ""

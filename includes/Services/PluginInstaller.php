@@ -177,7 +177,7 @@ class PluginInstaller {
 		if ( is_wp_error( $license_response ) ) {
 			$license_response->add(
 				'nfd_installer_error',
-				__( 'Failed to provision license', 'wp-module-installer' ),
+				__( 'Failed to provision license for premium plugin: ', 'wp-module-installer' ) . $plugin,
 				array(
 					'plugin'   => $plugin,
 					'provider' => $provider,
@@ -207,7 +207,7 @@ class PluginInstaller {
 			if ( empty( $license_response['downloadUrl'] ) ) {
 				return new \WP_Error(
 					'nfd_installer_error',
-					__( 'Download URL is missing for premium plugin', 'wp-module-installer' ),
+					__( 'Download URL is missing for premium plugin: ', 'wp-module-installer' ) . $plugin,
 					array(
 						'plugin'   => $plugin,
 						'provider' => $provider,
@@ -219,7 +219,7 @@ class PluginInstaller {
 			if ( is_wp_error( $install_status ) ) {
 				$install_status->add(
 					'nfd_installer_error',
-					__( 'Failed to install the plugin', 'wp-module-installer' ),
+					__( 'Failed to install or activate the premium plugin: ', 'wp-module-installer' ) . $plugin,
 					array(
 						'plugin'       => $plugin,
 						'provider'     => $provider,
@@ -237,7 +237,7 @@ class PluginInstaller {
 			if ( is_wp_error( $activate_plugin_response ) ) {
 				$activate_plugin_response->add(
 					'nfd_installer_error',
-					__( 'Failed to activate the plugin', 'wp-module-installer' ),
+					__( 'Failed to activate the plugin: ', 'wp-module-installer' ) . $plugin,
 					array(
 						'plugin'   => $plugin,
 						'provider' => $provider,
@@ -254,7 +254,7 @@ class PluginInstaller {
 		if ( is_wp_error( $activation_response ) ) {
 			$activation_response->add(
 				'nfd_installer_error',
-				__( 'Failed to activate the license', 'wp-module-installer' ),
+				__( 'Failed to activate the license for the premium plugin: ', 'wp-module-installer' ) . $plugin,
 				array(
 					'plugin'   => $plugin,
 					'provider' => $provider,
@@ -267,7 +267,7 @@ class PluginInstaller {
 		// Return success response
 		return new \WP_REST_Response(
 			array(
-				'message' => __( 'Successfully provisioned and installed the plugin', 'wp-module-installer' ),
+				'message' => __( 'Successfully provisioned and installed: ', 'wp-module-installer' ) . $plugin,
 			),
 			200
 		);
