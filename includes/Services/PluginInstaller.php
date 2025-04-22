@@ -162,6 +162,9 @@ class PluginInstaller {
 	 * @return \WP_Error|\WP_REST_Response
 	 */
 	public static function install_premium_plugin( $plugin, $provider, $activate ) {
+		$is_installed = false;
+		$is_active    = false;
+
 		// Ensure plugin and provider are not empty
 		if ( empty( $plugin ) || empty( $provider ) ) {
 			return new \WP_Error(
@@ -186,23 +189,16 @@ class PluginInstaller {
 			return $license_response;
 		}
 
-		// Get the plugin basename from the license response
+		// Maybe get the plugin basename from the license response
+		// This is only returned if the plugin is already installed and licensed
 		$plugin_basename = ! empty( $license_response['basename'] ) ? $license_response['basename'] : false;
 
-		// Bail if no basename
-		if ( ! $plugin_basename ) {
-			return new \WP_Error(
-				'nfd_installer_error',
-				__( 'Plugin basename is missing.', 'wp-module-installer' ),
-				array(
-					'plugin'   => $plugin,
-					'provider' => $provider,
-				)
-			);
+		// Check if the plugin is already installed
+		if ( $plugin_basename && self::is_plugin_installed( $plugin_basename ) ) {
+			$is_installed = true;
 		}
-
 		// If NOT installed, install plugin
-		if ( ! self::is_plugin_installed( $plugin_basename ) ) {
+		if ( ! $is_installed ) {
 			// Check if the download URL is present in the license response
 			if ( empty( $license_response['downloadUrl'] ) ) {
 				return new \WP_Error(
@@ -211,7 +207,6 @@ class PluginInstaller {
 					array(
 						'plugin'   => $plugin,
 						'provider' => $provider,
-						'basename' => $plugin_basename,
 					)
 				);
 			}
@@ -223,7 +218,6 @@ class PluginInstaller {
 					array(
 						'plugin'       => $plugin,
 						'provider'     => $provider,
-						'basename'     => $plugin_basename,
 						'download_url' => $license_response['downloadUrl'],
 					)
 				);
@@ -231,8 +225,13 @@ class PluginInstaller {
 			}
 		}
 
-		// If $activate is true, activate the plugin via \activate_plugin
-		if ( $activate && ! is_plugin_active( $plugin_basename ) ) {
+		// Check if the plugin is already active
+		// - should only be true if the plugin was already installed
+		if ( $is_installed && is_plugin_active( $plugin_basename ) ) {
+			$is_active = true;
+		}
+		// If $activate is true, and not already active, activate the plugin via \activate_plugin
+		if ( $is_installed && $activate && $is_installed && ! $is_active ) {
 			$activate_plugin_response = activate_plugin( $plugin_basename );
 			if ( is_wp_error( $activate_plugin_response ) ) {
 				$activate_plugin_response->add(
@@ -258,7 +257,6 @@ class PluginInstaller {
 				array(
 					'plugin'   => $plugin,
 					'provider' => $provider,
-					'basename' => $plugin_basename,
 				)
 			);
 			return $activation_response;
