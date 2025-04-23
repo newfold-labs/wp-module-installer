@@ -94,6 +94,7 @@ jobs:
           mkdir gh-pages/phpunit || true;
 
       - name: Run unit tests
+        if: ${{ hashFiles('tests/phpunit/bootstrap.php') != '' }}
         run: XDEBUG_MODE=coverage vendor/bin/phpunit --bootstrap tests/phpunit/bootstrap.php --coverage-php tests/_output/unit.cov --debug
 
       - name: Run wpunit tests
