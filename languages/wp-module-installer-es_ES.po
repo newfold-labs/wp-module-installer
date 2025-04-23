@@ -23,15 +23,15 @@ msgstr ""
 msgid "Installer"
 msgstr "Instalador"
 
-#: includes/Services/PluginInstaller.php:169
+#: includes/Services/PluginInstaller.php:173
 msgid "Plugin slug and provider name cannot be empty."
 msgstr "El slug del complemento y el nombre del proveedor no pueden estar vacíos."
 
-#: includes/Services/PluginInstaller.php:240
+#: includes/Services/PluginInstaller.php:241
 msgid "Failed to activate the plugin: "
 msgstr "Error al activar el plugin: "
 
-#: includes/Services/PluginInstaller.php:257
+#: includes/Services/PluginInstaller.php:258
 msgid "Failed to activate the license for the premium plugin: "
 msgstr "No se pudo activar la licencia para el plugin premium: "
 
@@ -40,11 +40,11 @@ msgstr "No se pudo activar la licencia para el plugin premium: "
 msgid "Successfully provisioned and installed: "
 msgstr "Provisionado e instalado con éxito: "
 
-#: includes/Services/PluginInstaller.php:210
+#: includes/Services/PluginInstaller.php:207
 msgid "Download URL is missing for premium plugin: "
 msgstr "Falta la URL de descarga para el plugin premium: "
 
-#: includes/Services/PluginInstaller.php:222
+#: includes/Services/PluginInstaller.php:218
 msgid "Failed to install or activate the premium plugin: "
 msgstr "Error al instalar o activar el plugin premium: "
 
@@ -94,37 +94,33 @@ msgstr "Proceso de actualización del plugin YITH completado, pero algunas actua
 msgid "Both plugin slug and provider name are required."
 msgstr "Tanto el slug de plugins como el nombre del proveedor son requeridos."
 
-#: build/1.5.1/installer.js:1
+#: build/1.6.0/installer.js:1
 msgid "Sorry, there was an error installing and activating the plugin. Please try again. If the problem persists, <a>contact support</a>."
 msgstr "Lo sentimos, hubo un error al instalar y activar el plugin. Por favor, inténtelo de nuevo. Si el problema persiste, <a>póngase en contacto con el soporte</a>."
 
-#: build/1.5.1/installer.js:1
+#: build/1.6.0/installer.js:1
 msgid "Hold on while we get things setup for you!"
 msgstr "¡Espera mientras recibimos la configuración para ti!"
 
-#: build/1.5.1/installer.js:1
+#: build/1.6.0/installer.js:1
 msgid "Loading Vector."
 msgstr "Cargando vector."
 
 #. translators: %s: Plugin Name
-#: build/1.5.1/installer.js:2
+#: build/1.6.0/installer.js:2
 msgid "Activating %s"
 msgstr "Activando %s"
 
-#: build/1.5.1/installer.js:2
+#: build/1.6.0/installer.js:2
 msgid "Activation Complete! Redirecting…"
 msgstr "¡Activación completada! Redireccionando…"
 
-#: build/1.5.1/installer.js:2
+#: build/1.6.0/installer.js:2
 msgid "Error Icon."
 msgstr "Icono de error."
 
-#: includes/Services/PluginInstaller.php:180
+#: includes/Services/PluginInstaller.php:184
 msgid "Failed to provision license for premium plugin: "
-msgstr ""
-
-#: includes/Services/PluginInstaller.php:196
-msgid "Plugin basename is missing."
 msgstr ""
 
 #: wordpress/wp-includes/blocks/widget-group/block.json

@@ -16,31 +16,27 @@ msgstr ""
 msgid "Installer"
 msgstr ""
 
-#: includes/Services/PluginInstaller.php:169
+#: includes/Services/PluginInstaller.php:173
 msgid "Plugin slug and provider name cannot be empty."
 msgstr ""
 
-#: includes/Services/PluginInstaller.php:180
+#: includes/Services/PluginInstaller.php:184
 msgid "Failed to provision license for premium plugin: "
 msgstr ""
 
-#: includes/Services/PluginInstaller.php:196
-msgid "Plugin basename is missing."
-msgstr ""
-
-#: includes/Services/PluginInstaller.php:210
+#: includes/Services/PluginInstaller.php:207
 msgid "Download URL is missing for premium plugin: "
 msgstr ""
 
-#: includes/Services/PluginInstaller.php:222
+#: includes/Services/PluginInstaller.php:218
 msgid "Failed to install or activate the premium plugin: "
 msgstr ""
 
-#: includes/Services/PluginInstaller.php:240
+#: includes/Services/PluginInstaller.php:241
 msgid "Failed to activate the plugin: "
 msgstr ""
 
-#: includes/Services/PluginInstaller.php:257
+#: includes/Services/PluginInstaller.php:258
 msgid "Failed to activate the license for the premium plugin: "
 msgstr ""
 
@@ -95,28 +91,28 @@ msgstr ""
 msgid "Both plugin slug and provider name are required."
 msgstr ""
 
-#: build/1.5.1/installer.js:1
+#: build/1.6.0/installer.js:1
 msgid "Sorry, there was an error installing and activating the plugin. Please try again. If the problem persists, <a>contact support</a>."
 msgstr ""
 
-#: build/1.5.1/installer.js:1
+#: build/1.6.0/installer.js:1
 msgid "Hold on while we get things setup for you!"
 msgstr ""
 
-#: build/1.5.1/installer.js:1
+#: build/1.6.0/installer.js:1
 msgid "Loading Vector."
 msgstr ""
 
 #. translators: %s: Plugin Name
-#: build/1.5.1/installer.js:2
+#: build/1.6.0/installer.js:2
 msgid "Activating %s"
 msgstr ""
 
-#: build/1.5.1/installer.js:2
+#: build/1.6.0/installer.js:2
 msgid "Activation Complete! Redirecting…"
 msgstr ""
 
-#: build/1.5.1/installer.js:2
+#: build/1.6.0/installer.js:2
 msgid "Error Icon."
 msgstr ""
 
