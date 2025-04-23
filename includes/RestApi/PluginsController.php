@@ -183,24 +183,28 @@ class PluginsController {
 	 */
 	public function install( \WP_REST_Request $request ) {
 		$plugin   = $request->get_param( 'plugin' );
-		$activate = $request->get_param( 'activate' );
 		$queue    = $request->get_param( 'queue' );
 		$priority = $request->get_param( 'priority' );
 		$premium  = $request->get_param( 'premium' );
 		$provider = $request->get_param( 'provider' );
+		// default to true
+		$shoud_activate = 
+			$request->get_param( 'activate' )
+			? $request->get_param( 'activate' )
+			: true;
 
 		// If the plugin is premium use the corresponding function.
 		if ( true === $premium ) {
-			return PluginInstaller::install_premium_plugin( $plugin, $provider, $activate );
-		} 
+			return PluginInstaller::install_premium_plugin( $plugin, $provider, $shoud_activate );
+		}
 
 		// If the plugin is free and not queued use the corresponding function.
 		if ( false === $premuim && false === $queue ) {
-			return PluginInstaller::install( $plugin, $activate );
+			return PluginInstaller::install( $plugin, $shoud_activate );
 		}
 
 		// Checks if a plugin with the given slug and activation criteria already exists.
-		if ( PluginInstaller::exists( $plugin, $activate ) ) {
+		if ( PluginInstaller::exists( $plugin, $shoud_activate ) ) {
 			return new \WP_REST_Response(
 				array(),
 				200
@@ -213,7 +217,7 @@ class PluginsController {
 			PluginInstallTaskManager::add_to_queue(
 				new PluginInstallTask(
 					$plugin,
-					$activate,
+					$shoud_activate,
 					$priority
 				)
 			);
@@ -225,7 +229,7 @@ class PluginsController {
 		}
 
 		// Set up the task if it need not be queued.
-		$plugin_install_task = new PluginInstallTask( $plugin, $activate );
+		$plugin_install_task = new PluginInstallTask( $plugin, $shoud_activate );
 
 		// Return the queued task.
 		return $plugin_install_task->execute();
@@ -290,13 +294,13 @@ class PluginsController {
 	 * @return \WP_REST_Response
 	 */
 	public function get_status( \WP_REST_Request $request ) {
-		$plugin    = $request->get_param( 'plugin' );
-		$activated = $request->get_param( 'activated' );
+		$plugin       = $request->get_param( 'plugin' );
+		$is_activated = $request->get_param( 'activated' );
 
-		if ( PluginInstaller::exists( $plugin, $activated ) ) {
+		if ( PluginInstaller::exists( $plugin, $is_activated ) ) {
 			return new \WP_REST_Response(
 				array(
-					'status' => $activated ? 'activated' : 'installed',
+					'status' => $is_activated ? 'activated' : 'installed',
 				),
 				200
 			);
