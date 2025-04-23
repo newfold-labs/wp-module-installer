@@ -188,7 +188,6 @@ class PluginsController {
 		$priority = $request->get_param( 'priority' );
 		$premium  = $request->get_param( 'premium' );
 		$provider = $request->get_param( 'provider' );
-		$basename = $request->get_param( 'basename' );
 
 		// If the plugin is premium use the corresponding function.
 		if ( true === $premium ) {

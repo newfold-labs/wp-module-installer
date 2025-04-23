@@ -33,9 +33,6 @@ domReady( () => {
 					pluginProvider: el.getAttribute(
 						'data-nfd-installer-pls-provider'
 					),
-					pluginBasename: el.getAttribute(
-						'data-nfd-installer-plugin-basename'
-					),
 					redirectUrl,
 				} );
 				return false;
@@ -56,9 +53,6 @@ domReady( () => {
 					),
 					pluginProvider: el.getAttribute(
 						'data-nfd-installer-pls-provider'
-					),
-					pluginBasename: el.getAttribute(
-						'data-nfd-installer-plugin-basename'
 					),
 					redirectUrl,
 				} );
