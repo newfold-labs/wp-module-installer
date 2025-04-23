@@ -188,15 +188,15 @@ class PluginsController {
 		$premium  = $request->get_param( 'premium' );
 		$provider = $request->get_param( 'provider' );
 		$basename =
-			$request->get_param( 'basename' ) ?
-			$request->get_param( 'basename' ) :
-			false;
+			$request->get_param( 'basename' )
+			? $request->get_param( 'basename' )
+			: false; // defaults to false
 
 		// default to true
 		$shoud_activate =
 			$request->get_param( 'activate' )
 			? $request->get_param( 'activate' )
-			: true;
+			: true; // default
 
 		// If the plugin is premium use the corresponding function.
 		if ( true === $premium ) {
