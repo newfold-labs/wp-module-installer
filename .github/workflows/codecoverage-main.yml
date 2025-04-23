@@ -158,14 +158,14 @@ jobs:
       - name: Add coverage badge to PR comment
         if: ${{ matrix.php == '7.3' && github.event_name == 'pull_request' }}
         run: |
-          echo "[![Code Coverage ](https://newfold-labs.github.io/wp-module-data/${{ github.event.pull_request.head.sha }}/phpunit/coverage.svg)](https://newfold-labs.github.io/wp-module-data/${{ github.event.pull_request.head.sha }}/phpunit/html/)" >> coverage-comment.md
+          echo "[![Code Coverage ](https://newfold-labs.github.io/wp-module-installer/${{ github.event.pull_request.head.sha }}/phpunit/coverage.svg)](https://newfold-labs.github.io/wp-module-installer/${{ github.event.pull_request.head.sha }}/phpunit/html/)" >> coverage-comment.md
           echo "" >> coverage-comment.md
           echo "" >> coverage-comment.md
 
       - name: Add coverage report link to PR comment
         if: ${{ matrix.php == '7.3' && github.event_name == 'pull_request' }}
         run: |
-          echo "${{ format('[project coverage report {0}%](https://newfold-labs.github.io/wp-module-data/{1}/phpunit/html/) @ {2}', steps.coverage-percentage.outputs.coverage-rounded, github.event.pull_request.head.sha, github.event.pull_request.head.sha) }}" >> coverage-comment.md
+          echo "${{ format('[project coverage report {0}%](https://newfold-labs.github.io/wp-module-installer/{1}/phpunit/html/) @ {2}', steps.coverage-percentage.outputs.coverage-rounded, github.event.pull_request.head.sha, github.event.pull_request.head.sha) }}" >> coverage-comment.md
           echo "" >> coverage-comment.md
           echo "" >> coverage-comment.md
 
