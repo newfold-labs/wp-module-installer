@@ -91,7 +91,9 @@ jobs:
         if: ${{ hashFiles('wp-content') != '' }} # TODO: This may be incorrect since it's a directory.
         run: sudo chmod -R a+w wp-content
 
+      # On main, there will be a previous coverage report. On PRs we create a new directory using the commit SHA.
       - name: Clear previous code coverage
+        if: ${{ (matrix.php == '7.3') && (github.ref == 'refs/heads/main') }}
         run: |
           rm -rf gh-pages/phpunit || true;
           mkdir gh-pages/phpunit || true;
@@ -108,7 +110,7 @@ jobs:
         if: ${{ matrix.php == '7.3' && github.event_name == 'pull_request' }}
         run: |
           vendor/bin/phpcov merge --clover clover.xml tests/_output/;
-          vendor/bin/phpcov merge --clover gh-pages/phpunit/clover.xml --php gh-pages/${{ github.event.pull_request.head.sha }}/phpunit/phpunit.cov --html gh-pages/${{ github.event.pull_request.head.sha }}/phpunit/html/ tests/_output/;
+          vendor/bin/phpcov merge --clover gh-pages/${{ github.event.pull_request.head.sha }}/phpunit/clover.xml --php gh-pages/${{ github.event.pull_request.head.sha }}/phpunit/phpunit.cov --html gh-pages/${{ github.event.pull_request.head.sha }}/phpunit/html/ tests/_output/;
 
       # On main, we want it output to a different path
       - name: Merge code coverage for main
