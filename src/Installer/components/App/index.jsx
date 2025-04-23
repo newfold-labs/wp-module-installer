@@ -7,6 +7,7 @@ import Modal from '../Modal';
 const App = () => {
 	const [ action, setAction ] = useState();
 	const [ statesReady, setStatesReady ] = useState( false );
+	const [ pluginBasename, setPluginBasename ] = useState();
 	const [ pluginName, setPluginName ] = useState();
 	const [ pluginDownloadUrl, setPluginDownloadUrl ] = useState();
 	const [ pluginProvider, setPluginProvider ] = useState();
@@ -16,6 +17,7 @@ const App = () => {
 	const setData = ( e ) => {
 		setStatesReady( false );
 		setAction( e.detail.action );
+		setPluginBasename( e.detail.pluginBasename );
 		setPluginName( e.detail.pluginName );
 		setPluginDownloadUrl( e.detail.pluginDownloadUrl );
 		setPluginProvider( e.detail.pluginProvider );
@@ -39,6 +41,7 @@ const App = () => {
 			{ statesReady && (
 				<Modal
 					action={ action }
+					pluginBasename={ pluginBasename }
 					pluginName={ pluginName }
 					pluginDownloadUrl={ pluginDownloadUrl }
 					pluginProvider={ pluginProvider }
