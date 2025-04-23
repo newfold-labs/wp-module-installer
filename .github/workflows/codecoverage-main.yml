@@ -29,8 +29,8 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     strategy:
-        php: [ '7.3', '7.4', '8.0', '8.1', '8.2', '8.3' ]
       matrix: # Supported PHP versions
+        php: [ '7.3', '7.4', '8.0', '8.1', '8.2', '8.3', '8.4' ]
 
     steps:
       - name: Checkout
