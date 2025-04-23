@@ -23,6 +23,7 @@ const Modal = ( {
 	pluginProvider,
 	pluginSlug,
 	redirectUrl,
+	basename,
 } ) => {
 	/**
 	 * Represents the status of the plugin installation process.
@@ -94,10 +95,10 @@ const Modal = ( {
 						'X-NFD-INSTALLER': pluginInstallHash,
 					},
 					data: {
-						activate: true,
 						queue: false,
 						priority: 0,
 						plugin: 'woocommerce',
+						basename: 'woocommerce/woocommerce.php',
 					},
 				} );
 			} else if ( pluginProvider === 'yoast' ) {
@@ -109,10 +110,10 @@ const Modal = ( {
 						'X-NFD-INSTALLER': pluginInstallHash,
 					},
 					data: {
-						activate: true,
 						queue: false,
 						priority: 0,
 						plugin: 'wordpress-seo',
+						basename: 'wordpress-seo/wp-seo.php',
 					},
 				} );
 			}
@@ -132,12 +133,12 @@ const Modal = ( {
 					'X-NFD-INSTALLER': pluginInstallHash,
 				},
 				data: {
-					activate: true,
 					queue: false,
 					priority: 0,
 					premium: true,
 					plugin: pluginSlug,
 					provider: pluginProvider,
+					basename: basename,
 				},
 			} );
 			setPluginStatus( 'completed' );
@@ -158,10 +159,10 @@ const Modal = ( {
 					'X-NFD-INSTALLER': pluginInstallHash,
 				},
 				data: {
-					activate: true,
 					queue: false,
 					priority: 0,
 					plugin: pluginDownloadUrl,
+					basename: basename,
 				},
 			} );
 			setPluginStatus( 'completed' );

@@ -14,11 +14,11 @@ class PluginInstaller {
 	 * Install a whitelisted plugin.
 	 *
 	 * @param string  $plugin The plugin slug from Plugins.php.
-	 * @param boolean $activate Whether to activate the plugin after install.
+	 * @param boolean $should_activate Whether to activate the plugin after install.
 	 *
 	 * @return \WP_Error|\WP_REST_Response
 	 */
-	public static function install( $plugin, $activate ) {
+	public static function install( $plugin, $should_activate = true ) {
 		$plugins_list = Plugins::get();
 
 		// Check if the plugin param contains a zip url.
@@ -34,7 +34,7 @@ class PluginInstaller {
 					);
 			}
 
-			$status = self::install_from_zip( $plugin, $activate );
+			$status = self::install_from_zip( $plugin, $should_activate );
 			if ( \is_wp_error( $status ) ) {
 				return $status;
 			}
@@ -54,12 +54,12 @@ class PluginInstaller {
 			}
 			$plugin_path = $plugins_list['nfd_slugs'][ $plugin ]['path'];
 			if ( ! self::is_plugin_installed( $plugin_path ) ) {
-				$status = self::install_from_zip( $plugins_list['nfd_slugs'][ $plugin ]['url'], $activate );
+				$status = self::install_from_zip( $plugins_list['nfd_slugs'][ $plugin ]['url'], $should_activate );
 				if ( \is_wp_error( $status ) ) {
 					return $status;
 				}
 			}
-			if ( $activate && ! \is_plugin_active( $plugin_path ) ) {
+			if ( $should_activate && ! \is_plugin_active( $plugin_path ) ) {
 				$status = \activate_plugin( $plugin_path );
 				if ( \is_wp_error( $status ) ) {
 					$status->add_data( array( 'status' => 500 ) );
@@ -86,7 +86,7 @@ class PluginInstaller {
 		? $plugins_list['wp_slugs'][ $plugin ]['post_install_callback']
 		: false;
 		if ( ! self::is_plugin_installed( $plugin_path ) ) {
-			$status = self::install_from_wordpress( $plugin, $activate );
+			$status = self::install_from_wordpress( $plugin, $should_activate );
 			if ( \is_wp_error( $status ) ) {
 				return $status;
 			}
@@ -95,7 +95,7 @@ class PluginInstaller {
 			}
 		}
 
-		if ( $activate && ! \is_plugin_active( $plugin_path ) ) {
+		if ( $should_activate && ! \is_plugin_active( $plugin_path ) ) {
 			$status = \activate_plugin( $plugin_path );
 			if ( \is_wp_error( $status ) ) {
 				$status->add_data( array( 'status' => 500 ) );
@@ -114,10 +114,10 @@ class PluginInstaller {
 	 * Install a plugin from wordpress.org.
 	 *
 	 * @param string  $plugin The wp_slug to install.
-	 * @param boolean $activate Whether to activate the plugin after install.
+	 * @param boolean $should_activate Whether to activate the plugin after install.
 	 * @return \WP_REST_Response|\WP_Error
 	 */
-	public static function install_from_wordpress( $plugin, $activate ) {
+	public static function install_from_wordpress( $plugin, $should_activate = true ) {
 		require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
 
 		$api = \plugins_api(
@@ -141,7 +141,7 @@ class PluginInstaller {
 			return $api;
 		}
 
-		$status = self::install_from_zip( $api->download_link, $activate, $api->language_packs );
+		$status = self::install_from_zip( $api->download_link, $should_activate, $api->language_packs );
 		if ( \is_wp_error( $status ) ) {
 			return $status;
 		}
@@ -157,11 +157,15 @@ class PluginInstaller {
 	 *
 	 * @param string  $plugin The slug of the premium plugin.
 	 * @param string  $provider The provider name for the premium plugin.
-	 * @param boolean $activate Whether to activate the plugin after installation.
+	 * @param boolean $should_activate Whether to activate the plugin after installation. (default: true)
+	 * @param mixed   $plugin_basename The plugin basename, if known. (default: false)
 	 *
 	 * @return \WP_Error|\WP_REST_Response
 	 */
-	public static function install_premium_plugin( $plugin, $provider, $activate ) {
+	public static function install_premium_plugin( $plugin, $provider, $should_activate = true, $plugin_basename = false ) {
+		$is_installed = false;
+		$is_active    = false;
+
 		// Ensure plugin and provider are not empty
 		if ( empty( $plugin ) || empty( $provider ) ) {
 			return new \WP_Error(
@@ -186,23 +190,16 @@ class PluginInstaller {
 			return $license_response;
 		}
 
-		// Get the plugin basename from the license response
+		// Maybe get the plugin basename from the license response
+		// This is only returned if the plugin is already installed and licensed
 		$plugin_basename = ! empty( $license_response['basename'] ) ? $license_response['basename'] : false;
 
-		// Bail if no basename
-		if ( ! $plugin_basename ) {
-			return new \WP_Error(
-				'nfd_installer_error',
-				__( 'Plugin basename is missing.', 'wp-module-installer' ),
-				array(
-					'plugin'   => $plugin,
-					'provider' => $provider,
-				)
-			);
+		// Check if the plugin is already installed
+		if ( $plugin_basename && self::is_plugin_installed( $plugin_basename ) ) {
+			$is_installed = true;
 		}
-
 		// If NOT installed, install plugin
-		if ( ! self::is_plugin_installed( $plugin_basename ) ) {
+		if ( ! $is_installed ) {
 			// Check if the download URL is present in the license response
 			if ( empty( $license_response['downloadUrl'] ) ) {
 				return new \WP_Error(
@@ -211,11 +208,10 @@ class PluginInstaller {
 					array(
 						'plugin'   => $plugin,
 						'provider' => $provider,
-						'basename' => $plugin_basename,
 					)
 				);
 			}
-			$install_status = self::install_from_zip( $license_response['downloadUrl'], $activate );
+			$install_status = self::install_from_zip( $license_response['downloadUrl'], $should_activate );
 			if ( is_wp_error( $install_status ) ) {
 				$install_status->add(
 					'nfd_installer_error',
@@ -223,7 +219,6 @@ class PluginInstaller {
 					array(
 						'plugin'       => $plugin,
 						'provider'     => $provider,
-						'basename'     => $plugin_basename,
 						'download_url' => $license_response['downloadUrl'],
 					)
 				);
@@ -231,8 +226,14 @@ class PluginInstaller {
 			}
 		}
 
-		// If $activate is true, activate the plugin via \activate_plugin
-		if ( $activate && ! is_plugin_active( $plugin_basename ) ) {
+		// Check if the plugin is already active
+		// Can only be true if the plugin was already installed
+		// Only need to check if it should be activated
+		if ( $is_installed && $should_activate && is_plugin_active( $plugin_basename ) ) {
+			$is_active = true;
+		}
+		// If should activate, and not already active, activate the plugin
+		if ( $is_installed && $should_activate && ! $is_active ) {
 			$activate_plugin_response = activate_plugin( $plugin_basename );
 			if ( is_wp_error( $activate_plugin_response ) ) {
 				$activate_plugin_response->add(
@@ -250,18 +251,17 @@ class PluginInstaller {
 
 		// Activate the license
 		// Should we do this here or let the activation hook handle it - see WPAdmin/Listeners/InstallerListener.php
-		$activation_response = $pls_utility->activate_license( $plugin );
-		if ( is_wp_error( $activation_response ) ) {
-			$activation_response->add(
+		$license_activation_response = $pls_utility->activate_license( $plugin );
+		if ( is_wp_error( $license_activation_response ) ) {
+			$license_activation_response->add(
 				'nfd_installer_error',
 				__( 'Failed to activate the license for the premium plugin: ', 'wp-module-installer' ) . $plugin,
 				array(
 					'plugin'   => $plugin,
 					'provider' => $provider,
-					'basename' => $plugin_basename,
 				)
 			);
-			return $activation_response;
+			return $license_activation_response;
 		}
 
 		// Return success response
@@ -277,11 +277,11 @@ class PluginInstaller {
 	 * Install the plugin from a custom ZIP.
 	 *
 	 * @param string  $url The ZIP URL to install from.
-	 * @param boolean $activate Whether to activate the plugin after install.
+	 * @param boolean $should_activate Whether to activate the plugin after install.
 	 * @param array   $language_packs The set of language packs to install for the plugin.
 	 * @return \WP_REST_Response|\WP_Error
 	 */
-	public static function install_from_zip( $url, $activate, $language_packs = array() ) {
+	public static function install_from_zip( $url, $should_activate, $language_packs = array() ) {
 		require_once ABSPATH . 'wp-admin/includes/file.php';
 		require_once ABSPATH . 'wp-admin/includes/misc.php';
 		require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
@@ -335,7 +335,7 @@ class PluginInstaller {
 			);
 		}
 
-		if ( $activate && ! \is_plugin_active( $plugin_file ) ) {
+		if ( $should_activate && ! \is_plugin_active( $plugin_file ) ) {
 			$status = \activate_plugin( $plugin_file );
 			if ( \is_wp_error( $status ) ) {
 				$status->add_data( array( 'status' => 500 ) );
@@ -442,17 +442,17 @@ class PluginInstaller {
 	 * Checks if a plugin with the given slug and activation criteria already exists.
 	 *
 	 * @param string  $plugin The slug of the plugin to check for
-	 * @param boolean $activate The activation criteria.
+	 * @param boolean $is_active The activation criteria.
 	 * @return boolean
 	 */
-	public static function exists( $plugin, $activate ) {
+	public static function exists( $plugin, $is_active ) {
 		$plugin_type = self::get_plugin_type( $plugin );
 		$plugin_path = self::get_plugin_path( $plugin, $plugin_type );
 		if ( ! ( $plugin_path && self::is_plugin_installed( $plugin_path ) ) ) {
 			return false;
 		}
 
-		if ( $activate && ! \is_plugin_active( $plugin_path ) ) {
+		if ( $is_active && ! \is_plugin_active( $plugin_path ) ) {
 			return false;
 		}
 		return true;
