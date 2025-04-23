@@ -18,12 +18,12 @@ import {
 
 const Modal = ( {
 	action,
+	pluginBasename,
 	pluginDownloadUrl,
 	pluginName,
 	pluginProvider,
 	pluginSlug,
 	redirectUrl,
-	basename,
 } ) => {
 	/**
 	 * Represents the status of the plugin installation process.
