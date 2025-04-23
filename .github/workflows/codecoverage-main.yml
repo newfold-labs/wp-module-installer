@@ -20,17 +20,17 @@ jobs:
 
     services:
       mysql:
-        image: mysql:5.7
-        env:
+        image: mysql:5.7 # Password auth did not work on 8.0 on PHP 7.3, it did seem to work for PHP 7.4+
+        env: # These are the same username and password as the wp-env container defaults
           MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE: tests-wordpress
-        ports:
+        ports: # This mapping matches the .wp-env.json configuration
           - 33306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     strategy:
-      matrix:
         php: [ '7.3', '7.4', '8.0', '8.1', '8.2', '8.3' ]
+      matrix: # Supported PHP versions
 
     steps:
       - name: Checkout
@@ -38,6 +38,9 @@ jobs:
         with:
           fetch-depth: 0 # attempting to get all branch names.
 
+      # TODO: a DEPLOY_KEY is needed to enable gh-pages for the first time (the branch can be created and pushed but
+      # it will not be reachable as a website).
+      # Consider @see https://github.com/peaceiris/actions-gh-pages
       #      - name: Check does gh-pages branch need to be created
       #        run: |
       #          git branch -l;
@@ -85,7 +88,7 @@ jobs:
         run: composer install -v
 
       - name: Allow writing to wp-content
-        if: ${{ hashFiles('wp-content') != '' }}
+        if: ${{ hashFiles('wp-content') != '' }} # TODO: This may be incorrect since it's a directory.
         run: sudo chmod -R a+w wp-content
 
       - name: Clear previous code coverage
@@ -94,7 +97,7 @@ jobs:
           mkdir gh-pages/phpunit || true;
 
       - name: Run unit tests
-        if: ${{ hashFiles('tests/phpunit/bootstrap.php') != '' }}
+        if: ${{ hashFiles('tests/phpunit/bootstrap.php') != '' }} # Only run unit tests if they are present.
         run: XDEBUG_MODE=coverage vendor/bin/phpunit --bootstrap tests/phpunit/bootstrap.php --coverage-php tests/_output/unit.cov --debug
 
       - name: Run wpunit tests
