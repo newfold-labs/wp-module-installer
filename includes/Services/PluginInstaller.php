@@ -189,8 +189,7 @@ class PluginInstaller {
 			return $license_response;
 		}
 
-		// Maybe get the plugin basename from the license response
-		// This is only returned if the plugin is already installed and licensed
+		// Get the plugin basename from the license response
 		$plugin_basename = ! empty( $license_response['basename'] ) ? $license_response['basename'] : false;
 
 		// Check if the plugin is already installed
