@@ -85,6 +85,7 @@ jobs:
         run: composer install -v
 
       - name: Allow writing to wp-content
+        if: ${{ hashFiles('wp-content') != '' }}
         run: sudo chmod -R a+w wp-content
 
       - name: Clear previous code coverage
