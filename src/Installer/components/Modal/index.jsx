@@ -95,7 +95,6 @@ const Modal = ( {
 						'X-NFD-INSTALLER': pluginInstallHash,
 					},
 					data: {
-						activate: true,
 						queue: false,
 						priority: 0,
 						plugin: 'woocommerce',
@@ -111,7 +110,6 @@ const Modal = ( {
 						'X-NFD-INSTALLER': pluginInstallHash,
 					},
 					data: {
-						activate: true,
 						queue: false,
 						priority: 0,
 						plugin: 'wordpress-seo',
