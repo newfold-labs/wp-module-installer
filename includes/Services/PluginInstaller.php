@@ -157,11 +157,12 @@ class PluginInstaller {
 	 *
 	 * @param string  $plugin The slug of the premium plugin.
 	 * @param string  $provider The provider name for the premium plugin.
-	 * @param boolean $should_activate Whether to activate the plugin after installation.
+	 * @param boolean $should_activate Whether to activate the plugin after installation. (default: true)
+	 * @param mixed   $plugin_basename The plugin basename, if known. (default: false)
 	 *
 	 * @return \WP_Error|\WP_REST_Response
 	 */
-	public static function install_premium_plugin( $plugin, $provider, $should_activate = true ) {
+	public static function install_premium_plugin( $plugin, $provider, $should_activate = true, $plugin_basename = false ) {
 		$is_installed = false;
 		$is_active    = false;
 
@@ -189,7 +190,8 @@ class PluginInstaller {
 			return $license_response;
 		}
 
-		// Get the plugin basename from the license response
+		// Maybe get the plugin basename from the license response
+		// This is only returned if the plugin is already installed and licensed
 		$plugin_basename = ! empty( $license_response['basename'] ) ? $license_response['basename'] : false;
 
 		// Check if the plugin is already installed
@@ -225,8 +227,9 @@ class PluginInstaller {
 		}
 
 		// Check if the plugin is already active
-		// - should only be true if the plugin was already installed
-		if ( $is_installed && is_plugin_active( $plugin_basename ) ) {
+		// Can only be true if the plugin was already installed
+		// Only need to check if it should be activated
+		if ( $is_installed && $should_activate && is_plugin_active( $plugin_basename ) ) {
 			$is_active = true;
 		}
 		// If should activate, and not already active, activate the plugin
@@ -248,9 +251,9 @@ class PluginInstaller {
 
 		// Activate the license
 		// Should we do this here or let the activation hook handle it - see WPAdmin/Listeners/InstallerListener.php
-		$activation_response = $pls_utility->activate_license( $plugin );
-		if ( is_wp_error( $activation_response ) ) {
-			$activation_response->add(
+		$license_activation_response = $pls_utility->activate_license( $plugin );
+		if ( is_wp_error( $license_activation_response ) ) {
+			$license_activation_response->add(
 				'nfd_installer_error',
 				__( 'Failed to activate the license for the premium plugin: ', 'wp-module-installer' ) . $plugin,
 				array(
@@ -258,7 +261,7 @@ class PluginInstaller {
 					'provider' => $provider,
 				)
 			);
-			return $activation_response;
+			return $license_activation_response;
 		}
 
 		// Return success response

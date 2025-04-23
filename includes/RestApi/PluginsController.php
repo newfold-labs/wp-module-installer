@@ -187,15 +187,20 @@ class PluginsController {
 		$priority = $request->get_param( 'priority' );
 		$premium  = $request->get_param( 'premium' );
 		$provider = $request->get_param( 'provider' );
+		$basename =
+			$request->get_param( 'basename' ) ?
+			$request->get_param( 'basename' ) :
+			false;
+
 		// default to true
-		$shoud_activate = 
+		$shoud_activate =
 			$request->get_param( 'activate' )
 			? $request->get_param( 'activate' )
 			: true;
 
 		// If the plugin is premium use the corresponding function.
 		if ( true === $premium ) {
-			return PluginInstaller::install_premium_plugin( $plugin, $provider, $shoud_activate );
+			return PluginInstaller::install_premium_plugin( $plugin, $provider, $shoud_activate, $basename );
 		}
 
 		// If the plugin is free and not queued use the corresponding function.
