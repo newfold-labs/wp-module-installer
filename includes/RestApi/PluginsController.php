@@ -190,9 +190,14 @@ class PluginsController {
 		$provider = $request->get_param( 'provider' );
 		$basename = $request->get_param( 'basename' );
 
-		// Checks if the plugin is premium and uses the corresponding function for it.
+		// If the plugin is premium use the corresponding function.
 		if ( true === $premium ) {
 			return PluginInstaller::install_premium_plugin( $plugin, $provider, $activate );
+		} 
+
+		// If the plugin is free and not queued use the corresponding function.
+		if ( false === $premuim && false === $queue ) {
+			return PluginInstaller::install( $plugin, $activate );
 		}
 
 		// Checks if a plugin with the given slug and activation criteria already exists.
@@ -220,9 +225,10 @@ class PluginsController {
 			);
 		}
 
-		// Execute the task if it need not be queued.
+		// Set up the task if it need not be queued.
 		$plugin_install_task = new PluginInstallTask( $plugin, $activate );
 
+		// Return the queued task.
 		return $plugin_install_task->execute();
 	}
 
