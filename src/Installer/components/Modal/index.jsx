@@ -138,7 +138,7 @@ const Modal = ( {
 					premium: true,
 					plugin: pluginSlug,
 					provider: pluginProvider,
-					basename: basename,
+					basename: pluginBasename,
 				},
 			} );
 			setPluginStatus( 'completed' );
@@ -162,7 +162,7 @@ const Modal = ( {
 					queue: false,
 					priority: 0,
 					plugin: pluginDownloadUrl,
-					basename: basename,
+					basename: pluginBasename,
 				},
 			} );
 			setPluginStatus( 'completed' );
