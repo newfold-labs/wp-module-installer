@@ -6,6 +6,7 @@ height="42" />
 # WordPress Installer Module
 [![Version Number](https://img.shields.io/github/v/release/newfold-labs/wp-module-installer?color=21a0ed&labelColor=333333)](https://github.com/newfold/wp-module-installer/releases)
 [![License](https://img.shields.io/github/license/newfold-labs/wp-module-installer?labelColor=333333&color=666666)](https://raw.githubusercontent.com/newfold-labs/wp-module-installer/master/LICENSE)
+[![PHPUnit](https://newfold-labs.github.io/wp-module-installer/phpunit/coverage.svg)](https://newfold-labs.github.io/wp-module-installer/phpunit/html)
 
 An installer for WordPress plugins and themes.
 
