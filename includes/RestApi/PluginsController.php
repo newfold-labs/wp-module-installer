@@ -207,7 +207,7 @@ class PluginsController {
 		}
 
 		// If the plugin is free and not queued use the corresponding function.
-		if ( false === $premuim && false === $queue ) {
+		if ( false === $premium && false === $queue ) {
 			return PluginInstaller::install( $plugin, $shoud_activate );
 		}
 
