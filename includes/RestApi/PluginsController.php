@@ -185,8 +185,11 @@ class PluginsController {
 		$plugin   = $request->get_param( 'plugin' );
 		$queue    = $request->get_param( 'queue' );
 		$priority = $request->get_param( 'priority' );
-		$premium  = $request->get_param( 'premium' );
 		$provider = $request->get_param( 'provider' );
+		$premium  = 
+			$request->get_param( 'premium' )
+			? $request->get_param( 'premium' )
+			: false; // defaults to false
 		$basename =
 			$request->get_param( 'basename' )
 			? $request->get_param( 'basename' )
