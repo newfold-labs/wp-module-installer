@@ -23,28 +23,28 @@ msgstr ""
 msgid "Installer"
 msgstr "Installatore"
 
-#: includes/Services/PluginInstaller.php:173
+#: includes/Services/PluginInstaller.php:175
 msgid "Plugin slug and provider name cannot be empty."
 msgstr "Lo slug e il nome del provider dei plugin non possono essere vuoti."
 
-#: includes/Services/PluginInstaller.php:241
+#: includes/Services/PluginInstaller.php:243
 msgid "Failed to activate the plugin: "
 msgstr "Attivazione del plugin non riuscita: "
 
-#: includes/Services/PluginInstaller.php:258
+#: includes/Services/PluginInstaller.php:260
 msgid "Failed to activate the license for the premium plugin: "
 msgstr "Impossibile attivare la licenza per il plugin premium: "
 
-#: includes/Services/PluginInstaller.php:270
+#: includes/Services/PluginInstaller.php:272
 #: includes/Services/PluginUpgrader.php:121
 msgid "Successfully provisioned and installed: "
 msgstr "Fornito e installato con successo: "
 
-#: includes/Services/PluginInstaller.php:207
+#: includes/Services/PluginInstaller.php:209
 msgid "Download URL is missing for premium plugin: "
 msgstr "Manca l'URL del download per il plugin premium: "
 
-#: includes/Services/PluginInstaller.php:218
+#: includes/Services/PluginInstaller.php:220
 msgid "Failed to install or activate the premium plugin: "
 msgstr "Impossibile installare o attivare il plugin premium: "
 
@@ -119,11 +119,34 @@ msgstr "Attivazione Completata! Reindirizzamento…"
 msgid "Error Icon."
 msgstr "Icona Errore."
 
-#: includes/Services/PluginInstaller.php:184
+#: includes/Services/PluginInstaller.php:186
 msgid "Failed to provision license for premium plugin: "
 msgstr ""
 
-#: wordpress/wp-includes/blocks/widget-group/block.json
-msgctxt "block title"
-msgid "Widget Group"
+#. Translators: %s plugin slug
+#: includes/Services/PluginInstaller.php:33
+msgid "You do not have permission to install from %s."
+msgstr ""
+
+#. Translators: %s plugin slug
+#: includes/Services/PluginInstaller.php:81
+msgid "You do not have permission to install %s."
+msgstr ""
+
+#: includes/Services/PluginInstaller.php:326
+#: includes/Services/ThemeInstaller.php:101
+msgid "Unable to connect to the filesystem."
+msgstr ""
+
+#: includes/Services/PluginInstaller.php:335
+msgid "Unable to determine what plugin was installed."
+msgstr ""
+
+#: includes/Services/PluginInstaller.php:527
+#: includes/Services/PluginUninstaller.php:135
+msgid "Could not connect to the filesystem."
+msgstr ""
+
+#: includes/Services/PluginUninstaller.php:145
+msgid "Unable to Delete the Plugin"
 msgstr ""
