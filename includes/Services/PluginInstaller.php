@@ -29,7 +29,8 @@ class PluginInstaller {
 				&& ! isset( $plugins_list['domains'][ $domain ] ) ) {
 					return new \WP_Error(
 						'plugin-error',
-						"You do not have permission to install from {$plugin}.",
+						/* Translators: %s plugin slug */
+						sprintf( __( 'You do not have permission to install from %s.', 'wp-module-installer'), $plugin ),
 						array( 'status' => 400 )
 					);
 			}
@@ -76,7 +77,8 @@ class PluginInstaller {
 		if ( ! isset( $plugins_list['wp_slugs'][ $plugin ] ) ) {
 			return new \WP_Error(
 				'plugin-error',
-				"You do not have permission to install {$plugin}.",
+				/* Translators: %s plugin slug */
+				sprintf( __( 'You do not have permission to install %s.', 'wp-module-installer'), $plugin ),
 				array( 'status' => 400 )
 			);
 		}
@@ -321,7 +323,7 @@ class PluginInstaller {
 
 			return new \WP_Error(
 				'unable_to_connect_to_filesystem',
-				'Unable to connect to the filesystem.',
+				__( 'Unable to connect to the filesystem.', 'wp-module-installer' ),
 				array( 'status' => 500 )
 			);
 		}
@@ -330,7 +332,7 @@ class PluginInstaller {
 		if ( ! $plugin_file ) {
 			return new \WP_Error(
 				'unable_to_determine_installed_plugin',
-				'Unable to determine what plugin was installed.',
+				__( 'Unable to determine what plugin was installed.', 'wp-module-installer' ),
 				array( 'status' => 500 )
 			);
 		}
@@ -522,7 +524,7 @@ class PluginInstaller {
 		if ( ! self::connect_to_filesystem() ) {
 			return new \WP_Error(
 				'nfd_installer_error',
-				'Could not connect to the filesystem.',
+				__( 'Could not connect to the filesystem.', 'wp-module-installer' ),
 				array( 'status' => 500 )
 			);
 		}
