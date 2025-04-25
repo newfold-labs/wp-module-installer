@@ -30,7 +30,7 @@ class PluginInstaller {
 					return new \WP_Error(
 						'plugin-error',
 						/* Translators: %s plugin slug */
-						sprintf( __( 'You do not have permission to install from %s.', 'wp-module-installer'), $plugin ),
+						sprintf( __( 'You do not have permission to install from %s.', 'wp-module-installer' ), $plugin ),
 						array( 'status' => 400 )
 					);
 			}
@@ -78,7 +78,7 @@ class PluginInstaller {
 			return new \WP_Error(
 				'plugin-error',
 				/* Translators: %s plugin slug */
-				sprintf( __( 'You do not have permission to install %s.', 'wp-module-installer'), $plugin ),
+				sprintf( __( 'You do not have permission to install %s.', 'wp-module-installer' ), $plugin ),
 				array( 'status' => 400 )
 			);
 		}
