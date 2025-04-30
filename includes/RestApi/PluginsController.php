@@ -224,7 +224,6 @@ class PluginsController {
 					200
 				);
 			}
-
 		}
 
 		// If the plugin is premium use the corresponding function.
