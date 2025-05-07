@@ -185,8 +185,11 @@ class PluginsController {
 		$plugin   = $request->get_param( 'plugin' );
 		$queue    = $request->get_param( 'queue' );
 		$priority = $request->get_param( 'priority' );
-		$premium  = $request->get_param( 'premium' );
 		$provider = $request->get_param( 'provider' );
+		$premium  =
+			$request->get_param( 'premium' )
+			? $request->get_param( 'premium' )
+			: false; // defaults to false
 		$basename =
 			$request->get_param( 'basename' )
 			? $request->get_param( 'basename' )
@@ -198,13 +201,38 @@ class PluginsController {
 			? $request->get_param( 'activate' )
 			: true; // default
 
+		// If basename is provided, check if installed or active already.
+		if ( $basename && PluginInstaller::is_plugin_installed( $basename ) ) {
+			// If already installed, check if already active
+			if ( \is_plugin_active( $basename ) ) {
+				// If already active, nothing to do, return 200
+				return new \WP_REST_Response(
+					array(),
+					200
+				);
+			}
+			// If not active, check if should activate
+			if ( $shoud_activate ) {
+				// If should activate, activate the plugin
+				$status = \activate_plugin( $basename );
+				if ( \is_wp_error( $status ) ) {
+					$status->add_data( array( 'status' => 500 ) );
+					return $status;
+				}
+				return new \WP_REST_Response(
+					array(),
+					200
+				);
+			}
+		}
+
 		// If the plugin is premium use the corresponding function.
 		if ( true === $premium ) {
 			return PluginInstaller::install_premium_plugin( $plugin, $provider, $shoud_activate, $basename );
 		}
 
 		// If the plugin is free and not queued use the corresponding function.
-		if ( false === $premuim && false === $queue ) {
+		if ( false === $premium && false === $queue ) {
 			return PluginInstaller::install( $plugin, $shoud_activate );
 		}
 
