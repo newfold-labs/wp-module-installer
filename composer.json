@@ -34,7 +34,7 @@
         "newfold-labs/wp-module-pls": "^1.1.1"
     },
     "require-dev": {
-        "wp-cli/wp-cli": "^2.11",
+        "wp-cli/wp-cli": "^2.12",
         "wp-cli/i18n-command": "^2.6",
         "newfold-labs/wp-php-standards": "^1.2.5",
         "johnpbloch/wordpress": "6.8.0",
