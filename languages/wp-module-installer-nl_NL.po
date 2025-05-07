@@ -150,3 +150,11 @@ msgstr ""
 #: includes/Services/PluginUninstaller.php:145
 msgid "Unable to Delete the Plugin"
 msgstr ""
+
+#: includes/WPCLI/Handlers/InstallerCommandHandler.php:80
+msgid "Plugin upgrade completed successfully."
+msgstr ""
+
+#: includes/WPCLI/Handlers/InstallerCommandHandler.php:82
+msgid "Plugin upgrade failed. Please check the logs for more details."
+msgstr ""
