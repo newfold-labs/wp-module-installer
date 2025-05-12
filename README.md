@@ -28,9 +28,10 @@ An installer for WordPress plugins and themes.
 
 ## Releases
 
-### 1. Bump Version [IMPORTANT]
+Run the `Newfold Prepare Release` github action to automatically bump the version (either patch, minor or major version), and update build and language files all at once. It will create a PR with changed files for review. Using this workflow, we can skip all the manual steps below.
 
-Run the command `npm run set-version-bump`. This command will automatically
+### Manual Release Steps
+
 - Bump version constants in the proper files:
   - `includes/Data/Constants.php`: (NFD_INSTALLER_VERSION) 
   - `package.json`: version
