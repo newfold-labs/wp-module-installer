@@ -152,9 +152,10 @@ const Modal = ( {
 		try {
 			setPluginStatus( 'installing' );
 			await installDependantPlugins();
-			await apiFetch( {
+			const response = await apiFetch( {
 				url: installerAPI,
 				method: 'POST',
+				parse: false,
 				headers: {
 					'X-NFD-INSTALLER': pluginInstallHash,
 				},
@@ -165,8 +166,21 @@ const Modal = ( {
 					basename: pluginBasename,
 				},
 			} );
-			setPluginStatus( 'completed' );
-			window.location.href = redirectUrl;
+			// Check for ANY redirect status code (3xx range)
+			if ( response.status >= 300 && response.status < 400 ) {
+				setPluginStatus( 'completed' );
+				const newRedirectUrl = response.headers.get( 'Location' );
+				window.location.href = newRedirectUrl || redirectUrl;
+			} else if ( response.ok ) {
+				// Handle successful response (2xx range)
+				setPluginStatus( 'completed' );
+				window.location.href = redirectUrl;
+			} else {
+				// Handle other error status codes
+				throw new Error(
+					`HTTP ${ response.status }: ${ response.statusText }`
+				);
+			}
 		} catch ( e ) {
 			setPluginStatus( 'failed' );
 		}
