@@ -1,5 +1,5 @@
 {
-    "translation-revision-date": "2025-04-25 13:58+0100",
+    "translation-revision-date": "2025-05-07 16:31+0100",
     "generator": "WP-CLI\/2.11.0",
     "source": "build\/1.6.2\/installer.js",
     "domain": "messages",
@@ -7,7 +7,7 @@
         "messages": {
             "": {
                 "domain": "messages",
-                "lang": "es_ES",
+                "lang": "es_MX",
                 "plural-forms": "nplurals=2; plural=(n != 1);"
             },
             "Sorry, there was an error installing and activating the plugin. Please try again. If the problem persists, <a>contact support<\/a>.": [

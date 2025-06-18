@@ -77,9 +77,9 @@ class InstallerCommandHandler {
 		WP_CLI::log( $status_json );
 
 		if ( $status_info['upgraded'] ) {
-			WP_CLI::success( 'Plugin upgrade completed successfully.' );
+			WP_CLI::success( __( 'Plugin upgrade completed successfully.', 'wp-module-installer' ) );
 		} else {
-			WP_CLI::error( 'Plugin upgrade failed. Please check the logs for more details.' );
+			WP_CLI::error( __( 'Plugin upgrade failed. Please check the logs for more details.', 'wp-module-installer' ) );
 		}
 	}
 
