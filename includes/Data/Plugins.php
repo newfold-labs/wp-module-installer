@@ -31,8 +31,14 @@ final class Plugins {
 			'post_install_callback' => array( __CLASS__, 'wc_prevent_redirect_on_activation' ),
 		),
 		'wordpress-seo'                     => array(
-			'approved' => true,
-			'path'     => 'wordpress-seo/wp-seo.php',
+			'approved'              => true,
+			'path'                  => 'wordpress-seo/wp-seo.php',
+			'post_install_callback' => array( __CLASS__, 'wpseo_prevent_redirect_on_activation' ),
+		),
+		'wordpress-seo-premium'             => array(
+			'approved'              => true,
+			'path'                  => 'wordpress-seo-premium/wp-seo-premium.php',
+			'post_install_callback' => array( __CLASS__, 'wpseo_premium_prevent_redirect_on_activation' ),
 		),
 		'wpforms-lite'                      => array(
 			'approved' => true,
@@ -253,6 +259,41 @@ final class Plugins {
 	 */
 	public static function wc_prevent_redirect_on_activation() {
 		delete_transient( '_wc_activation_redirect' );
+	}
+
+
+	/**
+	 * Prevent redirect to YOAST page after activation (free version).
+	 *
+	 * @return void
+	 */
+	public static function wpseo_prevent_redirect_on_activation() {
+		$wpseo_options = get_option( 'wpseo' );
+
+		if ( is_array( $wpseo_options ) ) {
+			$wpseo_options['should_redirect_after_install_free'] = true;
+			if ( isset( $wpseo_options['activation_redirect_timestamp_free'] ) ) {
+				unset( $wpseo_options['activation_redirect_timestamp_free'] );
+			}
+			update_option( 'wpseo', $wpseo_options );
+		}
+	}
+
+	/**
+	 * Prevent redirect to YOAST page after activation (premium version).
+	 *
+	 * @return void
+	 */
+	public static function wpseo_premium_prevent_redirect_on_activation() {
+		$wpseo_options = get_option( 'wpseo_premium' );
+
+		if ( is_array( $wpseo_options ) ) {
+			$wpseo_options['should_redirect_after_install'] = true;
+			if ( isset( $wpseo_options['activation_redirect_timestamp'] ) ) {
+				unset( $wpseo_options['activation_redirect_timestamp'] );
+			}
+			update_option( 'wpseo_premium', $wpseo_options );
+		}
 	}
 
 	/**
