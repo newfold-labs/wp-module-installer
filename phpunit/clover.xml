@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1751313172">
-  <project timestamp="1751313172">
+<coverage generated="1751317187">
+  <project timestamp="1751317187">
     <file name="/home/runner/work/wp-module-installer/wp-module-installer/includes/Data/Constants.php">
       <class name="NewfoldLabs\WP\Module\Installer\Data\Constants" namespace="global">
         <metrics complexity="6" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="7" coveredelements="0"/>
@@ -31,52 +31,66 @@
     </file>
     <file name="/home/runner/work/wp-module-installer/wp-module-installer/includes/Data/Plugins.php">
       <class name="NewfoldLabs\WP\Module\Installer\Data\Plugins" namespace="global">
-        <metrics complexity="11" methods="10" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="33" coveredstatements="0" elements="43" coveredelements="0"/>
+        <metrics complexity="17" methods="12" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="45" coveredstatements="0" elements="57" coveredelements="0"/>
       </class>
-      <line num="167" type="method" name="get_wp_slugs" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="168" type="stmt" count="0"/>
-      <line num="176" type="method" name="get_urls" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="177" type="stmt" count="0"/>
-      <line num="185" type="method" name="get_domains" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="186" type="stmt" count="0"/>
-      <line num="194" type="method" name="get_status_codes" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="195" type="stmt" count="0"/>
-      <line num="203" type="method" name="get" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="204" type="stmt" count="0"/>
-      <line num="205" type="stmt" count="0"/>
-      <line num="206" type="stmt" count="0"/>
-      <line num="207" type="stmt" count="0"/>
-      <line num="208" type="stmt" count="0"/>
-      <line num="209" type="stmt" count="0"/>
+      <line num="173" type="method" name="get_wp_slugs" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="174" type="stmt" count="0"/>
+      <line num="182" type="method" name="get_urls" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="183" type="stmt" count="0"/>
+      <line num="191" type="method" name="get_domains" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="192" type="stmt" count="0"/>
+      <line num="200" type="method" name="get_status_codes" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="201" type="stmt" count="0"/>
+      <line num="209" type="method" name="get" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="210" type="stmt" count="0"/>
-      <line num="218" type="method" name="get_squashed" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="219" type="stmt" count="0"/>
-      <line num="220" type="stmt" count="0"/>
-      <line num="221" type="stmt" count="0"/>
-      <line num="222" type="stmt" count="0"/>
-      <line num="230" type="method" name="get_approved" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="231" type="stmt" count="0"/>
-      <line num="232" type="stmt" count="0"/>
-      <line num="233" type="stmt" count="0"/>
-      <line num="234" type="stmt" count="0"/>
-      <line num="235" type="stmt" count="0"/>
-      <line num="236" type="stmt" count="0"/>
-      <line num="245" type="method" name="check_approved" visibility="private" complexity="1" crap="2" count="0"/>
-      <line num="246" type="stmt" count="0"/>
-      <line num="254" type="method" name="wc_prevent_redirect_on_activation" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="255" type="stmt" count="0"/>
-      <line num="266" type="method" name="toggle_jetpack_module" visibility="public" complexity="2" crap="6" count="0"/>
-      <line num="267" type="stmt" count="0"/>
-      <line num="268" type="stmt" count="0"/>
-      <line num="269" type="stmt" count="0"/>
-      <line num="270" type="stmt" count="0"/>
+      <line num="211" type="stmt" count="0"/>
+      <line num="212" type="stmt" count="0"/>
+      <line num="213" type="stmt" count="0"/>
+      <line num="214" type="stmt" count="0"/>
+      <line num="215" type="stmt" count="0"/>
+      <line num="216" type="stmt" count="0"/>
+      <line num="224" type="method" name="get_squashed" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="225" type="stmt" count="0"/>
+      <line num="226" type="stmt" count="0"/>
+      <line num="227" type="stmt" count="0"/>
+      <line num="228" type="stmt" count="0"/>
+      <line num="236" type="method" name="get_approved" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="237" type="stmt" count="0"/>
+      <line num="238" type="stmt" count="0"/>
+      <line num="239" type="stmt" count="0"/>
+      <line num="240" type="stmt" count="0"/>
+      <line num="241" type="stmt" count="0"/>
+      <line num="242" type="stmt" count="0"/>
+      <line num="251" type="method" name="check_approved" visibility="private" complexity="1" crap="2" count="0"/>
+      <line num="252" type="stmt" count="0"/>
+      <line num="260" type="method" name="wc_prevent_redirect_on_activation" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="261" type="stmt" count="0"/>
+      <line num="270" type="method" name="wpseo_prevent_redirect_on_activation" visibility="public" complexity="3" crap="12" count="0"/>
       <line num="271" type="stmt" count="0"/>
-      <line num="272" type="stmt" count="0"/>
       <line num="273" type="stmt" count="0"/>
+      <line num="274" type="stmt" count="0"/>
       <line num="275" type="stmt" count="0"/>
       <line num="276" type="stmt" count="0"/>
       <line num="278" type="stmt" count="0"/>
-      <metrics loc="281" ncloc="192" classes="1" methods="10" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="33" coveredstatements="0" elements="43" coveredelements="0"/>
+      <line num="287" type="method" name="wpseo_premium_prevent_redirect_on_activation" visibility="public" complexity="3" crap="12" count="0"/>
+      <line num="288" type="stmt" count="0"/>
+      <line num="290" type="stmt" count="0"/>
+      <line num="291" type="stmt" count="0"/>
+      <line num="292" type="stmt" count="0"/>
+      <line num="293" type="stmt" count="0"/>
+      <line num="295" type="stmt" count="0"/>
+      <line num="307" type="method" name="toggle_jetpack_module" visibility="public" complexity="2" crap="6" count="0"/>
+      <line num="308" type="stmt" count="0"/>
+      <line num="309" type="stmt" count="0"/>
+      <line num="310" type="stmt" count="0"/>
+      <line num="311" type="stmt" count="0"/>
+      <line num="312" type="stmt" count="0"/>
+      <line num="313" type="stmt" count="0"/>
+      <line num="314" type="stmt" count="0"/>
+      <line num="316" type="stmt" count="0"/>
+      <line num="317" type="stmt" count="0"/>
+      <line num="319" type="stmt" count="0"/>
+      <metrics loc="322" ncloc="223" classes="1" methods="12" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="45" coveredstatements="0" elements="57" coveredelements="0"/>
     </file>
     <file name="/home/runner/work/wp-module-installer/wp-module-installer/includes/Data/Themes.php">
       <class name="NewfoldLabs\WP\Module\Installer\Data\Themes" namespace="global">
@@ -1729,6 +1743,6 @@
       <line num="19" type="stmt" count="0"/>
       <metrics loc="23" ncloc="15" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="3" coveredelements="0"/>
     </file>
-    <metrics files="32" loc="4301" ncloc="2817" classes="31" methods="148" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1389" coveredstatements="0" elements="1537" coveredelements="0"/>
+    <metrics files="32" loc="4342" ncloc="2848" classes="31" methods="150" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1401" coveredstatements="0" elements="1551" coveredelements="0"/>
   </project>
 </coverage>
