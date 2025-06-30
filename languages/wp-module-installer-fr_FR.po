@@ -108,6 +108,7 @@ msgstr "Chargement du vecteur."
 
 #. translators: %s: Plugin Name
 #: build/1.6.2/installer.js:2
+#, js-format
 msgid "Activating %s"
 msgstr "Activation de %s"
 
@@ -125,11 +126,13 @@ msgstr ""
 
 #. Translators: %s plugin slug
 #: includes/Services/PluginInstaller.php:33
+#, php-format
 msgid "You do not have permission to install from %s."
 msgstr ""
 
 #. Translators: %s plugin slug
 #: includes/Services/PluginInstaller.php:81
+#, php-format
 msgid "You do not have permission to install %s."
 msgstr ""
 
