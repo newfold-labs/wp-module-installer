@@ -98,7 +98,7 @@ class ThemeInstaller {
 
 			return new \WP_Error(
 				'unable_to_connect_to_filesystem',
-				'Unable to connect to the filesystem.',
+				__( 'Unable to connect to the filesystem.', 'wp-module-installer' ),
 				array( 'status' => 500 )
 			);
 		}

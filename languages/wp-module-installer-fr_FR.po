@@ -23,28 +23,28 @@ msgstr ""
 msgid "Installer"
 msgstr "Installateur"
 
-#: includes/Services/PluginInstaller.php:173
+#: includes/Services/PluginInstaller.php:175
 msgid "Plugin slug and provider name cannot be empty."
 msgstr "Le nom du plugin et du fournisseur ne peuvent pas être vides."
 
-#: includes/Services/PluginInstaller.php:241
+#: includes/Services/PluginInstaller.php:243
 msgid "Failed to activate the plugin: "
 msgstr "Impossible d'activer le plugin: "
 
-#: includes/Services/PluginInstaller.php:258
+#: includes/Services/PluginInstaller.php:260
 msgid "Failed to activate the license for the premium plugin: "
 msgstr "Échec de l'activation de la licence pour le plugin premium : "
 
-#: includes/Services/PluginInstaller.php:270
+#: includes/Services/PluginInstaller.php:272
 #: includes/Services/PluginUpgrader.php:121
 msgid "Successfully provisioned and installed: "
 msgstr "provisionné et installé avec succès : "
 
-#: includes/Services/PluginInstaller.php:207
+#: includes/Services/PluginInstaller.php:209
 msgid "Download URL is missing for premium plugin: "
 msgstr "L'URL de téléchargement est manquante pour le plugin premium : "
 
-#: includes/Services/PluginInstaller.php:218
+#: includes/Services/PluginInstaller.php:220
 msgid "Failed to install or activate the premium plugin: "
 msgstr "Impossible d'installer ou d'activer le plugin premium : "
 
@@ -119,11 +119,42 @@ msgstr "Activation terminée ! Redirection de…"
 msgid "Error Icon."
 msgstr "Icône d'erreur"
 
-#: includes/Services/PluginInstaller.php:184
+#: includes/Services/PluginInstaller.php:186
 msgid "Failed to provision license for premium plugin: "
 msgstr ""
 
-#: wordpress/wp-includes/blocks/widget-group/block.json
-msgctxt "block title"
-msgid "Widget Group"
+#. Translators: %s plugin slug
+#: includes/Services/PluginInstaller.php:33
+msgid "You do not have permission to install from %s."
+msgstr ""
+
+#. Translators: %s plugin slug
+#: includes/Services/PluginInstaller.php:81
+msgid "You do not have permission to install %s."
+msgstr ""
+
+#: includes/Services/PluginInstaller.php:326
+#: includes/Services/ThemeInstaller.php:101
+msgid "Unable to connect to the filesystem."
+msgstr ""
+
+#: includes/Services/PluginInstaller.php:335
+msgid "Unable to determine what plugin was installed."
+msgstr ""
+
+#: includes/Services/PluginInstaller.php:527
+#: includes/Services/PluginUninstaller.php:135
+msgid "Could not connect to the filesystem."
+msgstr ""
+
+#: includes/Services/PluginUninstaller.php:145
+msgid "Unable to Delete the Plugin"
+msgstr ""
+
+#: includes/WPCLI/Handlers/InstallerCommandHandler.php:80
+msgid "Plugin upgrade completed successfully."
+msgstr ""
+
+#: includes/WPCLI/Handlers/InstallerCommandHandler.php:82
+msgid "Plugin upgrade failed. Please check the logs for more details."
 msgstr ""
