@@ -103,6 +103,7 @@ msgstr "Cargando vector."
 
 #. translators: %s: Plugin Name
 #: build/1.6.2/installer.js:2
+#, js-format
 msgid "Activating %s"
 msgstr "Activando %s"
 
@@ -120,11 +121,13 @@ msgstr "Error al provisionar la licencia para el plugin premium. "
 
 #. Translators: %s plugin slug
 #: includes/Services/PluginInstaller.php:33
+#, php-format
 msgid "You do not have permission to install from %s."
 msgstr "No tienes permiso para instalar desde %s."
 
 #. Translators: %s plugin slug
 #: includes/Services/PluginInstaller.php:81
+#, php-format
 msgid "You do not have permission to install %s."
 msgstr "No tienes permiso para instalar %s."
 
