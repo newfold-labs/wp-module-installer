@@ -17,16 +17,11 @@
     "@wordpress/env": "^10.20.0",
     "@wordpress/scripts": "^30.15.0",
     "node-fetch": "^3.3.2",
-    "semver": "^7.7.1",
     "webpack-merge": "^6.0.1"
   },
   "scripts": {
     "build": "wp-scripts build ./src/Installer/installer.js ./src/Scripts/dataAttrListener.js",
-    "set-version-bump": "npm run set-version-patch",
-    "set-version-patch": "node ./.github/scripts/set-version-bump.js && npm run post-set-version",
-    "set-version-minor": "node ./.github/scripts/set-version-bump.js minor && npm run post-set-version",
-    "set-version-major": "node ./.github/scripts/set-version-bump.js major && npm run post-set-version",
-    "post-set-version": "npm ci && composer install && rm -rf ./build && npm run build && composer run i18n",
+    "post-set-version": "rm -rf ./build",
     "start": "wp-scripts start ./src/Installer/installer.js ./src/Scripts/dataAttrListener.js"
   }
 }
