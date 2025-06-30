@@ -20,11 +20,13 @@ msgstr "Instalador"
 
 #. Translators: %s plugin slug
 #: includes/Services/PluginInstaller.php:33
+#, php-format
 msgid "You do not have permission to install from %s."
 msgstr "Você não tem permissão para instalar de %s."
 
 #. Translators: %s plugin slug
 #: includes/Services/PluginInstaller.php:81
+#, php-format
 msgid "You do not have permission to install %s."
 msgstr "Você não tem permissão para instalar %s."
 
@@ -135,6 +137,7 @@ msgstr "Carregando Vector."
 
 #. translators: %s: Plugin Name
 #: build/1.6.2/installer.js:2
+#, js-format
 msgid "Activating %s"
 msgstr "Ativando %s"
 
