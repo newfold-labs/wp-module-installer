@@ -273,7 +273,7 @@ final class Plugins {
 		if ( is_array( $wpseo_options ) ) {
 			$wpseo_options['should_redirect_after_install_free'] = false;
 			$wpseo_options['activation_redirect_timestamp_free'] = time();
-			
+
 			update_option( 'wpseo', $wpseo_options );
 		}
 	}
@@ -289,7 +289,7 @@ final class Plugins {
 		if ( is_array( $wpseo_options ) ) {
 			$wpseo_options['should_redirect_after_install'] = false;
 			$wpseo_options['activation_redirect_timestamp'] = time();
-			
+
 			update_option( 'wpseo_premium', $wpseo_options );
 		}
 	}
