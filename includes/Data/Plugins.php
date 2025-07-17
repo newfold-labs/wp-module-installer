@@ -271,10 +271,9 @@ final class Plugins {
 		$wpseo_options = get_option( 'wpseo' );
 
 		if ( is_array( $wpseo_options ) ) {
-			$wpseo_options['should_redirect_after_install_free'] = true;
-			if ( isset( $wpseo_options['activation_redirect_timestamp_free'] ) ) {
-				unset( $wpseo_options['activation_redirect_timestamp_free'] );
-			}
+			$wpseo_options['should_redirect_after_install_free'] = false;
+			$wpseo_options['activation_redirect_timestamp_free'] = time();
+			
 			update_option( 'wpseo', $wpseo_options );
 		}
 	}
@@ -288,10 +287,9 @@ final class Plugins {
 		$wpseo_options = get_option( 'wpseo_premium' );
 
 		if ( is_array( $wpseo_options ) ) {
-			$wpseo_options['should_redirect_after_install'] = true;
-			if ( isset( $wpseo_options['activation_redirect_timestamp'] ) ) {
-				unset( $wpseo_options['activation_redirect_timestamp'] );
-			}
+			$wpseo_options['should_redirect_after_install'] = false;
+			$wpseo_options['activation_redirect_timestamp'] = time();
+			
 			update_option( 'wpseo_premium', $wpseo_options );
 		}
 	}
