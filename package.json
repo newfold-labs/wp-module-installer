@@ -4,6 +4,10 @@
   "description": "An installer for WordPress plugins and themes.",
   "license": "GPL-2.0-or-later",
   "private": true,
+  "engines": {
+    "node": ">=22.11.0",
+    "npm": ">=10.9.0"
+  },
   "author": {
     "name": "Micah Wood",
     "email": "micah.wood@newfold.com"
