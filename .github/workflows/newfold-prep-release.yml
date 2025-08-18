@@ -31,9 +31,11 @@ jobs:
   prep-release:
     name: Prepare Release
     needs: setup
-    uses: newfold-labs/workflows/.github/workflows/module-prep-release.yml@add/preprelease
+    uses: newfold-labs/workflows/.github/workflows/reusable-module-prep-release.yml@main
     with:
       module-repo: ${{ github.repository }}
       module-branch: ${{ needs.setup.outputs.branch }}
       level: ${{ inputs.level }}
+      json-file: 'package.json'
+      php-file: 'includes/Data/Constants.php'
     secrets: inherit

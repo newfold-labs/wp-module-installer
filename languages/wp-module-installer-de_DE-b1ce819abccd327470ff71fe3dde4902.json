@@ -1,32 +1,32 @@
 {
     "translation-revision-date": "2025-02-19 15:52",
-    "generator": "WP-CLI\/2.11.0",
-    "source": "build\/1.6.2\/installer.js",
+    "generator": "WP-CLI\/2.12.0",
+    "source": "build\/1.6.4\/installer.js",
     "domain": "messages",
     "locale_data": {
         "messages": {
             "": {
                 "domain": "messages",
-                "lang": "fr_FR",
-                "plural-forms": "nplurals=2; plural=(n > 1);"
+                "lang": "de_DE",
+                "plural-forms": "nplurals=2; plural=(n != 1);"
             },
             "Sorry, there was an error installing and activating the plugin. Please try again. If the problem persists, <a>contact support<\/a>.": [
-                "D\u00e9sol\u00e9, il y a eu une erreur lors de l'installation et de l'activation du plugin. Veuillez r\u00e9essayer. Si le probl\u00e8me persiste, <a>contactez le support<\/a>."
+                "Leider ist ein Fehler beim Installieren und Aktivieren des Plugins aufgetreten. Bitte versuchen Sie es erneut. Wenn das Problem weiterhin besteht, kontaktiere <a>den Support<\/a>."
             ],
             "Hold on while we get things setup for you!": [
-                "Attendez pendant que nous avons des choses \u00e0 configurer pour vous!"
+                "Halten Sie an, w\u00e4hrend wir die Dinge f\u00fcr Sie einrichten!"
             ],
             "Loading Vector.": [
-                "Chargement du vecteur."
+                "Lade Vektor."
             ],
             "Activating %s": [
-                "Activation de %s"
+                "Aktiviere %s"
             ],
             "Activation Complete! Redirecting\u2026": [
-                "Activation termin\u00e9e ! Redirection de\u2026"
+                "Aktivierung abgeschlossen! Umleitung\u2026"
             ],
             "Error Icon.": [
-                "Ic\u00f4ne d'erreur"
+                "Fehler-Icon."
             ]
         }
     }

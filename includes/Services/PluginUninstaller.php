@@ -132,7 +132,7 @@ class PluginUninstaller {
 		if ( ! self::connect_to_filesystem() ) {
 			return new \WP_Error(
 				'nfd_installer_error',
-				'Could not connect to the filesystem.',
+				__( 'Could not connect to the filesystem.', 'wp-module-installer' ),
 				array( 'status' => 500 )
 			);
 		}
@@ -142,7 +142,7 @@ class PluginUninstaller {
 		if ( ! $deleted || is_wp_error( $deleted ) ) {
 			return new \WP_Error(
 				'nfd_installer_error',
-				'Unable to Delete the Plugin',
+				__( 'Unable to Delete the Plugin', 'wp-module-installer' ),
 				array( 'status' => 500 )
 			);
 		}

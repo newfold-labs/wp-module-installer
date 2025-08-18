@@ -8,11 +8,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2025-02-13T10:12:56+00:00\n"
-"PO-Revision-Date: 2025-02-19 15:52\n"
+"PO-Revision-Date: 2025-04-25 13:58+0100\n"
 "Language: es_ES\n"
-"X-Generator: WP-CLI 2.11.0\n"
-"X-Domain: wp-module-installer\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.6\n"
+"X-Domain: wp-module-installer\n"
 "X-Crowdin-Project: newfold-labswp-module-staging\n"
 "X-Crowdin-Project-ID: 764889\n"
 "X-Crowdin-Language: es-ES\n"
@@ -23,54 +23,54 @@ msgstr ""
 msgid "Installer"
 msgstr "Instalador"
 
-#: includes/Services/PluginInstaller.php:173
+#: includes/Services/PluginInstaller.php:175
 msgid "Plugin slug and provider name cannot be empty."
-msgstr "El slug del complemento y el nombre del proveedor no pueden estar vacíos."
+msgstr "El slug del plugin y el nombre del proveedor no pueden estar vacíos."
 
-#: includes/Services/PluginInstaller.php:241
+#: includes/Services/PluginInstaller.php:243
 msgid "Failed to activate the plugin: "
 msgstr "Error al activar el plugin: "
 
-#: includes/Services/PluginInstaller.php:258
+#: includes/Services/PluginInstaller.php:260
 msgid "Failed to activate the license for the premium plugin: "
 msgstr "No se pudo activar la licencia para el plugin premium: "
 
-#: includes/Services/PluginInstaller.php:270
+#: includes/Services/PluginInstaller.php:272
 #: includes/Services/PluginUpgrader.php:121
 msgid "Successfully provisioned and installed: "
 msgstr "Provisionado e instalado con éxito: "
 
-#: includes/Services/PluginInstaller.php:207
+#: includes/Services/PluginInstaller.php:209
 msgid "Download URL is missing for premium plugin: "
 msgstr "Falta la URL de descarga para el plugin premium: "
 
-#: includes/Services/PluginInstaller.php:218
+#: includes/Services/PluginInstaller.php:220
 msgid "Failed to install or activate the premium plugin: "
 msgstr "Error al instalar o activar el plugin premium: "
 
 #: includes/Services/PluginUpgrader.php:70
 msgid "Invalid extended plugin slug provided."
-msgstr "El slug del plugin extendido no es válido."
+msgstr "El slug del plugin extended no es válido."
 
 #: includes/Services/PluginUpgrader.php:82
 msgid "Could not determine the status of the extended plugin."
-msgstr "No se pudo determinar el estado del plugin extendido."
+msgstr "No se pudo determinar el estado del plugin extended."
 
 #: includes/Services/PluginUpgrader.php:87
 msgid "Extended plugin is not installed."
-msgstr "El plugin extendido no está instalado."
+msgstr "El plugin extended no está instalado."
 
 #: includes/Services/PluginUpgrader.php:98
 msgid "Failed to deactivate the extended plugin: "
-msgstr "Error al desactivar el complemento extendido: "
+msgstr "Error al desactivar el plugin extended: "
 
 #: includes/Services/PluginUpgrader.php:112
 msgid " Also Failed to reactivate the extended plugin: "
-msgstr " También no se pudo reactivar el plugin extendido: "
+msgstr " También no se pudo reactivar el plugin extended: "
 
 #: includes/Services/PluginUpgrader.php:126
 msgid "Successfully installed the premium plugin, but there was an error uninstalling the extended plugin. Manual cleanup may be required."
-msgstr "Se ha instalado correctamente el complemento premium, pero se ha producido un error al desinstalar el complemento ampliado. Puede ser necesaria una limpieza manual."
+msgstr "Se ha instalado correctamente el plugin premium, pero se ha producido un error al desinstalar el plugin extended. Puede ser necesaria una limpieza manual."
 
 #: includes/TaskManagers/PluginInstallTaskManager.php:53
 #: includes/TaskManagers/TaskManagerSchedules.php:31
@@ -84,7 +84,7 @@ msgstr "Una vez cada diez segundos"
 
 #: includes/WPCLI/Handlers/InstallerCommandHandler.php:46
 msgid "YITH plugin upgrade process completed successfully."
-msgstr "Proceso de actualización del complemento YITH completado con éxito."
+msgstr "Proceso de actualización del plugin YITH completado con éxito."
 
 #: includes/WPCLI/Handlers/InstallerCommandHandler.php:48
 msgid "YITH plugin upgrade process completed, but some upgrades failed. Please check the logs."
@@ -92,38 +92,72 @@ msgstr "Proceso de actualización del plugin YITH completado, pero algunas actua
 
 #: includes/WPCLI/Handlers/InstallerCommandHandler.php:120
 msgid "Both plugin slug and provider name are required."
-msgstr "Tanto el slug de plugins como el nombre del proveedor son requeridos."
+msgstr "Tanto el slug del plugin como el nombre del proveedor son requeridos."
 
-#: build/1.6.2/installer.js:1
+#: build/1.6.4/installer.js:1
 msgid "Sorry, there was an error installing and activating the plugin. Please try again. If the problem persists, <a>contact support</a>."
 msgstr "Lo sentimos, hubo un error al instalar y activar el plugin. Por favor, inténtelo de nuevo. Si el problema persiste, <a>póngase en contacto con el soporte</a>."
 
-#: build/1.6.2/installer.js:1
+#: build/1.6.4/installer.js:1
 msgid "Hold on while we get things setup for you!"
 msgstr "¡Espera mientras recibimos la configuración para ti!"
 
-#: build/1.6.2/installer.js:1
+#: build/1.6.4/installer.js:1
 msgid "Loading Vector."
 msgstr "Cargando vector."
 
 #. translators: %s: Plugin Name
-#: build/1.6.2/installer.js:2
+#: build/1.6.4/installer.js:2
+#, js-format
 msgid "Activating %s"
 msgstr "Activando %s"
 
-#: build/1.6.2/installer.js:2
+#: build/1.6.4/installer.js:2
 msgid "Activation Complete! Redirecting…"
 msgstr "¡Activación completada! Redireccionando…"
 
-#: build/1.6.2/installer.js:2
+#: build/1.6.4/installer.js:2
 msgid "Error Icon."
 msgstr "Icono de error."
 
-#: includes/Services/PluginInstaller.php:184
+#: includes/Services/PluginInstaller.php:186
 msgid "Failed to provision license for premium plugin: "
+msgstr "Error al provisionar la licencia para el plugin premium. "
+
+#. Translators: %s plugin slug
+#: includes/Services/PluginInstaller.php:33
+#, php-format
+msgid "You do not have permission to install from %s."
+msgstr "No tienes permiso para instalar desde %s."
+
+#. Translators: %s plugin slug
+#: includes/Services/PluginInstaller.php:81
+#, php-format
+msgid "You do not have permission to install %s."
+msgstr "No tienes permiso para instalar %s."
+
+#: includes/Services/PluginInstaller.php:326
+#: includes/Services/ThemeInstaller.php:101
+msgid "Unable to connect to the filesystem."
+msgstr "No se puede conectar al sistema de archivos."
+
+#: includes/Services/PluginInstaller.php:335
+msgid "Unable to determine what plugin was installed."
+msgstr "No se puede determinar qué plugin fue instalado."
+
+#: includes/Services/PluginInstaller.php:527
+#: includes/Services/PluginUninstaller.php:135
+msgid "Could not connect to the filesystem."
+msgstr "No se pudo conectar al sistema de archivos."
+
+#: includes/Services/PluginUninstaller.php:145
+msgid "Unable to Delete the Plugin"
+msgstr "No se puede eliminar el plugin."
+
+#: includes/WPCLI/Handlers/InstallerCommandHandler.php:80
+msgid "Plugin upgrade completed successfully."
 msgstr ""
 
-#: wordpress/wp-includes/blocks/widget-group/block.json
-msgctxt "block title"
-msgid "Widget Group"
+#: includes/WPCLI/Handlers/InstallerCommandHandler.php:82
+msgid "Plugin upgrade failed. Please check the logs for more details."
 msgstr ""
