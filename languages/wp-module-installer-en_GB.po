@@ -1,18 +1,19 @@
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-02-13T10:12:56+00:00\n"
+"PO-Revision-Date: 2025-02-13 19:21+0530\n"
 "Last-Translator: Vara Prasad Maruboina <varaprasad.maruboina@newfold.com>\n"
 "Language-Team: English (British) <(nothing)>\n"
+"Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-02-13T10:12:56+00:00\n"
-"PO-Revision-Date: 2025-02-13 19:21+0530\n"
-"Language: en_GB\n"
-"X-Generator: WP-CLI 2.11.0\n"
-"X-Domain: wp-module-installer\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: wp-module-installer\n"
+"X-Generator: WP-CLI 2.11.0\n"
 
 #: bootstrap.php:18
 msgid "Installer"
@@ -64,8 +65,12 @@ msgid " Also Failed to reactivate the extended plugin: "
 msgstr " Also Failed to reactivate the extended plugin: "
 
 #: includes/Services/PluginUpgrader.php:126
-msgid "Successfully installed the premium plugin, but there was an error uninstalling the extended plugin. Manual cleanup may be required."
-msgstr "Successfully installed the premium plugin, but there was an error uninstalling the extended plugin. Manual cleanup may be required."
+msgid ""
+"Successfully installed the premium plugin, but there was an error "
+"uninstalling the extended plugin. Manual cleanup may be required."
+msgstr ""
+"Successfully installed the premium plugin, but there was an error "
+"uninstalling the extended plugin. Manual cleanup may be required."
 
 #: includes/TaskManagers/PluginInstallTaskManager.php:53
 #: includes/TaskManagers/TaskManagerSchedules.php:31
@@ -82,16 +87,24 @@ msgid "YITH plugin upgrade process completed successfully."
 msgstr "YITH plugin upgrade process completed successfully."
 
 #: includes/WPCLI/Handlers/InstallerCommandHandler.php:48
-msgid "YITH plugin upgrade process completed, but some upgrades failed. Please check the logs."
-msgstr "YITH plugin upgrade process completed, but some upgrades failed. Please check the logs."
+msgid ""
+"YITH plugin upgrade process completed, but some upgrades failed. Please "
+"check the logs."
+msgstr ""
+"YITH plugin upgrade process completed, but some upgrades failed. Please "
+"check the logs."
 
 #: includes/WPCLI/Handlers/InstallerCommandHandler.php:120
 msgid "Both plugin slug and provider name are required."
 msgstr "Both plugin slug and provider name are required."
 
 #: build/1.6.4/installer.js:1
-msgid "Sorry, there was an error installing and activating the plugin. Please try again. If the problem persists, <a>contact support</a>."
-msgstr "Sorry, there was an error installing and activating the plugin. Please try again. If the problem persists, <a>contact support</a>."
+msgid ""
+"Sorry, there was an error installing and activating the plugin. Please try "
+"again. If the problem persists, <a>contact support</a>."
+msgstr ""
+"Sorry, there was an error installing and activating the plugin. Please try "
+"again. If the problem persists, <a>contact support</a>."
 
 #: build/1.6.4/installer.js:1
 msgid "Hold on while we get things setup for you!"
@@ -117,42 +130,42 @@ msgstr "Error Icon."
 
 #: includes/Services/PluginInstaller.php:186
 msgid "Failed to provision license for premium plugin: "
-msgstr ""
+msgstr "Failed to provision license for premium plugin:"
 
 #. Translators: %s plugin slug
 #: includes/Services/PluginInstaller.php:33
 #, php-format
 msgid "You do not have permission to install from %s."
-msgstr ""
+msgstr "You do not have permission to install from %s."
 
 #. Translators: %s plugin slug
 #: includes/Services/PluginInstaller.php:81
 #, php-format
 msgid "You do not have permission to install %s."
-msgstr ""
+msgstr "You do not have permission to install %s."
 
 #: includes/Services/PluginInstaller.php:326
 #: includes/Services/ThemeInstaller.php:101
 msgid "Unable to connect to the filesystem."
-msgstr ""
+msgstr "Unable to connect to the filesystem."
 
 #: includes/Services/PluginInstaller.php:335
 msgid "Unable to determine what plugin was installed."
-msgstr ""
+msgstr "Unable to determine what plugin was installed."
 
 #: includes/Services/PluginInstaller.php:527
 #: includes/Services/PluginUninstaller.php:135
 msgid "Could not connect to the filesystem."
-msgstr ""
+msgstr "Could not connect to the filesystem."
 
 #: includes/Services/PluginUninstaller.php:145
 msgid "Unable to Delete the Plugin"
-msgstr ""
+msgstr "Unable to Delete the Plugin"
 
 #: includes/WPCLI/Handlers/InstallerCommandHandler.php:80
 msgid "Plugin upgrade completed successfully."
-msgstr ""
+msgstr "Plugin upgrade completed successfully."
 
 #: includes/WPCLI/Handlers/InstallerCommandHandler.php:82
 msgid "Plugin upgrade failed. Please check the logs for more details."
-msgstr ""
+msgstr "Plugin upgrade failed. Please check the logs for more details."
