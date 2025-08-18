@@ -1,23 +1,24 @@
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: newfold-labswp-module-staging\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-02-13T10:12:56+00:00\n"
+"PO-Revision-Date: 2025-02-19 15:52\n"
 "Last-Translator: \n"
 "Language-Team: Dutch\n"
+"Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-02-13T10:12:56+00:00\n"
-"PO-Revision-Date: 2025-02-19 15:52\n"
-"Language: nl_NL\n"
-"X-Generator: WP-CLI 2.11.0\n"
-"X-Domain: wp-module-installer\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Crowdin-Project: newfold-labswp-module-staging\n"
-"X-Crowdin-Project-ID: 764889\n"
-"X-Crowdin-Language: nl\n"
 "X-Crowdin-File: wp-module-installer.pot\n"
 "X-Crowdin-File-ID: 40\n"
+"X-Crowdin-Language: nl\n"
+"X-Crowdin-Project: newfold-labswp-module-staging\n"
+"X-Crowdin-Project-ID: 764889\n"
+"X-Domain: wp-module-installer\n"
+"X-Generator: WP-CLI 2.11.0\n"
 
 #: bootstrap.php:18
 msgid "Installer"
@@ -69,8 +70,13 @@ msgid " Also Failed to reactivate the extended plugin: "
 msgstr " Ook mislukt om de uitgebreide plugin opnieuw te activeren: "
 
 #: includes/Services/PluginUpgrader.php:126
-msgid "Successfully installed the premium plugin, but there was an error uninstalling the extended plugin. Manual cleanup may be required."
-msgstr "De premium plugin is succesvol geïnstalleerd, maar er is een fout opgetreden bij het verwijderen van de uitgebreide plugin. Handmatige opschoning kan vereist zijn."
+msgid ""
+"Successfully installed the premium plugin, but there was an error "
+"uninstalling the extended plugin. Manual cleanup may be required."
+msgstr ""
+"De premium plugin is succesvol geïnstalleerd, maar er is een fout opgetreden"
+" bij het verwijderen van de uitgebreide plugin. Handmatige opschoning kan "
+"vereist zijn."
 
 #: includes/TaskManagers/PluginInstallTaskManager.php:53
 #: includes/TaskManagers/TaskManagerSchedules.php:31
@@ -87,16 +93,25 @@ msgid "YITH plugin upgrade process completed successfully."
 msgstr "YITH plugin upgrade proces succesvol voltooid."
 
 #: includes/WPCLI/Handlers/InstallerCommandHandler.php:48
-msgid "YITH plugin upgrade process completed, but some upgrades failed. Please check the logs."
-msgstr "YITH plugin upgrade proces voltooid, maar sommige upgrades zijn mislukt. Controleer de logs."
+msgid ""
+"YITH plugin upgrade process completed, but some upgrades failed. Please "
+"check the logs."
+msgstr ""
+"YITH plugin upgrade proces voltooid, maar sommige upgrades zijn mislukt. "
+"Controleer de logs."
 
 #: includes/WPCLI/Handlers/InstallerCommandHandler.php:120
 msgid "Both plugin slug and provider name are required."
 msgstr "Zowel plugin slug als provider naam zijn vereist."
 
 #: build/1.6.4/installer.js:1
-msgid "Sorry, there was an error installing and activating the plugin. Please try again. If the problem persists, <a>contact support</a>."
-msgstr "Sorry, er is een fout opgetreden bij het installeren en activeren van de plugin. Probeer het opnieuw. Als het probleem aanhoudt, contacteer <a>support</a>."
+msgid ""
+"Sorry, there was an error installing and activating the plugin. Please try "
+"again. If the problem persists, <a>contact support</a>."
+msgstr ""
+"Sorry, er is een fout opgetreden bij het installeren en activeren van de "
+"plugin. Probeer het opnieuw. Als het probleem aanhoudt, contacteer "
+"<a>support</a>."
 
 #: build/1.6.4/installer.js:1
 msgid "Hold on while we get things setup for you!"
@@ -122,42 +137,43 @@ msgstr "Fout Icoon."
 
 #: includes/Services/PluginInstaller.php:186
 msgid "Failed to provision license for premium plugin: "
-msgstr ""
+msgstr "Kan geen licentie leveren voor premium plug-in:"
 
 #. Translators: %s plugin slug
 #: includes/Services/PluginInstaller.php:33
 #, php-format
 msgid "You do not have permission to install from %s."
-msgstr ""
+msgstr "U hebt geen toestemming om te installeren vanuit %s."
 
 #. Translators: %s plugin slug
 #: includes/Services/PluginInstaller.php:81
 #, php-format
 msgid "You do not have permission to install %s."
-msgstr ""
+msgstr "Je hebt geen toestemming om %s te installeren."
 
 #: includes/Services/PluginInstaller.php:326
 #: includes/Services/ThemeInstaller.php:101
 msgid "Unable to connect to the filesystem."
-msgstr ""
+msgstr "Kan geen verbinding maken met het bestandssysteem."
 
 #: includes/Services/PluginInstaller.php:335
 msgid "Unable to determine what plugin was installed."
-msgstr ""
+msgstr "Kan niet bepalen welke plug-in is geïnstalleerd."
 
 #: includes/Services/PluginInstaller.php:527
 #: includes/Services/PluginUninstaller.php:135
 msgid "Could not connect to the filesystem."
-msgstr ""
+msgstr "Kan geen verbinding maken met het bestandssysteem."
 
 #: includes/Services/PluginUninstaller.php:145
 msgid "Unable to Delete the Plugin"
-msgstr ""
+msgstr "Kan de plug-in niet verwijderen"
 
 #: includes/WPCLI/Handlers/InstallerCommandHandler.php:80
 msgid "Plugin upgrade completed successfully."
-msgstr ""
+msgstr "De upgrade van de plug-in is voltooid."
 
 #: includes/WPCLI/Handlers/InstallerCommandHandler.php:82
 msgid "Plugin upgrade failed. Please check the logs for more details."
 msgstr ""
+"Plug-in upgrade mislukt. Controleer de logboeken voor meer informatie."
