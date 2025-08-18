@@ -1,32 +1,32 @@
 {
-    "translation-revision-date": "2025-02-19 15:52",
+    "translation-revision-date": "2025-05-07 16:31+0100",
     "generator": "WP-CLI\/2.12.0",
-    "source": "build\/1.6.4\/installer.js",
+    "source": "build\/1.6.5\/installer.js",
     "domain": "messages",
     "locale_data": {
         "messages": {
             "": {
                 "domain": "messages",
-                "lang": "nl_NL",
+                "lang": "es_MX",
                 "plural-forms": "nplurals=2; plural=(n != 1);"
             },
             "Sorry, there was an error installing and activating the plugin. Please try again. If the problem persists, <a>contact support<\/a>.": [
-                "Sorry, er is een fout opgetreden bij het installeren en activeren van de plugin. Probeer het opnieuw. Als het probleem aanhoudt, contacteer <a>support<\/a>."
+                "Lo sentimos, hubo un error al instalar y activar el plugin. Por favor, int\u00e9ntelo de nuevo. Si el problema persiste, <a>p\u00f3ngase en contacto con el soporte<\/a>."
             ],
             "Hold on while we get things setup for you!": [
-                "Wacht even terwijl we dingen hebben ingesteld voor jou!"
+                "\u00a1Espera mientras recibimos la configuraci\u00f3n para ti!"
             ],
             "Loading Vector.": [
-                "Vector wordt geladen."
+                "Cargando vector."
             ],
             "Activating %s": [
-                "Activeren %s"
+                "Activando %s"
             ],
             "Activation Complete! Redirecting\u2026": [
-                "Activatie voltooid! Bezig met omleiden\u2026"
+                "\u00a1Activaci\u00f3n completada! Redireccionando\u2026"
             ],
             "Error Icon.": [
-                "Fout Icoon."
+                "Icono de error."
             ]
         }
     }
