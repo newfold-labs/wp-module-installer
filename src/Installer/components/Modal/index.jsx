@@ -116,7 +116,21 @@ const Modal = ( {
 						basename: 'wordpress-seo/wp-seo.php',
 					},
 				} );
-			}
+			} else if ( pluginProvider === 'bluehost' ) {
+                await apiFetch( {
+                    url: installerAPI,
+                    method: 'POST',
+                    headers: {
+                        'X-NFD-INSTALLER': pluginInstallHash,
+                    },
+                    data: {
+                        queue: false,
+                        priority: 0,
+                        plugin: 'woocommerce',
+                        basename: 'woocommerce/woocommerce.php',
+                    },
+                } );
+            }
 		} catch ( error ) {
 			throw error;
 		}
