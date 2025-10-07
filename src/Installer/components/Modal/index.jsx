@@ -24,6 +24,7 @@ const Modal = ( {
 	pluginProvider,
 	pluginSlug,
 	redirectUrl,
+    onClose
 } ) => {
 	/**
 	 * Represents the status of the plugin installation process.
@@ -36,14 +37,7 @@ const Modal = ( {
 	 * @property {'completed'}  completed  - The plugin installation process is complete.
 	 */
 	const [ pluginStatus, setPluginStatus ] = useState( 'unknown' );
-	const [ show, showModal ] = useState( true );
 	const modalRef = useRef( null );
-
-	useEffect( () => {
-		document.getElementById( INSTALLER_DIV ).style.display = show
-			? 'block'
-			: 'none';
-	}, [ show ] );
 
 	useEffect( () => {
 		switch ( action ) {
@@ -58,8 +52,8 @@ const Modal = ( {
 	}, [ action ] );
 
 	const handleKeyDown = ( event ) => {
-		if ( event.key === 'Escape' ) {
-			showModal( false );
+		if ( event.key === 'Escape')  {
+            handleClickOutside(event);
 		}
 	};
 
@@ -69,7 +63,7 @@ const Modal = ( {
 			modalRef.current &&
 			! modalRef.current.contains( event.target )
 		) {
-			showModal( false );
+            onClose();
 		}
 	};
 
@@ -209,7 +203,7 @@ const Modal = ( {
 		),
 		{
 			// eslint-disable-next-line jsx-a11y/anchor-has-content
-			a: <a href={ helpLink } onClick={ () => showModal( false ) } />,
+			a: <a href={ helpLink } onClick={ () => onClose() } />,
 		}
 	);
 
@@ -220,7 +214,7 @@ const Modal = ( {
 					{ __(
 						'Hold on while we get things setup for you!',
 						'wp-module-installer'
-					) }
+					)}
 				</div>
 				<div className="nfd-installer-modal__content-section">
 					<img
