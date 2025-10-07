@@ -18,7 +18,7 @@
     "@wordpress/icons": "^10.32.0"
   },
   "devDependencies": {
-    "@wordpress/env": "^10.28.0",
+    "@wordpress/env": "^10.32.0",
     "@wordpress/scripts": "^30.25.0",
     "node-fetch": "^3.3.2",
     "webpack-merge": "^6.0.1"
