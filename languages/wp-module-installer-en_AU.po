@@ -89,29 +89,29 @@ msgstr "YITH plugin upgrade process completed, but some upgrades failed. Please 
 msgid "Both plugin slug and provider name are required."
 msgstr "Both plugin slug and provider name are required."
 
-#: build/1.6.5/installer.js:1
+#: build/1.6.6/installer.js:1
 msgid "Sorry, there was an error installing and activating the plugin. Please try again. If the problem persists, <a>contact support</a>."
 msgstr "Sorry, there was an error installing and activating the plugin. Please try again. If the problem persists, <a>contact support</a>."
 
-#: build/1.6.5/installer.js:1
+#: build/1.6.6/installer.js:1
 msgid "Hold on while we get things setup for you!"
 msgstr "Hold on while we get things setup for you!"
 
-#: build/1.6.5/installer.js:1
+#: build/1.6.6/installer.js:1
 msgid "Loading Vector."
 msgstr "Loading Vector."
 
 #. translators: %s: Plugin Name
-#: build/1.6.5/installer.js:2
+#: build/1.6.6/installer.js:2
 #, js-format
 msgid "Activating %s"
 msgstr "Activating %s"
 
-#: build/1.6.5/installer.js:2
+#: build/1.6.6/installer.js:2
 msgid "Activation Complete! Redirecting…"
 msgstr "Activation Complete! Redirecting…"
 
-#: build/1.6.5/installer.js:2
+#: build/1.6.6/installer.js:2
 msgid "Error Icon."
 msgstr "Error Icon."
 
