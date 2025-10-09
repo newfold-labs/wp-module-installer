@@ -36,6 +36,9 @@ domReady( () => {
 					pluginBasename: el.getAttribute(
 						'data-nfd-installer-plugin-basename'
 					),
+					pluginDependency: el.getAttribute(
+						'data-nfd-installer-plugin-dependency'
+					),
 					redirectUrl,
 				} );
 				return false;
@@ -59,6 +62,9 @@ domReady( () => {
 					),
 					pluginBasename: el.getAttribute(
 						'data-nfd-installer-plugin-basename'
+					),
+					pluginDependency: el.getAttribute(
+						'data-nfd-installer-plugin-dependency'
 					),
 					redirectUrl,
 				} );

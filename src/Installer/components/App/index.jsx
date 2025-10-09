@@ -4,6 +4,7 @@ import { useState, useEffect } from '@wordpress/element';
 // Internal Imports
 import Modal from '../Modal';
 import {INSTALLER_DIV} from "../../constants";
+import { set } from 'lodash';
 
 const App = () => {
 	const [ action, setAction ] = useState();
@@ -13,6 +14,7 @@ const App = () => {
 	const [ pluginProvider, setPluginProvider ] = useState();
 	const [ pluginSlug, setPluginSlug ] = useState();
 	const [ redirectUrl, setRedirectUrl ] = useState();
+	const [ pluginDependency, setPluginDependency ] = useState();
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -25,6 +27,7 @@ const App = () => {
 		setPluginProvider( e.detail.pluginProvider );
 		setPluginSlug( e.detail.pluginSlug );
 		setRedirectUrl( e.detail.redirectUrl );
+		setPluginDependency( e.detail.pluginDependency );
         handleOpen();
 	};
 
@@ -55,6 +58,7 @@ const App = () => {
 					pluginProvider={ pluginProvider }
 					pluginSlug={ pluginSlug }
 					redirectUrl={ redirectUrl }
+					pluginDependency={ pluginDependency }
                     onClose={handleClose}
 				/>
 			) }
