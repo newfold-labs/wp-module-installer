@@ -6,43 +6,46 @@
 }
 
 .nfd-installer-progress-modal {
-	width:100%;
-	margin-bottom:10px;
+	width: 100%;
+	margin-bottom: 10px;
+
 	.nfd-progress-bar {
-        background-color: #E0E8EED1;
-        border: 1px solid #D7D7D7;
-        border-radius: 1rem;
-        height: 1rem;
-        max-width: 50%;
-        position: relative;
+		background-color: #e0e8eed1;
+		border: 1px solid #d7d7d7;
+		border-radius: 1rem;
+		height: 1rem;
+		max-width: 50%;
+		position: relative;
 		margin: 0 auto;
 
-        .nfd-progress-bar-inner {
-            background-color: #336AD7A8;
-            border-radius: 1rem;
-            height: calc(1rem - 0px);
-            z-index: 1;
-            transition: all .2s ease;
-        }
+		.nfd-progress-bar-inner {
+			background-color: #336ad7a8;
+			border-radius: 1rem;
+			height: calc(1rem - 0px);
+			z-index: 1;
+			transition: all 0.2s ease;
+		}
 
-        // empty style
-        &.nfd-progress-bar-0 {
-            .nfd-progress-bar-label {
-                color: #696969;
-            }
-        }
+		// empty style
+		&.nfd-progress-bar-0 {
 
-        // complete style
-        &.nfd-progress-bar-100 {
-            .nfd-progress-bar-inner {
-                background-color: #8daa0e;
-            }
+			.nfd-progress-bar-label {
+				color: #696969;
+			}
+		}
 
-            .nfd-progress-bar-label {
-                color: #fff;
-                text-shadow: 0 0 2px rgba(0, 0, 0, 0.75);
-            }
-        }
-    }
+		// complete style
+		&.nfd-progress-bar-100 {
+
+			.nfd-progress-bar-inner {
+				background-color: #8daa0e;
+			}
+
+			.nfd-progress-bar-label {
+				color: #fff;
+				text-shadow: 0 0 2px rgba(0, 0, 0, 0.75);
+			}
+		}
+	}
 }
 
