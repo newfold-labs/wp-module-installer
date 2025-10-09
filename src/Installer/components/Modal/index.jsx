@@ -15,6 +15,8 @@ import {
 	installerAPI,
 	pluginInstallHash,
 } from '../../constants';
+import { set } from 'lodash';
+import { ProgressBar } from '../../components/progressBar';
 
 const Modal = ( {
 	action,
@@ -24,6 +26,7 @@ const Modal = ( {
 	pluginProvider,
 	pluginSlug,
 	redirectUrl,
+	pluginDependency,
     onClose
 } ) => {
 	/**
@@ -37,7 +40,22 @@ const Modal = ( {
 	 * @property {'completed'}  completed  - The plugin installation process is complete.
 	 */
 	const [ pluginStatus, setPluginStatus ] = useState( 'unknown' );
+	const [ dependencyStatus, setDependencyStatus ] = useState( 'unknown' );
+	const [ progressStatus, setProgressStatus ] = useState(25);
 	const modalRef = useRef( null );
+	const dataDependencies = {
+					woocommerce: {
+						plugin: 'woocommerce',
+						basename: 'woocommerce/woocommerce.php',
+						pluginName: 'WooCommerce',
+					}, 
+					yoast: { 
+						plugin: 'wordpress-seo',
+						basename: 'wordpress-seo/wp-seo.php',
+						pluginName: 'Yoast SEO',
+					}
+				};
+
 
 	useEffect( () => {
 		switch ( action ) {
@@ -80,52 +98,29 @@ const Modal = ( {
 	// Function to handle premium plugin installation
 	const installDependantPlugins = async () => {
 		try {
-			// TODO: Change this logic to ensure we get dependent plugins as a prop
-			if ( pluginProvider === 'yith' ) {
-				await apiFetch( {
-					url: installerAPI,
-					method: 'POST',
-					headers: {
-						'X-NFD-INSTALLER': pluginInstallHash,
-					},
-					data: {
-						queue: false,
-						priority: 0,
-						plugin: 'woocommerce',
-						basename: 'woocommerce/woocommerce.php',
-					},
-				} );
-			} else if ( pluginProvider === 'yoast' ) {
-				// TODO: This will cause 2 calls to install the Yoast SEO Plugin. Remove this once we have dependent plugins as a prop.
-				await apiFetch( {
-					url: installerAPI,
-					method: 'POST',
-					headers: {
-						'X-NFD-INSTALLER': pluginInstallHash,
-					},
-					data: {
-						queue: false,
-						priority: 0,
-						plugin: 'wordpress-seo',
-						basename: 'wordpress-seo/wp-seo.php',
-					},
-				} );
-			} else if ( pluginProvider === 'bluehost' ) {
-                await apiFetch( {
-                    url: installerAPI,
-                    method: 'POST',
-                    headers: {
-                        'X-NFD-INSTALLER': pluginInstallHash,
-                    },
-                    data: {
-                        queue: false,
-                        priority: 0,
-                        plugin: 'woocommerce',
-                        basename: 'woocommerce/woocommerce.php',
-                    },
-                } );
-            }
+
+			if ( pluginDependency ) {
+
+				if ( dataDependencies[ pluginDependency ] ) {
+					setDependencyStatus( 'installing' )
+					response = await apiFetch( {
+						url: installerAPI,
+						method: 'POST',
+						headers: {
+							'X-NFD-INSTALLER': pluginInstallHash,
+						},
+						data: {
+							queue: false,
+							priority: 0,
+							plugin: dataDependencies[ pluginDependency ]['plugin'],
+							basename: dataDependencies[ pluginDependency ]['basename'],
+						},
+					} );
+				}
+			}
+			setDependencyStatus( 'completed' );
 		} catch ( error ) {
+			setDependencyStatus( 'failed' );
 			throw error;
 		}
 	};
@@ -149,6 +144,7 @@ const Modal = ( {
 					basename: pluginBasename,
 				},
 			} );
+			setProgressStatus( 100 );
 			setPluginStatus( 'completed' );
 			window.location.href = redirectUrl;
 		} catch ( e ) {
@@ -160,6 +156,7 @@ const Modal = ( {
 		try {
 			setPluginStatus( 'installing' );
 			await installDependantPlugins();
+			setProgressStatus( 50 );
 			const response = await apiFetch( {
 				url: installerAPI,
 				method: 'POST',
@@ -176,11 +173,13 @@ const Modal = ( {
 			} );
 			// Check for ANY redirect status code (3xx range)
 			if ( response.status >= 300 && response.status < 400 ) {
+				setProgressStatus( 100 );
 				setPluginStatus( 'completed' );
 				const newRedirectUrl = response.headers.get( 'Location' );
 				window.location.href = newRedirectUrl || redirectUrl;
 			} else if ( response.ok ) {
 				// Handle successful response (2xx range)
+				setProgressStatus( 100 );
 				setPluginStatus( 'completed' );
 				window.location.href = redirectUrl;
 			} else {
@@ -197,16 +196,20 @@ const Modal = ( {
 	const helpLink = `${ window.NewfoldRuntime.adminUrl }admin.php?page=${ window.NewfoldRuntime.plugin.brand }#/help`;
 
 	const errorMessage = createInterpolateElement(
+		sprintf(
+			/* translators: %s: Plugin Name */
 		__(
-			'Sorry, there was an error installing and activating the plugin. Please try again. If the problem persists, <a>contact support</a>.',
+			'Sorry, there was an error installing and activating the plugin %s. Please try again. If the problem persists, <a>contact support</a>.',
 			'wp-module-installer'
-		),
+		) , pluginName ),
 		{
 			// eslint-disable-next-line jsx-a11y/anchor-has-content
 			a: <a href={ helpLink } onClick={ () => onClose() } />,
 		}
+
 	);
 
+	console.log(progressStatus);
 	return (
 		<div className="nfd-installer-modal">
 			<div ref={ modalRef } className="nfd-installer-modal__content">
@@ -222,7 +225,26 @@ const Modal = ( {
 						alt={ __( 'Loading Vector.', 'wp-module-installer' ) }
 						className="nfd-installer-modal__content-image"
 					/>
-					{ pluginStatus === 'installing' && (
+					<div className='nfd-installer-progress-modal'>
+						<ProgressBar completed={progressStatus} total={100} />
+					</div>
+					{
+						pluginStatus === 'installing' && dependencyStatus === 'installing' && (
+						<>
+							<div className="nfd-installer-modal__content-subheading">
+								{ sprintf(
+									/* translators: %s: Plugin Name */
+									__(
+										'Installing and activating the required %s plugin.',
+										'wp-module-installer'
+									),
+									dataDependencies[ pluginDependency ]['pluginName']
+								) }
+							</div>
+							<div className="nfd-installer-modal__loader"></div>
+						</>
+					)}
+					{ pluginStatus === 'installing' && dependencyStatus === 'completed' && (
 						<>
 							<div className="nfd-installer-modal__content-subheading">
 								{ sprintf(
