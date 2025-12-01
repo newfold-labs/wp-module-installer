@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1764612106">
-  <project timestamp="1764612106">
+<coverage generated="1764612142">
+  <project timestamp="1764612142">
     <file name="/home/runner/work/wp-module-installer/wp-module-installer/includes/Data/Constants.php">
       <class name="NewfoldLabs\WP\Module\Installer\Data\Constants" namespace="global">
         <metrics complexity="6" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="7" coveredelements="0"/>
