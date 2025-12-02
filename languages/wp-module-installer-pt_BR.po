@@ -123,29 +123,25 @@ msgstr "O processo de atualização do plugin YITH foi concluído, mas algumas a
 msgid "Both plugin slug and provider name are required."
 msgstr "Tanto o identificador do plugin quanto o nome do provedor são obrigatórios."
 
-#: build/1.6.6/installer.js:1
-msgid "Sorry, there was an error installing and activating the plugin. Please try again. If the problem persists, <a>contact support</a>."
-msgstr "Desculpe, houve um erro ao instalar e ativar o plugin. Por favor, tente novamente. Se o problema persistir, <a>entre em contato com o suporte</a>."
-
-#: build/1.6.6/installer.js:1
+#: build/1.7.0/installer.js:2
 msgid "Hold on while we get things setup for you!"
 msgstr "Aguarde enquanto preparamos tudo para você!"
 
-#: build/1.6.6/installer.js:1
+#: build/1.7.0/installer.js:2
 msgid "Loading Vector."
 msgstr "Carregando Vector."
 
 #. translators: %s: Plugin Name
-#: build/1.6.6/installer.js:2
+#: build/1.7.0/installer.js:4
 #, js-format
 msgid "Activating %s"
 msgstr "Ativando %s"
 
-#: build/1.6.6/installer.js:2
+#: build/1.7.0/installer.js:4
 msgid "Activation Complete! Redirecting…"
 msgstr "Ativação concluída! Redirecionando…"
 
-#: build/1.6.6/installer.js:2
+#: build/1.7.0/installer.js:4
 msgid "Error Icon."
 msgstr "Ícone de erro."
 
@@ -156,3 +152,15 @@ msgstr "Atualização do plug-in concluída com sucesso."
 #: includes/WPCLI/Handlers/InstallerCommandHandler.php:82
 msgid "Plugin upgrade failed. Please check the logs for more details."
 msgstr "Falha na atualização do plug-in. Verifique os logs para obter mais detalhes."
+
+#. translators: %s: Plugin Name
+#: build/1.7.0/installer.js:2
+#, js-format
+msgid "Sorry, there was an error installing and activating the plugin %s. Please try again. If the problem persists, <a>contact support</a>."
+msgstr ""
+
+#. translators: %s: Plugin Name
+#: build/1.7.0/installer.js:3
+#, js-format
+msgid "Installing and activating the required %s plugin."
+msgstr ""
