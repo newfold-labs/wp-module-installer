@@ -1,16 +1,15 @@
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: newfold-labswp-module-staging\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-13T10:12:56+00:00\n"
-"PO-Revision-Date: 2025-02-19 15:52\n"
 "Last-Translator: \n"
 "Language-Team: German\n"
-"Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-02-13T10:12:56+00:00\n"
+"PO-Revision-Date: 2025-02-19 15:52\n"
+"Language: de_DE\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Crowdin-File: wp-module-installer.pot\n"
 "X-Crowdin-File-ID: 40\n"
@@ -70,13 +69,8 @@ msgid " Also Failed to reactivate the extended plugin: "
 msgstr " Fehler beim Reaktivieren des erweiterten Plugins: "
 
 #: includes/Services/PluginUpgrader.php:126
-msgid ""
-"Successfully installed the premium plugin, but there was an error "
-"uninstalling the extended plugin. Manual cleanup may be required."
-msgstr ""
-"Das Premium-Plugin wurde erfolgreich installiert, aber es gab einen Fehler "
-"beim Deinstallieren des erweiterten Plugins. Manuelle Bereinigung kann "
-"erforderlich sein."
+msgid "Successfully installed the premium plugin, but there was an error uninstalling the extended plugin. Manual cleanup may be required."
+msgstr "Das Premium-Plugin wurde erfolgreich installiert, aber es gab einen Fehler beim Deinstallieren des erweiterten Plugins. Manuelle Bereinigung kann erforderlich sein."
 
 #: includes/TaskManagers/PluginInstallTaskManager.php:53
 #: includes/TaskManagers/TaskManagerSchedules.php:31
@@ -93,36 +87,32 @@ msgid "YITH plugin upgrade process completed successfully."
 msgstr "YITH Plugin Upgrade Prozess erfolgreich abgeschlossen."
 
 #: includes/WPCLI/Handlers/InstallerCommandHandler.php:48
-msgid ""
-"YITH plugin upgrade process completed, but some upgrades failed. Please "
-"check the logs."
-msgstr ""
-"YITH Plugin Upgrade Prozess abgeschlossen, aber einige Upgrades sind "
-"fehlgeschlagen. Bitte überprüfen Sie die Protokolle."
+msgid "YITH plugin upgrade process completed, but some upgrades failed. Please check the logs."
+msgstr "YITH Plugin Upgrade Prozess abgeschlossen, aber einige Upgrades sind fehlgeschlagen. Bitte überprüfen Sie die Protokolle."
 
 #: includes/WPCLI/Handlers/InstallerCommandHandler.php:120
 msgid "Both plugin slug and provider name are required."
 msgstr "Sowohl Plugin Slug als auch Providername sind erforderlich."
 
-#: build/1.7.0/installer.js:2
+#: build/1.7.1/installer.js:2
 msgid "Hold on while we get things setup for you!"
 msgstr "Halten Sie an, während wir die Dinge für Sie einrichten!"
 
-#: build/1.7.0/installer.js:2
+#: build/1.7.1/installer.js:2
 msgid "Loading Vector."
 msgstr "Lade Vektor."
 
 #. translators: %s: Plugin Name
-#: build/1.7.0/installer.js:4
+#: build/1.7.1/installer.js:4
 #, js-format
 msgid "Activating %s"
 msgstr "Aktiviere %s"
 
-#: build/1.7.0/installer.js:4
+#: build/1.7.1/installer.js:4
 msgid "Activation Complete! Redirecting…"
 msgstr "Aktivierung abgeschlossen! Umleitung…"
 
-#: build/1.7.0/installer.js:4
+#: build/1.7.1/installer.js:4
 msgid "Error Icon."
 msgstr "Fehler-Icon."
 
@@ -166,23 +156,16 @@ msgstr "Das Plug-In-Upgrade wurde erfolgreich abgeschlossen."
 
 #: includes/WPCLI/Handlers/InstallerCommandHandler.php:82
 msgid "Plugin upgrade failed. Please check the logs for more details."
-msgstr ""
-"Fehler beim Plugin-Upgrade. Weitere Informationen finden Sie in den "
-"Protokollen."
+msgstr "Fehler beim Plugin-Upgrade. Weitere Informationen finden Sie in den Protokollen."
 
 #. translators: %s: Plugin Name
-#: build/1.7.0/installer.js:2
+#: build/1.7.1/installer.js:2
 #, js-format
-msgid ""
-"Sorry, there was an error installing and activating the plugin %s. Please "
-"try again. If the problem persists, <a>contact support</a>."
-msgstr ""
-"Entschuldigung, es gab einen Fehler beim Installieren und Aktivieren des "
-"Plugin-%s. Bitte versuchen Sie es erneut. Wenn das Problem weiterhin "
-"besteht, <a>kontaktiere den Support</a>."
+msgid "Sorry, there was an error installing and activating the plugin %s. Please try again. If the problem persists, <a>contact support</a>."
+msgstr "Entschuldigung, es gab einen Fehler beim Installieren und Aktivieren des Plugin-%s. Bitte versuchen Sie es erneut. Wenn das Problem weiterhin besteht, <a>kontaktiere den Support</a>."
 
 #. translators: %s: Plugin Name
-#: build/1.7.0/installer.js:3
+#: build/1.7.1/installer.js:3
 #, js-format
 msgid "Installing and activating the required %s plugin."
 msgstr "Installation und Aktivierung des erforderlichen %s-Plugins."

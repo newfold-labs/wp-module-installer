@@ -130,35 +130,35 @@ msgid "Both plugin slug and provider name are required."
 msgstr ""
 
 #. translators: %s: Plugin Name
-#: build/1.7.0/installer.js:2
+#: build/1.7.1/installer.js:2
 #, js-format
 msgid "Sorry, there was an error installing and activating the plugin %s. Please try again. If the problem persists, <a>contact support</a>."
 msgstr ""
 
-#: build/1.7.0/installer.js:2
+#: build/1.7.1/installer.js:2
 msgid "Hold on while we get things setup for you!"
 msgstr ""
 
-#: build/1.7.0/installer.js:2
+#: build/1.7.1/installer.js:2
 msgid "Loading Vector."
 msgstr ""
 
 #. translators: %s: Plugin Name
-#: build/1.7.0/installer.js:3
+#: build/1.7.1/installer.js:3
 #, js-format
 msgid "Installing and activating the required %s plugin."
 msgstr ""
 
 #. translators: %s: Plugin Name
-#: build/1.7.0/installer.js:4
+#: build/1.7.1/installer.js:4
 #, js-format
 msgid "Activating %s"
 msgstr ""
 
-#: build/1.7.0/installer.js:4
+#: build/1.7.1/installer.js:4
 msgid "Activation Complete! Redirecting…"
 msgstr ""
 
-#: build/1.7.0/installer.js:4
+#: build/1.7.1/installer.js:4
 msgid "Error Icon."
 msgstr ""
