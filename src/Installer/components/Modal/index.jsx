@@ -149,7 +149,7 @@ const Modal = ( {
 			setPluginStatus( 'completed' );
 			window.location.href = redirectUrl;
 		} catch ( e ) {
-			console.log( e );
+			console.error( e );
 			setPluginStatus( 'failed' );
 		}
 	};
