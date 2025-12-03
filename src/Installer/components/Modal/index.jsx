@@ -103,7 +103,7 @@ const Modal = ( {
 
 				if ( dataDependencies[ pluginDependency ] ) {
 					setDependencyStatus( 'installing' )
-					response = await apiFetch( {
+					await apiFetch( {
 						url: installerAPI,
 						method: 'POST',
 						headers: {
@@ -129,6 +129,7 @@ const Modal = ( {
 		try {
 			setPluginStatus( 'installing' );
 			await installDependantPlugins();
+			setProgressStatus( 50 );
 			await apiFetch( {
 				url: installerAPI,
 				method: 'POST',
@@ -148,6 +149,7 @@ const Modal = ( {
 			setPluginStatus( 'completed' );
 			window.location.href = redirectUrl;
 		} catch ( e ) {
+			console.log( e );
 			setPluginStatus( 'failed' );
 		}
 	};
@@ -209,7 +211,6 @@ const Modal = ( {
 
 	);
 
-	console.log(progressStatus);
 	return (
 		<div className="nfd-installer-modal">
 			<div ref={ modalRef } className="nfd-installer-modal__content">
