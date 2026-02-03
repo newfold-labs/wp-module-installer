@@ -6,3 +6,4 @@
 /wp-content
 node_modules
 vendor
+.env.testing
