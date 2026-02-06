@@ -94,25 +94,25 @@ msgstr "YITH plugin upgrade proces voltooid, maar sommige upgrades zijn mislukt.
 msgid "Both plugin slug and provider name are required."
 msgstr "Zowel plugin slug als provider naam zijn vereist."
 
-#: build/1.7.1/installer.js:2
+#: build/1.7.2/installer.js:2
 msgid "Hold on while we get things setup for you!"
 msgstr "Wacht even terwijl we dingen hebben ingesteld voor jou!"
 
-#: build/1.7.1/installer.js:2
+#: build/1.7.2/installer.js:2
 msgid "Loading Vector."
 msgstr "Vector wordt geladen."
 
 #. translators: %s: Plugin Name
-#: build/1.7.1/installer.js:4
+#: build/1.7.2/installer.js:4
 #, js-format
 msgid "Activating %s"
 msgstr "Activeren %s"
 
-#: build/1.7.1/installer.js:4
+#: build/1.7.2/installer.js:4
 msgid "Activation Complete! Redirecting…"
 msgstr "Activatie voltooid! Bezig met omleiden…"
 
-#: build/1.7.1/installer.js:4
+#: build/1.7.2/installer.js:4
 msgid "Error Icon."
 msgstr "Fout Icoon."
 
@@ -159,13 +159,13 @@ msgid "Plugin upgrade failed. Please check the logs for more details."
 msgstr "Plug-in upgrade mislukt. Controleer de logboeken voor meer informatie."
 
 #. translators: %s: Plugin Name
-#: build/1.7.1/installer.js:2
+#: build/1.7.2/installer.js:2
 #, js-format
 msgid "Sorry, there was an error installing and activating the plugin %s. Please try again. If the problem persists, <a>contact support</a>."
 msgstr "Sorry, er was een foutmelding bij het installeren en activeren van de plugin %s. Probeer het alsjeblieft opnieuw. Als het probleem blijft bestaan, <a>neem dan contact op met de support</a>."
 
 #. translators: %s: Plugin Name
-#: build/1.7.1/installer.js:3
+#: build/1.7.2/installer.js:3
 #, js-format
 msgid "Installing and activating the required %s plugin."
 msgstr "Ik installeer en activeer de vereiste %s-plugin."
