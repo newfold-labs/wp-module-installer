@@ -94,25 +94,25 @@ msgstr "Processo di aggiornamento del plugin YITH completato, ma alcuni aggiorna
 msgid "Both plugin slug and provider name are required."
 msgstr "Sia il plugin slug che il nome del provider sono obbligatori."
 
-#: build/1.7.1/installer.js:2
+#: build/1.7.2/installer.js:2
 msgid "Hold on while we get things setup for you!"
 msgstr "Tieni premuto mentre riceviamo le cose impostate per te!"
 
-#: build/1.7.1/installer.js:2
+#: build/1.7.2/installer.js:2
 msgid "Loading Vector."
 msgstr "Caricamento Vector."
 
 #. translators: %s: Plugin Name
-#: build/1.7.1/installer.js:4
+#: build/1.7.2/installer.js:4
 #, js-format
 msgid "Activating %s"
 msgstr "Attivazione %s"
 
-#: build/1.7.1/installer.js:4
+#: build/1.7.2/installer.js:4
 msgid "Activation Complete! Redirecting…"
 msgstr "Attivazione Completata! Reindirizzamento…"
 
-#: build/1.7.1/installer.js:4
+#: build/1.7.2/installer.js:4
 msgid "Error Icon."
 msgstr "Icona Errore."
 
@@ -159,13 +159,13 @@ msgid "Plugin upgrade failed. Please check the logs for more details."
 msgstr "Aggiornamento del plug-in non riuscito. Si prega di controllare i registri per maggiori dettagli."
 
 #. translators: %s: Plugin Name
-#: build/1.7.1/installer.js:2
+#: build/1.7.2/installer.js:2
 #, js-format
 msgid "Sorry, there was an error installing and activating the plugin %s. Please try again. If the problem persists, <a>contact support</a>."
 msgstr "Scusa, c'è stato un errore nell'installazione e attivazione del plugin percentuale. Per favore, riprova. Se il problema persiste, <a>contatta l'assistenza</a>."
 
 #. translators: %s: Plugin Name
-#: build/1.7.1/installer.js:3
+#: build/1.7.2/installer.js:3
 #, js-format
 msgid "Installing and activating the required %s plugin."
 msgstr "Installare e attivare il plugin di percentuale richiesto."
