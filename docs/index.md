@@ -11,6 +11,7 @@ Documentation for wp-module-installer, for **humans** and **AI agents**. Start h
 | [integration.md](integration.md) | How the module registers and integrates (REST, CLI, admin). |
 | [development.md](development.md) | Lint, test, i18n, and workflow. |
 | [dependencies.md](dependencies.md) | Composer dependencies (wp-module-pls, etc.). |
+| [release.md](release.md) | Release process: use the Newfold Prepare Release workflow. |
 
 ## Quick links
 
