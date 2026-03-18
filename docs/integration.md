@@ -1,3 +1,10 @@
+---
+name: wp-module-installer
+title: Integration
+description: How the module registers and integrates.
+updated: 2025-03-18
+---
+
 # Integration
 
 ## How the module registers
