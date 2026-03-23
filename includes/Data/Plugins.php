@@ -13,6 +13,10 @@ final class Plugins {
 	 * @var array
 	 */
 	protected static $wp_slugs = array(
+		'icon-block'                        => array(
+			'approved' => true,
+			'path'     => 'icon-block/icon-block.php',
+		),
 		'jetpack'                           => array(
 			'approved' => true,
 			'path'     => 'jetpack/jetpack.php',
