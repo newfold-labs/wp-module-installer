@@ -3,9 +3,16 @@ name: Crowdin Upload Action
 on:
   workflow_dispatch:
 
+# Disable permissions for all available scopes by default.
+# Any needed permissions should be configured at the job level.
+permissions: {}
+
 jobs:
   call-crowdin-upload-workflow:
     uses: newfold-labs/workflows/.github/workflows/i18n-crowdin-upload.yml@main
+    permissions:
+      contents: write      # Required for callee Crowdin upload sync that commits translation sources to the repository.
+      pull-requests: write # Required for callee Crowdin GitHub Action integration that uses GITHUB_TOKEN for PR-related updates.
     with:
       CROWDIN_PROJECT_ID: ${{ vars.CROWDIN_PROJECT_ID }}
     secrets:

@@ -13,12 +13,17 @@ on:
         default: 'patch'
         required: true
 
+# Disable permissions for all available scopes by default.
+# Any needed permissions should be configured at the job level.
+permissions: {}
+
 jobs:
 
   # This job is used to extract the branch name from the pull request or branch.
   setup:
     name: Setup
     runs-on: ubuntu-latest
+    permissions: {} # Extracts branch name from environment only; no checkout or GitHub API calls.
     outputs:
       branch: ${{ steps.extract_branch.outputs.branch }}
     steps:
@@ -32,6 +37,9 @@ jobs:
     name: Prepare Release
     needs: setup
     uses: newfold-labs/workflows/.github/workflows/reusable-module-prep-release.yml@main
+    permissions:
+      contents: write      # Required for callee to push the release branch and version bump commits.
+      pull-requests: write # Required for callee gh pr commands and opening the release pull request.
     with:
       module-repo: ${{ github.repository }}
       module-branch: ${{ needs.setup.outputs.branch }}
