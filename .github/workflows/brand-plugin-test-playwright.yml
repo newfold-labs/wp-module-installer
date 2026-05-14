@@ -6,19 +6,19 @@ on:
       - main
   workflow_dispatch:
 
-permissions:
-  contents: read
-
 concurrency:
   group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.sha }}
   cancel-in-progress: true
+
+# Disable permissions for all available scopes by default.
+# Any needed permissions should be configured at the job level.
+permissions: {}
 
 jobs:
   setup:
     name: Setup
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
+    permissions: {} # Extracts branch name from environment only; no checkout or GitHub API calls.
     outputs:
       branch: ${{ steps.extract_branch.outputs.branch }}
     steps:
@@ -31,9 +31,9 @@ jobs:
   bluehost:
     name: Bluehost Build and Test Playwright
     needs: setup
-    permissions:
-      contents: read
     uses: newfold-labs/workflows/.github/workflows/module-plugin-test-playwright.yml@main
+    permissions:
+      contents: read # Required for callee checkouts of the module (this repo) and brand plugin repositories.
     with:
       module-repo: ${{ github.repository }}
       module-branch: ${{ needs.setup.outputs.branch }}
@@ -43,9 +43,9 @@ jobs:
   bluehost-dev:
     name: Bluehost Dev Build and Test Playwright
     needs: setup
-    permissions:
-      contents: read
     uses: newfold-labs/workflows/.github/workflows/module-plugin-test-playwright.yml@main
+    permissions:
+      contents: read # Required for callee checkouts of the module (this repo) and brand plugin repositories.
     with:
       module-repo: ${{ github.repository }}
       module-branch: ${{ needs.setup.outputs.branch }}

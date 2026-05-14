@@ -13,12 +13,14 @@ on:
       - main
   workflow_dispatch:
 
-permissions:
-  contents: read
+# Disable permissions for all available scopes by default.
+# Any needed permissions should be configured at the job level.
+permissions: {}
 
 jobs:
   get-repo-name:
     runs-on: ubuntu-latest
+    permissions: {} # Uses github.repository context only; no checkout or GitHub API calls.
     outputs:
       repository-name: ${{ steps.repo-name.outputs.name }}
     steps:
@@ -28,10 +30,10 @@ jobs:
 
   codecoverage:
     needs: get-repo-name
-    permissions:
-      contents: write
-      pull-requests: write
     uses: newfold-labs/workflows/.github/workflows/reusable-codecoverage.yml@main
+    permissions:
+      contents: write      # Required for callee jobs to push merged coverage HTML to the gh-pages branch.
+      pull-requests: write # Required for callee to post pull request coverage comments (e.g. add-pr-comment).
     with:
       php-versions: '["7.4", "8.0", "8.1", "8.2", "8.3", "8.4"]'
       coverage-php-version: '7.4'
