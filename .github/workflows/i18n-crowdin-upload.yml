@@ -13,6 +13,7 @@ jobs:
     permissions:
       contents: write      # Required for callee Crowdin upload sync that commits translation sources to the repository.
       pull-requests: write # Required for callee Crowdin GitHub Action integration that uses GITHUB_TOKEN for PR-related updates.
+    timeout-minutes: 60
     with:
       CROWDIN_PROJECT_ID: ${{ vars.CROWDIN_PROJECT_ID }}
     secrets:

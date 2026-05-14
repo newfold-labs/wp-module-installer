@@ -23,6 +23,7 @@ jobs:
     permissions:
       contents: write      # Required for callee translation automation to push commits and manage branches.
       pull-requests: write # Required for callee gh-driven pull request create/update flows in the reusable workflow.
+    timeout-minutes: 90
     with:
       text_domain: 'wp-module-installer'
     secrets:

@@ -18,6 +18,7 @@ jobs:
     permissions:
       contents: write      # Required for callee Crowdin download workflow to commit translation updates (when using default token paths).
       pull-requests: write # Required for callee Crowdin PR creation flow (see reusable workflow; PAT may also be used via secrets).
+    timeout-minutes: 60
     with:
       base_branch: ${{ inputs.base_branch }}
       CROWDIN_PROJECT_ID: ${{ vars.CROWDIN_PROJECT_ID }}

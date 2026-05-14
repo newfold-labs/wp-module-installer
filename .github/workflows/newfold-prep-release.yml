@@ -24,6 +24,7 @@ jobs:
     name: Setup
     runs-on: ubuntu-latest
     permissions: {} # Extracts branch name from environment only; no checkout or GitHub API calls.
+    timeout-minutes: 5
     outputs:
       branch: ${{ steps.extract_branch.outputs.branch }}
     steps:
@@ -40,6 +41,7 @@ jobs:
     permissions:
       contents: write      # Required for callee to push the release branch and version bump commits.
       pull-requests: write # Required for callee gh pr commands and opening the release pull request.
+    timeout-minutes: 60
     with:
       module-repo: ${{ github.repository }}
       module-branch: ${{ needs.setup.outputs.branch }}
