@@ -1,4 +1,5 @@
-name: 'PHP Lint Check'
+name: 'Lint Checker: PHP'
+
 on:
   push:
     paths:
@@ -11,27 +12,28 @@ on:
       - '!build/**/*.php'
   workflow_dispatch:
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.sha }}
-  cancel-in-progress: true
-
 # Disable permissions for all available scopes by default.
 # Any needed permissions should be configured at the job level.
 permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.sha }}
+  cancel-in-progress: true
 
 jobs:
   phpcs:
     name: Run PHP Code Sniffer
     runs-on: ubuntu-latest
     permissions:
-      contents: read # Required to clone the repo for checkout and diff tooling.
+      contents: read        # Required for actions/checkout to clone the private repository.
+      pull-requests: read   # Required for technote-space/get-diff-action to resolve changed files via the pulls API on pull_request events.
     timeout-minutes: 30
     steps:
 
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
-      # User PHP 7.4 here for compatibility with the WordPress codesniffer rules.
+      # Use PHP 7.3 for compatibility with composer.json platform and WordPress-oriented rulesets.
       - name: Setup PHP
         uses: shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f # v2.37.0
         with:
