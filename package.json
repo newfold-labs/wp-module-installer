@@ -13,7 +13,7 @@
     "email": "micah.wood@newfold.com"
   },
   "dependencies": {
-    "@wordpress/base-styles": "^8.0.0",
+    "@wordpress/base-styles": "^10.0.1",
     "@wordpress/element": "^6.46.0",
     "@wordpress/icons": "^13.1.0"
   },
