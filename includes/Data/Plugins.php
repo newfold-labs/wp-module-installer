@@ -134,7 +134,7 @@ final class Plugins {
 		),
 		'nfd_slug_wp_plugin_payments_shipping'           => array(
 			'approved' => true,
-			'url'      => 'https://hiive.cloud/workers/plugin-downloads/wp-plugin-payments-shipping',
+			'url'      => 'https://hiive.cloud/workers/wp-release-api/plugin/download/wp-plugin-payments-shipping/latest',
 			'path'     => 'wp-plugin-payments-shipping/wp-plugin-payments-shipping.php',
 		),
 	);
