@@ -132,10 +132,10 @@ final class Plugins {
 			'url'      => 'https://hiive.cloud/workers/plugin-downloads/yith-stripe-payments-for-woocommerce',
 			'path'     => 'yith-stripe-payments-for-woocommerce-extended/init.php',
 		),
-		'nfd_slug_payments_shipping'                       => array(
+		'nfd_slug_wp_plugin_payments_shipping'           => array(
 			'approved' => true,
-			'url'      => 'https://hiive.cloud/workers/plugin-downloads/payments-shipping',
-			'path'     => 'payments-shipping/payments-shipping.php',
+			'url'      => 'https://hiive.cloud/workers/plugin-downloads/wp-plugin-payments-shipping',
+			'path'     => 'wp-plugin-payments-shipping/wp-plugin-payments-shipping.php',
 		),
 	);
 
