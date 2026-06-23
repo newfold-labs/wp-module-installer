@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2025-02-13T10:12:56+00:00\n"
-"PO-Revision-Date: 2026-06-23T10:44:01+00:00\n"
+"PO-Revision-Date: 2026-06-23T10:54:20+00:00\n"
 "Language: fr_FR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Crowdin-File: wp-module-installer.pot\n"
@@ -137,35 +137,35 @@ msgid "Both plugin slug and provider name are required."
 msgstr "Les deux noms de slug de plugin et de fournisseur sont requis."
 
 #. translators: %s: Plugin Name
-#: build/1.7.3/installer.js:2
+#: build/1.7.4/installer.js:2
 #, js-format
 msgid "Sorry, there was an error installing and activating the plugin %s. Please try again. If the problem persists, <a>contact support</a>."
 msgstr "Désolé, il y a eu une erreur lors de l’installation et de l’activation du plugin %s. Veuillez réessayer. Si le problème persiste, <a>contactez le support</a>."
 
-#: build/1.7.3/installer.js:2
+#: build/1.7.4/installer.js:2
 msgid "Hold on while we get things setup for you!"
 msgstr "Attendez pendant que nous avons des choses à configurer pour vous!"
 
-#: build/1.7.3/installer.js:2
+#: build/1.7.4/installer.js:2
 msgid "Loading Vector."
 msgstr "Chargement du vecteur."
 
 #. translators: %s: Plugin Name
-#: build/1.7.3/installer.js:3
+#: build/1.7.4/installer.js:3
 #, js-format
 msgid "Installing and activating the required %s plugin."
 msgstr "Installer et activer le plugin % requis."
 
 #. translators: %s: Plugin Name
-#: build/1.7.3/installer.js:4
+#: build/1.7.4/installer.js:4
 #, js-format
 msgid "Activating %s"
 msgstr "Activation de %s"
 
-#: build/1.7.3/installer.js:4
+#: build/1.7.4/installer.js:4
 msgid "Activation Complete! Redirecting…"
 msgstr "Activation terminée ! Redirection de…"
 
-#: build/1.7.3/installer.js:4
+#: build/1.7.4/installer.js:4
 msgid "Error Icon."
 msgstr "Icône d'erreur"
