@@ -1,35 +1,35 @@
 {
-    "translation-revision-date": "2026-06-23T10:54:20+00:00",
+    "translation-revision-date": "2026-06-23T13:17:18+00:00",
     "generator": "WP-CLI\/2.12.0",
-    "source": "build\/1.7.4\/installer.js",
+    "source": "build\/1.7.5\/installer.js",
     "domain": "messages",
     "locale_data": {
         "messages": {
             "": {
                 "domain": "messages",
-                "lang": "pt_BR",
-                "plural-forms": "nplurals=2; plural=(n > 1);"
+                "lang": "it_IT",
+                "plural-forms": "nplurals=2; plural=(n != 1);"
             },
             "Sorry, there was an error installing and activating the plugin %s. Please try again. If the problem persists, <a>contact support<\/a>.": [
-                "Desculpe, houve um erro ao instalar e ativar o plugin percentualmente. Por favor, tente novamente. Se o problema persistir, <a>entre em contato com o suporte<\/a>."
+                "Scusa, c'\u00e8 stato un errore nell'installazione e attivazione del plugin percentuale. Per favore, riprova. Se il problema persiste, <a>contatta l'assistenza<\/a>."
             ],
             "Hold on while we get things setup for you!": [
-                "Aguarde enquanto preparamos tudo para voc\u00ea!"
+                "Tieni premuto mentre riceviamo le cose impostate per te!"
             ],
             "Loading Vector.": [
-                "Carregando Vector."
+                "Caricamento Vector."
             ],
             "Installing and activating the required %s plugin.": [
-                "Instalar e ativar o plugin de % necess\u00e1rio."
+                "Installare e attivare il plugin di percentuale richiesto."
             ],
             "Activating %s": [
-                "Ativando %s"
+                "Attivazione %s"
             ],
             "Activation Complete! Redirecting\u2026": [
-                "Ativa\u00e7\u00e3o conclu\u00edda! Redirecionando\u2026"
+                "Attivazione Completata! Reindirizzamento\u2026"
             ],
             "Error Icon.": [
-                "\u00cdcone de erro."
+                "Icona Errore."
             ]
         }
     }
