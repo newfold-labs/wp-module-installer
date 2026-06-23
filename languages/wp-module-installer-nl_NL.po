@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2025-02-13T10:12:56+00:00\n"
-"PO-Revision-Date: 2025-02-19 15:52\n"
+"PO-Revision-Date: 2026-06-23T10:44:01+00:00\n"
 "Language: nl_NL\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Crowdin-File: wp-module-installer.pot\n"
@@ -23,9 +23,33 @@ msgstr ""
 msgid "Installer"
 msgstr "Installatie"
 
+#. Translators: %s plugin slug
+#: includes/Services/PluginInstaller.php:33
+#, php-format
+msgid "You do not have permission to install from %s."
+msgstr "U hebt geen toestemming om te installeren vanuit %s."
+
+#. Translators: %s plugin slug
+#: includes/Services/PluginInstaller.php:81
+#, php-format
+msgid "You do not have permission to install %s."
+msgstr "Je hebt geen toestemming om %s te installeren."
+
 #: includes/Services/PluginInstaller.php:175
 msgid "Plugin slug and provider name cannot be empty."
 msgstr "Plugin slug en provider naam mag niet leeg zijn."
+
+#: includes/Services/PluginInstaller.php:186
+msgid "Failed to provision license for premium plugin: "
+msgstr "Kan geen licentie leveren voor premium plug-in:"
+
+#: includes/Services/PluginInstaller.php:209
+msgid "Download URL is missing for premium plugin: "
+msgstr "De download-URL ontbreekt voor de premium plugin: "
+
+#: includes/Services/PluginInstaller.php:220
+msgid "Failed to install or activate the premium plugin: "
+msgstr "Fout bij het installeren of activeren van de premium plugin: "
 
 #: includes/Services/PluginInstaller.php:243
 msgid "Failed to activate the plugin: "
@@ -40,13 +64,23 @@ msgstr "Fout bij het activeren van de licentie voor de premium plugin: "
 msgid "Successfully provisioned and installed: "
 msgstr "Succesvol geregistreerd en geïnstalleerd: "
 
-#: includes/Services/PluginInstaller.php:209
-msgid "Download URL is missing for premium plugin: "
-msgstr "De download-URL ontbreekt voor de premium plugin: "
+#: includes/Services/PluginInstaller.php:326
+#: includes/Services/ThemeInstaller.php:101
+msgid "Unable to connect to the filesystem."
+msgstr "Kan geen verbinding maken met het bestandssysteem."
 
-#: includes/Services/PluginInstaller.php:220
-msgid "Failed to install or activate the premium plugin: "
-msgstr "Fout bij het installeren of activeren van de premium plugin: "
+#: includes/Services/PluginInstaller.php:335
+msgid "Unable to determine what plugin was installed."
+msgstr "Kan niet bepalen welke plug-in is geïnstalleerd."
+
+#: includes/Services/PluginInstaller.php:527
+#: includes/Services/PluginUninstaller.php:135
+msgid "Could not connect to the filesystem."
+msgstr "Kan geen verbinding maken met het bestandssysteem."
+
+#: includes/Services/PluginUninstaller.php:145
+msgid "Unable to Delete the Plugin"
+msgstr "Kan de plug-in niet verwijderen"
 
 #: includes/Services/PluginUpgrader.php:70
 msgid "Invalid extended plugin slug provided."
@@ -90,66 +124,6 @@ msgstr "YITH plugin upgrade proces succesvol voltooid."
 msgid "YITH plugin upgrade process completed, but some upgrades failed. Please check the logs."
 msgstr "YITH plugin upgrade proces voltooid, maar sommige upgrades zijn mislukt. Controleer de logs."
 
-#: includes/WPCLI/Handlers/InstallerCommandHandler.php:120
-msgid "Both plugin slug and provider name are required."
-msgstr "Zowel plugin slug als provider naam zijn vereist."
-
-#: build/1.7.2/installer.js:2
-msgid "Hold on while we get things setup for you!"
-msgstr "Wacht even terwijl we dingen hebben ingesteld voor jou!"
-
-#: build/1.7.2/installer.js:2
-msgid "Loading Vector."
-msgstr "Vector wordt geladen."
-
-#. translators: %s: Plugin Name
-#: build/1.7.2/installer.js:4
-#, js-format
-msgid "Activating %s"
-msgstr "Activeren %s"
-
-#: build/1.7.2/installer.js:4
-msgid "Activation Complete! Redirecting…"
-msgstr "Activatie voltooid! Bezig met omleiden…"
-
-#: build/1.7.2/installer.js:4
-msgid "Error Icon."
-msgstr "Fout Icoon."
-
-#: includes/Services/PluginInstaller.php:186
-msgid "Failed to provision license for premium plugin: "
-msgstr "Kan geen licentie leveren voor premium plug-in:"
-
-#. Translators: %s plugin slug
-#: includes/Services/PluginInstaller.php:33
-#, php-format
-msgid "You do not have permission to install from %s."
-msgstr "U hebt geen toestemming om te installeren vanuit %s."
-
-#. Translators: %s plugin slug
-#: includes/Services/PluginInstaller.php:81
-#, php-format
-msgid "You do not have permission to install %s."
-msgstr "Je hebt geen toestemming om %s te installeren."
-
-#: includes/Services/PluginInstaller.php:326
-#: includes/Services/ThemeInstaller.php:101
-msgid "Unable to connect to the filesystem."
-msgstr "Kan geen verbinding maken met het bestandssysteem."
-
-#: includes/Services/PluginInstaller.php:335
-msgid "Unable to determine what plugin was installed."
-msgstr "Kan niet bepalen welke plug-in is geïnstalleerd."
-
-#: includes/Services/PluginInstaller.php:527
-#: includes/Services/PluginUninstaller.php:135
-msgid "Could not connect to the filesystem."
-msgstr "Kan geen verbinding maken met het bestandssysteem."
-
-#: includes/Services/PluginUninstaller.php:145
-msgid "Unable to Delete the Plugin"
-msgstr "Kan de plug-in niet verwijderen"
-
 #: includes/WPCLI/Handlers/InstallerCommandHandler.php:80
 msgid "Plugin upgrade completed successfully."
 msgstr "De upgrade van de plug-in is voltooid."
@@ -158,14 +132,40 @@ msgstr "De upgrade van de plug-in is voltooid."
 msgid "Plugin upgrade failed. Please check the logs for more details."
 msgstr "Plug-in upgrade mislukt. Controleer de logboeken voor meer informatie."
 
+#: includes/WPCLI/Handlers/InstallerCommandHandler.php:120
+msgid "Both plugin slug and provider name are required."
+msgstr "Zowel plugin slug als provider naam zijn vereist."
+
 #. translators: %s: Plugin Name
-#: build/1.7.2/installer.js:2
+#: build/1.7.3/installer.js:2
 #, js-format
 msgid "Sorry, there was an error installing and activating the plugin %s. Please try again. If the problem persists, <a>contact support</a>."
 msgstr "Sorry, er was een foutmelding bij het installeren en activeren van de plugin %s. Probeer het alsjeblieft opnieuw. Als het probleem blijft bestaan, <a>neem dan contact op met de support</a>."
 
+#: build/1.7.3/installer.js:2
+msgid "Hold on while we get things setup for you!"
+msgstr "Wacht even terwijl we dingen hebben ingesteld voor jou!"
+
+#: build/1.7.3/installer.js:2
+msgid "Loading Vector."
+msgstr "Vector wordt geladen."
+
 #. translators: %s: Plugin Name
-#: build/1.7.2/installer.js:3
+#: build/1.7.3/installer.js:3
 #, js-format
 msgid "Installing and activating the required %s plugin."
 msgstr "Ik installeer en activeer de vereiste %s-plugin."
+
+#. translators: %s: Plugin Name
+#: build/1.7.3/installer.js:4
+#, js-format
+msgid "Activating %s"
+msgstr "Activeren %s"
+
+#: build/1.7.3/installer.js:4
+msgid "Activation Complete! Redirecting…"
+msgstr "Activatie voltooid! Bezig met omleiden…"
+
+#: build/1.7.3/installer.js:4
+msgid "Error Icon."
+msgstr "Fout Icoon."

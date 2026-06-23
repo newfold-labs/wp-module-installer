@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2025-02-13T10:12:56+00:00\n"
-"PO-Revision-Date: 2025-02-13 19:22+0530\n"
+"PO-Revision-Date: 2026-06-23T10:44:01+00:00\n"
 "Language: en_AU\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Domain: wp-module-installer\n"
@@ -18,9 +18,33 @@ msgstr ""
 msgid "Installer"
 msgstr "Installer"
 
+#. Translators: %s plugin slug
+#: includes/Services/PluginInstaller.php:33
+#, php-format
+msgid "You do not have permission to install from %s."
+msgstr "You do not have permission to install from %s."
+
+#. Translators: %s plugin slug
+#: includes/Services/PluginInstaller.php:81
+#, php-format
+msgid "You do not have permission to install %s."
+msgstr "You do not have permission to install %s."
+
 #: includes/Services/PluginInstaller.php:175
 msgid "Plugin slug and provider name cannot be empty."
 msgstr "Plugin slug and provider name cannot be empty."
+
+#: includes/Services/PluginInstaller.php:186
+msgid "Failed to provision license for premium plugin: "
+msgstr "Failed to provision license for premium plugin:"
+
+#: includes/Services/PluginInstaller.php:209
+msgid "Download URL is missing for premium plugin: "
+msgstr "Download URL is missing for premium plugin: "
+
+#: includes/Services/PluginInstaller.php:220
+msgid "Failed to install or activate the premium plugin: "
+msgstr "Failed to install or activate the premium plugin: "
 
 #: includes/Services/PluginInstaller.php:243
 msgid "Failed to activate the plugin: "
@@ -35,13 +59,23 @@ msgstr "Failed to activate the license for the premium plugin: "
 msgid "Successfully provisioned and installed: "
 msgstr "Successfully provisioned and installed: "
 
-#: includes/Services/PluginInstaller.php:209
-msgid "Download URL is missing for premium plugin: "
-msgstr "Download URL is missing for premium plugin: "
+#: includes/Services/PluginInstaller.php:326
+#: includes/Services/ThemeInstaller.php:101
+msgid "Unable to connect to the filesystem."
+msgstr "Unable to connect to the filesystem."
 
-#: includes/Services/PluginInstaller.php:220
-msgid "Failed to install or activate the premium plugin: "
-msgstr "Failed to install or activate the premium plugin: "
+#: includes/Services/PluginInstaller.php:335
+msgid "Unable to determine what plugin was installed."
+msgstr "Unable to determine what plugin was installed."
+
+#: includes/Services/PluginInstaller.php:527
+#: includes/Services/PluginUninstaller.php:135
+msgid "Could not connect to the filesystem."
+msgstr "Could not connect to the filesystem."
+
+#: includes/Services/PluginUninstaller.php:145
+msgid "Unable to Delete the Plugin"
+msgstr "Unable to Delete the Plugin"
 
 #: includes/Services/PluginUpgrader.php:70
 msgid "Invalid extended plugin slug provided."
@@ -85,66 +119,6 @@ msgstr "YITH plugin upgrade process completed successfully."
 msgid "YITH plugin upgrade process completed, but some upgrades failed. Please check the logs."
 msgstr "YITH plugin upgrade process completed, but some upgrades failed. Please check the logs."
 
-#: includes/WPCLI/Handlers/InstallerCommandHandler.php:120
-msgid "Both plugin slug and provider name are required."
-msgstr "Both plugin slug and provider name are required."
-
-#: build/1.7.2/installer.js:2
-msgid "Hold on while we get things setup for you!"
-msgstr "Hold on while we get things setup for you!"
-
-#: build/1.7.2/installer.js:2
-msgid "Loading Vector."
-msgstr "Loading Vector."
-
-#. translators: %s: Plugin Name
-#: build/1.7.2/installer.js:4
-#, js-format
-msgid "Activating %s"
-msgstr "Activating %s"
-
-#: build/1.7.2/installer.js:4
-msgid "Activation Complete! Redirecting…"
-msgstr "Activation Complete! Redirecting…"
-
-#: build/1.7.2/installer.js:4
-msgid "Error Icon."
-msgstr "Error Icon."
-
-#: includes/Services/PluginInstaller.php:186
-msgid "Failed to provision license for premium plugin: "
-msgstr "Failed to provision license for premium plugin:"
-
-#. Translators: %s plugin slug
-#: includes/Services/PluginInstaller.php:33
-#, php-format
-msgid "You do not have permission to install from %s."
-msgstr "You do not have permission to install from %s."
-
-#. Translators: %s plugin slug
-#: includes/Services/PluginInstaller.php:81
-#, php-format
-msgid "You do not have permission to install %s."
-msgstr "You do not have permission to install %s."
-
-#: includes/Services/PluginInstaller.php:326
-#: includes/Services/ThemeInstaller.php:101
-msgid "Unable to connect to the filesystem."
-msgstr "Unable to connect to the filesystem."
-
-#: includes/Services/PluginInstaller.php:335
-msgid "Unable to determine what plugin was installed."
-msgstr "Unable to determine what plugin was installed."
-
-#: includes/Services/PluginInstaller.php:527
-#: includes/Services/PluginUninstaller.php:135
-msgid "Could not connect to the filesystem."
-msgstr "Could not connect to the filesystem."
-
-#: includes/Services/PluginUninstaller.php:145
-msgid "Unable to Delete the Plugin"
-msgstr "Unable to Delete the Plugin"
-
 #: includes/WPCLI/Handlers/InstallerCommandHandler.php:80
 msgid "Plugin upgrade completed successfully."
 msgstr "Plugin upgrade completed successfully."
@@ -153,14 +127,40 @@ msgstr "Plugin upgrade completed successfully."
 msgid "Plugin upgrade failed. Please check the logs for more details."
 msgstr "Plugin upgrade failed. Please check the logs for more details."
 
+#: includes/WPCLI/Handlers/InstallerCommandHandler.php:120
+msgid "Both plugin slug and provider name are required."
+msgstr "Both plugin slug and provider name are required."
+
 #. translators: %s: Plugin Name
-#: build/1.7.2/installer.js:2
+#: build/1.7.3/installer.js:2
 #, js-format
 msgid "Sorry, there was an error installing and activating the plugin %s. Please try again. If the problem persists, <a>contact support</a>."
 msgstr "Sorry, there was an error installing and activating the plugin %s. Please try again. If the problem persists, <a>contact support</a>."
 
+#: build/1.7.3/installer.js:2
+msgid "Hold on while we get things setup for you!"
+msgstr "Hold on while we get things setup for you!"
+
+#: build/1.7.3/installer.js:2
+msgid "Loading Vector."
+msgstr "Loading Vector."
+
 #. translators: %s: Plugin Name
-#: build/1.7.2/installer.js:3
+#: build/1.7.3/installer.js:3
 #, js-format
 msgid "Installing and activating the required %s plugin."
 msgstr "Installing and activating the required %s plugin."
+
+#. translators: %s: Plugin Name
+#: build/1.7.3/installer.js:4
+#, js-format
+msgid "Activating %s"
+msgstr "Activating %s"
+
+#: build/1.7.3/installer.js:4
+msgid "Activation Complete! Redirecting…"
+msgstr "Activation Complete! Redirecting…"
+
+#: build/1.7.3/installer.js:4
+msgid "Error Icon."
+msgstr "Error Icon."
