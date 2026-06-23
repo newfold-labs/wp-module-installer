@@ -5,7 +5,7 @@ return [
 	'language' => 'es_ES',
 	'project-id-version' => 'newfold-labswp-module-staging',
 	'pot-creation-date' => '2025-02-13T10:12:56+00:00',
-	'po-revision-date' => '2026-06-23T10:44:01+00:00',
+	'po-revision-date' => '2026-06-23T10:54:20+00:00',
 	'x-generator' => 'Poedit 3.6',
 	'messages' => [
 		'Installer' => 'Instalador',
