@@ -1,7 +1,7 @@
 {
-    "translation-revision-date": "2025-02-19 15:52",
+    "translation-revision-date": "2026-06-23T10:44:01+00:00",
     "generator": "WP-CLI\/2.12.0",
-    "source": "build\/1.7.2\/installer.js",
+    "source": "build\/1.7.3\/installer.js",
     "domain": "messages",
     "locale_data": {
         "messages": {
@@ -10,11 +10,17 @@
                 "lang": "de_DE",
                 "plural-forms": "nplurals=2; plural=(n != 1);"
             },
+            "Sorry, there was an error installing and activating the plugin %s. Please try again. If the problem persists, <a>contact support<\/a>.": [
+                "Entschuldigung, es gab einen Fehler beim Installieren und Aktivieren des Plugin-%s. Bitte versuchen Sie es erneut. Wenn das Problem weiterhin besteht, <a>kontaktiere den Support<\/a>."
+            ],
             "Hold on while we get things setup for you!": [
                 "Halten Sie an, w\u00e4hrend wir die Dinge f\u00fcr Sie einrichten!"
             ],
             "Loading Vector.": [
                 "Lade Vektor."
+            ],
+            "Installing and activating the required %s plugin.": [
+                "Installation und Aktivierung des erforderlichen %s-Plugins."
             ],
             "Activating %s": [
                 "Aktiviere %s"
@@ -24,12 +30,6 @@
             ],
             "Error Icon.": [
                 "Fehler-Icon."
-            ],
-            "Sorry, there was an error installing and activating the plugin %s. Please try again. If the problem persists, <a>contact support<\/a>.": [
-                "Entschuldigung, es gab einen Fehler beim Installieren und Aktivieren des Plugin-%s. Bitte versuchen Sie es erneut. Wenn das Problem weiterhin besteht, <a>kontaktiere den Support<\/a>."
-            ],
-            "Installing and activating the required %s plugin.": [
-                "Installation und Aktivierung des erforderlichen %s-Plugins."
             ]
         }
     }
