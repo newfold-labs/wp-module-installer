@@ -1,35 +1,35 @@
 {
-    "translation-revision-date": "2026-06-23T13:17:18+00:00",
+    "translation-revision-date": "2026-08-20T23:13:22+00:00",
     "generator": "WP-CLI\/2.12.0",
-    "source": "build\/1.7.5\/installer.js",
+    "source": "build\/1.7.6\/installer.js",
     "domain": "messages",
     "locale_data": {
         "messages": {
             "": {
                 "domain": "messages",
-                "lang": "de_DE",
+                "lang": "it_IT",
                 "plural-forms": "nplurals=2; plural=(n != 1);"
             },
             "Sorry, there was an error installing and activating the plugin %s. Please try again. If the problem persists, <a>contact support<\/a>.": [
-                "Entschuldigung, es gab einen Fehler beim Installieren und Aktivieren des Plugin-%s. Bitte versuchen Sie es erneut. Wenn das Problem weiterhin besteht, <a>kontaktiere den Support<\/a>."
+                "Scusa, c'\u00e8 stato un errore nell'installazione e attivazione del plugin percentuale. Per favore, riprova. Se il problema persiste, <a>contatta l'assistenza<\/a>."
             ],
             "Hold on while we get things setup for you!": [
-                "Halten Sie an, w\u00e4hrend wir die Dinge f\u00fcr Sie einrichten!"
+                "Tieni premuto mentre riceviamo le cose impostate per te!"
             ],
             "Loading Vector.": [
-                "Lade Vektor."
+                "Caricamento Vector."
             ],
             "Installing and activating the required %s plugin.": [
-                "Installation und Aktivierung des erforderlichen %s-Plugins."
+                "Installare e attivare il plugin di percentuale richiesto."
             ],
             "Activating %s": [
-                "Aktiviere %s"
+                "Attivazione %s"
             ],
             "Activation Complete! Redirecting\u2026": [
-                "Aktivierung abgeschlossen! Umleitung\u2026"
+                "Attivazione Completata! Reindirizzamento\u2026"
             ],
             "Error Icon.": [
-                "Fehler-Icon."
+                "Icona Errore."
             ]
         }
     }
