@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@wordpress/base-styles": "^12.1.0",
-    "@wordpress/element": "^8.4.0",
+    "@wordpress/element": "^8.5.0",
     "@wordpress/icons": "^15.4.0"
   },
   "devDependencies": {
