@@ -15,7 +15,7 @@
   "dependencies": {
     "@wordpress/base-styles": "^12.1.0",
     "@wordpress/element": "^8.6.0",
-    "@wordpress/icons": "^15.4.0"
+    "@wordpress/icons": "^15.5.0"
   },
   "devDependencies": {
     "@wordpress/env": "^11.13.0",
