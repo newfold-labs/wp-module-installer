@@ -37,7 +37,7 @@
         "wp-cli/wp-cli": "^2.12",
         "wp-cli/i18n-command": "^2.7",
         "newfold-labs/wp-php-standards": "^2.0",
-        "johnpbloch/wordpress": "6.9.4",
+        "johnpbloch/wordpress": "7.1.1",
         "lucatume/wp-browser": "*",
         "phpunit/phpcov": "*"
     },
