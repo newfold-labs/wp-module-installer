@@ -35,7 +35,6 @@ jobs:
     permissions:
       contents: write      # Required for callee jobs to push merged coverage HTML to the gh-pages branch.
       pull-requests: write # Required for callee to post pull request coverage comments (e.g. add-pr-comment).
-    timeout-minutes: 120
     with:
       php-versions: '["7.4", "8.0", "8.1", "8.2", "8.3", "8.4"]'
       coverage-php-version: '7.4'
