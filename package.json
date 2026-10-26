@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@wordpress/env": "^11.17.0",
-    "@wordpress/scripts": "^36.1.0",
+    "@wordpress/scripts": "^37.0.0",
     "node-fetch": "^3.3.2",
     "webpack-merge": "^6.0.1"
   },
